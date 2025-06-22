@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "about": "Sobre Nosotros",
+    "services": "Nuestros Servicios",
+    "pricing": "Paquetes & Precios",
+    "benefits": "Beneficios Clave",
+    "process": "Nuestro Proceso",
+    "testimonials": "Testimonios",
+    "faq": "Preguntas Frecuentes",
+    "contact": "Contacto",
+    "english": "English"
+  },
+  "hero": {
+    "title": "Descubre el futuro de la digitalización de las empresas",
+    "subtitle": "Soluciones digitales para empresas modernas. Automatiza, crece y destaca en el mundo digital.",
+    "cta": "Descúbrelo"
+  },
+  "contact": {
+    "title": "Contacto",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
+    "error": "Hubo un error. Intenta de nuevo más tarde."
+  }
+} 

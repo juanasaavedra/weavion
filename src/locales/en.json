@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "about": "About Us",
+    "services": "Our Services",
+    "pricing": "Packages & Pricing",
+    "benefits": "Key Benefits",
+    "process": "Our Process",
+    "testimonials": "Testimonials",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "english": "Español"
+  },
+  "hero": {
+    "title": "Discover the future of business digitalization",
+    "subtitle": "Digital solutions for modern companies. Automate, grow, and stand out in the digital world.",
+    "cta": "Discover it"
+  },
+  "contact": {
+    "title": "Contact",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "success": "Message sent! We'll be in touch soon.",
+    "error": "There was an error. Please try again later."
+  }
+} 
