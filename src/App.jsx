@@ -3,12 +3,22 @@ import Folder from './Folder';
 import StarBorder from './StarBorder';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 export default function App() {
   const { t } = useTranslation();
   const [folderOpen, setFolderOpen] = useState(false);
   const folderRef = useRef(null);
+  const [folderSize, setFolderSize] = useState(2.0);
+
+  useEffect(() => {
+    const updateSize = () => {
+      setFolderSize(window.innerWidth < 640 ? 1.1 : 2.0);
+    };
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   // Scroll a servicios
   const scrollToServices = () => {
@@ -106,7 +116,7 @@ export default function App() {
                 <div className="mb-8 md:mb-12 flex justify-center w-full">
                   <Folder
                     color="#111827"
-                    size={window.innerWidth < 640 ? 1.1 : 2.0}
+                    size={folderSize}
                     items={folderItems}
                     open={folderOpen}
                     setOpen={setFolderOpen}
