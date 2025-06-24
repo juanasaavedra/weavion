@@ -1,168 +1,144 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
-const darkenColor = (hex, percent) => {
-  let color = hex.startsWith("#") ? hex.slice(1) : hex;
-  if (color.length === 3) {
-    color = color
-      .split("")
-      .map((c) => c + c)
-      .join("");
-  }
-  const num = parseInt(color, 16);
-  let r = (num >> 16) & 0xff;
-  let g = (num >> 8) & 0xff;
-  let b = num & 0xff;
-  r = Math.max(0, Math.min(255, Math.floor(r * (1 - percent))));
-  g = Math.max(0, Math.min(255, Math.floor(g * (1 - percent))));
-  b = Math.max(0, Math.min(255, Math.floor(b * (1 - percent))));
-  return (
-    "#" +
-    ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()
-  );
-};
+const cardsData = [
+  {
+    id: 1,
+    title: 'Desarrollo web',
+    short: 'Webs modernas y rápidas',
+    detail: 'Creamos sitios web modernos, rápidos y responsivos, adaptados a las necesidades de tu negocio, optimizados para SEO y con las mejores prácticas de accesibilidad.'
+  },
+  {
+    id: 2,
+    title: 'Diseño web',
+    short: 'Diseño atractivo y funcional',
+    detail: 'Diseñamos interfaces atractivas, intuitivas y centradas en el usuario, asegurando una experiencia visual coherente y profesional.'
+  },
+  {
+    id: 3,
+    title: 'Integración a ServiceTitan',
+    short: 'Automatiza tu operación',
+    detail: 'Integramos tu negocio con ServiceTitan para automatizar procesos, mejorar la gestión y conectar tus sistemas de manera eficiente.'
+  },
+  {
+    id: 4,
+    title: 'Analíticas de negocio y predicción de inventario',
+    short: 'Toma decisiones inteligentes',
+    detail: 'Implementamos sistemas de analítica avanzada y predicción de inventario usando IA, para que tomes decisiones informadas y optimices tus recursos.'
+  },
+];
 
-const WebSVG = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="5" y="10" width="30" height="20" rx="4" fill="#3B82F6"/>
-    <rect x="10" y="15" width="20" height="10" rx="2" fill="white"/>
-    <circle cx="20" cy="25" r="2" fill="#3B82F6"/>
-  </svg>
-);
-const MobileSVG = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="13" y="8" width="14" height="24" rx="3" fill="#3B82F6"/>
-    <rect x="15" y="12" width="10" height="16" rx="1" fill="white"/>
-    <circle cx="20" cy="28" r="1.5" fill="#3B82F6"/>
-  </svg>
-);
-const AiSVG = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="20" cy="20" r="12" fill="#3B82F6"/>
-    <rect x="14" y="14" width="12" height="12" rx="6" fill="white"/>
-    <circle cx="20" cy="20" r="3" fill="#3B82F6"/>
-  </svg>
-);
-
-const Folder = ({
-  color = "#111827",
-  size = 2,
-  items = [],
-  open,
-  setOpen,
-  className = "",
-}) => {
-  const maxItems = 3;
-  const defaultData = [
-    {
-      title: "Desarrollo Web",
-      description: "Sitios web modernos, rápidos y responsivos para tu negocio.",
-      svg: <WebSVG />,
-    },
-    {
-      title: "Apps Móviles",
-      description: "Aplicaciones móviles nativas y multiplataforma para iOS y Android.",
-      svg: <MobileSVG />,
-    },
-    {
-      title: "Inteligencia Artificial",
-      description: "Soluciones de IA para automatizar y potenciar tu empresa.",
-      svg: <AiSVG />,
-    },
-  ];
-  const papers = items.length && typeof items[0] === 'object' && items[0].title ? items.slice(0, maxItems) : defaultData;
-  while (papers.length < maxItems) {
-    papers.push(defaultData[papers.length]);
-  }
-
+export default function Stack({
+  cardDimensions = { width: 260, height: 260 },
+  cardsData: propCardsData,
+}) {
+  const cards = propCardsData || cardsData;
   const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(1); // 1: next, -1: prev
+  const [expanded, setExpanded] = useState(true);
 
-  const folderBackColor = darkenColor(color, 0.08);
+  const spread = 60;
+  const scaleStep = 0.08;
+  const maxVisible = 2;
 
-  const handleClick = () => {
-    if (setOpen && !open) setOpen(true);
-    else {
-      setDirection(1);
-      setActiveIndex((prev) => (prev + 1) % maxItems);
-    }
+  // Navegación circular
+  const goTo = (idx) => {
+    setActiveIndex((idx + cards.length) % cards.length);
+    setExpanded(true);
+  };
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    goTo(activeIndex - 1);
+  };
+  const handleNext = (e) => {
+    e.stopPropagation();
+    goTo(activeIndex + 1);
   };
 
-  // Slide variants
-  const variants = {
-    enter: (dir) => ({
-      x: dir > 0 ? 200 : -200,
-      opacity: 0,
-      position: 'absolute',
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      position: 'relative',
-      zIndex: 50,
-    },
-    exit: (dir) => ({
-      x: dir > 0 ? -200 : 200,
-      opacity: 0,
-      position: 'absolute',
-    }),
-  };
-
-  const scaleStyle = { transform: `scale(${size})` };
+  // Ajustar el ancho del contenedor para que nunca corte las cartas laterales
+  const containerWidth = cardDimensions.width + spread * maxVisible * 2 + 40;
 
   return (
-    <div style={scaleStyle} className={className}>
-      {/* Overlay para cerrar al hacer clic fuera */}
-      {open && (
-        <div
-          className="fixed inset-0 z-40 cursor-pointer"
-          style={{ background: 'transparent' }}
-          onClick={() => setOpen && setOpen(false)}
-        />
-      )}
-      <div
-        className={`group relative transition-all duration-300 ease-in cursor-pointer shadow-[0_0_32px_0_rgba(59,130,246,0.5)] bg-[#232b3e] bg-opacity-95 border-4 border-blue-400 rounded-3xl flex flex-col items-center justify-center z-50`}
-        style={{
-          boxShadow: '0 0 32px 0 rgba(59,130,246,0.5)',
-          transform: open ? "translateY(-12px)" : undefined,
-          padding: '24px 32px',
-          minWidth: 220,
-          minHeight: 160,
-        }}
-        onClick={handleClick}
+    <div
+      className="relative flex items-center justify-center select-none"
+      style={{
+        width: containerWidth,
+        height: cardDimensions.height + 40,
+        perspective: 600,
+      }}
+    >
+      {/* Flecha izquierda */}
+      <button
+        aria-label="Anterior"
+        className="absolute left-0 z-20 bg-[#FFD100] text-[#202020] rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-[#FFEE32] transition"
+        onClick={handlePrev}
+        style={{ top: '50%', transform: 'translateY(-50%)' }}
       >
-        <div
-          className="relative w-[120px] h-[100px] rounded-tl-0 rounded-tr-[18px] rounded-br-[18px] rounded-bl-[18px] flex items-center justify-center mx-auto"
-          style={{ backgroundColor: folderBackColor }}
-        >
-          <span
-            className="absolute z-0 bottom-[98%] left-0 w-[40px] h-[14px] rounded-tl-[8px] rounded-tr-[8px] rounded-bl-0 rounded-br-0"
-            style={{ backgroundColor: folderBackColor }}
-          ></span>
-          {/* Slide de tarjeta activa */}
-          <AnimatePresence custom={direction} mode="wait">
-            {open && (
-              <motion.div
-                key={activeIndex}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.7, ease: 'easeInOut' }}
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-blue-400 rounded-2xl shadow-2xl flex flex-col items-center justify-center p-6 text-center bg-[#181f2f] w-44 h-60 z-50"
-                style={{ boxShadow: '0 8px 32px 0 rgba(59,130,246,0.25)' }}
-              >
-                <div className="mb-2" style={{width:40, height:40}}>{papers[activeIndex].svg}</div>
-                <div className="text-base font-bold text-white mb-1">{papers[activeIndex].title}</div>
-                <div className="text-gray-300 text-xs leading-tight">{papers[activeIndex].description}</div>
-              </motion.div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="#202020" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+      {/* Flecha derecha */}
+      <button
+        aria-label="Siguiente"
+        className="absolute right-0 z-20 bg-[#FFD100] text-[#202020] rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-[#FFEE32] transition"
+        onClick={handleNext}
+        style={{ top: '50%', transform: 'translateY(-50%)' }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="#202020" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+      {/* Stack de tarjetas */}
+      {cards.map((card, i) => {
+        // Offset circular para simetría perfecta
+        let offset = i - activeIndex;
+        if (offset > cards.length / 2) offset -= cards.length;
+        if (offset < -cards.length / 2) offset += cards.length;
+        const absOffset = Math.abs(offset);
+        if (absOffset > maxVisible) return null;
+        const isActive = i === activeIndex;
+        // Centrado perfecto: left 50% y translateX(-50% + offset)
+        return (
+          <motion.div
+            key={card.id}
+            className={`rounded-2xl border-2 border-black bg-white shadow-xl flex flex-col items-center justify-center cursor-pointer font-sans transition-all duration-300`}
+            style={{
+              width: cardDimensions.width,
+              height: cardDimensions.height,
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              zIndex: isActive ? 20 : 10 - absOffset,
+              boxShadow: isActive ? '0 8px 32px 0 rgba(255,221,0,0.18)' : '0 2px 8px 0 rgba(0,0,0,0.10)',
+            }}
+            animate={{
+              x: 0,
+              y: 0,
+              scale: isActive && expanded ? 1.12 : 1 - absOffset * scaleStep,
+              rotate: offset * 8,
+              opacity: 1 - absOffset * 0.18,
+              filter: isActive && expanded ? 'brightness(1)' : 'brightness(0.95)',
+              translateX: `calc(-50% + ${offset * spread}px)`
+            }}
+            transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+            onClick={() => {
+              if (isActive) {
+                setExpanded((prev) => !prev);
+              } else {
+                goTo(i);
+              }
+            }}
+          >
+            <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 text-center">
+              <div className="text-xl md:text-2xl font-bold text-[#202020] mb-2 font-sans">
+                {isActive && expanded ? card.title : card.short}
+              </div>
+              <div className="text-base text-[#202020] font-normal font-sans">
+                {isActive && expanded ? card.detail : null}
+              </div>
+            </div>
+            {isActive && expanded && (
+              <div className="text-xs text-[#202020] pb-2 cursor-pointer select-none opacity-60">Haz clic para colapsar</div>
             )}
-          </AnimatePresence>
-        </div>
-      </div>
+          </motion.div>
+        );
+      })}
     </div>
   );
-};
-
-export default Folder; 
+} 

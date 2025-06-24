@@ -1,3 +1,70 @@
+@import url('https://use.typekit.net/dyf0yaq.css');
+
+html, body {
+  font-family: 'interstate', sans-serif;
+  background-color: #202020;
+}
+
+.font-bree {
+  font-family: 'bree', sans-serif;
+}
+
+.font-bree-normal {
+  font-family: 'bree', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.font-bree-italic {
+  font-family: 'bree', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+.font-bree-bold {
+  font-family: 'bree', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.font-bree-bold-italic {
+  font-family: 'bree', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.font-futura {
+  font-family: 'futura-pt', 'futura-pt-bold', sans-serif;
+}
+
+.font-book {
+  font-family: 'futura-pt', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.font-book-italic {
+  font-family: 'futura-pt', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+.font-heavy {
+  font-family: 'futura-pt', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.font-heavy-italic {
+  font-family: 'futura-pt', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+.font-bold {
+  font-family: 'futura-pt-bold', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.font-bold-italic {
+  font-family: 'futura-pt-bold', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities; 

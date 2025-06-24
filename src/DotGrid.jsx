@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useEffect, useCallback, useMemo } from "react";
+import { useRef, useEffect, useCallback, useMemo, useState } from "react";
 import { gsap } from "gsap";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 
@@ -36,10 +36,10 @@ function lerpColor(a, b, t) {
 }
 
 const DotGrid = ({
-  dotSize = 4,
-  gap = 12,
+  dotSize = 3,
+  gap = 10,
   baseColor = '#fff',
-  activeColor = '#fff',
+  activeColor = '#FFD600',
   proximity = 120,
   speedTrigger = 100,
   shockRadius = 250,
@@ -63,6 +63,7 @@ const DotGrid = ({
     lastX: 0,
     lastY: 0,
   });
+  const [pressedDot, setPressedDot] = useState(null);
 
   const baseRgb = useMemo(() => hexToRgb(baseColor), [baseColor]);
   const activeRgb = useMemo(() => hexToRgb(activeColor), [activeColor]);
@@ -110,63 +111,44 @@ const DotGrid = ({
       for (let x = 0; x < cols; x++) {
         const cx = startX + x * cell;
         const cy = startY + y * cell;
-        // Interpolación de color entre azul y blanco
-        const t = Math.random();
-        const rgb = lerpColor(blue, white, t);
-        dots.push({ cx, cy, xOffset: 0, yOffset: 0, _inertiaApplied: false, rgb });
+        dots.push({ cx, cy, x, y, xOffset: 0, yOffset: 0, _inertiaApplied: false });
       }
     }
     dotsRef.current = dots;
+    dotsRef.current.cols = cols;
+    dotsRef.current.rows = rows;
   }, [dotSize, gap]);
 
   useEffect(() => {
     if (!circlePath) return;
-
     let rafId;
-    const proxSq = proximity * proximity;
-
     const draw = () => {
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const { x: px, y: py } = pointerRef.current;
-
+      // Dibuja solo los puntos
       for (const dot of dotsRef.current) {
         const ox = dot.cx + dot.xOffset;
         const oy = dot.cy + dot.yOffset;
-        const dx = dot.cx - px;
-        const dy = dot.cy - py;
-        const dsq = dx * dx + dy * dy;
-
         let style = baseColor;
-        if (dsq <= proxSq) {
-          const dist = Math.sqrt(dsq);
-          const t = 1 - dist / proximity;
-          const r = Math.round(baseRgb.r + (activeRgb.r - baseRgb.r) * t);
-          const g = Math.round(baseRgb.g + (activeRgb.g - baseRgb.g) * t);
-          const b = Math.round(baseRgb.b + (activeRgb.b - baseRgb.b) * t);
-          style = `rgba(${r},${g},${b},0.5)`;
-        } else {
-          const { r, g, b } = dot.rgb;
-          style = `rgba(${r},${g},${b},0.35)`;
+        if (pressedDot && pressedDot.x === dot.x && pressedDot.y === dot.y) {
+          style = activeColor;
         }
-
         ctx.save();
         ctx.translate(ox, oy);
         ctx.fillStyle = style;
-        ctx.fill(circlePath);
+        ctx.beginPath();
+        ctx.arc(0, 0, dotSize / 2, 0, Math.PI * 2);
+        ctx.fill();
         ctx.restore();
       }
-
       rafId = requestAnimationFrame(draw);
     };
-
     draw();
     return () => cancelAnimationFrame(rafId);
-  }, [proximity, baseColor, activeRgb, baseRgb, circlePath]);
+  }, [baseColor, activeColor, dotSize, circlePath, pressedDot]);
 
   useEffect(() => {
     buildGrid();
@@ -279,6 +261,40 @@ const DotGrid = ({
     shockStrength,
   ]);
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const handlePointerDown = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      let minDist = Infinity;
+      let closest = null;
+      for (const dot of dotsRef.current) {
+        const dist = Math.hypot(dot.cx - cx, dot.cy - cy);
+        if (dist < minDist && dist < dotSize * 2) {
+          minDist = dist;
+          closest = dot;
+        }
+      }
+      if (closest) setPressedDot({ x: closest.x, y: closest.y });
+    };
+    const handlePointerUp = () => setPressedDot(null);
+    canvas.addEventListener('mousedown', handlePointerDown);
+    window.addEventListener('mouseup', handlePointerUp);
+    // Para touch
+    canvas.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) handlePointerDown(e.touches[0]);
+    });
+    window.addEventListener('touchend', handlePointerUp);
+    return () => {
+      canvas.removeEventListener('mousedown', handlePointerDown);
+      window.removeEventListener('mouseup', handlePointerUp);
+      canvas.removeEventListener('touchstart', handlePointerDown);
+      window.removeEventListener('touchend', handlePointerUp);
+    };
+  }, [dotSize]);
+
   return (
     <section
       className={`p-4 flex items-center justify-center h-full w-full relative ${className}`}
@@ -295,10 +311,10 @@ const DotGrid = ({
 };
 
 DotGrid.defaultProps = {
-  dotSize: 4,
-  gap: 12,
+  dotSize: 3,
+  gap: 10,
   baseColor: '#fff',
-  activeColor: '#fff',
+  activeColor: '#FFD600',
   proximity: 120,
   shockRadius: 250,
   shockStrength: 5,

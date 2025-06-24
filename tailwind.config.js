@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -19,6 +21,16 @@ module.exports = {
           '0%': { transform: 'translate(0%, 0%)', opacity: '0.7' },
           '100%': { transform: 'translate(100%, 0%)', opacity: '0' },
         },
+      },
+      fontFamily: {
+        sans: ['interstate', ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        'primary': '#D6D6D6',
+        'secondary': '#FFD100',
+        'accent': '#FFEE32',
+        'dark': '#202020',
+        'medium': '#333533'
       },
     },
   },
