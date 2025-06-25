@@ -174,16 +174,19 @@ export default function App() {
               Nuestros Servicios
             </h2>
             <div className="flex justify-center w-full">
-              <div ref={folderRef} className="bg-[#333533]/70 backdrop-blur-xl rounded-3xl p-10 sm:p-16 md:p-24 shadow-[0_0_64px_0_rgba(255,221,0,0.2)] text-center w-full max-w-lg sm:max-w-2xl md:max-w-3xl flex flex-col items-center mx-auto my-6 md:my-12">
-                <div className="mb-8 md:mb-12 flex justify-center w-full">
+              <div ref={folderRef} className="bg-[#333533]/70 backdrop-blur-xl rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_0_64px_0_rgba(255,221,0,0.2)] text-center w-full max-w-sm md:max-w-md flex flex-col items-center mx-auto mt-0 mb-0">
+                <div className="mb-8 md:mb-12 flex justify-center w-full mt-0">
                   <Stack
                     randomRotation={true}
                     sensitivity={180}
                     sendToBackOnClick={false}
-                    cardDimensions={{ width: 260, height: 260 }}
+                    cardDimensions={{ width: 260, height: 320 }}
+                    fontSizeTitle="text-xl md:text-3xl"
+                    fontSizeShort="text-base md:text-xl"
+                    fontSizeDetail="text-base md:text-xl"
                   />
                 </div>
-                <h3 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8 text-[#FFEE32] font-sans">Soluciones Digitales</h3>
+                <h3 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8 text-[#FFEE32] font-sans mt-[10rem]">Soluciones Digitales</h3>
                 <p className="text-[#D6D6D6] mb-6 md:mb-12 leading-relaxed text-base md:text-2xl max-w-2xl mx-auto font-sans">
                   Ofrecemos cuatro servicios principales que cubren todas las necesidades digitales de tu empresa. Haz clic en las tarjetas para ver más detalles.
                 </p>

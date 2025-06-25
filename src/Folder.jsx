@@ -31,6 +31,9 @@ const cardsData = [
 export default function Stack({
   cardDimensions = { width: 260, height: 260 },
   cardsData: propCardsData,
+  fontSizeTitle = "text-xl md:text-3xl",
+  fontSizeShort = "text-base md:text-xl",
+  fontSizeDetail = "text-base md:text-xl",
 }) {
   const cards = propCardsData || cardsData;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,14 +48,6 @@ export default function Stack({
     setActiveIndex((idx + cards.length) % cards.length);
     setExpanded(true);
   };
-  const handlePrev = (e) => {
-    e.stopPropagation();
-    goTo(activeIndex - 1);
-  };
-  const handleNext = (e) => {
-    e.stopPropagation();
-    goTo(activeIndex + 1);
-  };
 
   // Ajustar el ancho del contenedor para que nunca corte las cartas laterales
   const containerWidth = cardDimensions.width + spread * maxVisible * 2 + 40;
@@ -66,24 +61,6 @@ export default function Stack({
         perspective: 600,
       }}
     >
-      {/* Flecha izquierda */}
-      <button
-        aria-label="Anterior"
-        className="absolute left-0 z-20 bg-[#FFD100] text-[#202020] rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-[#FFEE32] transition"
-        onClick={handlePrev}
-        style={{ top: '50%', transform: 'translateY(-50%)' }}
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="#202020" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-      </button>
-      {/* Flecha derecha */}
-      <button
-        aria-label="Siguiente"
-        className="absolute right-0 z-20 bg-[#FFD100] text-[#202020] rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-[#FFEE32] transition"
-        onClick={handleNext}
-        style={{ top: '50%', transform: 'translateY(-50%)' }}
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="#202020" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-      </button>
       {/* Stack de tarjetas */}
       {cards.map((card, i) => {
         // Offset circular para simetría perfecta
@@ -93,11 +70,11 @@ export default function Stack({
         const absOffset = Math.abs(offset);
         if (absOffset > maxVisible) return null;
         const isActive = i === activeIndex;
-        // Centrado perfecto: left 50% y translateX(-50% + offset)
+        // Centrado perfectoleft 50% y translateX(-50% + offset)
         return (
           <motion.div
             key={card.id}
-            className={`rounded-2xl border-2 border-black bg-white shadow-xl flex flex-col items-center justify-center cursor-pointer font-sans transition-all duration-300`}
+            className={`rounded-2xl bg-white shadow-xl flex flex-col items-center justify-center cursor-pointer font-sans transition-all duration-300 px-6 py-8`}
             style={{
               width: cardDimensions.width,
               height: cardDimensions.height,
@@ -125,12 +102,14 @@ export default function Stack({
               }
             }}
           >
-            <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 text-center">
-              <div className="text-xl md:text-2xl font-bold text-[#202020] mb-2 font-sans">
+            <div className="flex-1 flex flex-col items-center justify-center text-center">
+              <div className={`${fontSizeTitle} font-bold text-[#202020] mb-2 font-sans`}>
                 {isActive && expanded ? card.title : card.short}
               </div>
-              <div className="text-base text-[#202020] font-normal font-sans">
-                {isActive && expanded ? card.detail : null}
+              <div className={`${isActive && expanded ? fontSizeDetail : fontSizeShort} text-[#202020] font-normal font-sans`}>
+                {isActive && expanded ? (
+                  <div className={`w-full text-center ${fontSizeDetail} text-black px-4 break-words min-h-[3.5rem] font-normal`}>{card.detail}</div>
+                ) : null}
               </div>
             </div>
             {isActive && expanded && (
