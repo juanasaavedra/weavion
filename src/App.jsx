@@ -172,7 +172,7 @@ export default function App() {
           <div className="w-full max-w-lg sm:max-w-2xl md:max-w-5xl mx-auto flex flex-col items-center mt-6 mx-2">
             <h2 className="text-4xl md:text-7xl font-bold mb-8 md:mb-20 text-center text-[#D6D6D6] drop-shadow-lg font-sans">
               Nuestros Servicios
-            </h2>
+            </h2> 
             <div className="flex justify-center w-full">
               <div ref={folderRef} className="bg-[#333533]/70 backdrop-blur-xl rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_0_64px_0_rgba(255,221,0,0.2)] text-center w-full max-w-sm md:max-w-md flex flex-col items-center mx-auto mt-0 mb-0">
                 <div className="mb-8 md:mb-12 flex justify-center w-full mt-0">
