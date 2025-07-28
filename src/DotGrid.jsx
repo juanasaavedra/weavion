@@ -301,7 +301,7 @@ const DotGrid = ({
       style={{
         ...style,
         position: 'relative',
-        backgroundColor: '#000000',
+        backgroundColor: 'transparent',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
