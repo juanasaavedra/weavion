@@ -2,7 +2,7 @@ import DotGrid from './DotGrid';
 import Folder from './Folder';
 import StarBorder from './StarBorder';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DecryptedText from './DecryptedText';
@@ -12,6 +12,8 @@ import ContactForm from './ContactForm';
 import ContactSection from './ContactSection';
 import backgroundBlur from './assets/backgroundBlur.png';
 import logo from './assets/logo.png';
+import StarryBackground from './StarryBackground';
+import Moon from './Moon';
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -20,6 +22,18 @@ export default function App() {
   const [folderSize, setFolderSize] = useState(2.0);
   const [showLanding, setShowLanding] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+  const [currentSection, setCurrentSection] = useState('hero');
+  
+  // Referencias para las secciones
+  const heroRef = useRef(null);
+  const servicesRef = useRef(null);
+  const aboutRef = useRef(null);
+  const benefitsRef = useRef(null);
+  const processRef = useRef(null);
+  const contactRef = useRef(null);
+  
+  // Para el scroll y animaciones
+  const { scrollY } = useScroll();
 
   useEffect(() => {
     const updateSize = () => {
@@ -28,6 +42,39 @@ export default function App() {
     updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  
+  // Detectar la sección actual basada en el scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      
+      const sections = [
+        { ref: heroRef, id: 'hero' },
+        { ref: servicesRef, id: 'services' },
+        { ref: aboutRef, id: 'about' },
+        { ref: benefitsRef, id: 'benefits' },
+        { ref: processRef, id: 'process' },
+        { ref: contactRef, id: 'contact' }
+      ];
+      
+      for (const section of sections) {
+        if (section.ref.current) {
+          const { top, bottom } = section.ref.current.getBoundingClientRect();
+          if (top <= scrollPosition && bottom >= scrollPosition) {
+            setCurrentSection(section.id);
+            break;
+          }
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   // Scroll a servicios
@@ -77,6 +124,9 @@ export default function App() {
 
       {/* Background */}
       <div className="fixed inset-0 z-0" style={{ backgroundColor: '#000000' }}>
+        <StarryBackground />
+      </div>
+      <div className="fixed inset-0 z-5" style={{ pointerEvents: 'none' }}>
         <DotGrid
           dotSize={3}
           gap={12}
@@ -89,11 +139,49 @@ export default function App() {
           returnDuration={1.5}
         />
       </div>
+      
+      {/* Luna que se mueve entre secciones */}
+      <Moon 
+        position={{
+          x: currentSection === 'hero' ? '10vw' : // Mucho más a la izquierda en home
+             currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
+             currentSection === 'about' ? '80vw' : // A la derecha en Sobre Nosotros
+             currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
+             currentSection === 'process' ? '50vw' : // Centro abajo en proceso
+             currentSection === 'contact' ? '15vw' : // Izquierda en contacto
+             '50vw',
+          y: currentSection === 'hero' ? '50vh' : 
+             currentSection === 'services' ? '85vh' : 
+             currentSection === 'about' ? '40vh' : // Un poco más arriba para estar centrado
+             currentSection === 'benefits' ? '25vh' : 
+             currentSection === 'process' ? '85vh' : 
+             currentSection === 'contact' ? '90vh' : // Abajo del todo en contacto
+             '80vh'
+        }}
+        size={
+          currentSection === 'hero' ? '350px' : // Más grande en inicio
+          currentSection === 'about' ? '400px' : // Muy grande en Sobre Nosotros
+          currentSection === 'benefits' ? '250px' : // Grande en beneficios
+          currentSection === 'process' ? '400px' : // Grande en proceso
+          currentSection === 'contact' ? '300px' : // Tamaño mediano en contacto
+          '200px'
+        }
+        opacity={
+          currentSection === 'benefits' || currentSection === 'contact' ? 0.7 : // Menos opacidad cuando hay poco espacio
+          1
+        }
+        zIndex={
+          currentSection === 'contact' ? 10 : // Debajo de los contenedores pero encima del fondo
+          20
+        }
+        transition={{ duration: 1, ease: "easeInOut" }}
+      />
 
       {/* Content */}
       <div className="relative z-10">
         {/* Hero Section */}
         <motion.section
+          ref={heroRef}
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -101,16 +189,24 @@ export default function App() {
         >
           <div className="text-center max-w-3xl mx-auto space-y-8 mt-16 mb-2">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-[#D6D6D6] leading-tight font-sans">
-              <DecryptedText text={t('hero.title')} animateOn="view" />
+              <DecryptedText text={t('hero.title', "Take your company to space and beyond")} animateOn="view" />
             </h1>
             <p className="text-2xl md:text-3xl mb-10 text-[#D6D6D6] max-w-2xl mx-auto font-sans">
-              <DecryptedText text={t('hero.subtitle')} animateOn="view" speed={20} />
+              <DecryptedText text={t('hero.subtitle', "Your business deserves a stellar online presence. We'll help you reach for the stars.")} animateOn="view" speed={20} />
             </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="text-xl text-[#6F47FF] mb-10 font-semibold"
+            >
+              {t('hero.motivational', "The universe of digital possibilities awaits your brand")}
+            </motion.div>
             <button
               onClick={scrollToServices}
               className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors"
             >
-              {t('hero.cta')}
+              {t('hero.cta', "Discover how")}
             </button>
           </div>
         </motion.section>
@@ -118,27 +214,30 @@ export default function App() {
         {/* Services Section - mobile optimized, mejor espaciado y tarjetas grandes */}
         <motion.section
           id="servicios"
+          ref={servicesRef}
           initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
-          className="py-24 md:py-32 px-2 md:px-8 flex flex-col items-center mb-32 bg-[#0C0D13]"
+          className="py-16 md:py-24 px-2 md:px-8 flex flex-col items-center mb-32 bg-[#0C0D13]"
         >
-          <div className="w-full max-w-6xl mx-auto flex flex-col items-center mt-6 mb-16">
-            <h2 className="headline mb-8 md:mb-12 text-center text-[#FFFFFF] drop-shadow-lg">
-              {t('services.title')}
+          <div className="w-full max-w-6xl mx-auto flex flex-col items-center mt-2 mb-8">
+            <h2 className="headline mb-4 md:mb-8 text-center text-[#FFFFFF] drop-shadow-lg">
+              {t('services.title', "Our Services")}
             </h2>
             <div className="flex flex-col md:flex-row gap-8 w-full">
-              <div className="md:w-1/2 w-full md:mb-0 mb-8">
-                <Stack
-                  randomRotation={false}
-                  sensitivity={180}
-                  sendToBackOnClick={false}
-                  cardDimensions={{ width: "100%", height: 350 }}
-                  fontSizeTitle="text-2xl"
-                  fontSizeShort="text-lg"
-                  fontSizeDetail="text-base"
-                />
+              <div className="md:w-1/2 w-full md:mb-0 mb-8 flex justify-center items-center">
+                <div className="w-full max-w-xl">
+                  <Stack
+                    randomRotation={false}
+                    sensitivity={180}
+                    sendToBackOnClick={false}
+                    cardDimensions={{ width: "100%", height: 350 }}
+                    fontSizeTitle="text-2xl"
+                    fontSizeShort="text-lg"
+                    fontSizeDetail="text-base"
+                  />
+                </div>
               </div>
               <div className="md:w-1/2 w-full md:flex md:flex-col md:justify-center">
                 <h3 className="text-2xl md:text-3xl font-bold mb-2 text-[#6F47FF] font-sans md:text-left text-center">
@@ -193,27 +292,38 @@ export default function App() {
 
         {/* About Us Section */}
         <motion.section
+          ref={aboutRef}
           initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
           className="py-24 md:py-32 relative mt-24"
         >
-          <div className="absolute inset-0 w-full h-full z-0" style={{ backgroundImage: `url(${backgroundBlur})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          <div className="absolute inset-0 w-full h-full z-0 bg-black bg-opacity-90" />
           <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="p-12 md:p-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-[#D6D6D6] font-sans">
-                {t('about.title')}
+                {t('about.title', "About Us")}
               </h2>
-              <div className="grid md:grid-cols-2 gap-20 items-center">
+              <div className="grid md:grid-cols-2 gap-10 items-center">
                 <div>
-                  <p className="text-lg text-[#D6D6D6] mb-8 leading-relaxed font-sans">
-                    {t('about.paragraph1')}
+                  <p className="text-lg text-[#D6D6D6] mb-8 leading-relaxed font-sans font-medium">
+                    {t('about.paragraph1', "We're a team of passionate digital creators dedicated to launching your business into the digital stratosphere.")}
                   </p>
-                  <p className="text-lg text-[#D6D6D6] leading-relaxed font-sans">
-                    {t('about.paragraph2')}
+                  <p className="text-lg text-[#D6D6D6] leading-relaxed font-sans font-medium">
+                    {t('about.paragraph2', "Our mission is to help businesses of all sizes achieve orbital success with cutting-edge web solutions and service integrations.")}
                   </p>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 1 }}
+                    className="mt-8 text-[#6F47FF] text-lg font-bold"
+                  >
+                    {t('about.quote', "Your vision, our mission - reaching for the stars together.")}
+                  </motion.div>
                 </div>
+                {/* La luna estará en la derecha mediante el componente Moon posicionado absolutamente */}
+                <div className="hidden md:block" style={{ height: '300px' }}></div>
               </div>
             </div>
           </div>
@@ -221,6 +331,7 @@ export default function App() {
 
         {/* Benefits Section */}
         <motion.section
+          ref={benefitsRef}
           initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -253,15 +364,17 @@ export default function App() {
         </motion.section>
 
         {/* Process Section */}
-        <section className="py-24 md:py-32 px-4 bg-[var(--color-dark-bg)] mt-24" style={{ minHeight: 'auto' }}>
+        <section ref={processRef} className="py-24 md:py-32 px-4 bg-[var(--color-dark-bg)] mt-24" style={{ minHeight: 'auto' }}>
           <h2 className="headline mb-10 text-center text-[var(--color-text)]">
-            {t('process.title')}
+            {t('process.title', "Our Process")}
           </h2>
           <ProcessTimeline />
         </section>
         
         {/* Contact Section */}
-        <ContactSection />
+        <div ref={contactRef}>
+          <ContactSection />
+        </div>
         
         {/* Extra space for mobile view */}
         <div className="h-16 md:h-0"></div>

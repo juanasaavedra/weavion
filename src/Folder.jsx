@@ -43,8 +43,8 @@ export default function Stack({
   const [activeIndex, setActiveIndex] = useState(0);
   const [expanded, setExpanded] = useState(true);
 
-  const spread = 60;
-  const scaleStep = 0.08;
+  const spread = 30; // Reducimos el espacio entre tarjetas
+  const scaleStep = 0.05; // Reducimos la diferencia de escala
   const maxVisible = 2;
 
   // Navegación circular
@@ -60,11 +60,12 @@ export default function Stack({
     <div
       className="relative flex items-center justify-center select-none mx-auto card-stack-container"
       style={{
-        width: "20vw",
+        width: window.innerWidth < 768 ? "100%" : "100%",
         height: window.innerWidth < 768 ? "350px" : "400px",
         perspective: 600,
-        maxWidth: "300px", 
-        marginBottom: "40px"
+        maxWidth: "600px", // Aumentamos el ancho máximo
+        marginBottom: "40px",
+        overflow: "visible" // Permitir que las tarjetas se vean completas
       }}
     >
       {/* Stack de tarjetas */}
@@ -84,24 +85,24 @@ export default function Stack({
             key={card.id}
             className={`container-rounded bg-white shadow-xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 px-6 py-8 border-0`}
             style={{
-              width: window.innerWidth < 640 ? (isActive ? "260px" : "220px") : (isActive ? "300px" : "260px"),
+              width: window.innerWidth < 640 ? (isActive ? "270px" : "240px") : (isActive ? "320px" : "280px"),
               height: window.innerWidth < 640 ? (isActive ? "280px" : "240px") : (isActive ? "330px" : "290px"),
               position: 'absolute',
-              left: window.innerWidth >= 768 ? `calc(50% + ${offset * 180}px)` : '50%',
+              left: '50%',
               top: '50%',
               zIndex: isActive ? 20 : 10 - absOffset,
               boxShadow: isActive ? '0 10px 30px 0 rgba(0, 0, 0, 0.15)' : '0 4px 12px 0 rgba(0, 0, 0, 0.1)',
               marginBottom: "0px",
-              overflow: "hidden"
+              overflow: "hidden",
+              transform: 'translate(-50%, -50%)' // Centrado perfecto
             }}
             animate={{
-              x: 0,
-              y: 0,
-              scale: isActive && expanded ? 1.12 : 1 - absOffset * scaleStep,
-              rotate: rotationAngle,
-              opacity: 1 - absOffset * 0.18,
+              scale: isActive && expanded ? 1.08 : 1 - absOffset * scaleStep,
+              rotate: rotationAngle * 0.3, // Rotación mucho menos pronunciada
+              opacity: 1 - absOffset * 0.08, // Aún menos diferencia de opacidad
               filter: isActive && expanded ? 'brightness(1)' : 'brightness(0.95)',
-              translateX: `calc(-50% + ${offset * (window.innerWidth < 768 ? 40 : 50)}px)`
+              translateX: `${offset * (window.innerWidth < 768 ? 30 : 40)}px`, // Mayor separación entre tarjetas
+              translateY: `${offset * (window.innerWidth < 768 ? 5 : 8)}px` // Ligero desplazamiento vertical
             }}
             transition={{ type: 'spring', stiffness: 220, damping: 24 }}
             onClick={() => {

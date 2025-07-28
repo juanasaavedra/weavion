@@ -11,9 +11,10 @@
     "english": "English"
   },
   "hero": {
-    "title": "Descubre el futuro de la digitalización de las empresas",
-    "subtitle": "Soluciones digitales para empresas modernas. Automatiza, crece y destaca en el mundo digital.",
-    "cta": "Descúbrelo"
+    "title": "Lleva tu empresa al espacio y más allá",
+    "subtitle": "Tu negocio merece una presencia estelar en línea. Te ayudaremos a alcanzar las estrellas.",
+    "motivational": "El universo de posibilidades digitales espera a tu marca",
+    "cta": "Descubre cómo"
   },
   "services": {
     "title": "¿Qué ganas con nosotros?",
@@ -23,8 +24,9 @@
   },
   "about": {
     "title": "Sobre Nosotros",
-    "paragraph1": "Somos una empresa especializada en el desarrollo de soluciones digitales para pequeñas y medianas empresas. Nuestro objetivo es democratizar el acceso a tecnología de calidad, permitiendo que empresas de todos los tamaños puedan competir en el mercado digital actual.",
-    "paragraph2": "Creemos que la tecnología debe ser accesible, escalable y sostenible. Por eso trabajamos con metodologías ágiles, tecnologías modernas y un enfoque centrado en el usuario para asegurar que cada proyecto sea un éxito."
+    "paragraph1": "Somos un equipo de creadores digitales apasionados dedicados a lanzar tu negocio hacia la estratósfera digital.",
+    "paragraph2": "Nuestra misión es ayudar a empresas de todos los tamaños a alcanzar el éxito orbital con soluciones web de vanguardia e integraciones de servicios.",
+    "quote": "Tu visión, nuestra misión - alcanzando las estrellas juntos."
   },
   "benefits": {
     "title": "¿Qué ventajas obtienes con nosotros?",

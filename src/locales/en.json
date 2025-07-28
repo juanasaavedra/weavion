@@ -11,9 +11,10 @@
     "english": "Español"
   },
   "hero": {
-    "title": "Discover the future of business digitalization",
-    "subtitle": "Digital solutions for modern companies. Automate, grow, and stand out in the digital world.",
-    "cta": "Discover it"
+    "title": "Take your company to space and beyond",
+    "subtitle": "Your business deserves a stellar online presence. We'll help you reach for the stars.",
+    "motivational": "The universe of digital possibilities awaits your brand",
+    "cta": "Discover how"
   },
   "services": {
     "title": "What do you gain with us?",
@@ -23,8 +24,9 @@
   },
   "about": {
     "title": "About Us",
-    "paragraph1": "We are a company specialized in developing digital solutions for small and medium-sized businesses. Our goal is to democratize access to quality technology, allowing businesses of all sizes to compete in today's digital market.",
-    "paragraph2": "We believe that technology should be accessible, scalable, and sustainable. That is why we work with agile methodologies, modern technologies, and a user-centered approach to ensure that every project is a success."
+    "paragraph1": "We're a team of passionate digital creators dedicated to launching your business into the digital stratosphere.",
+    "paragraph2": "Our mission is to help businesses of all sizes achieve orbital success with cutting-edge web solutions and service integrations.",
+    "quote": "Your vision, our mission - reaching for the stars together."
   },
   "benefits": {
     "title": "What advantages do you get with us?",
