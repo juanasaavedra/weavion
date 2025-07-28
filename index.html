@@ -2,15 +2,33 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/weavion/vite.svg" />
+    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0C0D13" />
+    <meta name="description" content="Weavion - Desarrollo web y diseño de experiencias digitales" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/weavion/manifest.json" />
     <title>Weavion</title>
-    <link rel="stylesheet" href="https://use.typekit.net/dyf0yaq.css">
-    <script type="module" crossorigin src="/weavion/assets/index-b8f83213.js"></script>
-    <link rel="stylesheet" href="/weavion/assets/index-0a1de21e.css">
+    
+    <!-- Preload Ars Nova font files to ensure they load first -->
+    <link rel="preload" href="/weavion/fonts/ArsNova-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/weavion/fonts/ArsNova-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    
+    <!-- Font display swap ensures text remains visible during font loading -->
+    <style>
+      /* Fallback font strategy while Ars Nova loads */
+      @font-face {
+        font-family: 'Ars Nova Fallback';
+        size-adjust: 100%;
+        ascent-override: 90%;
+        src: local('Arial');
+      }
+    </style>
+    <script type="module" crossorigin src="/weavion/assets/index-dd8e81ff.js"></script>
+    <link rel="stylesheet" href="/weavion/assets/index-f33f8843.css">
   </head>
-  <body class="bg-[#0a0c15]">
+  <body>
     <div id="root"></div>
     
   </body>
-</html>   
+</html>
