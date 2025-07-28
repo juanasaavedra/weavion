@@ -53,15 +53,12 @@ export default function Stack({
     setExpanded(true);
   };
 
-  // Ajustar el contenedor para usar porcentajes
-  const containerWidth = "100%";
+
 
   return (
     <div
       className="relative flex items-center justify-center select-none mx-auto card-stack-container"
       style={{
-        width: window.innerWidth < 768 ? "100%" : "100%",
-        height: window.innerWidth < 768 ? "350px" : "400px",
         perspective: 600,
         maxWidth: "600px", // Aumentamos el ancho máximo
         marginBottom: "40px",
