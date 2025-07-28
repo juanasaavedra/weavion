@@ -4,10 +4,12 @@ import StarBorder from './StarBorder';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import DecryptedText from './DecryptedText';
 import Stack from './Folder';
 import ProcessTimeline from './ProcessTimeline';
 import ContactForm from './ContactForm';
+import ContactSection from './ContactSection';
 import backgroundBlur from './assets/backgroundBlur.png';
 import logo from './assets/logo.png';
 
@@ -57,29 +59,29 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#202020] text-[#D6D6D6] font-sans">
+    <div className="min-h-screen bg-[var(--color-dark-bg)] text-[var(--color-text)] font-sans">
       {/* Logo y selector de idioma */}
-      <div className="fixed top-4 left-4 z-50 flex items-center gap-3">
-        <button className="w-10 h-10 rounded-full bg-white/70 flex items-center justify-center shadow-lg" style={{ opacity: 0.7 }}>
-          <img src={logo} alt="Logo" className="w-7 h-7 object-contain" />
+      <div className="fixed top-8 left-8 md:left-8 z-50 flex items-center">
+        <button className="w-16 h-16 md:w-18 md:h-18 rounded-full bg-[var(--color-slate)] flex items-center justify-center shadow-xl border border-[var(--color-slate)]">
+          <img src={logo} alt="Logo" className="md:w-16 md:h-16 w-14 h-14 object-cover rounded-full" />
         </button>
       </div>
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-8 right-8 md:right-8 z-50">
         <button
           onClick={handleLang}
-          className="bg-[#333533] text-[#FFD100] px-4 py-2 rounded-full font-bold shadow hover:bg-[#FFD100] hover:text-[#202020] transition"
+          className="md:text-2xl text-lg font-bold bg-[var(--color-accent)] text-[var(--color-text)] md:px-6 px-4 md:py-3 py-2 btn-rounded border-0 hover:bg-[var(--color-highlight)] hover:transform hover:scale-105 transition-all duration-300 shadow-lg"
         >
           {i18n.language === 'es' ? 'EN' : 'ES'}
         </button>
       </div>
 
       {/* Background */}
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0" style={{ backgroundColor: '#000000' }}>
         <DotGrid
           dotSize={3}
           gap={12}
-          baseColor="rgba(214, 214, 214, 0.2)"
-          activeColor="#FFD100"
+          baseColor="#000000"
+          activeColor="#6F47FF"
           proximity={120}
           shockRadius={250}
           shockStrength={5}
@@ -104,17 +106,12 @@ export default function App() {
             <p className="text-2xl md:text-3xl mb-10 text-[#D6D6D6] max-w-2xl mx-auto font-sans">
               <DecryptedText text={t('hero.subtitle')} animateOn="view" speed={20} />
             </p>
-            <StarBorder
-              as="button"
+            <button
               onClick={scrollToServices}
-              starColor="#FFD100"
-              backgroundColor="#FFEE32"
-              textColor="#202020"
-              className="cursor-pointer text-2xl md:text-3xl px-6 py-2 font-bold rounded-full shadow-lg hover:bg-[#FFD100] transition"
-              style={{ fontSize: '2rem', padding: '0.5rem 1.5rem' }}
+              className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors"
             >
               {t('hero.cta')}
-            </StarBorder>
+            </button>
           </div>
         </motion.section>
 
@@ -125,38 +122,44 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
-          className="py-10 md:py-20 px-2 md:px-8 flex flex-col items-center mb-32"
+          className="py-24 md:py-32 px-2 md:px-8 flex flex-col items-center mb-32 bg-[#0C0D13]"
         >
-          <div className="w-full max-w-lg mx-auto flex flex-col items-center mt-6 mx-2">
-            <h2 className="text-4xl md:text-7xl font-bold mb-8 md:mb-12 text-center text-[#D6D6D6] drop-shadow-lg font-sans">
-              Nuestros Servicios
+          <div className="w-full max-w-6xl mx-auto flex flex-col items-center mt-6 mb-16">
+            <h2 className="headline mb-8 md:mb-12 text-center text-[#FFFFFF] drop-shadow-lg">
+              {t('services.title')}
             </h2>
-            <div className="flex flex-col gap-8 w-full">
-              <Stack
-                randomRotation={false}
-                sensitivity={180}
-                sendToBackOnClick={false}
-                cardDimensions={{ width: 320, height: 340 }}
-                fontSizeTitle="text-2xl"
-                fontSizeShort="text-lg"
-                fontSizeDetail="text-base"
-              />
-              <h3 className="text-xl md:text-2xl font-bold mb-2 text-[#FFEE32] font-sans">
-                Soluciones Digitales para tu empresa
-              </h3>
-              <p className="text-[#D6D6D6] mb-4 leading-relaxed text-base max-w-xs mx-auto font-sans">
-                Ofrecemos servicios principales que cubren todas las necesidades digitales de tu empresa. Haz clic en las tarjetas para ver más detalles.
-              </p>
-              <StarBorder
-                className="relative z-10 py-1 px-3 rounded-[28px] font-bold"
-                style={{ backgroundColor: "#FFEE32", color: "#202020", fontSize: '1.3rem', padding: '0.25rem 1rem' }}
-                onClick={handleExploreClick}
-                starColor="#FFD100"
-                backgroundColor="#FFEE32"
-                textColor="#202020"
-              >
-                <span className="text-2xl font-bold">Explorar Servicios</span>
-              </StarBorder>
+            <div className="flex flex-col md:flex-row gap-8 w-full">
+              <div className="md:w-1/2 w-full md:mb-0 mb-8">
+                <Stack
+                  randomRotation={false}
+                  sensitivity={180}
+                  sendToBackOnClick={false}
+                  cardDimensions={{ width: "100%", height: 350 }}
+                  fontSizeTitle="text-2xl"
+                  fontSizeShort="text-lg"
+                  fontSizeDetail="text-base"
+                />
+              </div>
+              <div className="md:w-1/2 w-full md:flex md:flex-col md:justify-center">
+                <h3 className="text-2xl md:text-3xl font-bold mb-2 text-[#6F47FF] font-sans md:text-left text-center">
+                  {t('services.subtitle')}
+                </h3>
+                <p className="text-[#D6D6D6] mb-4 leading-relaxed text-base md:max-w-lg md:mx-0 max-w-xs mx-auto font-sans md:text-left text-center">
+                  {t('services.description')}
+                </p>
+                <button
+                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 hover:bg-[var(--color-highlight)] transition-colors border-0"
+                  style={{ 
+                    borderRadius: "8px",
+                    maxWidth: "250px",
+                    margin: "0 auto",
+                    marginLeft: window.innerWidth >= 768 ? "0" : "auto"
+                  }}
+                  onClick={handleExploreClick}
+                >
+                  {t('services.exploreButton')}
+                </button>
+              </div>
             </div>
           </div>
         </motion.section>
@@ -164,24 +167,26 @@ export default function App() {
         {/* Modal/landing de servicio */}
         {showLanding && selectedService && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xl">
-            <div className="bg-[#333533] rounded-3xl shadow-2xl p-8 max-w-sm w-full relative flex flex-col items-center">
-              <button onClick={handleBack} className="absolute top-4 right-4 text-[#FFD100] text-2xl font-bold">×</button>
+            <div className="bg-[var(--color-slate)] container-rounded shadow-2xl p-10 max-w-sm w-full relative flex flex-col items-center border-0">
+              <button onClick={handleBack} className="absolute top-4 right-4 text-[var(--color-highlight)] text-2xl font-bold btn-rounded w-10 h-10 flex items-center justify-center">×</button>
               <div className="mb-8">{selectedService.icon}</div>
-              <h3 className="text-3xl font-bold mb-4 text-[#FFD100] text-center">{selectedService.title}</h3>
-              <p className="text-lg text-[#D6D6D6] text-center mb-8">{selectedService.description}</p>
-              <div
-                className="relative z-1 text-center rounded-[20px] font-bold select-none"
+              <h3 className="text-3xl font-bold mb-4 text-[var(--color-accent)] text-center">{selectedService.title}</h3>
+              <p className="text-lg text-[var(--color-text)] text-center mb-8">{selectedService.description}</p>
+              <Link
+                to="/contact"
+                className="relative z-1 text-center font-bold text-2xl border-0"
                 style={{
-                  backgroundColor: "rgb(255, 238, 50)",
-                  color: "rgb(32, 32, 32)",
-                  fontSize: "2.5rem",
-                  padding: "2rem 3rem",
+                  backgroundColor: "var(--color-accent)",
+                  color: "var(--color-text)",
+                  padding: "0.75rem 1.5rem",
                   cursor: "pointer",
-                  userSelect: "none"
+                  display: "inline-block",
+                  textDecoration: "none",
+                  borderRadius: "30px"
                 }}
               >
                 Descúbrelo
-              </div>
+              </Link>
             </div>
           </div>
         )}
@@ -192,21 +197,21 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
-          className="py-16 relative"
+          className="py-24 md:py-32 relative mt-24"
         >
           <div className="absolute inset-0 w-full h-full z-0" style={{ backgroundImage: `url(${backgroundBlur})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
           <div className="relative z-10 max-w-6xl mx-auto px-4">
             <div className="p-12 md:p-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-[#D6D6D6] font-sans">
-                Sobre Nosotros
+                {t('about.title')}
               </h2>
               <div className="grid md:grid-cols-2 gap-20 items-center">
                 <div>
                   <p className="text-lg text-[#D6D6D6] mb-8 leading-relaxed font-sans">
-                    Somos una empresa especializada en el desarrollo de soluciones digitales para pequeñas y medianas empresas. Nuestro objetivo es democratizar el acceso a tecnología de calidad, permitiendo que empresas de todos los tamaños puedan competir en el mercado digital actual.
+                    {t('about.paragraph1')}
                   </p>
                   <p className="text-lg text-[#D6D6D6] leading-relaxed font-sans">
-                    Creemos que la tecnología debe ser accesible, escalable y sostenible. Por eso trabajamos con metodologías ágiles, tecnologías modernas y un enfoque centrado en el usuario para asegurar que cada proyecto sea un éxito.
+                    {t('about.paragraph2')}
                   </p>
                 </div>
               </div>
@@ -220,59 +225,46 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
-          className="py-8 px-4"
+          className="py-24 md:py-32 px-4"
         >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center text-[#D6D6D6] font-sans">
-              ¿Qué ventajas obtienes con nosotros?
+              {t('benefits.title')}
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="bg-[#333533] backdrop-blur-sm rounded-2xl p-4 border border-black shadow-2xl text-center flex flex-col items-center mb-6">
-                <h3 className="text-xl font-bold mb-1 text-[#FFEE32] mt-2 font-sans">Rápido</h3>
-                <p className="text-white text-sm">Entregas en tiempo récord sin comprometer la calidad. Metodologías ágiles para resultados inmediatos.</p>
+              <div className="bg-[var(--color-gunmetal)] backdrop-blur-sm container-rounded p-6 border-0 shadow-2xl text-center flex flex-col items-center mb-6">
+                <h3 className="text-xl font-bold mb-1 text-[var(--color-accent)] mt-2 subtitle">{t('benefits.fast.title')}</h3>
+                <p className="text-[var(--color-text)] text-sm body-text">{t('benefits.fast.description')}</p>
               </div>
-              <div className="bg-[#333533] backdrop-blur-sm rounded-2xl p-4 border border-black shadow-2xl text-center flex flex-col items-center mb-6">
-                <h3 className="text-xl font-bold mb-1 text-[#FFEE32] mt-2 font-sans">Económico</h3>
-                <p className="text-white text-sm">Precios justos para empresas de todos los tamaños. Sin costos ocultos ni sorpresas.</p>
+              <div className="bg-[var(--color-gunmetal)] backdrop-blur-sm container-rounded p-6 border-0 shadow-2xl text-center flex flex-col items-center mb-6">
+                <h3 className="text-xl font-bold mb-1 text-[var(--color-accent)] mt-2 subtitle">{t('benefits.economic.title')}</h3>
+                <p className="text-[var(--color-text)] text-sm body-text">{t('benefits.economic.description')}</p>
               </div>
-              <div className="bg-[#333533] backdrop-blur-sm rounded-2xl p-4 border border-black shadow-2xl text-center flex flex-col items-center mb-6">
-                <h3 className="text-xl font-bold mb-1 text-[#FFEE32] mt-2 font-sans">Seguro</h3>
-                <p className="text-white text-sm">Implementamos las mejores prácticas de seguridad. Protección de datos y cumplimiento normativo.</p>
+              <div className="bg-[var(--color-gunmetal)] backdrop-blur-sm container-rounded p-6 border-0 shadow-2xl text-center flex flex-col items-center mb-6">
+                <h3 className="text-xl font-bold mb-1 text-[var(--color-accent)] mt-2 subtitle">{t('benefits.secure.title')}</h3>
+                <p className="text-[var(--color-text)] text-sm body-text">{t('benefits.secure.description')}</p>
               </div>
-              <div className="bg-[#333533] backdrop-blur-sm rounded-2xl p-4 border border-black shadow-2xl text-center flex flex-col items-center mb-6">
-                <h3 className="text-xl font-bold mb-1 text-[#FFEE32] mt-2 font-sans">Escalable</h3>
-                <p className="text-white text-sm">Soluciones que crecen con tu negocio. Arquitectura flexible para el futuro.</p>
+              <div className="bg-[var(--color-gunmetal)] backdrop-blur-sm container-rounded p-6 border-0 shadow-2xl text-center flex flex-col items-center mb-6">
+                <h3 className="text-xl font-bold mb-1 text-[var(--color-accent)] mt-2 subtitle">{t('benefits.scalable.title')}</h3>
+                <p className="text-[var(--color-text)] text-sm body-text">{t('benefits.scalable.description')}</p>
               </div>
             </div>
           </div>
         </motion.section>
 
         {/* Process Section */}
-        <section className="py-12 px-4">
-          <h2 className="text-4xl md:text-5xl font-bold mb-10 text-center text-[#D6D6D6] font-sans">
-            ¿Cómo es nuestro proceso de trabajo?
+        <section className="py-24 md:py-32 px-4 bg-[var(--color-dark-bg)] mt-24" style={{ minHeight: 'auto' }}>
+          <h2 className="headline mb-10 text-center text-[var(--color-text)]">
+            {t('process.title')}
           </h2>
           <ProcessTimeline />
         </section>
-
-        {/* Contact Section - más grande y con formulario real */}
-        <section className="py-32 md:py-[10rem] w-full relative">
-          <div
-            className="absolute inset-0 w-full h-full z-0"
-            style={{
-              backgroundImage: `url(${backgroundBlur})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              filter: 'blur(8px)'
-            }}
-          />
-          <div className="relative z-10 w-full max-w-4xl mx-auto px-4 flex flex-col items-center">
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-center text-[#FFD100] font-sans">
-              ¿Quieres impulsar tu empresa con tecnología? Completa el formulario y recibe una propuesta exclusiva.
-            </h2>
-            <ProjectForm />
-          </div>
-        </section>
+        
+        {/* Contact Section */}
+        <ContactSection />
+        
+        {/* Extra space for mobile view */}
+        <div className="h-16 md:h-0"></div>
       </div>
     </div>
   );
@@ -280,9 +272,11 @@ export default function App() {
 
 // Formulario de contacto real
 function ProjectForm() {
+  const { t } = useTranslation();
+  
   return (
     <form
-      className="w-full max-w-2xl mx-auto bg-[#232323] rounded-2xl p-8 md:p-12 text-[#FFD100] text-base md:text-lg shadow-lg flex flex-col gap-6"
+      className="w-full max-w-2xl mx-auto bg-[var(--color-gunmetal)] container-rounded p-8 md:p-12 text-[var(--color-accent)] text-base md:text-lg shadow-lg flex flex-col gap-6"
       style={{ marginTop: 40, marginBottom: 40 }}
       action="https://formspree.io/f/your-form-id" // Cambia esto por tu endpoint real
       method="POST"
@@ -294,30 +288,30 @@ function ProjectForm() {
       <div className="flex flex-col gap-4">
         <label>
           Nombre completo o razón social:
-          <input name="nombre" required className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" />
+          <input name="nombre" required className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
         </label>
         <label>
           Nombre del contacto (si aplica):
-          <input name="contacto" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" />
+          <input name="contacto" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
         </label>
         <label>
           Correo electrónico:
-          <input name="email" type="email" required className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" />
+          <input name="email" type="email" required className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
         </label>
         <label>
           Teléfono:
-          <input name="telefono" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" />
+          <input name="telefono" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
         </label>
         <label>
           ¿Tienes sitio web actualmente?
           <div className="flex gap-4 mt-1">
-            <label className="flex items-center gap-2">
-              <input type="radio" name="tiene_sitio" value="si" className="accent-[#FFD100]" />
+            <label className="flex items-center gap-2 custom-radio">
+              <input type="radio" name="tiene_sitio" value="si" />
               Sí
             </label>
-            <input name="url" placeholder="URL" className="rounded px-3 py-2 bg-[#181818] text-white flex-1" />
-            <label className="flex items-center gap-2">
-              <input type="radio" name="tiene_sitio" value="no" className="accent-[#FFD100]" />
+            <input name="url" placeholder="URL" className="rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0 flex-1" />
+            <label className="flex items-center gap-2 custom-radio">
+              <input type="radio" name="tiene_sitio" value="no" />
               No
             </label>
           </div>
@@ -326,43 +320,43 @@ function ProjectForm() {
       <div>
         <div className="font-semibold mb-2">¿Qué necesitas? Selecciona los servicios que deseas cotizar:</div>
         <div className="grid grid-cols-1 gap-2">
-          <label><input type="checkbox" name="servicios" value="Diseño web completo" className="accent-[#FFD100]" /> Diseño web completo</label>
-          <label><input type="checkbox" name="servicios" value="Rediseño de sitio actual" className="accent-[#FFD100]" /> Rediseño de sitio actual</label>
-          <label><input type="checkbox" name="servicios" value="Integración de CRM" className="accent-[#FFD100]" /> Integración de CRM</label>
-          <label><input type="checkbox" name="servicios" value="HubSpot" className="accent-[#FFD100]" /> HubSpot</label>
-          <label><input type="checkbox" name="servicios" value="Salesforce" className="accent-[#FFD100]" /> Salesforce</label>
-          <label><input type="checkbox" name="servicios" value="Zoho" className="accent-[#FFD100]" /> Zoho</label>
-          <label><input type="checkbox" name="servicios" value="ServiceTitan" className="accent-[#FFD100]" /> ServiceTitan</label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" name="servicios" value="Otro" className="accent-[#FFD100]" />
-            Otro: <input name="servicio_otro" className="rounded px-2 py-1 bg-[#181818] text-white flex-1" />
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Diseño web completo" /> Diseño web completo</label>
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Rediseño de sitio actual" /> Rediseño de sitio actual</label>
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Integración de CRM" /> Integración de CRM</label>
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="HubSpot" /> HubSpot</label>
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Salesforce" /> Salesforce</label>
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Zoho" /> Zoho</label>
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="ServiceTitan" /> ServiceTitan</label>
+          <label className="flex items-center gap-2 custom-checkbox">
+            <input type="checkbox" name="servicios" value="Otro" />
+            Otro: <input name="servicio_otro" className="rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0 flex-1" />
           </label>
-          <label><input type="checkbox" name="servicios" value="Automatización de procesos" className="accent-[#FFD100]" /> Automatización de procesos</label>
-          <label><input type="checkbox" name="servicios" value="Conexión con herramientas de marketing/ventas" className="accent-[#FFD100]" /> Conexión con herramientas de marketing/ventas</label>
-          <label><input type="checkbox" name="servicios" value="Optimización SEO & rendimiento" className="accent-[#FFD100]" /> Optimización SEO & rendimiento</label>
-          <label><input type="checkbox" name="servicios" value="Alojamiento y mantenimiento" className="accent-[#FFD100]" /> Alojamiento y mantenimiento</label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" name="servicios" value="Otro2" className="accent-[#FFD100]" />
-            Otro (especificar): <input name="servicio_otro2" className="rounded px-2 py-1 bg-[#181818] text-white flex-1" />
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Automatización de procesos" /> Automatización de procesos</label>
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Conexión con herramientas de marketing/ventas" /> Conexión con herramientas de marketing/ventas</label>
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Optimización SEO & rendimiento" /> Optimización SEO & rendimiento</label>
+          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Alojamiento y mantenimiento" /> Alojamiento y mantenimiento</label>
+          <label className="flex items-center gap-2 custom-checkbox">
+            <input type="checkbox" name="servicios" value="Otro2" />
+            Otro (especificar): <input name="servicio_otro2" className="rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0 flex-1" />
           </label>
         </div>
       </div>
       <div className="flex flex-col gap-4">
         <label>
           ¿Cuál es el objetivo principal del proyecto?
-          <textarea name="objetivo" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" rows={2} />
+          <textarea name="objetivo" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" rows={2} />
         </label>
         <label>
           ¿Qué funcionalidades específicas necesitas?
-          <textarea name="funcionalidades" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" rows={2} />
+          <textarea name="funcionalidades" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" rows={2} />
         </label>
         <label>
           ¿Hay una fecha ideal para lanzar este proyecto?
-          <input name="fecha_lanzamiento" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" />
+          <input name="fecha_lanzamiento" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
         </label>
         <label>
           Presupuesto estimado:
-          <select name="presupuesto" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white">
+          <select name="presupuesto" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0">
             <option>Menos de USD 2.000</option>
             <option>USD 2.000 – 5.000</option>
             <option>USD 5.000 – 10.000</option>
@@ -373,9 +367,9 @@ function ProjectForm() {
         <label>
           ¿Te interesa soporte técnico o capacitación post-lanzamiento?
           <div className="flex gap-4 mt-1">
-            <label><input type="radio" name="soporte" value="Sí" className="accent-[#FFD100]" /> Sí</label>
-            <label><input type="radio" name="soporte" value="No" className="accent-[#FFD100]" /> No</label>
-            <label><input type="radio" name="soporte" value="Necesito más información" className="accent-[#FFD100]" /> Necesito más información</label>
+            <label className="custom-radio"><input type="radio" name="soporte" value="Sí" /> Sí</label>
+            <label className="custom-radio"><input type="radio" name="soporte" value="No" /> No</label>
+            <label className="custom-radio"><input type="radio" name="soporte" value="Necesito más información" /> Necesito más información</label>
           </div>
         </label>
       </div>
@@ -385,60 +379,60 @@ function ProjectForm() {
           <label>
             ¿Tu sitio actual usa algún CMS?
             <div className="flex flex-wrap gap-4 mt-1">
-              <label><input type="radio" name="cms" value="WordPress" className="accent-[#FFD100]" /> WordPress</label>
-              <label><input type="radio" name="cms" value="Shopify" className="accent-[#FFD100]" /> Shopify</label>
-              <label><input type="radio" name="cms" value="Webflow" className="accent-[#FFD100]" /> Webflow</label>
-              <label className="flex items-center gap-2">
-                <input type="radio" name="cms" value="Otro" className="accent-[#FFD100]" />
-                Otro: <input name="cms_otro" className="rounded px-2 py-1 bg-[#181818] text-white flex-1" />
+              <label className="custom-radio"><input type="radio" name="cms" value="WordPress" /> WordPress</label>
+              <label className="custom-radio"><input type="radio" name="cms" value="Shopify" /> Shopify</label>
+              <label className="custom-radio"><input type="radio" name="cms" value="Webflow" /> Webflow</label>
+              <label className="flex items-center gap-2 custom-radio">
+                <input type="radio" name="cms" value="Otro" />
+                Otro: <input name="cms_otro" className="rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0 flex-1" />
               </label>
-              <label><input type="radio" name="cms" value="No lo sé" className="accent-[#FFD100]" /> No lo sé</label>
-              <label><input type="radio" name="cms" value="No tengo sitio web" className="accent-[#FFD100]" /> No tengo sitio web</label>
+              <label className="custom-radio"><input type="radio" name="cms" value="No lo sé" /> No lo sé</label>
+              <label className="custom-radio"><input type="radio" name="cms" value="No tengo sitio web" /> No tengo sitio web</label>
             </div>
           </label>
           <label>
             ¿Cuentas con dominio y hosting?
             <div className="flex flex-wrap gap-4 mt-1">
-              <label><input type="radio" name="dominio_hosting" value="Sí, ambos" className="accent-[#FFD100]" /> Sí, ambos</label>
-              <label><input type="radio" name="dominio_hosting" value="Solo dominio" className="accent-[#FFD100]" /> Solo dominio</label>
-              <label><input type="radio" name="dominio_hosting" value="Solo hosting" className="accent-[#FFD100]" /> Solo hosting</label>
-              <label><input type="radio" name="dominio_hosting" value="Aún no" className="accent-[#FFD100]" /> Aún no</label>
+              <label className="custom-radio"><input type="radio" name="dominio_hosting" value="Sí, ambos" /> Sí, ambos</label>
+              <label className="custom-radio"><input type="radio" name="dominio_hosting" value="Solo dominio" /> Solo dominio</label>
+              <label className="custom-radio"><input type="radio" name="dominio_hosting" value="Solo hosting" /> Solo hosting</label>
+              <label className="custom-radio"><input type="radio" name="dominio_hosting" value="Aún no" /> Aún no</label>
             </div>
           </label>
           <label>
             ¿Tienes actualmente un CRM o estás migrando a uno nuevo?
-            <input name="crm_actual" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" />
+            <input name="crm_actual" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
           </label>
         </div>
       </div>
       <div className="flex flex-col gap-4">
         <label>
           ¿Algo más que debamos saber?
-          <textarea name="extra" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" rows={2} />
+          <textarea name="extra" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" rows={2} />
         </label>
       </div>
       <div>
         <div className="font-semibold mb-2">Consentimiento</div>
-        <label className="flex items-center gap-2">
-          <input type="checkbox" name="consentimiento" value="Sí" required className="accent-[#FFD100]" />
+        <label className="flex items-center gap-2 custom-checkbox">
+          <input type="checkbox" name="consentimiento" value="Sí" required />
           Autorizo a Weavion a contactarme para presentarme una propuesta personalizada.
         </label>
         <div className="flex flex-col md:flex-row gap-4 mt-2">
           <label className="flex-1">
             Firma (opcional):
-            <input name="firma" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" />
+            <input name="firma" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
           </label>
           <label className="flex-1">
             Fecha:
-            <input name="fecha" type="date" className="mt-1 w-full rounded px-3 py-2 bg-[#181818] text-white" />
+            <input name="fecha" type="date" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
           </label>
         </div>
       </div>
       <button
         type="submit"
-        className="mt-6 bg-[#FFD100] text-[#202020] font-bold rounded-full px-8 py-4 shadow hover:bg-[#FFEE32] transition text-xl"
+        className="mt-6 bg-[var(--color-accent)] text-[var(--color-text)] font-bold rounded-xl border-0 px-6 py-3 text-2xl"
       >
-        Enviar
+        {t('contact.submitButton')}
       </button>
     </form>
   );

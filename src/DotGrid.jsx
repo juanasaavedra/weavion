@@ -298,7 +298,13 @@ const DotGrid = ({
   return (
     <section
       className={`p-4 flex items-center justify-center h-full w-full relative ${className}`}
-      style={style}
+      style={{
+        ...style,
+        position: 'relative',
+        backgroundColor: '#000000',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
     >
       <div ref={wrapperRef} className="w-full h-full relative">
         <canvas
@@ -310,16 +316,6 @@ const DotGrid = ({
   );
 };
 
-DotGrid.defaultProps = {
-  dotSize: 3,
-  gap: 10,
-  baseColor: '#fff',
-  activeColor: '#FFD600',
-  proximity: 120,
-  shockRadius: 250,
-  shockStrength: 5,
-  resistance: 750,
-  returnDuration: 1.5,
-};
+// Los valores predeterminados ya se definen en los parámetros de la función
 
 export default DotGrid; 

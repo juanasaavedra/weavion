@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "about": "Sobre Nosotros",
     "services": "Nuestros Servicios",
@@ -15,13 +15,103 @@
     "subtitle": "Soluciones digitales para empresas modernas. Automatiza, crece y destaca en el mundo digital.",
     "cta": "Descúbrelo"
   },
+  "services": {
+    "title": "¿Qué ganas con nosotros?",
+    "subtitle": "Soluciones Digitales para tu empresa",
+    "description": "Ofrecemos servicios principales que cubren todas las necesidades digitales de tu empresa. Haz clic en las tarjetas para ver más detalles.",
+    "exploreButton": "Explorar Servicios"
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "paragraph1": "Somos una empresa especializada en el desarrollo de soluciones digitales para pequeñas y medianas empresas. Nuestro objetivo es democratizar el acceso a tecnología de calidad, permitiendo que empresas de todos los tamaños puedan competir en el mercado digital actual.",
+    "paragraph2": "Creemos que la tecnología debe ser accesible, escalable y sostenible. Por eso trabajamos con metodologías ágiles, tecnologías modernas y un enfoque centrado en el usuario para asegurar que cada proyecto sea un éxito."
+  },
+  "benefits": {
+    "title": "¿Qué ventajas obtienes con nosotros?",
+    "fast": {
+      "title": "Rápido",
+      "description": "Entregas en tiempo récord sin comprometer la calidad. Metodologías ágiles para resultados inmediatos."
+    },
+    "economic": {
+      "title": "Económico",
+      "description": "Precios justos para empresas de todos los tamaños. Sin costos ocultos ni sorpresas."
+    },
+    "secure": {
+      "title": "Seguro",
+      "description": "Implementamos las mejores prácticas de seguridad. Protección de datos y cumplimiento normativo."
+    },
+    "scalable": {
+      "title": "Escalable",
+      "description": "Soluciones que crecen con tu negocio. Arquitectura flexible para el futuro."
+    }
+  },
+  "process": {
+    "title": "¿Cómo es nuestro proceso de trabajo?",
+    "step1": "Reunión Inicial",
+    "step1Detail": "Conocemos tu negocio, objetivos y requisitos. Juntos definimos el alcance y hoja de ruta del proyecto.",
+    "step2": "Investigación y Planificación",
+    "step2Detail": "Analizamos el mercado, la competencia y tu público objetivo para desarrollar una estrategia integral.",
+    "step3": "Diseño y Desarrollo",
+    "step3Detail": "Creamos prototipos funcionales y desarrollamos la solución con comunicación constante e iteraciones.",
+    "step4": "Pruebas y Lanzamiento",
+    "step4Detail": "Realizamos pruebas exhaustivas y hacemos los ajustes necesarios antes de salir en vivo.",
+    "step5": "Crecimiento y Soporte",
+    "step5Detail": "Proporcionamos soporte continuo, actualizaciones y optimizaciones para garantizar que la solución siga dando resultados."
+  },
   "contact": {
-    "title": "Contacto",
-    "name": "Nombre",
+    "title": "¿Listo para empezar?",
+    "subtitle": "Cuéntanos sobre tu proyecto y creemos algo increíble juntos.",
+    "name": "Nombre completo",
     "email": "Correo electrónico",
-    "message": "Mensaje",
-    "send": "Enviar",
-    "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
-    "error": "Hubo un error. Intenta de nuevo más tarde."
+    "phone": "Teléfono (opcional)",
+    "message": "Cuéntanos sobre tu proyecto",
+    "submitButton": "Enviar mensaje",
+    "formTitle": "Inicia tu proyecto ahora",
+    "nameRequired": "Por favor ingresa tu nombre",
+    "emailRequired": "Por favor ingresa un correo válido",
+    "messageRequired": "Por favor cuéntanos sobre tu proyecto",
+    "success": "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
+    "error": "Hubo un error al enviar tu mensaje. Por favor intenta más tarde.",
+    "services": {
+      "web": "Diseño o rediseño de sitio web",
+      "dashboard": "Dashboard de analítica de negocio",
+      "serviceTitan": "Integración o soporte con Service Titan",
+      "automation": "Automatización de procesos o flujos internos",
+      "other": "Otro"
+    },
+    "cta": {
+      "title": "¿Listo para dar el siguiente paso?",
+      "subtitle": "Impulsa tu agencia hoy",
+      "description": "Contáctanos hoy para comenzar a trabajar en tu proyecto. Nuestro equipo está listo para ayudarte a alcanzar tus objetivos.",
+      "button": "Contáctanos"
+    }
+  },
+  "folder": {
+    "clickToCollapse": "Haz clic para colapsar",
+    "webDevelopment": {
+      "title": "Desarrollo web",
+      "short": "Webs modernas y rápidas",
+      "detail": "Creamos sitios web modernos, rápidos y responsivos, adaptados a las necesidades de tu negocio, optimizados para SEO y con las mejores prácticas de accesibilidad."
+    },
+    "webDesign": {
+      "title": "Diseño web",
+      "short": "Diseño atractivo y funcional",
+      "detail": "Diseñamos interfaces atractivas, intuitivas y centradas en el usuario, asegurando una experiencia visual coherente y profesional."
+    },
+    "serviceTitan": {
+      "title": "Integración a ServiceTitan",
+      "short": "Automatiza tu operación",
+      "detail": "Integramos tu negocio con ServiceTitan para automatizar procesos, mejorar la gestión y conectar tus sistemas de manera eficiente."
+    },
+    "analytics": {
+      "title": "Analíticas de negocio y predicción de inventario",
+      "short": "Toma decisiones inteligentes",
+      "detail": "Implementamos sistemas de analítica avanzada y predicción de inventario usando IA, para que tomes decisiones informadas y optimices tus recursos."
+    }
+  },
+  "common": {
+    "discover": "Descúbrelo",
+    "backHome": "Volver al inicio",
+    "clickToCollapse": "Haz clic para colapsar"
   }
-} 
+}

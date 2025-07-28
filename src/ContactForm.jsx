@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
-const serviceOptions = [
-  { label: 'Diseño o rediseño de sitio web', value: 'web' },
-  { label: 'Dashboard de analítica de negocio', value: 'dashboard' },
-  { label: 'Integración o soporte con Service Titan', value: 'servicetitan' },
-  { label: 'Automatización de procesos o flujos internos', value: 'automatizacion' },
-  { label: 'Otro', value: 'otro' },
+const getServiceOptions = (t) => [
+  { label: t('contact.services.web'), value: 'web' },
+  { label: t('contact.services.dashboard'), value: 'dashboard' },
+  { label: t('contact.services.serviceTitan'), value: 'servicetitan' },
+  { label: t('contact.services.automation'), value: 'automatizacion' },
+  { label: t('contact.services.other'), value: 'otro' },
 ];
 
 export default function ContactForm() {
+  const { t } = useTranslation();
+  const serviceOptions = getServiceOptions(t);
+  
   const [step, setStep] = useState(0);
   const [form, setForm] = useState({
     servicios: [],
@@ -99,59 +103,77 @@ export default function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Calculate progress percentage
+  const totalSteps = steps.length;
+  const progressPercentage = ((step + 1) / totalSteps) * 100;
+
   return (
-    <div className="max-w-2xl mx-auto rounded-3xl p-8 md:p-16 shadow-2xl mt-12 mb-24">
-      <h2 className="text-4xl font-extrabold text-[#FFD100] mb-8 text-center">Contáctanos</h2>
+    <div className="max-w-2xl mx-auto rounded-3xl p-6 md:p-10 shadow-2xl bg-[var(--color-slate)] backdrop-blur-sm">
+      {/* Progress Bar */}
+      <div className="w-full h-2 bg-[var(--color-gunmetal)] rounded-full mb-8">
+        <div 
+          className="h-full bg-[var(--color-accent)] rounded-full transition-all duration-300 ease-out"
+          style={{ width: `${progressPercentage}%` }}
+        ></div>
+      </div>
+      
       <form onSubmit={handleSubmit} noValidate>
         <AnimatePresence mode="wait">
           {submitted ? (
             <motion.div key="done" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <div className="text-2xl text-[#FFD100] font-bold text-center mb-4">¡Gracias por tu interés!</div>
-              <div className="text-lg text-[#D6D6D6] text-center">Pronto recibirás nuestra propuesta personalizada {form.contacto.llamada === 'no' ? 'por correo electrónico.' : 'y te contactaremos para la llamada.'}</div>
+              <div className="subtitle text-[#00CFF4] text-center mb-4">¡Gracias por tu interés!</div>
+              <div className="body-text text-[#FFFFFF] text-center">Pronto recibirás nuestra propuesta personalizada {form.contacto.llamada === 'no' ? 'por correo electrónico.' : 'y te contactaremos para la llamada.'}</div>
             </motion.div>
           ) : (
             <motion.div key={current} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 40 }}>
               {current === 'servicios' && (
                 <div>
-                  <div className="text-xl text-[#FFD100] font-bold mb-4">¿Qué servicio estás buscando actualmente?</div>
-                  <div className="flex flex-col gap-3 mb-6">
+                  <div className="subtitle text-[var(--color-text)] mb-6">¿Qué servicio estás buscando actualmente?</div>
+                  <div className="flex flex-col gap-4 mb-8">
                     {serviceOptions.map(opt => (
-                      <label key={opt.value} className="flex items-center gap-2 text-lg text-white">
+                      <label key={opt.value} className="custom-checkbox text-lg text-[var(--color-text)]">
                         <input type="checkbox"
-                          className="w-5 h-5 rounded border-2 border-[#FFD100] bg-black checked:bg-[#FFD100] checked:border-[#FFD100] focus:ring-0 focus:outline-none transition-all duration-150"
                           checked={form.servicios.includes(opt.value)}
                           onChange={() => handleServicioChange(opt.value)}
                         />
+                        <span className="checkmark"></span>
                         {opt.label}
                         {opt.value === 'otro' && form.servicios.includes('otro') && (
-                          <input type="text" placeholder="Otro..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.otroServicio} onChange={e => setForm(f => ({ ...f, otroServicio: e.target.value }))} />
+                          <input type="text" placeholder="Otro..." className="form-input ml-2" value={form.otroServicio} onChange={e => setForm(f => ({ ...f, otroServicio: e.target.value }))} />
                         )}
                       </label>
                     ))}
                   </div>
-                  <button type="button" className="bg-[#FFD100] text-[#202020] font-bold px-8 py-3 rounded-full text-xl w-full mt-6" onClick={handleNext} disabled={form.servicios.length === 0}>Siguiente</button>
+                  <button 
+                    type="button" 
+                    className="form-btn-next" 
+                    onClick={handleNext} 
+                    disabled={form.servicios.length === 0}
+                  >
+                    Siguiente
+                  </button>
                 </div>
               )}
               {current === 'web' && (
                 <div>
-                  <div className="text-xl text-[#FFD100] font-bold mb-4">Sobre tu sitio web</div>
+                  <div className="subtitle text-[#00CFF4] mb-4">Sobre tu sitio web</div>
                   <div className="mb-4">
-                    <label className="block text-[#D6D6D6] mb-2">¿Ya tienes un sitio web?</label>
-                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.web.tieneWeb} onChange={e => handleInput('web', 'tieneWeb', e.target.value)}>
+                    <label className="block text-[#FFFFFF] mb-2">¿Ya tienes un sitio web?</label>
+                    <select className="w-full rounded-xl px-4 py-3 bg-[var(--color-gunmetal)] text-[var(--color-text)] border border-[var(--color-accent)]" value={form.web.tieneWeb} onChange={e => handleInput('web', 'tieneWeb', e.target.value)}>
                       <option value="">Selecciona...</option>
                       <option value="si">Sí</option>
                       <option value="no">No</option>
                     </select>
                     {form.web.tieneWeb === 'si' && (
-                      <input type="url" placeholder="URL de tu sitio" className="mt-2 w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.web.url} onChange={e => handleInput('web', 'url', e.target.value)} />
+                      <input type="url" placeholder="URL de tu sitio" className="mt-2 w-full rounded px-3 py-2 bg-[#0A122E] text-[#FFFFFF] border border-[#3E92CC]" value={form.web.url} onChange={e => handleInput('web', 'url', e.target.value)} />
                     )}
                   </div>
                   <div className="mb-4">
-                    <label className="block text-[#D6D6D6] mb-2">¿Qué funcionalidades deseas incluir?</label>
+                    <label className="block text-[#FFFFFF] mb-2">¿Qué funcionalidades deseas incluir?</label>
                     <div className="flex flex-col gap-2">
                       {['Agendamiento de citas','Formulario de contacto','Portafolio de trabajos o galería','Testimonios / reseñas de clientes','Chat en vivo','Otra'].map(func => (
                         <label key={func} className="flex items-center gap-2">
-                          <input type="checkbox" className="accent-[#FFD100]" checked={form.web.funcionalidades.includes(func)} onChange={() => {
+                          <input type="checkbox" className="accent-[#00CFF4]" checked={form.web.funcionalidades.includes(func)} onChange={() => {
                             setForm(f => {
                               let funcionalidades = f.web.funcionalidades.includes(func)
                                 ? f.web.funcionalidades.filter(x => x !== func)
@@ -159,28 +181,28 @@ export default function ContactForm() {
                               return { ...f, web: { ...f.web, funcionalidades } };
                             });
                           }} />
-                          <span className="text-[#FFD100]">{func}</span>
+                          <span className="text-[#FFFFFF]">{func}</span>
                           {func === 'Otra' && form.web.funcionalidades.includes('Otra') && (
-                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.web.otraFunc} onChange={e => handleInput('web', 'otraFunc', e.target.value)} />
+                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#0A122E] text-[#FFFFFF] border border-[#3E92CC]" value={form.web.otraFunc} onChange={e => handleInput('web', 'otraFunc', e.target.value)} />
                           )}
                         </label>
                       ))}
                     </div>
                   </div>
                   <div className="mb-4">
-                    <label className="block text-[#D6D6D6] mb-2">¿Tienes ya un logotipo o identidad visual?</label>
-                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.web.logotipo} onChange={e => handleInput('web', 'logotipo', e.target.value)}>
+                    <label className="block text-[var(--color-text)] mb-2">¿Tienes ya un logotipo o identidad visual?</label>
+                    <select className="w-full rounded-2xl px-4 py-3 bg-[var(--color-gunmetal)] text-[var(--color-text)] border border-[var(--color-accent)]" value={form.web.logotipo} onChange={e => handleInput('web', 'logotipo', e.target.value)}>
                       <option value="">Selecciona...</option>
                       <option value="si">Sí</option>
                       <option value="no">No</option>
                     </select>
                   </div>
                   <div className="mb-4">
-                    <label className="block text-[#D6D6D6] mb-2">¿Qué objetivo tiene tu sitio web?</label>
+                    <label className="block text-[#FFFFFF] mb-2">¿Qué objetivo tiene tu sitio web?</label>
                     <div className="flex flex-col gap-2">
                       {['Generar leads','Mostrar tu empresa profesionalmente','Facilitar agendamiento','Otras'].map(obj => (
                         <label key={obj} className="flex items-center gap-2">
-                          <input type="checkbox" className="accent-[#FFD100]" checked={form.web.objetivo.includes(obj)} onChange={() => {
+                          <input type="checkbox" className="accent-[#00CFF4]" checked={form.web.objetivo.includes(obj)} onChange={() => {
                             setForm(f => {
                               let objetivo = f.web.objetivo.includes(obj)
                                 ? f.web.objetivo.filter(x => x !== obj)
@@ -188,17 +210,17 @@ export default function ContactForm() {
                               return { ...f, web: { ...f.web, objetivo } };
                             });
                           }} />
-                          <span className="text-[#FFD100]">{obj}</span>
+                          <span className="text-[#FFFFFF]">{obj}</span>
                           {obj === 'Otras' && form.web.objetivo.includes('Otras') && (
-                            <input type="text" placeholder="Otras..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.web.otroObj} onChange={e => handleInput('web', 'otroObj', e.target.value)} />
+                            <input type="text" placeholder="Otras..." className="ml-2 px-2 py-1 rounded bg-[#0A122E] text-[#FFFFFF] border border-[#3E92CC]" value={form.web.otroObj} onChange={e => handleInput('web', 'otroObj', e.target.value)} />
                           )}
                         </label>
                       ))}
                     </div>
                   </div>
-                  <div className="flex justify-between mt-8">
-                    <button type="button" className="text-[#FFD100] underline" onClick={handleBack}>Atrás</button>
-                    <button type="button" className="bg-[#FFD100] text-[#202020] font-bold px-8 py-3 rounded-full text-xl" onClick={handleNext}>Siguiente</button>
+                  <div className="form-btn-container">
+                    <button type="button" className="form-btn-back" onClick={handleBack}>Atrás</button>
+                    <button type="button" className="form-btn-next" onClick={handleNext}>Siguiente</button>
                   </div>
                 </div>
               )}
@@ -247,9 +269,9 @@ export default function ContactForm() {
                       <option value="no">No</option>
                     </select>
                   </div>
-                  <div className="flex justify-between mt-8">
-                    <button type="button" className="text-[#FFD100] underline" onClick={handleBack}>Atrás</button>
-                    <button type="button" className="bg-[#FFD100] text-[#202020] font-bold px-8 py-3 rounded-full text-xl" onClick={handleNext}>Siguiente</button>
+                  <div className="form-btn-container">
+                    <button type="button" className="form-btn-back" onClick={handleBack}>Atrás</button>
+                    <button type="button" className="form-btn-next" onClick={handleNext}>Siguiente</button>
                   </div>
                 </div>
               )}
@@ -290,9 +312,9 @@ export default function ContactForm() {
                     <label className="block text-[#D6D6D6] mb-2">¿Qué sistemas o herramientas necesitas conectar con Service Titan?</label>
                     <input type="text" className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.servicetitan.sistemas} onChange={e => handleInput('servicetitan', 'sistemas', e.target.value)} placeholder="Ej: QuickBooks, Zapier, página web, etc." />
                   </div>
-                  <div className="flex justify-between mt-8">
-                    <button type="button" className="text-[#FFD100] underline" onClick={handleBack}>Atrás</button>
-                    <button type="button" className="bg-[#FFD100] text-[#202020] font-bold px-8 py-3 rounded-full text-xl" onClick={handleNext}>Siguiente</button>
+                  <div className="form-btn-container">
+                    <button type="button" className="form-btn-back" onClick={handleBack}>Atrás</button>
+                    <button type="button" className="form-btn-next" onClick={handleNext}>Siguiente</button>
                   </div>
                 </div>
               )}
@@ -338,9 +360,9 @@ export default function ContactForm() {
                       ))}
                     </div>
                   </div>
-                  <div className="flex justify-between mt-8">
-                    <button type="button" className="text-[#FFD100] underline" onClick={handleBack}>Atrás</button>
-                    <button type="button" className="bg-[#FFD100] text-[#202020] font-bold px-8 py-3 rounded-full text-xl" onClick={handleNext}>Siguiente</button>
+                  <div className="form-btn-container">
+                    <button type="button" className="form-btn-back" onClick={handleBack}>Atrás</button>
+                    <button type="button" className="form-btn-next" onClick={handleNext}>Siguiente</button>
                   </div>
                 </div>
               )}
@@ -370,9 +392,9 @@ export default function ContactForm() {
                       <input type="text" className="mt-2 w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.contacto.horario} onChange={e => handleContacto('horario', e.target.value)} placeholder="Proporciona un horario o disponibilidad" />
                     )}
                   </div>
-                  <div className="flex justify-between mt-8">
-                    <button type="button" className="text-[#FFD100] underline" onClick={handleBack}>Atrás</button>
-                    <button type="submit" className="bg-[#FFD100] text-[#202020] font-bold px-8 py-3 rounded-full text-xl">Enviar</button>
+                  <div className="form-btn-container">
+                    <button type="button" className="form-btn-back" onClick={handleBack}>Atrás</button>
+                    <button type="submit" className="form-btn-next">Enviar</button>
                   </div>
                 </div>
               )}

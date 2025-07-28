@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "about": "About Us",
     "services": "Our Services",
@@ -15,13 +15,90 @@
     "subtitle": "Digital solutions for modern companies. Automate, grow, and stand out in the digital world.",
     "cta": "Discover it"
   },
+  "services": {
+    "title": "What do you gain with us?",
+    "subtitle": "Digital Solutions for your business",
+    "description": "We offer core services that cover all your business digital needs. Click on the cards to see more details.",
+    "exploreButton": "Explore Services"
+  },
+  "about": {
+    "title": "About Us",
+    "paragraph1": "We are a company specialized in developing digital solutions for small and medium-sized businesses. Our goal is to democratize access to quality technology, allowing businesses of all sizes to compete in today's digital market.",
+    "paragraph2": "We believe that technology should be accessible, scalable, and sustainable. That is why we work with agile methodologies, modern technologies, and a user-centered approach to ensure that every project is a success."
+  },
+  "benefits": {
+    "title": "What advantages do you get with us?",
+    "fast": {
+      "title": "Fast",
+      "description": "Record-time deliveries without compromising quality. Agile methodologies for immediate results."
+    },
+    "economic": {
+      "title": "Economical",
+      "description": "Fair prices for businesses of all sizes. No hidden costs or surprises."
+    },
+    "secure": {
+      "title": "Secure",
+      "description": "We implement best security practices. Data protection and regulatory compliance."
+    },
+    "scalable": {
+      "title": "Scalable",
+      "description": "Solutions that grow with your business. Flexible architecture for the future."
+    }
+  },
+  "process": {
+    "title": "How does our work process work?",
+    "step1": "Initial Meeting",
+    "step1Detail": "We get to know your business, objectives, and requirements. Together we define the scope and roadmap of the project.",
+    "step2": "Research & Planning",
+    "step2Detail": "We analyze the market, the competition, and your target audience to develop a comprehensive strategy.",
+    "step3": "Design & Development",
+    "step3Detail": "We create functional prototypes and develop the solution with constant communication and iterations.",
+    "step4": "Testing & Launch",
+    "step4Detail": "We perform exhaustive testing and make the necessary adjustments before going live.",
+    "step5": "Growth & Support",
+    "step5Detail": "We provide ongoing support, updates, and optimizations to ensure the solution continues to deliver results."
+  },
   "contact": {
-    "title": "Contact",
-    "name": "Name",
+    "title": "Ready to Start?",
+    "subtitle": "Tell us about your project and let us create something amazing together.",
+    "name": "Full Name",
     "email": "Email",
-    "message": "Message",
-    "send": "Send",
-    "success": "Message sent! We'll be in touch soon.",
-    "error": "There was an error. Please try again later."
+    "phone": "Phone (optional)",
+    "message": "Tell us about your project",
+    "submitButton": "Send Message",
+    "formTitle": "Start your project now",
+    "nameRequired": "Please enter your name",
+    "emailRequired": "Please enter a valid email",
+    "messageRequired": "Please tell us about your project",
+    "success": "Message sent successfully! We will contact you soon.",
+    "error": "There was an error sending your message. Please try again later."
+  },
+  "folder": {
+    "clickToCollapse": "Click to collapse",
+    "webDevelopment": {
+      "title": "Web Development",
+      "short": "Modern and fast websites",
+      "detail": "We create modern, fast, and responsive websites, tailored to the needs of your business, optimized for SEO, and with best accessibility practices."
+    },
+    "webDesign": {
+      "title": "Web Design",
+      "short": "Attractive and functional design",
+      "detail": "We design attractive, intuitive, and user-centered interfaces, ensuring a consistent and professional visual experience."
+    },
+    "serviceTitan": {
+      "title": "ServiceTitan Integration",
+      "short": "Automate your operation",
+      "detail": "We integrate your business with ServiceTitan to automate processes, improve management, and connect your systems efficiently."
+    },
+    "analytics": {
+      "title": "Business Analytics and Inventory Prediction",
+      "short": "Make smart decisions",
+      "detail": "We implement advanced analytics and inventory prediction systems using AI, so you can make informed decisions and optimize your resources."
+    }
+  },
+  "common": {
+    "discover": "Discover it",
+    "backHome": "Back to home",
+    "clickToCollapse": "Click to collapse"
   }
-} 
+}
