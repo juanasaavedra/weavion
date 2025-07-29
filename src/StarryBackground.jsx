@@ -30,16 +30,16 @@ const StarryBackground = ({ opacity = 1 }) => {
       stars = [];
       const numStars = Math.floor((width * height) / 2500);
       for (let i = 0; i < numStars; i++) {
-        const big = Math.random() < 0.25; // Algunas estrellas más grandes
+        const big = Math.random() < 0.2; // Más estrellas grandes
         stars.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          radius: big ? Math.random() * 1.2 + 1.5 : Math.random() * 1.2 + 0.5,
-          opacity: big ? Math.random() * 0.3 + 0.5 : Math.random() * 0.4 + 0.2,
+          radius: Math.random() * 1.2 + 0.5,
+          opacity: Math.random() * 0.4 + 0.2,
           pulse: Math.random() * 0.02 + 0.005,
           pulseFactor: Math.random() * Math.PI * 2,
-          dx: (Math.random() - 0.5) * 0.2,
-          dy: (Math.random() - 0.5) * 0.2
+          dx: (Math.random() - 0.5) * 0.1,
+          dy: (Math.random() - 0.5) * 0.1
         });
       }
     };
@@ -88,23 +88,15 @@ const StarryBackground = ({ opacity = 1 }) => {
         if (star.y < 0) star.y += height;
         if (star.y > height) star.y -= height;
       }
-
-      ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 * opacity})`;
-      const lineWidth = window.innerWidth < 768 ? 0.5 : 1;
-      ctx.lineWidth = lineWidth;
+      ctx.strokeStyle = `rgba(255, 255, 255, ${0.35 * opacity})`;
+      ctx.lineWidth = 1;
       for (const constellation of constellations) {
-        for (let i = 0; i < constellation.length - 1; i++) {
-          const a = constellation[i];
-          const b = constellation[i + 1];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          if (Math.sqrt(dx * dx + dy * dy) < 80) {
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
+        ctx.beginPath();
+        ctx.moveTo(constellation[0].x, constellation[0].y);
+        for (let i = 1; i < constellation.length; i++) {
+          ctx.lineTo(constellation[i].x, constellation[i].y);
         }
+        ctx.stroke();
       }
 
       for (const star of stars) {

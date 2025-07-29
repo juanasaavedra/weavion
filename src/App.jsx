@@ -11,7 +11,7 @@ import ProcessTimeline from './ProcessTimeline';
 import ContactForm from './ContactForm';
 import ContactSection from './ContactSection';
 import backgroundBlur from './assets/backgroundBlur.png';
-import logo from './assets/logo.png';
+import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
 import Moon from './Moon';
 
@@ -146,14 +146,14 @@ export default function App() {
       {!isMobile && (
         <Moon
           position={{
-            x: currentSection === 'hero' ? '92vw' : // Más a la derecha en home
+            x: currentSection === 'hero' ? '85vw' : // Derecha en home
                currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
                currentSection === 'about' ? '90vw' : // Totalmente a la derecha en Sobre Nosotros
                currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
                currentSection === 'process' ? '50vw' : // Centro abajo en proceso
                currentSection === 'contact' ? '85vw' : // En el último div a la derecha
                '50vw',
-            y: currentSection === 'hero' ? '15vh' : // Más arriba en home
+            y: currentSection === 'hero' ? '35vh' :
                currentSection === 'services' ? '85vh' :
                currentSection === 'about' ? '50vh' : // Centrado vertical en Sobre Nosotros
                currentSection === 'benefits' ? '25vh' :
@@ -162,7 +162,7 @@ export default function App() {
                '80vh'
           }}
           size={
-            currentSection === 'hero' ? '180px' : // Más pequeño y discreto en inicio
+            currentSection === 'hero' ? '250px' : // Más pequeño en inicio
             currentSection === 'about' ? '300px' : // A la derecha en Sobre Nosotros
           currentSection === 'benefits' ? '250px' : // Grande en beneficios
           currentSection === 'process' ? '400px' : // Grande en proceso
