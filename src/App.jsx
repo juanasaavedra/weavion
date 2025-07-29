@@ -11,7 +11,7 @@ import ProcessTimeline from './ProcessTimeline';
 import ContactForm from './ContactForm';
 import ContactSection from './ContactSection';
 import backgroundBlur from './assets/backgroundBlur.png';
-import logo from './assets/Logo.png';
+import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
 import Moon from './Moon';
 
