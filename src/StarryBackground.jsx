@@ -9,131 +9,134 @@ const StarryBackground = ({ opacity = 1 }) => {
     let animationFrameId;
     let stars = [];
     let constellations = [];
+    let dpr = window.devicePixelRatio || 1;
 
-    // Configurar el canvas para que ocupe toda la pantalla
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 3; // Hacerlo más alto para cubrir todo el scroll
-      initStars();
-      initConstellations();
+    const initCanvas = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight * 3;
+
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      initStars(width, height);
+      initConstellations(width, height);
     };
 
-    // Crear estrellas
-    const initStars = () => {
+    const initStars = (width, height) => {
       stars = [];
-      const numStars = Math.floor((canvas.width * canvas.height) / 3000); // Más densidad de estrellas
-      
+      const numStars = Math.floor((width * height) / 2500);
       for (let i = 0; i < numStars; i++) {
+        const big = Math.random() < 0.25; // Algunas estrellas más grandes
         stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          radius: Math.random() * 2 + 0.8, // Estrellas más grandes
-          opacity: Math.random() * 0.9 + 0.3, // Más brillantes
-          pulse: Math.random() * 0.03 + 0.01,
-          pulseFactor: 0
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: big ? Math.random() * 1.2 + 1.5 : Math.random() * 1.2 + 0.5,
+          opacity: big ? Math.random() * 0.3 + 0.5 : Math.random() * 0.4 + 0.2,
+          pulse: Math.random() * 0.02 + 0.005,
+          pulseFactor: Math.random() * Math.PI * 2,
+          dx: (Math.random() - 0.5) * 0.2,
+          dy: (Math.random() - 0.5) * 0.2
         });
       }
     };
 
-      // Crear constelaciones (líneas entre algunas estrellas)
-    const initConstellations = () => {
+    const initConstellations = (width, height) => {
       constellations = [];
-      const numConstellations = Math.floor(stars.length / 30); // Muchas más constelaciones
-      
+      const numConstellations = Math.floor((width * height) / 150000);
       for (let i = 0; i < numConstellations; i++) {
-        const numStarsInConstellation = Math.floor(Math.random() * 6) + 5; // Más estrellas por constelación
+        const starCount = Math.floor(Math.random() * 3) + 3; // 3-5 estrellas
         const constellationStars = [];
-        
-        // Elegir un área para la constelación
-        const centerX = Math.random() * canvas.width;
-        const centerY = Math.random() * canvas.height;
-        const radius = Math.random() * 200 + 100; // Radio más grande para constelaciones más visibles        // Seleccionar estrellas cercanas al centro de la constelación
-        for (let j = 0; j < stars.length && constellationStars.length < numStarsInConstellation; j++) {
+        const centerX = Math.random() * width;
+        const centerY = Math.random() * height;
+        const radius = Math.random() * 80 + 60;
+
+        for (let j = 0; j < stars.length && constellationStars.length < starCount; j++) {
           const star = stars[j];
-          const distance = Math.sqrt(Math.pow(star.x - centerX, 2) + Math.pow(star.y - centerY, 2));
-          
-          if (distance < radius) {
+          const dx = star.x - centerX;
+          const dy = star.y - centerY;
+          if (Math.sqrt(dx * dx + dy * dy) < radius) {
             constellationStars.push(star);
           }
         }
-        
         if (constellationStars.length >= 3) {
+          constellationStars.sort(
+            (a, b) =>
+              Math.atan2(a.y - centerY, a.x - centerX) -
+              Math.atan2(b.y - centerY, b.x - centerX)
+          );
           constellations.push(constellationStars);
         }
       }
     };
 
-      // Dibujar el cielo estrellado
-    const drawStarryBackground = () => {
+    const draw = () => {
+      const width = canvas.width / dpr;
+      const height = canvas.height / dpr;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Fondo oscuro para mejor contraste
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      // Dibujar las constelaciones
-      for (const constellation of constellations) {
-        // Dibujar líneas de constelación
-        ctx.beginPath();
-        ctx.moveTo(constellation[0].x, constellation[0].y);
-        
-        for (let i = 1; i < constellation.length; i++) {
-          ctx.lineTo(constellation[i].x, constellation[i].y);
-        }
-        
-        // Líneas más brillantes y visibles
-        ctx.strokeStyle = `rgba(111, 71, 255, 0.6)`; 
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-        
-        // Resaltar los puntos de unión de las constelaciones
-        for (const star of constellation) {
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, 1.8, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(111, 71, 255, 0.8)';
-          ctx.fill();
-        }
-      }      // Dibujar las estrellas
+
       for (const star of stars) {
+        star.x += star.dx;
+        star.y += star.dy;
         star.pulseFactor += star.pulse;
-        const pulseOpacity = 0.8 + Math.sin(star.pulseFactor) * 0.2;
-        
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(star.opacity * pulseOpacity * 1.5, 1.0)})`; // Estrellas más brillantes
-        ctx.fill();
-        
-        // Añadir brillo para estrellas más grandes
-        if (star.radius > 1.5) {
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius * 1.8, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * 0.3})`;
-          ctx.fill();
+
+        if (star.x < 0) star.x += width;
+        if (star.x > width) star.x -= width;
+        if (star.y < 0) star.y += height;
+        if (star.y > height) star.y -= height;
+      }
+
+      ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 * opacity})`;
+      const lineWidth = window.innerWidth < 768 ? 0.5 : 1;
+      ctx.lineWidth = lineWidth;
+      for (const constellation of constellations) {
+        for (let i = 0; i < constellation.length - 1; i++) {
+          const a = constellation[i];
+          const b = constellation[i + 1];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          if (Math.sqrt(dx * dx + dy * dy) < 80) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
         }
       }
-      
-      animationFrameId = window.requestAnimationFrame(drawStarryBackground);
+
+      for (const star of stars) {
+        const pulseOpacity = 0.8 + Math.sin(star.pulseFactor) * 0.2;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(star.opacity * pulseOpacity * opacity, 1)})`;
+        ctx.fill();
+      }
+
+      animationFrameId = window.requestAnimationFrame(draw);
     };
 
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    drawStarryBackground();
-    
+    initCanvas();
+    draw();
+    window.addEventListener('resize', initCanvas);
+
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', initCanvas);
       window.cancelAnimationFrame(animationFrameId);
     };
   }, [opacity]);
 
   return (
-    <canvas 
-      ref={canvasRef} 
-      className="fixed inset-0 z-0 pointer-events-none" 
-      style={{ 
-        opacity: 1,
-        position: "fixed",
-        width: "100%",
-        height: "100%",
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 z-0 pointer-events-none"
+      style={{
+        opacity,
+        position: 'fixed',
+        width: '100%',
+        height: '100%',
         top: 0,
         left: 0
       }}

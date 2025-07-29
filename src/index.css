@@ -31,7 +31,7 @@ head::before {
   --color-slate: #1E1F26;       /* Dark Slate (Surfaces) - Tarjetas, nav */
   --color-gunmetal: #2A2C37;    /* Gunmetal (Detalles) - Bordes, divisores */
   --color-accent: #6F47FF;      /* Tech Purple (Accent) - Botones CTA */
-  --color-highlight: #D81B60;   /* Deep Magenta (Highlight) - Hover */
+  --color-highlight: #A76CFF;   /* Lighter Purple (Highlight) */
   --color-text: #ECECEC;        /* Soft White (Texto) - Texto principal */
 }
 
@@ -86,9 +86,8 @@ html, body {
 }
 
 .btn-primary:hover {
-  background-color: var(--color-highlight);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(216, 27, 96, 0.4);
+  box-shadow: 0 0 12px var(--color-accent);
 }
 
 /* Clase específica para botones con bordes más redondeados */
@@ -110,11 +109,9 @@ html, body {
   box-shadow: 0 4px 8px rgba(111, 71, 255, 0.3);
   transition: all 0.3s ease;
 }
-
 .form-btn-next:hover:not(:disabled) {
-  background-color: var(--color-highlight);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(216, 27, 96, 0.4);
+  box-shadow: 0 0 12px var(--color-accent);
 }
 
 .form-btn-next:disabled {
@@ -341,12 +338,12 @@ html, body {
 
 @media (max-width: 768px) {
   .card-stack-container {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 200px;
+    width: 100%;
+    height: 350px;
+    margin-bottom: 2rem;
   }
 }
 
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
