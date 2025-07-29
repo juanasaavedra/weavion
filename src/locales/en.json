@@ -11,7 +11,7 @@
     "english": "Español"
   },
   "hero": {
-    "title": "Take your company to space and beyond",
+    "title": "Boost your business with web solutions orbiting innovation and security.",
     "subtitle": "Your business deserves a stellar online presence. We'll help you reach for the stars.",
     "motivational": "The universe of digital possibilities awaits your brand",
     "cta": "Discover how"
@@ -73,7 +73,9 @@
     "emailRequired": "Please enter a valid email",
     "messageRequired": "Please tell us about your project",
     "success": "Message sent successfully! We will contact you soon.",
-    "error": "There was an error sending your message. Please try again later."
+    "error": "There was an error sending your message. Please try again later.",
+    "schedulePrompt": "Choose your preferred time slot and let's launch your project today.",
+    "scheduleButton": "Schedule call"
   },
   "folder": {
     "clickToCollapse": "Click to collapse",
