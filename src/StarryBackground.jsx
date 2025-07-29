@@ -30,7 +30,7 @@ const StarryBackground = ({ opacity = 1 }) => {
       stars = [];
       const numStars = Math.floor((width * height) / 2500);
       for (let i = 0; i < numStars; i++) {
-        const big = Math.random() < 0.1; // Algunas estrellas más grandes
+        const big = Math.random() < 0.2; // Más estrellas grandes
         stars.push({
           x: Math.random() * width,
           y: Math.random() * height,
@@ -38,8 +38,8 @@ const StarryBackground = ({ opacity = 1 }) => {
           opacity: big ? Math.random() * 0.2 + 0.6 : Math.random() * 0.4 + 0.2,
           pulse: Math.random() * 0.02 + 0.005,
           pulseFactor: Math.random() * Math.PI * 2,
-          dx: (Math.random() - 0.5) * 0.1,
-          dy: (Math.random() - 0.5) * 0.1
+          dx: (Math.random() - 0.5) * 0.2,
+          dy: (Math.random() - 0.5) * 0.2
         });
       }
     };
@@ -90,7 +90,8 @@ const StarryBackground = ({ opacity = 1 }) => {
       }
 
       ctx.strokeStyle = `rgba(255, 255, 255, ${0.25 * opacity})`;
-      ctx.lineWidth = 1;
+      const lineWidth = window.innerWidth < 768 ? 0.5 : 1;
+      ctx.lineWidth = lineWidth;
       for (const constellation of constellations) {
         for (let i = 0; i < constellation.length - 1; i++) {
           const a = constellation[i];
