@@ -31,7 +31,7 @@ head::before {
   --color-slate: #1E1F26;       /* Dark Slate (Surfaces) - Tarjetas, nav */
   --color-gunmetal: #2A2C37;    /* Gunmetal (Detalles) - Bordes, divisores */
   --color-accent: #6F47FF;      /* Tech Purple (Accent) - Botones CTA */
-  --color-highlight: #D81B60;   /* Deep Magenta (Highlight) - Hover */
+  --color-highlight: #FFD100;   /* Brillo (Highlight) */
   --color-text: #ECECEC;        /* Soft White (Texto) - Texto principal */
 }
 
@@ -88,7 +88,7 @@ html, body {
 .btn-primary:hover {
   background-color: var(--color-highlight);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(216, 27, 96, 0.4);
+  box-shadow: 0 6px 12px rgba(255, 209, 0, 0.4);
 }
 
 /* Clase específica para botones con bordes más redondeados */
@@ -111,10 +111,18 @@ html, body {
   transition: all 0.3s ease;
 }
 
+@media (min-width: 768px) {
+  .form-btn-next {
+    width: auto;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
 .form-btn-next:hover:not(:disabled) {
   background-color: var(--color-highlight);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(216, 27, 96, 0.4);
+  box-shadow: 0 6px 12px rgba(255, 209, 0, 0.4);
 }
 
 .form-btn-next:disabled {
@@ -155,7 +163,7 @@ html, body {
 .form-input:focus {
   outline: none;
   border-color: var(--color-highlight);
-  box-shadow: 0 0 0 2px rgba(216, 27, 96, 0.2);
+  box-shadow: 0 0 0 2px rgba(255, 209, 0, 0.2);
 }
 
 .form-label {
@@ -184,8 +192,7 @@ html, body {
   width: 0;
 }
 
-.custom-checkbox::before {
-  content: '';
+.checkmark {
   position: absolute;
   top: 0;
   left: 0;
@@ -197,18 +204,19 @@ html, body {
   transition: all 0.2s ease;
 }
 
-.custom-checkbox:hover::before {
+.custom-checkbox:hover .checkmark {
   background-color: rgba(111, 71, 255, 0.1);
 }
 
-.custom-checkbox input:checked + .custom-checkbox::before {
+.custom-checkbox input:checked + .checkmark {
   background-color: var(--color-accent);
   border-color: var(--color-highlight);
 }
 
-.custom-checkbox input:checked::after {
+.checkmark::after {
   content: "";
   position: absolute;
+  display: none;
   left: 8px;
   top: 4px;
   width: 6px;
@@ -216,6 +224,9 @@ html, body {
   border: solid var(--color-text);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked + .checkmark::after {
   display: block;
 }
 
@@ -337,12 +348,13 @@ html, body {
 .card-stack-container {
   width: 100%;
   height: 400px;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
   .card-stack-container {
-    width: 20px;
-    height: 20px;
+    width: 100%;
+    height: 350px;
     margin-bottom: 200px;
   }
 }

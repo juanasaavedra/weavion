@@ -65,7 +65,7 @@ export default function Stack({
         perspective: 600,
         maxWidth: "600px", // Aumentamos el ancho máximo
         marginBottom: "40px",
-        overflow: "visible" // Permitir que las tarjetas se vean completas
+        overflow: "hidden"
       }}
     >
       {/* Stack de tarjetas */}
