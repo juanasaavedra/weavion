@@ -492,12 +492,17 @@ export default function ContactForm() {
                       <option value="no">No por ahora</option>
                     </select>
                     {form.contacto.llamada === 'si' && (
-                      <input type="text" className="mt-2 w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.contacto.horario} onChange={e => handleContacto('horario', e.target.value)} placeholder="Proporciona un horario o disponibilidad" />
+                      <>
+                        <div className="text-sm text-[#E0E0E0] mt-2">{t('contact.schedulePrompt')}</div>
+                        <input type="text" className="mt-1 w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.contacto.horario} onChange={e => handleContacto('horario', e.target.value)} placeholder={t('contact.schedulePrompt')} />
+                      </>
                     )}
                   </div>
                   <div className="form-btn-container">
                     <button type="button" className="form-btn-back" onClick={handleBack}>Atrás</button>
-                    <button type="submit" className="form-btn-next">Enviar</button>
+                    <button type="submit" className="form-btn-next">
+                      {form.contacto.llamada === 'si' ? t('contact.scheduleButton') : t('contact.submitButton')}
+                    </button>
                   </div>
                 </div>
               )}

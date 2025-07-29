@@ -11,7 +11,7 @@
     "english": "English"
   },
   "hero": {
-    "title": "Lleva tu empresa al espacio y más allá",
+    "title": "Impulsa tu empresa con soluciones web orbitadas en innovación y seguridad.",
     "subtitle": "Tu negocio merece una presencia estelar en línea. Te ayudaremos a alcanzar las estrellas.",
     "motivational": "El universo de posibilidades digitales espera a tu marca",
     "cta": "Descubre cómo"
@@ -74,6 +74,8 @@
     "messageRequired": "Por favor cuéntanos sobre tu proyecto",
     "success": "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
     "error": "Hubo un error al enviar tu mensaje. Por favor intenta más tarde.",
+    "schedulePrompt": "Elige tu franja horaria y despeguemos tu proyecto hoy mismo.",
+    "scheduleButton": "Agendar llamada",
     "services": {
       "web": "Diseño o rediseño de sitio web",
       "dashboard": "Dashboard de analítica de negocio",
