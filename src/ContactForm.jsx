@@ -15,6 +15,7 @@ export default function ContactForm() {
   const serviceOptions = getServiceOptions(t);
   
   const [step, setStep] = useState(0);
+  const [maxSteps, setMaxSteps] = useState(2); // se actualiza al avanzar
   const [form, setForm] = useState({
     servicios: [],
     otroServicio: '',
@@ -57,8 +58,19 @@ export default function ContactForm() {
   const handleContacto = (field, value) => {
     setForm(f => ({ ...f, contacto: { ...f.contacto, [field]: value } }));
   };
-  const handleNext = () => setStep(s => s + 1);
-  const handleBack = () => setStep(s => s - 1);
+  const handleNext = () => {
+    if (current === 'servicios' && form.servicios.length === 0) {
+      setErrors({ servicios: 'Debes seleccionar al menos un servicio.' });
+      return;
+    }
+    setErrors({});
+    setMaxSteps(steps.length);
+    setStep(s => Math.min(s + 1, steps.length - 1));
+  };
+  const handleBack = () => {
+    setErrors({});
+    setStep(s => Math.max(s - 1, 0));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -89,19 +101,19 @@ export default function ContactForm() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!form.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio.';
-    if (!form.email.trim()) {
+    if (!form.contacto.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio.';
+    if (!form.contacto.email.trim()) {
       newErrors.email = 'El email es obligatorio.';
-    } else if (!/^\S+@\S+\.\S+$/.test(form.email)) {
+    } else if (!/^\S+@\S+\.\S+$/.test(form.contacto.email)) {
       newErrors.email = 'El formato del email no es válido.';
     }
-    if (!form.empresa.trim()) newErrors.empresa = 'El nombre de la empresa es obligatorio.';
     if (form.servicios.length === 0) {
       newErrors.servicios = 'Debes seleccionar al menos un servicio.';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
 
   // Calculate progress based on answered questions rather than selected options
   const questionChecks = [
@@ -224,11 +236,13 @@ export default function ContactForm() {
                       </label>
                     ))}
                   </div>
-                  <button 
-                    type="button" 
-                    className="form-btn-next" 
-                    onClick={handleNext} 
-                    disabled={form.servicios.length === 0}
+                  {errors.servicios && (
+                    <div className="text-[var(--color-highlight)] mb-2">{errors.servicios}</div>
+                  )}
+                  <button
+                    type="button"
+                    className="form-btn-next"
+                    onClick={handleNext}
                   >
                     Siguiente
                   </button>
@@ -252,8 +266,8 @@ export default function ContactForm() {
                     <label className="block text-[#FFFFFF] mb-2">¿Qué funcionalidades deseas incluir?</label>
                     <div className="flex flex-col gap-2">
                       {['Agendamiento de citas','Formulario de contacto','Portafolio de trabajos o galería','Testimonios / reseñas de clientes','Chat en vivo','Otra'].map(func => (
-                        <label key={func} className="flex items-center gap-2">
-                          <input type="checkbox" className="accent-[#00CFF4]" checked={form.web.funcionalidades.includes(func)} onChange={() => {
+                        <label key={func} className="custom-checkbox text-[#FFFFFF]">
+                          <input type="checkbox" checked={form.web.funcionalidades.includes(func)} onChange={() => {
                             setForm(f => {
                               let funcionalidades = f.web.funcionalidades.includes(func)
                                 ? f.web.funcionalidades.filter(x => x !== func)
@@ -261,7 +275,8 @@ export default function ContactForm() {
                               return { ...f, web: { ...f.web, funcionalidades } };
                             });
                           }} />
-                          <span className="text-[#FFFFFF]">{func}</span>
+                          <span className="checkmark"></span>
+                          {func}
                           {func === 'Otra' && form.web.funcionalidades.includes('Otra') && (
                             <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#0A122E] text-[#FFFFFF] border border-[#3E92CC]" value={form.web.otraFunc} onChange={e => handleInput('web', 'otraFunc', e.target.value)} />
                           )}
@@ -281,8 +296,8 @@ export default function ContactForm() {
                     <label className="block text-[#FFFFFF] mb-2">¿Qué objetivo tiene tu sitio web?</label>
                     <div className="flex flex-col gap-2">
                       {['Generar leads','Mostrar tu empresa profesionalmente','Facilitar agendamiento','Otras'].map(obj => (
-                        <label key={obj} className="flex items-center gap-2">
-                          <input type="checkbox" className="accent-[#00CFF4]" checked={form.web.objetivo.includes(obj)} onChange={() => {
+                        <label key={obj} className="custom-checkbox text-[#FFFFFF]">
+                          <input type="checkbox" checked={form.web.objetivo.includes(obj)} onChange={() => {
                             setForm(f => {
                               let objetivo = f.web.objetivo.includes(obj)
                                 ? f.web.objetivo.filter(x => x !== obj)
@@ -290,7 +305,8 @@ export default function ContactForm() {
                               return { ...f, web: { ...f.web, objetivo } };
                             });
                           }} />
-                          <span className="text-[#FFFFFF]">{obj}</span>
+                          <span className="checkmark"></span>
+                          {obj}
                           {obj === 'Otras' && form.web.objetivo.includes('Otras') && (
                             <input type="text" placeholder="Otras..." className="ml-2 px-2 py-1 rounded bg-[#0A122E] text-[#FFFFFF] border border-[#3E92CC]" value={form.web.otroObj} onChange={e => handleInput('web', 'otroObj', e.target.value)} />
                           )}
@@ -311,8 +327,8 @@ export default function ContactForm() {
                     <label className="block text-[#D6D6D6] mb-2">¿Qué métricas te gustaría visualizar?</label>
                     <div className="flex flex-col gap-2">
                       {['Ingresos por mes / servicio','Servicios más solicitados','Tasa de conversión por canal (web, llamadas, redes)','Costos operativos o por empleado','Otra'].map(met => (
-                        <label key={met} className="flex items-center gap-2">
-                          <input type="checkbox" className="accent-[#FFD100]" checked={form.dashboard.metricas.includes(met)} onChange={() => {
+                        <label key={met} className="custom-checkbox text-[#FFD100]">
+                          <input type="checkbox" checked={form.dashboard.metricas.includes(met)} onChange={() => {
                             setForm(f => {
                               let metricas = f.dashboard.metricas.includes(met)
                                 ? f.dashboard.metricas.filter(x => x !== met)
@@ -320,7 +336,8 @@ export default function ContactForm() {
                               return { ...f, dashboard: { ...f.dashboard, metricas } };
                             });
                           }} />
-                          <span className="text-[#FFD100]">{met}</span>
+                          <span className="checkmark"></span>
+                          {met}
                           {met === 'Otra' && form.dashboard.metricas.includes('Otra') && (
                             <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.dashboard.otraMetrica} onChange={e => handleInput('dashboard', 'otraMetrica', e.target.value)} />
                           )}
@@ -371,8 +388,8 @@ export default function ContactForm() {
                     <label className="block text-[#D6D6D6] mb-2">¿Qué deseas hacer con Service Titan?</label>
                     <div className="flex flex-col gap-2">
                       {['Automatizar flujo de trabajo con el sitio web','Integrarlo con pagos, facturación o agendamiento','Mostrar datos en un dashboard personalizado','Otra'].map(obj => (
-                        <label key={obj} className="flex items-center gap-2">
-                          <input type="checkbox" className="accent-[#FFD100]" checked={form.servicetitan.objetivo.includes(obj)} onChange={() => {
+                        <label key={obj} className="custom-checkbox text-[#FFD100]">
+                          <input type="checkbox" checked={form.servicetitan.objetivo.includes(obj)} onChange={() => {
                             setForm(f => {
                               let objetivo = f.servicetitan.objetivo.includes(obj)
                                 ? f.servicetitan.objetivo.filter(x => x !== obj)
@@ -380,7 +397,8 @@ export default function ContactForm() {
                               return { ...f, servicetitan: { ...f.servicetitan, objetivo } };
                             });
                           }} />
-                          <span className="text-[#FFD100]">{obj}</span>
+                          <span className="checkmark"></span>
+                          {obj}
                           {obj === 'Otra' && form.servicetitan.objetivo.includes('Otra') && (
                             <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.servicetitan.otroObj} onChange={e => handleInput('servicetitan', 'otroObj', e.target.value)} />
                           )}
@@ -405,8 +423,8 @@ export default function ContactForm() {
                     <label className="block text-[#D6D6D6] mb-2">¿Qué procesos deseas automatizar?</label>
                     <div className="flex flex-col gap-2">
                       {['Confirmaciones de citas','Notificaciones al cliente','Seguimiento post-servicio','Facturación automática','Otra'].map(proc => (
-                        <label key={proc} className="flex items-center gap-2">
-                          <input type="checkbox" className="accent-[#FFD100]" checked={form.automatizacion.procesos.includes(proc)} onChange={() => {
+                        <label key={proc} className="custom-checkbox text-[#FFD100]">
+                          <input type="checkbox" checked={form.automatizacion.procesos.includes(proc)} onChange={() => {
                             setForm(f => {
                               let procesos = f.automatizacion.procesos.includes(proc)
                                 ? f.automatizacion.procesos.filter(x => x !== proc)
@@ -414,7 +432,8 @@ export default function ContactForm() {
                               return { ...f, automatizacion: { ...f.automatizacion, procesos } };
                             });
                           }} />
-                          <span className="text-[#FFD100]">{proc}</span>
+                          <span className="checkmark"></span>
+                          {proc}
                           {proc === 'Otra' && form.automatizacion.procesos.includes('Otra') && (
                             <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.automatizacion.otroProc} onChange={e => handleInput('automatizacion', 'otroProc', e.target.value)} />
                           )}
@@ -426,8 +445,8 @@ export default function ContactForm() {
                     <label className="block text-[#D6D6D6] mb-2">¿Qué herramientas usas actualmente para tus operaciones?</label>
                     <div className="flex flex-col gap-2">
                       {['Google Calendar','WhatsApp / correo','Excel / manualmente','Otra'].map(herr => (
-                        <label key={herr} className="flex items-center gap-2">
-                          <input type="checkbox" className="accent-[#FFD100]" checked={form.automatizacion.herramientas.includes(herr)} onChange={() => {
+                        <label key={herr} className="custom-checkbox text-[#FFD100]">
+                          <input type="checkbox" checked={form.automatizacion.herramientas.includes(herr)} onChange={() => {
                             setForm(f => {
                               let herramientas = f.automatizacion.herramientas.includes(herr)
                                 ? f.automatizacion.herramientas.filter(x => x !== herr)
@@ -435,7 +454,8 @@ export default function ContactForm() {
                               return { ...f, automatizacion: { ...f.automatizacion, herramientas } };
                             });
                           }} />
-                          <span className="text-[#FFD100]">{herr}</span>
+                          <span className="checkmark"></span>
+                          {herr}
                         </label>
                       ))}
                     </div>
@@ -452,10 +472,12 @@ export default function ContactForm() {
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Cuál es tu nombre y empresa?</label>
                     <input type="text" className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.contacto.nombre} onChange={e => handleContacto('nombre', e.target.value)} placeholder="Nombre y empresa" required />
+                    {errors.nombre && <div className="text-[var(--color-highlight)] mt-1">{errors.nombre}</div>}
                   </div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">Correo electrónico de contacto</label>
                     <input type="email" className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.contacto.email} onChange={e => handleContacto('email', e.target.value)} placeholder="Correo electrónico" required />
+                    {errors.email && <div className="text-[var(--color-highlight)] mt-1">{errors.email}</div>}
                   </div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Cuál es tu presupuesto estimado para este proyecto? <span className="text-[#FFD100]">(opcional)</span></label>
