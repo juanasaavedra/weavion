@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import moonImg from './assets/moon.png';
 
 const Moon = ({ 
-  position = { x: "5vw", y: "50vh" }, 
-  size = "150px", 
+  position = { x: "85vw", y: "10vh" },
+  size = "120px",
   opacity = 1,
   zIndex = 20,
   transition = { duration: 1.5, ease: "easeInOut" } 

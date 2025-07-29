@@ -146,7 +146,6 @@ export default function App() {
       {!isMobile && (
         <Moon
           position={{
-
             x: currentSection === 'hero' ? '85vw' : // Derecha en home
                currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
                currentSection === 'about' ? '90vw' : // Totalmente a la derecha en Sobre Nosotros
