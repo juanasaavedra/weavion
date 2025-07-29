@@ -204,7 +204,7 @@ export default function ContactForm() {
         <AnimatePresence mode="wait">
           {submitted ? (
             <motion.div key="done" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <div className="subtitle text-[#00CFF4] text-center mb-4">¡Gracias por tu interés!</div>
+              <div className="subtitle text-[var(--color-accent)] text-center mb-4">¡Gracias por tu interés!</div>
               <div className="body-text text-[#FFFFFF] text-center">Pronto recibirás nuestra propuesta personalizada {form.contacto.llamada === 'no' ? 'por correo electrónico.' : 'y te contactaremos para la llamada.'}</div>
             </motion.div>
           ) : (
@@ -250,7 +250,7 @@ export default function ContactForm() {
               )}
               {current === 'web' && (
                 <div>
-                  <div className="subtitle text-[#00CFF4] mb-4">Sobre tu sitio web</div>
+                  <div className="subtitle text-[var(--color-accent)] mb-4">Sobre tu sitio web</div>
                   <div className="mb-4">
                     <label className="block text-[#FFFFFF] mb-2">¿Ya tienes un sitio web?</label>
                     <select className="w-full rounded-xl px-4 py-3 bg-[var(--color-gunmetal)] text-[var(--color-text)] border border-[var(--color-accent)]" value={form.web.tieneWeb} onChange={e => handleInput('web', 'tieneWeb', e.target.value)}>
@@ -259,7 +259,7 @@ export default function ContactForm() {
                       <option value="no">No</option>
                     </select>
                     {form.web.tieneWeb === 'si' && (
-                      <input type="url" placeholder="URL de tu sitio" className="mt-2 w-full rounded px-3 py-2 bg-[#0A122E] text-[#FFFFFF] border border-[#3E92CC]" value={form.web.url} onChange={e => handleInput('web', 'url', e.target.value)} />
+                      <input type="url" placeholder="URL de tu sitio" className="mt-2 w-full rounded px-3 py-2 bg-[#0A122E] text-[#FFFFFF] border border-[var(--color-accent)]" value={form.web.url} onChange={e => handleInput('web', 'url', e.target.value)} />
                     )}
                   </div>
                   <div className="mb-4">
@@ -278,7 +278,7 @@ export default function ContactForm() {
                           <span className="checkmark"></span>
                           {func}
                           {func === 'Otra' && form.web.funcionalidades.includes('Otra') && (
-                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#0A122E] text-[#FFFFFF] border border-[#3E92CC]" value={form.web.otraFunc} onChange={e => handleInput('web', 'otraFunc', e.target.value)} />
+                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#0A122E] text-[#FFFFFF] border border-[var(--color-accent)]" value={form.web.otraFunc} onChange={e => handleInput('web', 'otraFunc', e.target.value)} />
                           )}
                         </label>
                       ))}
@@ -308,7 +308,7 @@ export default function ContactForm() {
                           <span className="checkmark"></span>
                           {obj}
                           {obj === 'Otras' && form.web.objetivo.includes('Otras') && (
-                            <input type="text" placeholder="Otras..." className="ml-2 px-2 py-1 rounded bg-[#0A122E] text-[#FFFFFF] border border-[#3E92CC]" value={form.web.otroObj} onChange={e => handleInput('web', 'otroObj', e.target.value)} />
+                            <input type="text" placeholder="Otras..." className="ml-2 px-2 py-1 rounded bg-[#0A122E] text-[#FFFFFF] border border-[var(--color-accent)]" value={form.web.otroObj} onChange={e => handleInput('web', 'otroObj', e.target.value)} />
                           )}
                         </label>
                       ))}
@@ -322,7 +322,7 @@ export default function ContactForm() {
               )}
               {current === 'dashboard' && (
                 <div>
-                  <div className="text-xl text-[#FFD100] font-bold mb-4">Sobre tu dashboard de analítica</div>
+                  <div className="text-xl text-[var(--color-accent)] font-bold mb-4">Sobre tu dashboard de analítica</div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Qué métricas te gustaría visualizar?</label>
                     <div className="flex flex-col gap-2">
@@ -339,7 +339,7 @@ export default function ContactForm() {
                           <span className="checkmark"></span>
                           {met}
                           {met === 'Otra' && form.dashboard.metricas.includes('Otra') && (
-                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.dashboard.otraMetrica} onChange={e => handleInput('dashboard', 'otraMetrica', e.target.value)} />
+                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.dashboard.otraMetrica} onChange={e => handleInput('dashboard', 'otraMetrica', e.target.value)} />
                           )}
                         </label>
                       ))}
@@ -347,7 +347,7 @@ export default function ContactForm() {
                   </div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Dónde se almacenan actualmente tus datos de negocio?</label>
-                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.dashboard.datos} onChange={e => handleInput('dashboard', 'datos', e.target.value)}>
+                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.dashboard.datos} onChange={e => handleInput('dashboard', 'datos', e.target.value)}>
                       <option value="">Selecciona...</option>
                       <option value="excel">En hojas de Excel</option>
                       <option value="crm">En un CRM</option>
@@ -355,12 +355,12 @@ export default function ContactForm() {
                       <option value="otro">Otro</option>
                     </select>
                     {form.dashboard.datos === 'otro' && (
-                      <input type="text" placeholder="Otro..." className="mt-2 w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.dashboard.otroDato} onChange={e => handleInput('dashboard', 'otroDato', e.target.value)} />
+                      <input type="text" placeholder="Otro..." className="mt-2 w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.dashboard.otroDato} onChange={e => handleInput('dashboard', 'otroDato', e.target.value)} />
                     )}
                   </div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Necesitas reportes automáticos o alertas?</label>
-                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.dashboard.reportes} onChange={e => handleInput('dashboard', 'reportes', e.target.value)}>
+                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.dashboard.reportes} onChange={e => handleInput('dashboard', 'reportes', e.target.value)}>
                       <option value="">Selecciona...</option>
                       <option value="si">Sí</option>
                       <option value="no">No</option>
@@ -374,10 +374,10 @@ export default function ContactForm() {
               )}
               {current === 'servicetitan' && (
                 <div>
-                  <div className="text-xl text-[#FFD100] font-bold mb-4">Sobre integración con Service Titan</div>
+                  <div className="text-xl text-[var(--color-accent)] font-bold mb-4">Sobre integración con Service Titan</div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Ya usas Service Titan?</label>
-                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.servicetitan.usa} onChange={e => handleInput('servicetitan', 'usa', e.target.value)}>
+                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.servicetitan.usa} onChange={e => handleInput('servicetitan', 'usa', e.target.value)}>
                       <option value="">Selecciona...</option>
                       <option value="si">Sí</option>
                       <option value="no">No, pero quiero implementarlo</option>
@@ -400,7 +400,7 @@ export default function ContactForm() {
                           <span className="checkmark"></span>
                           {obj}
                           {obj === 'Otra' && form.servicetitan.objetivo.includes('Otra') && (
-                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.servicetitan.otroObj} onChange={e => handleInput('servicetitan', 'otroObj', e.target.value)} />
+                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.servicetitan.otroObj} onChange={e => handleInput('servicetitan', 'otroObj', e.target.value)} />
                           )}
                         </label>
                       ))}
@@ -408,7 +408,7 @@ export default function ContactForm() {
                   </div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Qué sistemas o herramientas necesitas conectar con Service Titan?</label>
-                    <input type="text" className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.servicetitan.sistemas} onChange={e => handleInput('servicetitan', 'sistemas', e.target.value)} placeholder="Ej: QuickBooks, Zapier, página web, etc." />
+                    <input type="text" className="w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.servicetitan.sistemas} onChange={e => handleInput('servicetitan', 'sistemas', e.target.value)} placeholder="Ej: QuickBooks, Zapier, página web, etc." />
                   </div>
                   <div className="form-btn-container">
                     <button type="button" className="form-btn-back" onClick={handleBack}>Atrás</button>
@@ -418,7 +418,7 @@ export default function ContactForm() {
               )}
               {current === 'automatizacion' && (
                 <div>
-                  <div className="text-xl text-[#FFD100] font-bold mb-4">Sobre automatización de procesos</div>
+                  <div className="text-xl text-[var(--color-accent)] font-bold mb-4">Sobre automatización de procesos</div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Qué procesos deseas automatizar?</label>
                     <div className="flex flex-col gap-2">
@@ -435,7 +435,7 @@ export default function ContactForm() {
                           <span className="checkmark"></span>
                           {proc}
                           {proc === 'Otra' && form.automatizacion.procesos.includes('Otra') && (
-                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.automatizacion.otroProc} onChange={e => handleInput('automatizacion', 'otroProc', e.target.value)} />
+                            <input type="text" placeholder="Otra..." className="ml-2 px-2 py-1 rounded bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.automatizacion.otroProc} onChange={e => handleInput('automatizacion', 'otroProc', e.target.value)} />
                           )}
                         </label>
                       ))}
@@ -468,7 +468,7 @@ export default function ContactForm() {
               )}
               {current === 'contacto' && (
                 <div>
-                  <div className="text-xl text-[#FFD100] font-bold mb-4">Datos de contacto</div>
+                  <div className="text-xl text-[var(--color-accent)] font-bold mb-4">Datos de contacto</div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Cuál es tu nombre y empresa?</label>
                     <input type="text" className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.contacto.nombre} onChange={e => handleContacto('nombre', e.target.value)} placeholder="Nombre y empresa" required />
@@ -480,18 +480,18 @@ export default function ContactForm() {
                     {errors.email && <div className="text-[var(--color-highlight)] mt-1">{errors.email}</div>}
                   </div>
                   <div className="mb-4">
-                    <label className="block text-[#D6D6D6] mb-2">¿Cuál es tu presupuesto estimado para este proyecto? <span className="text-[#FFD100]">(opcional)</span></label>
-                    <input type="text" className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.contacto.presupuesto} onChange={e => handleContacto('presupuesto', e.target.value)} placeholder="Ej: $2,000 USD" />
+                    <label className="block text-[#D6D6D6] mb-2">¿Cuál es tu presupuesto estimado para este proyecto? <span className="text-[var(--color-accent)]">(opcional)</span></label>
+                    <input type="text" className="w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.contacto.presupuesto} onChange={e => handleContacto('presupuesto', e.target.value)} placeholder="Ej: $2,000 USD" />
                   </div>
                   <div className="mb-4">
                     <label className="block text-[#D6D6D6] mb-2">¿Deseas agendar una llamada para discutir más detalles?</label>
-                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.contacto.llamada} onChange={e => handleContacto('llamada', e.target.value)} required>
+                    <select className="w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.contacto.llamada} onChange={e => handleContacto('llamada', e.target.value)} required>
                       <option value="">Selecciona...</option>
                       <option value="si">Sí</option>
                       <option value="no">No por ahora</option>
                     </select>
                     {form.contacto.llamada === 'si' && (
-                      <input type="text" className="mt-2 w-full rounded px-3 py-2 bg-[#202020] text-[#FFD100] border border-[#FFD100]" value={form.contacto.horario} onChange={e => handleContacto('horario', e.target.value)} placeholder="Proporciona un horario o disponibilidad" />
+                      <input type="text" className="mt-2 w-full rounded px-3 py-2 bg-[#202020] text-[var(--color-accent)] border border-[var(--color-accent)]" value={form.contacto.horario} onChange={e => handleContacto('horario', e.target.value)} placeholder="Proporciona un horario o disponibilidad" />
                     )}
                   </div>
                   <div className="form-btn-container">

@@ -146,6 +146,7 @@ export default function App() {
       {!isMobile && (
         <Moon
           position={{
+
             x: currentSection === 'hero' ? '85vw' : // Derecha en home
                currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
                currentSection === 'about' ? '90vw' : // Totalmente a la derecha en Sobre Nosotros
@@ -251,13 +252,8 @@ export default function App() {
                   {t('services.description')}
                 </p>
                 <button
-                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 hover:bg-[var(--color-highlight)] transition-colors border-0"
-                  style={{ 
-                    borderRadius: "8px",
-                    maxWidth: "250px",
-                    margin: "0 auto",
-                    marginLeft: window.innerWidth >= 768 ? "0" : "auto"
-                  }}
+                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 mt-4 md:mt-0 mx-auto md:mx-0 border-0 hover:shadow-[0_0_12px_var(--color-accent)] transition-all"
+                  style={{ borderRadius: '8px', maxWidth: '250px' }}
                   onClick={handleExploreClick}
                 >
                   {t('services.exploreButton')}

@@ -86,7 +86,6 @@ html, body {
 }
 
 .btn-primary:hover {
-  background-color: var(--color-highlight);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(255, 209, 0, 0.4);
 }
@@ -120,9 +119,8 @@ html, body {
 }
 
 .form-btn-next:hover:not(:disabled) {
-  background-color: var(--color-highlight);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(255, 209, 0, 0.4);
+  box-shadow: 0 6px 12px rgba(255, 209, 0, 0.4)
 }
 
 .form-btn-next:disabled {
@@ -361,4 +359,4 @@ html, body {
 
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;

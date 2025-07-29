@@ -30,6 +30,7 @@ const StarryBackground = ({ opacity = 1 }) => {
       stars = [];
       const numStars = Math.floor((width * height) / 2500);
       for (let i = 0; i < numStars; i++) {
+        const big = Math.random() < 0.2; // Más estrellas grandes
         stars.push({
           x: Math.random() * width,
           y: Math.random() * height,
@@ -62,6 +63,11 @@ const StarryBackground = ({ opacity = 1 }) => {
           }
         }
         if (constellationStars.length >= 3) {
+          constellationStars.sort(
+            (a, b) =>
+              Math.atan2(a.y - centerY, a.x - centerX) -
+              Math.atan2(b.y - centerY, b.x - centerX)
+          );
           constellations.push(constellationStars);
         }
       }
@@ -82,7 +88,7 @@ const StarryBackground = ({ opacity = 1 }) => {
         if (star.y < 0) star.y += height;
         if (star.y > height) star.y -= height;
       }
-
+      2ljzzw-codex/adjust-mobile-and-desktop-moon-illustration
       ctx.strokeStyle = `rgba(255, 255, 255, ${0.35 * opacity})`;
       ctx.lineWidth = 1;
       for (const constellation of constellations) {
