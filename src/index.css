@@ -179,7 +179,6 @@ html, body {
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding-left: 35px;
   user-select: none;
   margin-bottom: 0.75rem;
 }
@@ -192,15 +191,16 @@ html, body {
   width: 0;
 }
 
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
+.custom-checkbox .checkmark {
+  position: relative;
   height: 24px;
   width: 24px;
+  min-width: 24px;
+  margin-right: 0.5rem;
   border-radius: 6px;
   background-color: var(--color-gunmetal);
   border: 2px solid var(--color-accent);
+  box-sizing: border-box;
   transition: all 0.2s ease;
 }
 
@@ -213,12 +213,12 @@ html, body {
   border-color: var(--color-highlight);
 }
 
-.checkmark::after {
+.custom-checkbox .checkmark::after {
   content: "";
   position: absolute;
   display: none;
-  left: 8px;
-  top: 4px;
+  left: 6px;
+  top: 2px;
   width: 6px;
   height: 12px;
   border: solid var(--color-text);

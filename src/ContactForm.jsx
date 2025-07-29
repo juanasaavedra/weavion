@@ -114,9 +114,81 @@ export default function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Calculate progress percentage only when advancing
-  const totalSteps = maxSteps;
-  const progressPercentage = (step / totalSteps) * 100;
+
+  // Calculate progress based on answered questions rather than selected options
+  const questionChecks = [
+    { visible: true, answered: () => form.servicios.length > 0 },
+    ...(
+      showWeb
+        ? [
+            { visible: true, answered: () => form.web.tieneWeb !== '' },
+            ...(form.web.tieneWeb === 'si'
+              ? [{ visible: true, answered: () => form.web.url.trim() !== '' }]
+              : []),
+            { visible: true, answered: () => form.web.funcionalidades.length > 0 },
+            { visible: true, answered: () => form.web.logotipo !== '' },
+            { visible: true, answered: () => form.web.objetivo.length > 0 },
+            ...(form.web.objetivo.includes('Otras')
+              ? [{ visible: true, answered: () => form.web.otroObj.trim() !== '' }]
+              : []),
+            ...(form.web.funcionalidades.includes('Otra')
+              ? [{ visible: true, answered: () => form.web.otraFunc.trim() !== '' }]
+              : []),
+          ]
+        : []
+    ),
+    ...(
+      showDashboard
+        ? [
+            { visible: true, answered: () => form.dashboard.metricas.length > 0 },
+            ...(form.dashboard.metricas.includes('Otra')
+              ? [{ visible: true, answered: () => form.dashboard.otraMetrica.trim() !== '' }]
+              : []),
+            { visible: true, answered: () => form.dashboard.datos !== '' },
+            ...(form.dashboard.datos === 'otro'
+              ? [{ visible: true, answered: () => form.dashboard.otroDato.trim() !== '' }]
+              : []),
+            { visible: true, answered: () => form.dashboard.reportes !== '' },
+          ]
+        : []
+    ),
+    ...(
+      showST
+        ? [
+            { visible: true, answered: () => form.servicetitan.usa !== '' },
+            { visible: true, answered: () => form.servicetitan.objetivo.length > 0 },
+            ...(form.servicetitan.objetivo.includes('Otra')
+              ? [{ visible: true, answered: () => form.servicetitan.otroObj.trim() !== '' }]
+              : []),
+            { visible: true, answered: () => form.servicetitan.sistemas.trim() !== '' },
+          ]
+        : []
+    ),
+    ...(
+      showAuto
+        ? [
+            { visible: true, answered: () => form.automatizacion.procesos.length > 0 },
+            ...(form.automatizacion.procesos.includes('Otra')
+              ? [{ visible: true, answered: () => form.automatizacion.otroProc.trim() !== '' }]
+              : []),
+            { visible: true, answered: () => form.automatizacion.herramientas.length > 0 },
+          ]
+        : []
+    ),
+    { visible: true, answered: () => form.contacto.nombre.trim() !== '' },
+    { visible: true, answered: () => form.contacto.email.trim() !== '' },
+    { visible: true, answered: () => form.contacto.llamada !== '' },
+    ...(form.contacto.llamada === 'si'
+      ? [{ visible: true, answered: () => form.contacto.horario.trim() !== '' }]
+      : []),
+  ];
+
+  const visibleQuestions = questionChecks.filter(q => q.visible);
+  const answeredQuestions = visibleQuestions.filter(q => q.answered());
+  const progressPercentage =
+    visibleQuestions.length > 0
+      ? (answeredQuestions.length / visibleQuestions.length) * 100
+      : 0;
 
   return (
     <div className="max-w-2xl mx-auto rounded-3xl p-6 md:p-10 shadow-2xl bg-[var(--color-slate)] backdrop-blur-sm">
@@ -143,14 +215,23 @@ export default function ContactForm() {
                   <div className="flex flex-col gap-4 mb-8">
                     {serviceOptions.map(opt => (
                       <label key={opt.value} className="custom-checkbox text-lg text-[var(--color-text)]">
-                        <input type="checkbox"
+                        <input
+                          type="checkbox"
                           checked={form.servicios.includes(opt.value)}
                           onChange={() => handleServicioChange(opt.value)}
                         />
                         <span className="checkmark"></span>
-                        {opt.label}
+                        <span className="ml-2">{opt.label}</span>
                         {opt.value === 'otro' && form.servicios.includes('otro') && (
-                          <input type="text" placeholder="Otro..." className="form-input ml-2" value={form.otroServicio} onChange={e => setForm(f => ({ ...f, otroServicio: e.target.value }))} />
+                          <input
+                            type="text"
+                            placeholder="Otro..."
+                            className="form-input ml-2"
+                            value={form.otroServicio}
+                            onChange={e =>
+                              setForm(f => ({ ...f, otroServicio: e.target.value }))
+                            }
+                          />
                         )}
                       </label>
                     ))}
