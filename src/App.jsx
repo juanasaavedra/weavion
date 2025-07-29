@@ -20,6 +20,7 @@ export default function App() {
   const [folderOpen, setFolderOpen] = useState(false);
   const folderRef = useRef(null);
   const [folderSize, setFolderSize] = useState(2.0);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const [showLanding, setShowLanding] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [currentSection, setCurrentSection] = useState('hero');
@@ -38,6 +39,7 @@ export default function App() {
   useEffect(() => {
     const updateSize = () => {
       setFolderSize(window.innerWidth < 640 ? 1.1 : 2.0);
+      setIsMobile(window.innerWidth < 768);
     };
     updateSize();
     window.addEventListener('resize', updateSize);
@@ -141,41 +143,43 @@ export default function App() {
       </div>
       
       {/* Luna que se mueve entre secciones */}
-      <Moon 
-        position={{
-          x: currentSection === 'hero' ? '10vw' : // Mucho más a la izquierda en home
-             currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
-             currentSection === 'about' ? '80vw' : // A la derecha en Sobre Nosotros
-             currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
-             currentSection === 'process' ? '50vw' : // Centro abajo en proceso
-             currentSection === 'contact' ? '15vw' : // Izquierda en contacto
-             '50vw',
-          y: currentSection === 'hero' ? '50vh' : 
-             currentSection === 'services' ? '85vh' : 
-             currentSection === 'about' ? '40vh' : // Un poco más arriba para estar centrado
-             currentSection === 'benefits' ? '25vh' : 
-             currentSection === 'process' ? '85vh' : 
-             currentSection === 'contact' ? '90vh' : // Abajo del todo en contacto
-             '80vh'
-        }}
-        size={
-          currentSection === 'hero' ? '350px' : // Más grande en inicio
-          currentSection === 'about' ? '400px' : // Muy grande en Sobre Nosotros
+      {!isMobile && (
+        <Moon
+          position={{
+            x: currentSection === 'hero' ? '92vw' : // Más a la derecha en home
+               currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
+               currentSection === 'about' ? '90vw' : // Totalmente a la derecha en Sobre Nosotros
+               currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
+               currentSection === 'process' ? '50vw' : // Centro abajo en proceso
+               currentSection === 'contact' ? '85vw' : // En el último div a la derecha
+               '50vw',
+            y: currentSection === 'hero' ? '15vh' : // Más arriba en home
+               currentSection === 'services' ? '85vh' :
+               currentSection === 'about' ? '50vh' : // Centrado vertical en Sobre Nosotros
+               currentSection === 'benefits' ? '25vh' :
+               currentSection === 'process' ? '85vh' :
+               currentSection === 'contact' ? '90vh' : // Abajo del todo en contacto
+               '80vh'
+          }}
+          size={
+            currentSection === 'hero' ? '180px' : // Más pequeño y discreto en inicio
+            currentSection === 'about' ? '300px' : // A la derecha en Sobre Nosotros
           currentSection === 'benefits' ? '250px' : // Grande en beneficios
           currentSection === 'process' ? '400px' : // Grande en proceso
           currentSection === 'contact' ? '300px' : // Tamaño mediano en contacto
           '200px'
-        }
-        opacity={
-          currentSection === 'benefits' || currentSection === 'contact' ? 0.7 : // Menos opacidad cuando hay poco espacio
-          1
-        }
-        zIndex={
-          currentSection === 'contact' ? 10 : // Debajo de los contenedores pero encima del fondo
-          20
-        }
-        transition={{ duration: 1, ease: "easeInOut" }}
-      />
+          }
+          opacity={
+            currentSection === 'benefits' || currentSection === 'contact' ? 0.7 : // Menos opacidad cuando hay poco espacio
+            1
+          }
+          zIndex={
+            currentSection === 'contact' ? 10 : // Debajo de los contenedores pero encima del fondo
+            20
+          }
+          transition={{ duration: 1, ease: "easeInOut" }}
+        />
+      )}
 
       {/* Content */}
       <div className="relative z-10">
@@ -247,13 +251,8 @@ export default function App() {
                   {t('services.description')}
                 </p>
                 <button
-                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 hover:bg-[var(--color-highlight)] transition-colors border-0"
-                  style={{ 
-                    borderRadius: "8px",
-                    maxWidth: "250px",
-                    margin: "0 auto",
-                    marginLeft: window.innerWidth >= 768 ? "0" : "auto"
-                  }}
+                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 mt-4 md:mt-0 mx-auto md:mx-0 border-0 hover:shadow-[0_0_12px_var(--color-accent)] transition-all"
+                  style={{ borderRadius: '8px', maxWidth: '250px' }}
                   onClick={handleExploreClick}
                 >
                   {t('services.exploreButton')}
@@ -322,7 +321,7 @@ export default function App() {
                     {t('about.quote', "Your vision, our mission - reaching for the stars together.")}
                   </motion.div>
                 </div>
-                {/* La luna estará en la derecha mediante el componente Moon posicionado absolutamente */}
+                {/* Espacio reservado para la luna en pantallas grandes */}
                 <div className="hidden md:block" style={{ height: '300px' }}></div>
               </div>
             </div>
