@@ -13,7 +13,6 @@ import ContactSection from './ContactSection';
 import backgroundBlur from './assets/backgroundBlur.png';
 import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
-import Moon from './Moon';
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -142,45 +141,7 @@ export default function App() {
         />
       </div>
       
-      {/* Luna que se mueve entre secciones */}
-      {!isMobile && (
-        <Moon
-          position={{
 
-            x: currentSection === 'hero' ? '85vw' : // Derecha en home
-               currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
-               currentSection === 'about' ? '90vw' : // Totalmente a la derecha en Sobre Nosotros
-               currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
-               currentSection === 'process' ? '50vw' : // Centro abajo en proceso
-               currentSection === 'contact' ? '85vw' : // En el último div a la derecha
-               '50vw',
-            y: currentSection === 'hero' ? '35vh' :
-               currentSection === 'services' ? '85vh' :
-               currentSection === 'about' ? '50vh' : // Centrado vertical en Sobre Nosotros
-               currentSection === 'benefits' ? '25vh' :
-               currentSection === 'process' ? '85vh' :
-               currentSection === 'contact' ? '90vh' : // Abajo del todo en contacto
-               '80vh'
-          }}
-          size={
-            currentSection === 'hero' ? '250px' : // Más pequeño en inicio
-            currentSection === 'about' ? '300px' : // A la derecha en Sobre Nosotros
-          currentSection === 'benefits' ? '250px' : // Grande en beneficios
-          currentSection === 'process' ? '400px' : // Grande en proceso
-          currentSection === 'contact' ? '300px' : // Tamaño mediano en contacto
-          '200px'
-          }
-          opacity={
-            currentSection === 'benefits' || currentSection === 'contact' ? 0.7 : // Menos opacidad cuando hay poco espacio
-            1
-          }
-          zIndex={
-            currentSection === 'contact' ? 10 : // Debajo de los contenedores pero encima del fondo
-            20
-          }
-          transition={{ duration: 1, ease: "easeInOut" }}
-        />
-      )}
 
       {/* Content */}
       <div className="relative z-10">
@@ -322,8 +283,6 @@ export default function App() {
                     {t('about.quote', "Your vision, our mission - reaching for the stars together.")}
                   </motion.div>
                 </div>
-                {/* Espacio reservado para la luna en pantallas grandes */}
-                <div className="hidden md:block" style={{ height: '300px' }}></div>
               </div>
             </div>
           </div>
