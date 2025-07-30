@@ -27,6 +27,7 @@ export default function App() {
   // Referencias para las secciones
   const heroRef = useRef(null);
   const servicesRef = useRef(null);
+  const exploreRef = useRef(null);
   const aboutRef = useRef(null);
   const benefitsRef = useRef(null);
   const processRef = useRef(null);
@@ -53,6 +54,7 @@ export default function App() {
       const sections = [
         { ref: heroRef, id: 'hero' },
         { ref: servicesRef, id: 'services' },
+        { ref: exploreRef, id: 'explore' },
         { ref: aboutRef, id: 'about' },
         { ref: benefitsRef, id: 'benefits' },
         { ref: processRef, id: 'process' },
@@ -84,10 +86,15 @@ export default function App() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Scroll a la sección de exploración de servicios
+  const scrollToExplore = () => {
+    const el = document.getElementById('explorar-servicios');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   // Manejar click en el botón
   const handleExploreClick = () => {
-    setShowLanding(true);
-    setSelectedService(services[0]);
+    scrollToExplore();
   };
 
   // Handler to select a service from landing
@@ -112,6 +119,14 @@ export default function App() {
       <div className="fixed top-8 left-8 md:left-8 z-50 flex items-center">
         <button className="w-16 h-16 md:w-18 md:h-18 rounded-full bg-[var(--color-slate)] flex items-center justify-center shadow-xl border border-[var(--color-slate)]">
           <img src={logo} alt="Logo" className="md:w-16 md:h-16 w-14 h-14 object-cover rounded-full" />
+        </button>
+      </div>
+      <div className="fixed top-8 left-1/2 -translate-x-1/2 transform z-50">
+        <button
+          onClick={scrollToExplore}
+          className="text-lg md:text-xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-4 py-2 btn-rounded border-0 hover:bg-[var(--color-highlight)] transition-all shadow-lg"
+        >
+          {t('services.exploreButton')}
         </button>
       </div>
       <div className="fixed top-8 right-8 md:right-8 z-50">
@@ -288,6 +303,28 @@ export default function App() {
             </div>
           </div>
         )}
+
+        {/* Explore Services Section */}
+        <section
+          id="explorar-servicios"
+          ref={exploreRef}
+          className="py-16 md:py-24 px-4 md:px-8 space-y-12"
+        >
+          <div className="max-w-5xl mx-auto">
+            <div className="container-rounded p-8 md:p-12 mb-8 bg-gradient-to-r from-purple-800 to-slate-900 md:mr-auto md:w-3/4">
+              <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">Desarrollo Web y Diseño Web</h3>
+              <p className="text-lg text-[var(--color-text)]">
+                Impulsa tu presencia digital con sitios de alto impacto apoyados en inteligencia artificial. Diseñamos y desarrollamos plataformas que conquistan clientes y hacen crecer tu negocio.
+              </p>
+            </div>
+            <div className="container-rounded p-8 md:p-12 bg-gradient-to-r from-blue-800 to-slate-900 md:ml-auto md:w-3/4">
+              <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">Automatización de Operaciones</h3>
+              <p className="text-lg text-[var(--color-text)]">
+                Integra inventarios, órdenes de compra y ventas en un único flujo automatizado. Nuestras soluciones sincronizan tus procesos para que te dediques a hacer crecer tu empresa.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* About Us Section */}
         <motion.section
