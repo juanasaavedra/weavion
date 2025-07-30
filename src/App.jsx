@@ -141,7 +141,45 @@ export default function App() {
         />
       </div>
       
-
+      {/* Luna que se mueve entre secciones */}
+      {!isMobile && (
+        <Moon
+          position={{
+            x: currentSection === 'hero' ? '85vw' : // Derecha en home
+               currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
+               currentSection === 'about' ? '100vw' : // Totalmente a la derecha en Sobre Nosotros
+               currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
+               currentSection === 'process' ? '50vw' : // Centro abajo en proceso
+               currentSection === 'contact' ? '85vw' : // En el último div a la derecha
+               '50vw',
+            y: currentSection === 'hero' ? '35vh' :
+               currentSection === 'services' ? '85vh' :
+               currentSection === 'about' ? '50vh' : // Centrado vertical en Sobre Nosotros
+               currentSection === 'benefits' ? '25vh' :
+               currentSection === 'process' ? '85vh' :
+               currentSection === 'contact' ? '90vh' : // Abajo del todo en contacto
+              '80vh'
+          }}
+          size={
+            currentSection === 'hero' ? '250px' : // Más pequeño en inicio
+            currentSection === 'about' ? '300px' : // A la derecha en Sobre Nosotros
+          currentSection === 'benefits' ? '250px' : // Grande en beneficios
+          currentSection === 'process' ? '400px' : // Grande en proceso
+          currentSection === 'contact' ? '300px' : // Tamaño mediano en contacto
+          '200px'
+          }
+          opacity={
+            currentSection === 'benefits' || currentSection === 'contact' ? 0.7 : // Menos opacidad cuando hay poco espacio
+            1
+          }
+          zIndex={
+            currentSection === 'contact' ? 10 : // Debajo de los contenedores pero encima del fondo
+            20
+          }
+          transition={{ duration: 1, ease: "easeInOut" }}
+          alignRight={currentSection === 'about'}
+        />
+      )}
 
       {/* Content */}
       <div className="relative z-10">
