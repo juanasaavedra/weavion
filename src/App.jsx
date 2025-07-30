@@ -13,7 +13,6 @@ import ContactSection from './ContactSection';
 import backgroundBlur from './assets/backgroundBlur.png';
 import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
-import Moon from './Moon';
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -322,8 +321,6 @@ export default function App() {
                     {t('about.quote', "Your vision, our mission - reaching for the stars together.")}
                   </motion.div>
                 </div>
-                {/* Espacio reservado para la luna en pantallas grandes */}
-                <div className="hidden md:block" style={{ height: '300px' }}></div>
               </div>
             </div>
           </div>
