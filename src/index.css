@@ -109,7 +109,6 @@ html, body {
   box-shadow: 0 4px 8px rgba(111, 71, 255, 0.3);
   transition: all 0.3s ease;
 }
-
 @media (min-width: 768px) {
   .form-btn-next {
     width: auto;
@@ -345,8 +344,8 @@ html, body {
 /* Clases para contenedores de tarjetas */
 .card-stack-container {
   width: 100%;
-  height: 450px;
-  overflow: hidden;
+  height: 400px;
+  overflow: visible; /* allow 3D cards to extend outside */
   perspective-origin: center;
   transform-style: preserve-3d;
 }

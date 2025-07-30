@@ -58,6 +58,7 @@ export default function ContactForm() {
   const handleContacto = (field, value) => {
     setForm(f => ({ ...f, contacto: { ...f.contacto, [field]: value } }));
   };
+
   const handleNext = () => {
     if (current === 'servicios' && form.servicios.length === 0) {
       setErrors({ servicios: 'Debes seleccionar al menos un servicio.' });
