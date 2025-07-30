@@ -60,9 +60,11 @@ export default function Stack({
       className="relative flex items-center justify-center select-none mx-auto card-stack-container"
       style={{
         perspective: 600,
+        perspectiveOrigin: '50% 50%',
+        transformStyle: 'preserve-3d',
         maxWidth: "600px", // Aumentamos el ancho máximo
         marginBottom: "40px",
-        overflow: "hidden"
+        overflow: "visible" // Allow cards to remain visible
       }}
     >
       {/* Stack de tarjetas */}
@@ -98,8 +100,8 @@ export default function Stack({
               rotate: rotationAngle * 0.3, // Rotación mucho menos pronunciada
               opacity: 1 - absOffset * 0.08, // Aún menos diferencia de opacidad
               filter: isActive && expanded ? 'brightness(1)' : 'brightness(0.95)',
-              translateX: `${offset * (window.innerWidth < 768 ? 30 : 40)}px`, // Mayor separación entre tarjetas
-              translateY: `${offset * (window.innerWidth < 768 ? 5 : 8)}px` // Ligero desplazamiento vertical
+              x: offset * (window.innerWidth < 768 ? 30 : 40), // Mayor separación entre tarjetas
+              y: offset * (window.innerWidth < 768 ? 5 : 8) // Ligero desplazamiento vertical
             }}
             transition={{ type: 'spring', stiffness: 220, damping: 24 }}
             onClick={() => {

@@ -2,12 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import moonImg from './assets/moon.png';
 
+
 const Moon = ({ 
   position = { x: "85vw", y: "10vh" },
   size = "120px",
   opacity = 1,
   zIndex = 20,
-  transition = { duration: 1.5, ease: "easeInOut" } 
+  transition = { duration: 1.5, ease: "easeInOut" },
+  alignRight = false
 }) => {
   return (
     <motion.div
@@ -23,7 +25,8 @@ const Moon = ({
       transition={transition}
       style={{
         filter: 'drop-shadow(0 0 15px rgba(255, 255, 255, 0.4))',
-        zIndex: zIndex
+        zIndex: zIndex,
+        transform: alignRight ? 'translate(-100%, -50%)' : 'translate(-50%, -50%)'
       }}
     >
       <img 

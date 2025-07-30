@@ -345,7 +345,9 @@ html, body {
 .card-stack-container {
   width: 100%;
   height: 400px;
-  overflow: hidden;
+  overflow: visible; /* allow 3D cards to extend outside */
+  perspective-origin: center;
+  transform-style: preserve-3d;
 }
 
 @media (max-width: 768px) {
@@ -353,6 +355,7 @@ html, body {
     width: 100%;
     height: 350px;
     margin-bottom: 200px;
+    perspective-origin: center;
   }
 }
 
