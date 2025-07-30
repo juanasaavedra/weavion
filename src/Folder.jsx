@@ -92,8 +92,7 @@ export default function Stack({
               zIndex: isActive ? 20 : 10 - absOffset,
               boxShadow: isActive ? '0 10px 30px 0 rgba(0, 0, 0, 0.15)' : '0 4px 12px 0 rgba(0, 0, 0, 0.1)',
               marginBottom: "0px",
-              overflow: "hidden",
-              transform: 'translate(-50%, -50%)' // Centrado perfecto
+              overflow: "hidden"
             }}
             animate={{
               scale: isActive && expanded ? 1.08 : 1 - absOffset * scaleStep,
@@ -103,6 +102,7 @@ export default function Stack({
               x: offset * (window.innerWidth < 768 ? 30 : 40), // Mayor separación entre tarjetas
               y: offset * (window.innerWidth < 768 ? 5 : 8) // Ligero desplazamiento vertical
             }}
+            transformTemplate={(transform) => `translate(-50%, -50%) ${transform}`}
             transition={{ type: 'spring', stiffness: 220, damping: 24 }}
             onClick={() => {
               if (isActive) {
