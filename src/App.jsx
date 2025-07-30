@@ -149,7 +149,7 @@ export default function App() {
 
             x: currentSection === 'hero' ? '85vw' : // Derecha en home
                currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
-               currentSection === 'about' ? '90vw' : // Totalmente a la derecha en Sobre Nosotros
+               currentSection === 'about' ? '100vw' : // Totalmente a la derecha en Sobre Nosotros
                currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
                currentSection === 'process' ? '50vw' : // Centro abajo en proceso
                currentSection === 'contact' ? '85vw' : // En el último div a la derecha
@@ -160,7 +160,7 @@ export default function App() {
                currentSection === 'benefits' ? '25vh' :
                currentSection === 'process' ? '85vh' :
                currentSection === 'contact' ? '90vh' : // Abajo del todo en contacto
-               '80vh'
+              '80vh'
           }}
           size={
             currentSection === 'hero' ? '250px' : // Más pequeño en inicio
@@ -179,6 +179,7 @@ export default function App() {
             20
           }
           transition={{ duration: 1, ease: "easeInOut" }}
+          alignRight={currentSection === 'about'}
         />
       )}
 

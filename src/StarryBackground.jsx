@@ -54,7 +54,12 @@ const StarryBackground = ({ opacity = 1 }) => {
         const centerY = Math.random() * height;
         const radius = Math.random() * 80 + 60;
 
-        for (let j = 0; j < stars.length && constellationStars.length < starCount; j++) {
+        for (
+          let j = 0,
+          len = stars.length;
+          j < len && constellationStars.length < starCount;
+          j++
+        ) {
           const star = stars[j];
           const dx = star.x - centerX;
           const dy = star.y - centerY;
@@ -68,7 +73,12 @@ const StarryBackground = ({ opacity = 1 }) => {
               Math.atan2(a.y - centerY, a.x - centerX) -
               Math.atan2(b.y - centerY, b.x - centerX)
           );
-          constellations.push(constellationStars);
+          constellations.push({
+            stars: constellationStars,
+            centerX,
+            centerY,
+            radius,
+          });
         }
       }
     };
@@ -88,10 +98,16 @@ const StarryBackground = ({ opacity = 1 }) => {
         if (star.y < 0) star.y += height;
         if (star.y > height) star.y -= height;
       }
-      2ljzzw-codex/adjust-mobile-and-desktop-moon-illustration
       ctx.strokeStyle = `rgba(255, 255, 255, ${0.35 * opacity})`;
       ctx.lineWidth = 1;
-      for (const constellation of constellations) {
+      for (const cluster of constellations) {
+        const { stars: constellation, centerX, centerY, radius } = cluster;
+        const inRange = constellation.every((star) => {
+          const dx = star.x - centerX;
+          const dy = star.y - centerY;
+          return dx * dx + dy * dy <= radius * radius;
+        });
+        if (!inRange) continue;
         ctx.beginPath();
         ctx.moveTo(constellation[0].x, constellation[0].y);
         for (let i = 1; i < constellation.length; i++) {
