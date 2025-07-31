@@ -74,6 +74,7 @@ export default function App() {
     };
   }, []);
 
+
   // No-op placeholders removed after moving services to a dedicated page
 
 
@@ -330,7 +331,6 @@ export default function App() {
             ))}
           </div>
         </section>
-
         {/* About Us Section */}
         <motion.section
           ref={aboutRef}
