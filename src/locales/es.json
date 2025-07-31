@@ -111,6 +111,11 @@
       "title": "Analíticas de negocio y predicción de inventario",
       "short": "Toma decisiones inteligentes",
       "detail": "Implementamos sistemas de analítica avanzada y predicción de inventario usando IA, para que tomes decisiones informadas y optimices tus recursos."
+    },
+    "emailMarketing": {
+      "title": "Email marketing",
+      "short": "Conecta con tus clientes",
+      "detail": "Diseñamos campañas de email marketing automatizadas que fidelizan y convierten, integradas con tus herramientas de ventas."
     }
   },
   "common": {
