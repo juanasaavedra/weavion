@@ -30,16 +30,17 @@ const StarryBackground = ({ opacity = 1 }) => {
       stars = [];
       const numStars = Math.floor((width * height) / 2500);
       for (let i = 0; i < numStars; i++) {
-        const big = Math.random() < 0.2; // Más estrellas grandes
+        const big = Math.random() < 0.25; // un poco más de estrellas grandes
         stars.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          radius: Math.random() * 1.2 + 0.5,
+          radius: big ? Math.random() * 2 + 1 : Math.random() * 1.2 + 0.6,
           opacity: Math.random() * 0.4 + 0.2,
           pulse: Math.random() * 0.02 + 0.005,
           pulseFactor: Math.random() * Math.PI * 2,
           dx: (Math.random() - 0.5) * 0.1,
-          dy: (Math.random() - 0.5) * 0.1
+          dy: (Math.random() - 0.5) * 0.1,
+          glow: Math.random() < 0.1
         });
       }
     };
@@ -122,6 +123,20 @@ const StarryBackground = ({ opacity = 1 }) => {
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(star.opacity * pulseOpacity * opacity, 1)})`;
         ctx.fill();
+        if (star.glow) {
+          const gradient = ctx.createRadialGradient(
+            star.x,
+            star.y,
+            0,
+            star.x,
+            star.y,
+            star.radius * 4
+          );
+          gradient.addColorStop(0, `rgba(111, 71, 255, ${0.4 * opacity})`);
+          gradient.addColorStop(1, 'transparent');
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        }
       }
 
       animationFrameId = window.requestAnimationFrame(draw);
