@@ -69,9 +69,6 @@ export default function App() {
   }, []);
 
 
-  // No-op placeholders removed after moving services to a dedicated page
-
-
   // Handler para cambiar idioma
   const handleLang = () => {
     i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
@@ -91,7 +88,7 @@ export default function App() {
           className="text-lg md:text-xl font-bold uppercase text-[var(--color-highlight)] bg-transparent px-4 py-2 hover:text-[var(--color-accent)] transition-colors"
         >
           {t('services.exploreButton')}
-        </button>
+        </Link>
       </div>
       <div className="fixed top-8 right-8 md:right-8 z-50">
         <button
@@ -119,6 +116,7 @@ export default function App() {
           returnDuration={1.5}
         />
       </div>
+
 
       {/* Content */}
       <div className="relative z-10">
