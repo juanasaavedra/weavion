@@ -159,7 +159,7 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
-          className="py-24 md:py-32 relative mt-24"
+          className="py-24 md:py-32 relative mt-8"
         >
           <div className="absolute inset-0 w-full h-full z-0 bg-black bg-opacity-90" />
           <div className="relative z-10 max-w-6xl mx-auto px-4">

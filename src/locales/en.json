@@ -105,6 +105,9 @@
       "detail": "We create automated email marketing campaigns that build loyalty and boost conversions, integrated with your sales tools."
     }
   },
+  "product": {
+    "prompt": "This is your product. Let's see how our agency can transform it."
+  },
   "common": {
     "discover": "Discover it",
     "backHome": "Back to home",
