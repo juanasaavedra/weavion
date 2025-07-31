@@ -1,15 +1,11 @@
 import DotGrid from './DotGrid';
-import Folder from './Folder';
-import StarBorder from './StarBorder';
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DecryptedText from './DecryptedText';
 import ProcessTimeline from './ProcessTimeline';
-import ContactForm from './ContactForm';
 import ContactSection from './ContactSection';
-import backgroundBlur from './assets/backgroundBlur.png';
 import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
 
@@ -90,12 +86,12 @@ export default function App() {
         </button>
       </div>
       <div className="fixed top-8 left-1/2 -translate-x-1/2 transform z-50">
-        <button
-          onClick={scrollToExplore}
+        <Link
+          to="/services"
           className="text-lg md:text-xl font-bold uppercase text-[var(--color-highlight)] bg-transparent px-4 py-2 hover:text-[var(--color-accent)] transition-colors"
         >
           {t('services.exploreButton')}
-        </button>
+        </Link>
       </div>
       <div className="fixed top-8 right-8 md:right-8 z-50">
         <button
@@ -158,139 +154,6 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* Services Section - mobile optimized, mejor espaciado y tarjetas grandes */}
-        <motion.section
-          id="servicios"
-          ref={servicesRef}
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
-          className="py-16 md:py-24 px-2 md:px-8 flex flex-col items-center mb-32 bg-[#0C0D13]"
-        >
-          <div className="w-full max-w-6xl mx-auto flex flex-col items-center mt-2 mb-8">
-            <h2 className="headline mb-4 md:mb-8 text-center text-[#FFFFFF] drop-shadow-lg">
-              {t('services.title', "Our Services")}
-            </h2>
-            <div className="flex flex-col md:flex-row gap-8 w-full">
-              <div className="md:w-1/2 w-full md:mb-0 mb-8 flex justify-center items-center">
-                <div className="w-full max-w-xl">
-                  <Stack
-                    randomRotation={false}
-                    sensitivity={180}
-                    sendToBackOnClick={false}
-                    cardDimensions={{ width: "100%", height: 350 }}
-                    fontSizeTitle="text-2xl"
-                    fontSizeShort="text-lg"
-                    fontSizeDetail="text-base"
-                  />
-                </div>
-              </div>
-              <div className="md:w-1/2 w-full md:flex md:flex-col md:justify-center">
-                <h3 className="text-2xl md:text-3xl font-bold mb-2 text-[#6F47FF] font-sans md:text-left text-center">
-                  {t('services.subtitle')}
-                </h3>
-                <p className="text-[#D6D6D6] mb-4 leading-relaxed text-base md:max-w-lg md:mx-0 max-w-xs mx-auto font-sans md:text-left text-center">
-                  {t('services.description')}
-                </p>
-                <button
-                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 mt-4 md:mt-0 mx-auto border-0 hover:shadow-[0_0_12px_var(--color-accent)] transition-all"
-                  style={{ borderRadius: '8px', maxWidth: '250px' }}
-                  onClick={handleExploreClick}
-                >
-                  {t('services.exploreButton')}
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Modal/landing de servicio */}
-        {showLanding && selectedService && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xl">
-            <div className="bg-[var(--color-slate)] container-rounded shadow-2xl p-10 max-w-sm w-full relative flex flex-col items-center border-0">
-              <button onClick={handleBack} className="absolute top-4 right-4 text-[var(--color-highlight)] text-2xl font-bold btn-rounded w-10 h-10 flex items-center justify-center">×</button>
-              <div className="mb-8">{selectedService.icon}</div>
-              <h3 className="text-3xl font-bold mb-4 text-[var(--color-accent)] text-center">{selectedService.title}</h3>
-              <p className="text-lg text-[var(--color-text)] text-center mb-8">{selectedService.description}</p>
-              <Link
-                to="/contact"
-                className="relative z-1 text-center font-bold text-2xl border-0"
-                style={{
-                  backgroundColor: "var(--color-accent)",
-                  color: "var(--color-text)",
-                  padding: "0.75rem 1.5rem",
-                  cursor: "pointer",
-                  display: "inline-block",
-                  textDecoration: "none",
-                  borderRadius: "30px"
-                }}
-              >
-                Descúbrelo
-              </Link>
-            </div>
-          </div>
-        )}
-
-        {/* Explore Services Section */}
-        <section
-          id="explorar-servicios"
-          ref={exploreRef}
-          className="py-16 md:py-24 px-4 md:px-8"
-        >
-          <div className="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
-            {[
-              {
-                title: t('folder.webDevelopment.title', 'Desarrollo web'),
-                desc: t(
-                  'folder.webDevelopment.detail',
-                  'Creamos sitios web modernos, rápidos y responsivos, adaptados a las necesidades de tu negocio, optimizados para SEO y con las mejores prácticas de accesibilidad.'
-                ),
-                gradient: 'from-purple-800 to-slate-900'
-              },
-              {
-                title: t('folder.webDesign.title', 'Diseño web'),
-                desc: t(
-                  'folder.webDesign.detail',
-                  'Diseñamos interfaces atractivas, intuitivas y centradas en el usuario, asegurando una experiencia visual coherente y profesional.'
-                ),
-                gradient: 'from-blue-800 to-slate-900'
-              },
-              {
-                title: t('folder.serviceTitan.title', 'Integración a ServiceTitan'),
-                desc: t(
-                  'folder.serviceTitan.detail',
-                  'Integramos tu negocio con ServiceTitan para automatizar procesos, mejorar la gestión y conectar tus sistemas de manera eficiente.'
-                ),
-                gradient: 'from-pink-800 to-slate-900'
-              },
-              {
-                title: t('folder.analytics.title', 'Analíticas de negocio y predicción de inventario'),
-                desc: t(
-                  'folder.analytics.detail',
-                  'Implementamos sistemas de analítica avanzada y predicción de inventario usando IA, para que tomes decisiones informadas y optimices tus recursos.'
-                ),
-                gradient: 'from-green-800 to-slate-900'
-              },
-              {
-                title: t('folder.emailMarketing.title', 'Email marketing'),
-                desc: t(
-                  'folder.emailMarketing.detail',
-                  'Diseñamos campañas de email marketing automatizadas que fidelizan y convierten, integradas con tus herramientas de ventas.'
-                ),
-                gradient: 'from-yellow-700 to-slate-900'
-              }
-            ].map((card, idx) => (
-              <div
-                key={idx}
-                className={`container-rounded p-8 md:p-12 bg-gradient-to-r ${card.gradient}`}
-              >
-                <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">{card.title}</h3>
-                <p className="text-lg text-[var(--color-text)]">{card.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
         {/* About Us Section */}
         <motion.section
           ref={aboutRef}
