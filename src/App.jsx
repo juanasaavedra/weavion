@@ -1,15 +1,12 @@
 import DotGrid from './DotGrid';
-import Folder from './Folder';
-import StarBorder from './StarBorder';
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DecryptedText from './DecryptedText';
 import ProcessTimeline from './ProcessTimeline';
-import ContactForm from './ContactForm';
 import ContactSection from './ContactSection';
-import backgroundBlur from './assets/backgroundBlur.png';
+import CardSwap, { Card } from './CardSwap';
 import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
 
@@ -18,7 +15,6 @@ export default function App() {
   const [folderOpen, setFolderOpen] = useState(false);
   const folderRef = useRef(null);
   const [folderSize, setFolderSize] = useState(2.0);
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const [currentSection, setCurrentSection] = useState('hero');
   
   // Referencias para las secciones
@@ -33,10 +29,9 @@ export default function App() {
   const { scrollY } = useScroll();
 
   useEffect(() => {
-    const updateSize = () => {
-      setFolderSize(window.innerWidth < 640 ? 1.1 : 2.0);
-      setIsMobile(window.innerWidth < 768);
-    };
+      const updateSize = () => {
+        setFolderSize(window.innerWidth < 640 ? 1.1 : 2.0);
+      };
     updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
@@ -92,9 +87,9 @@ export default function App() {
         </button>
       </div>
       <div className="fixed top-8 left-1/2 -translate-x-1/2 transform z-50">
-        <button
-          onClick={scrollToExplore}
-          className="text-lg md:text-xl font-bold uppercase text-[var(--color-highlight)] bg-transparent px-4 py-2 hover:text-[var(--color-accent)] transition-colors"
+        <Link
+          to="/services"
+          className="text-lg md:text-xl font-medium uppercase text-white bg-transparent px-4 py-2 hover:text-[var(--color-highlight)] transition-colors"
         >
           {t('services.exploreButton')}
         </Link>
@@ -125,44 +120,6 @@ export default function App() {
           returnDuration={1.5}
         />
       </div>
-      
-      {/* Luna que se mueve entre secciones */}
-      {!isMobile && (
-        <Moon
-          position={{
-            x: currentSection === 'hero' ? '85vw' : // Derecha en home
-               currentSection === 'about' ? '100vw' : // Totalmente a la derecha en Sobre Nosotros
-               currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
-               currentSection === 'process' ? '50vw' : // Centro abajo en proceso
-               currentSection === 'contact' ? '85vw' : // En el último div a la derecha
-               '50vw',
-            y: currentSection === 'hero' ? '35vh' :
-               currentSection === 'about' ? '50vh' : // Centrado vertical en Sobre Nosotros
-               currentSection === 'benefits' ? '25vh' :
-               currentSection === 'process' ? '85vh' :
-               currentSection === 'contact' ? '90vh' : // Abajo del todo en contacto
-              '80vh'
-          }}
-          size={
-            currentSection === 'hero' ? '250px' : // Más pequeño en inicio
-            currentSection === 'about' ? '300px' : // A la derecha en Sobre Nosotros
-          currentSection === 'benefits' ? '250px' : // Grande en beneficios
-          currentSection === 'process' ? '400px' : // Grande en proceso
-          currentSection === 'contact' ? '300px' : // Tamaño mediano en contacto
-          '200px'
-          }
-          opacity={
-            currentSection === 'benefits' || currentSection === 'contact' ? 0.7 : // Menos opacidad cuando hay poco espacio
-            1
-          }
-          zIndex={
-            currentSection === 'contact' ? 10 : // Debajo de los contenedores pero encima del fondo
-            20
-          }
-          transition={{ duration: 1, ease: "easeInOut" }}
-          alignRight={currentSection === 'about'}
-        />
-      )}
 
       {/* Content */}
       <div className="relative z-10">
@@ -191,146 +148,34 @@ export default function App() {
             </motion.div>
             <Link
               to="/services"
-              className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors"
+              className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors mt-4"
             >
               {t('hero.cta', "Discover how")}
-            </button>
+            </Link>
           </div>
         </motion.section>
 
-        {/* Services Section - mobile optimized, mejor espaciado y tarjetas grandes */}
-        <motion.section
-          id="servicios"
-          ref={servicesRef}
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
-          className="py-16 md:py-24 px-2 md:px-8 flex flex-col items-center mb-32 bg-[#0C0D13]"
-        >
-          <div className="w-full max-w-6xl mx-auto flex flex-col items-center mt-2 mb-8">
-            <h2 className="headline mb-4 md:mb-8 text-center text-[#FFFFFF] drop-shadow-lg">
-              {t('services.title', "Our Services")}
-            </h2>
-            <div className="flex flex-col md:flex-row gap-8 w-full">
-              <div className="md:w-1/2 w-full md:mb-0 mb-8 flex justify-center items-center">
-                <div className="w-full max-w-xl">
-                  <Stack
-                    randomRotation={false}
-                    sensitivity={180}
-                    sendToBackOnClick={false}
-                    cardDimensions={{ width: "100%", height: 350 }}
-                    fontSizeTitle="text-2xl"
-                    fontSizeShort="text-lg"
-                    fontSizeDetail="text-base"
-                  />
-                </div>
-              </div>
-              <div className="md:w-1/2 w-full md:flex md:flex-col md:justify-center">
-                <h3 className="text-2xl md:text-3xl font-bold mb-2 text-[#6F47FF] font-sans md:text-left text-center">
-                  {t('services.subtitle')}
-                </h3>
-                <p className="text-[#D6D6D6] mb-4 leading-relaxed text-base md:max-w-lg md:mx-0 max-w-xs mx-auto font-sans md:text-left text-center">
-                  {t('services.description')}
-                </p>
-                <button
-                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 mt-4 md:mt-0 mx-auto border-0 hover:shadow-[0_0_12px_var(--color-accent)] transition-all"
-                  style={{ borderRadius: '8px', maxWidth: '250px' }}
-                  onClick={handleExploreClick}
-                >
-                  {t('services.exploreButton')}
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.section>
+        <div className="relative h-[600px] mt-20">
+          <CardSwap cardDistance={60} verticalDistance={70} delay={5000} pauseOnHover={false}>
+            <Card className="flex flex-col items-center justify-center bg-[var(--color-gunmetal)] text-white p-6">
+              <h3 className="text-xl font-bold mb-2">{t('folder.webDevelopment.title')}</h3>
+              <p className="text-sm">{t('folder.webDevelopment.short')}</p>
+            </Card>
+            <Card className="flex flex-col items-center justify-center bg-[var(--color-gunmetal)] text-white p-6">
+              <h3 className="text-xl font-bold mb-2">{t('folder.serviceTitan.title')}</h3>
+              <p className="text-sm">{t('folder.serviceTitan.short')}</p>
+            </Card>
+            <Card className="flex flex-col items-center justify-center bg-[var(--color-gunmetal)] text-white p-6">
+              <h3 className="text-xl font-bold mb-2">{t('folder.emailMarketing.title')}</h3>
+              <p className="text-sm">{t('folder.emailMarketing.short')}</p>
+            </Card>
+            <Card className="flex flex-col items-center justify-center bg-[var(--color-gunmetal)] text-white p-6">
+              <h3 className="text-xl font-bold mb-2">{t('folder.analytics.title')}</h3>
+              <p className="text-sm">{t('folder.analytics.short')}</p>
+            </Card>
+          </CardSwap>
+        </div>
 
-        {/* Modal/landing de servicio */}
-        {showLanding && selectedService && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xl">
-            <div className="bg-[var(--color-slate)] container-rounded shadow-2xl p-10 max-w-sm w-full relative flex flex-col items-center border-0">
-              <button onClick={handleBack} className="absolute top-4 right-4 text-[var(--color-highlight)] text-2xl font-bold btn-rounded w-10 h-10 flex items-center justify-center">×</button>
-              <div className="mb-8">{selectedService.icon}</div>
-              <h3 className="text-3xl font-bold mb-4 text-[var(--color-accent)] text-center">{selectedService.title}</h3>
-              <p className="text-lg text-[var(--color-text)] text-center mb-8">{selectedService.description}</p>
-              <Link
-                to="/contact"
-                className="relative z-1 text-center font-bold text-2xl border-0"
-                style={{
-                  backgroundColor: "var(--color-accent)",
-                  color: "var(--color-text)",
-                  padding: "0.75rem 1.5rem",
-                  cursor: "pointer",
-                  display: "inline-block",
-                  textDecoration: "none",
-                  borderRadius: "30px"
-                }}
-              >
-                Descúbrelo
-              </Link>
-            </div>
-          </div>
-        )}
-
-        {/* Explore Services Section */}
-        <section
-          id="explorar-servicios"
-          ref={exploreRef}
-          className="py-16 md:py-24 px-4 md:px-8"
-        >
-          <div className="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
-            {[
-              {
-                title: t('folder.webDevelopment.title', 'Desarrollo web'),
-                desc: t(
-                  'folder.webDevelopment.detail',
-                  'Creamos sitios web modernos, rápidos y responsivos, adaptados a las necesidades de tu negocio, optimizados para SEO y con las mejores prácticas de accesibilidad.'
-                ),
-                gradient: 'from-purple-800 to-slate-900'
-              },
-              {
-                title: t('folder.webDesign.title', 'Diseño web'),
-                desc: t(
-                  'folder.webDesign.detail',
-                  'Diseñamos interfaces atractivas, intuitivas y centradas en el usuario, asegurando una experiencia visual coherente y profesional.'
-                ),
-                gradient: 'from-blue-800 to-slate-900'
-              },
-              {
-                title: t('folder.serviceTitan.title', 'Integración a ServiceTitan'),
-                desc: t(
-                  'folder.serviceTitan.detail',
-                  'Integramos tu negocio con ServiceTitan para automatizar procesos, mejorar la gestión y conectar tus sistemas de manera eficiente.'
-                ),
-                gradient: 'from-pink-800 to-slate-900'
-              },
-              {
-                title: t('folder.analytics.title', 'Analíticas de negocio y predicción de inventario'),
-                desc: t(
-                  'folder.analytics.detail',
-                  'Implementamos sistemas de analítica avanzada y predicción de inventario usando IA, para que tomes decisiones informadas y optimices tus recursos.'
-                ),
-                gradient: 'from-green-800 to-slate-900'
-              },
-              {
-                title: t('folder.emailMarketing.title', 'Email marketing'),
-                desc: t(
-                  'folder.emailMarketing.detail',
-                  'Diseñamos campañas de email marketing automatizadas que fidelizan y convierten, integradas con tus herramientas de ventas.'
-                ),
-                gradient: 'from-yellow-700 to-slate-900'
-              }
-            ].map((card, idx) => (
-              <div
-                key={idx}
-                className={`container-rounded p-8 md:p-12 bg-gradient-to-r ${card.gradient}`}
-              >
-                <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">{card.title}</h3>
-                <p className="text-lg text-[var(--color-text)]">{card.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
         {/* About Us Section */}
         <motion.section
           ref={aboutRef}
@@ -338,7 +183,7 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
-          className="py-24 md:py-32 relative mt-24"
+          className="py-24 md:py-32 relative mt-8"
         >
           <div className="absolute inset-0 w-full h-full z-0 bg-black bg-opacity-90" />
           <div className="relative z-10 max-w-6xl mx-auto px-4">
@@ -422,170 +267,3 @@ export default function App() {
   );
 }
 
-// Formulario de contacto real
-function ProjectForm() {
-  const { t } = useTranslation();
-  
-  return (
-    <form
-      className="w-full max-w-2xl mx-auto bg-[var(--color-gunmetal)] container-rounded p-8 md:p-12 text-[var(--color-accent)] text-base md:text-lg shadow-lg flex flex-col gap-6"
-      style={{ marginTop: 40, marginBottom: 40 }}
-      action="https://formspree.io/f/your-form-id" // Cambia esto por tu endpoint real
-      method="POST"
-      autoComplete="off"
-    >
-      <div className="mb-2 text-white font-semibold">
-        Gracias por confiar en nosotros. Este formulario nos ayudará a entender tu visión y ofrecerte una solución a la medida. Ya sea que necesites un sitio web desde cero, rediseño, o integrar herramientas como ServiceTitan o CRMs, estamos listos para ayudarte.
-      </div>
-      <div className="flex flex-col gap-4">
-        <label>
-          Nombre completo o razón social:
-          <input name="nombre" required className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
-        </label>
-        <label>
-          Nombre del contacto (si aplica):
-          <input name="contacto" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
-        </label>
-        <label>
-          Correo electrónico:
-          <input name="email" type="email" required className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
-        </label>
-        <label>
-          Teléfono:
-          <input name="telefono" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
-        </label>
-        <label>
-          ¿Tienes sitio web actualmente?
-          <div className="flex gap-4 mt-1">
-            <label className="flex items-center gap-2 custom-radio">
-              <input type="radio" name="tiene_sitio" value="si" />
-              Sí
-            </label>
-            <input name="url" placeholder="URL" className="rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0 flex-1" />
-            <label className="flex items-center gap-2 custom-radio">
-              <input type="radio" name="tiene_sitio" value="no" />
-              No
-            </label>
-          </div>
-        </label>
-      </div>
-      <div>
-        <div className="font-semibold mb-2">¿Qué necesitas? Selecciona los servicios que deseas cotizar:</div>
-        <div className="grid grid-cols-1 gap-2">
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Diseño web completo" /> Diseño web completo</label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Rediseño de sitio actual" /> Rediseño de sitio actual</label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Integración de CRM" /> Integración de CRM</label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="HubSpot" /> HubSpot</label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Salesforce" /> Salesforce</label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Zoho" /> Zoho</label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="ServiceTitan" /> ServiceTitan</label>
-          <label className="flex items-center gap-2 custom-checkbox">
-            <input type="checkbox" name="servicios" value="Otro" />
-            Otro: <input name="servicio_otro" className="rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0 flex-1" />
-          </label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Automatización de procesos" /> Automatización de procesos</label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Conexión con herramientas de marketing/ventas" /> Conexión con herramientas de marketing/ventas</label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Optimización SEO & rendimiento" /> Optimización SEO & rendimiento</label>
-          <label className="custom-checkbox"><input type="checkbox" name="servicios" value="Alojamiento y mantenimiento" /> Alojamiento y mantenimiento</label>
-          <label className="flex items-center gap-2 custom-checkbox">
-            <input type="checkbox" name="servicios" value="Otro2" />
-            Otro (especificar): <input name="servicio_otro2" className="rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0 flex-1" />
-          </label>
-        </div>
-      </div>
-      <div className="flex flex-col gap-4">
-        <label>
-          ¿Cuál es el objetivo principal del proyecto?
-          <textarea name="objetivo" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" rows={2} />
-        </label>
-        <label>
-          ¿Qué funcionalidades específicas necesitas?
-          <textarea name="funcionalidades" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" rows={2} />
-        </label>
-        <label>
-          ¿Hay una fecha ideal para lanzar este proyecto?
-          <input name="fecha_lanzamiento" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
-        </label>
-        <label>
-          Presupuesto estimado:
-          <select name="presupuesto" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0">
-            <option>Menos de USD 2.000</option>
-            <option>USD 2.000 – 5.000</option>
-            <option>USD 5.000 – 10.000</option>
-            <option>Más de USD 10.000</option>
-            <option>A definir</option>
-          </select>
-        </label>
-        <label>
-          ¿Te interesa soporte técnico o capacitación post-lanzamiento?
-          <div className="flex gap-4 mt-1">
-            <label className="custom-radio"><input type="radio" name="soporte" value="Sí" /> Sí</label>
-            <label className="custom-radio"><input type="radio" name="soporte" value="No" /> No</label>
-            <label className="custom-radio"><input type="radio" name="soporte" value="Necesito más información" /> Necesito más información</label>
-          </div>
-        </label>
-      </div>
-      <div>
-        <div className="font-semibold mb-2">Contexto técnico</div>
-        <div className="flex flex-col gap-2">
-          <label>
-            ¿Tu sitio actual usa algún CMS?
-            <div className="flex flex-wrap gap-4 mt-1">
-              <label className="custom-radio"><input type="radio" name="cms" value="WordPress" /> WordPress</label>
-              <label className="custom-radio"><input type="radio" name="cms" value="Shopify" /> Shopify</label>
-              <label className="custom-radio"><input type="radio" name="cms" value="Webflow" /> Webflow</label>
-              <label className="flex items-center gap-2 custom-radio">
-                <input type="radio" name="cms" value="Otro" />
-                Otro: <input name="cms_otro" className="rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0 flex-1" />
-              </label>
-              <label className="custom-radio"><input type="radio" name="cms" value="No lo sé" /> No lo sé</label>
-              <label className="custom-radio"><input type="radio" name="cms" value="No tengo sitio web" /> No tengo sitio web</label>
-            </div>
-          </label>
-          <label>
-            ¿Cuentas con dominio y hosting?
-            <div className="flex flex-wrap gap-4 mt-1">
-              <label className="custom-radio"><input type="radio" name="dominio_hosting" value="Sí, ambos" /> Sí, ambos</label>
-              <label className="custom-radio"><input type="radio" name="dominio_hosting" value="Solo dominio" /> Solo dominio</label>
-              <label className="custom-radio"><input type="radio" name="dominio_hosting" value="Solo hosting" /> Solo hosting</label>
-              <label className="custom-radio"><input type="radio" name="dominio_hosting" value="Aún no" /> Aún no</label>
-            </div>
-          </label>
-          <label>
-            ¿Tienes actualmente un CRM o estás migrando a uno nuevo?
-            <input name="crm_actual" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
-          </label>
-        </div>
-      </div>
-      <div className="flex flex-col gap-4">
-        <label>
-          ¿Algo más que debamos saber?
-          <textarea name="extra" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" rows={2} />
-        </label>
-      </div>
-      <div>
-        <div className="font-semibold mb-2">Consentimiento</div>
-        <label className="flex items-center gap-2 custom-checkbox">
-          <input type="checkbox" name="consentimiento" value="Sí" required />
-          Autorizo a Weavion a contactarme para presentarme una propuesta personalizada.
-        </label>
-        <div className="flex flex-col md:flex-row gap-4 mt-2">
-          <label className="flex-1">
-            Firma (opcional):
-            <input name="firma" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
-          </label>
-          <label className="flex-1">
-            Fecha:
-            <input name="fecha" type="date" className="mt-1 w-full rounded-lg px-4 py-3 bg-[var(--color-slate)] text-[var(--color-text)] border-0" />
-          </label>
-        </div>
-      </div>
-      <button
-        type="submit"
-        className="mt-6 bg-[var(--color-accent)] text-[var(--color-text)] font-bold rounded-xl border-0 px-6 py-3 text-2xl"
-      >
-        {t('contact.submitButton')}
-      </button>
-    </form>
-  );
-}
