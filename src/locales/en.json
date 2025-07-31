@@ -98,6 +98,11 @@
       "title": "Business Analytics and Inventory Prediction",
       "short": "Make smart decisions",
       "detail": "We implement advanced analytics and inventory prediction systems using AI, so you can make informed decisions and optimize your resources."
+    },
+    "emailMarketing": {
+      "title": "Email marketing",
+      "short": "Connect with your customers",
+      "detail": "We create automated email marketing campaigns that build loyalty and boost conversions, integrated with your sales tools."
     }
   },
   "common": {
