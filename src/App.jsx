@@ -117,7 +117,6 @@ export default function App() {
         />
       </div>
 
-
       {/* Content */}
       <div className="relative z-10">
         {/* Hero Section */}
@@ -145,7 +144,7 @@ export default function App() {
             </motion.div>
             <Link
               to="/services"
-              className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors"
+              className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors mt-4"
             >
               {t('hero.cta', "Discover how")}
             </Link>
