@@ -310,7 +310,7 @@ export default function App() {
           ref={exploreRef}
           className="py-16 md:py-24 px-4 md:px-8"
         >
-          <div className="max-w-5xl mx-auto grid gap-8 md:grid-cols-2 justify-items-center">
+          <div className="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
             {[
               {
                 title: t('folder.webDevelopment.title', 'Desarrollo web'),
@@ -355,7 +355,7 @@ export default function App() {
             ].map((card, idx) => (
               <div
                 key={idx}
-                className={`w-full container-rounded p-8 md:p-12 bg-gradient-to-r ${card.gradient}`}
+                className={`container-rounded p-8 md:p-12 bg-gradient-to-r ${card.gradient}`}
               >
                 <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">{card.title}</h3>
                 <p className="text-lg text-[var(--color-text)]">{card.desc}</p>
