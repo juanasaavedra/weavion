@@ -6,7 +6,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DecryptedText from './DecryptedText';
-import Stack from './Folder';
 import ProcessTimeline from './ProcessTimeline';
 import ContactForm from './ContactForm';
 import ContactSection from './ContactSection';
@@ -20,14 +19,11 @@ export default function App() {
   const folderRef = useRef(null);
   const [folderSize, setFolderSize] = useState(2.0);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
-  const [showLanding, setShowLanding] = useState(false);
-  const [selectedService, setSelectedService] = useState(null);
   const [currentSection, setCurrentSection] = useState('hero');
   
   // Referencias para las secciones
   const heroRef = useRef(null);
-  const servicesRef = useRef(null);
-  const exploreRef = useRef(null);
+
   const aboutRef = useRef(null);
   const benefitsRef = useRef(null);
   const processRef = useRef(null);
@@ -53,8 +49,6 @@ export default function App() {
       
       const sections = [
         { ref: heroRef, id: 'hero' },
-        { ref: servicesRef, id: 'services' },
-        { ref: exploreRef, id: 'explore' },
         { ref: aboutRef, id: 'about' },
         { ref: benefitsRef, id: 'benefits' },
         { ref: processRef, id: 'process' },
@@ -80,33 +74,8 @@ export default function App() {
     };
   }, []);
 
-  // Scroll a servicios
-  const scrollToServices = () => {
-    const el = document.getElementById('servicios');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  // No-op placeholders removed after moving services to a dedicated page
 
-  // Scroll a la sección de exploración de servicios
-  const scrollToExplore = () => {
-    const el = document.getElementById('explorar-servicios');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  // Manejar click en el botón
-  const handleExploreClick = () => {
-    scrollToExplore();
-  };
-
-  // Handler to select a service from landing
-  const handleSelectService = (service) => {
-    setSelectedService(service);
-  };
-
-  // Handler to go back
-  const handleBack = () => {
-    setShowLanding(false);
-    setSelectedService(null);
-  };
 
   // Handler para cambiar idioma
   const handleLang = () => {
@@ -127,7 +96,7 @@ export default function App() {
           className="text-lg md:text-xl font-bold uppercase text-[var(--color-highlight)] bg-transparent px-4 py-2 hover:text-[var(--color-accent)] transition-colors"
         >
           {t('services.exploreButton')}
-        </button>
+        </Link>
       </div>
       <div className="fixed top-8 right-8 md:right-8 z-50">
         <button
@@ -161,14 +130,12 @@ export default function App() {
         <Moon
           position={{
             x: currentSection === 'hero' ? '85vw' : // Derecha en home
-               currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
                currentSection === 'about' ? '100vw' : // Totalmente a la derecha en Sobre Nosotros
                currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
                currentSection === 'process' ? '50vw' : // Centro abajo en proceso
                currentSection === 'contact' ? '85vw' : // En el último div a la derecha
                '50vw',
             y: currentSection === 'hero' ? '35vh' :
-               currentSection === 'services' ? '85vh' :
                currentSection === 'about' ? '50vh' : // Centrado vertical en Sobre Nosotros
                currentSection === 'benefits' ? '25vh' :
                currentSection === 'process' ? '85vh' :
@@ -221,8 +188,8 @@ export default function App() {
             >
               {t('hero.motivational', "The universe of digital possibilities awaits your brand")}
             </motion.div>
-            <button
-              onClick={scrollToServices}
+            <Link
+              to="/services"
               className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors"
             >
               {t('hero.cta', "Discover how")}
