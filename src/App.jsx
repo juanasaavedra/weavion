@@ -18,7 +18,6 @@ export default function App() {
   const [folderOpen, setFolderOpen] = useState(false);
   const folderRef = useRef(null);
   const [folderSize, setFolderSize] = useState(2.0);
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const [currentSection, setCurrentSection] = useState('hero');
   
   // Referencias para las secciones
@@ -33,10 +32,9 @@ export default function App() {
   const { scrollY } = useScroll();
 
   useEffect(() => {
-    const updateSize = () => {
-      setFolderSize(window.innerWidth < 640 ? 1.1 : 2.0);
-      setIsMobile(window.innerWidth < 768);
-    };
+      const updateSize = () => {
+        setFolderSize(window.innerWidth < 640 ? 1.1 : 2.0);
+      };
     updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
@@ -97,7 +95,7 @@ export default function App() {
           className="text-lg md:text-xl font-bold uppercase text-[var(--color-highlight)] bg-transparent px-4 py-2 hover:text-[var(--color-accent)] transition-colors"
         >
           {t('services.exploreButton')}
-        </Link>
+        </button>
       </div>
       <div className="fixed top-8 right-8 md:right-8 z-50">
         <button
@@ -125,44 +123,6 @@ export default function App() {
           returnDuration={1.5}
         />
       </div>
-      
-      {/* Luna que se mueve entre secciones */}
-      {!isMobile && (
-        <Moon
-          position={{
-            x: currentSection === 'hero' ? '85vw' : // Derecha en home
-               currentSection === 'about' ? '100vw' : // Totalmente a la derecha en Sobre Nosotros
-               currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
-               currentSection === 'process' ? '50vw' : // Centro abajo en proceso
-               currentSection === 'contact' ? '85vw' : // En el último div a la derecha
-               '50vw',
-            y: currentSection === 'hero' ? '35vh' :
-               currentSection === 'about' ? '50vh' : // Centrado vertical en Sobre Nosotros
-               currentSection === 'benefits' ? '25vh' :
-               currentSection === 'process' ? '85vh' :
-               currentSection === 'contact' ? '90vh' : // Abajo del todo en contacto
-              '80vh'
-          }}
-          size={
-            currentSection === 'hero' ? '250px' : // Más pequeño en inicio
-            currentSection === 'about' ? '300px' : // A la derecha en Sobre Nosotros
-          currentSection === 'benefits' ? '250px' : // Grande en beneficios
-          currentSection === 'process' ? '400px' : // Grande en proceso
-          currentSection === 'contact' ? '300px' : // Tamaño mediano en contacto
-          '200px'
-          }
-          opacity={
-            currentSection === 'benefits' || currentSection === 'contact' ? 0.7 : // Menos opacidad cuando hay poco espacio
-            1
-          }
-          zIndex={
-            currentSection === 'contact' ? 10 : // Debajo de los contenedores pero encima del fondo
-            20
-          }
-          transition={{ duration: 1, ease: "easeInOut" }}
-          alignRight={currentSection === 'about'}
-        />
-      )}
 
       {/* Content */}
       <div className="relative z-10">
@@ -194,7 +154,7 @@ export default function App() {
               className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors"
             >
               {t('hero.cta', "Discover how")}
-            </button>
+            </Link>
           </div>
         </motion.section>
 
