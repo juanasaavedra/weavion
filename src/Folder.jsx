@@ -28,6 +28,12 @@ const getCardsData = (t) => [
     short: t('folder.analytics.short', 'Toma decisiones inteligentes'),
     detail: t('folder.analytics.detail', 'Implementamos sistemas de analítica avanzada y predicción de inventario usando IA, para que tomes decisiones informadas y optimices tus recursos.')
   },
+  {
+    id: 5,
+    title: t('folder.emailMarketing.title', 'Email marketing'),
+    short: t('folder.emailMarketing.short', 'Conecta con tus clientes'),
+    detail: t('folder.emailMarketing.detail', 'Diseñamos campañas de email marketing automatizadas que fidelizan y convierten, integradas con tus herramientas de ventas.')
+  },
 ];
 
 export default function Stack({

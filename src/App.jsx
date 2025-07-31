@@ -6,7 +6,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DecryptedText from './DecryptedText';
-import Stack from './Folder';
 import ProcessTimeline from './ProcessTimeline';
 import ContactForm from './ContactForm';
 import ContactSection from './ContactSection';
@@ -20,14 +19,11 @@ export default function App() {
   const folderRef = useRef(null);
   const [folderSize, setFolderSize] = useState(2.0);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
-  const [showLanding, setShowLanding] = useState(false);
-  const [selectedService, setSelectedService] = useState(null);
   const [currentSection, setCurrentSection] = useState('hero');
   
   // Referencias para las secciones
   const heroRef = useRef(null);
-  const servicesRef = useRef(null);
-  const exploreRef = useRef(null);
+
   const aboutRef = useRef(null);
   const benefitsRef = useRef(null);
   const processRef = useRef(null);
@@ -53,8 +49,6 @@ export default function App() {
       
       const sections = [
         { ref: heroRef, id: 'hero' },
-        { ref: servicesRef, id: 'services' },
-        { ref: exploreRef, id: 'explore' },
         { ref: aboutRef, id: 'about' },
         { ref: benefitsRef, id: 'benefits' },
         { ref: processRef, id: 'process' },
@@ -80,33 +74,8 @@ export default function App() {
     };
   }, []);
 
-  // Scroll a servicios
-  const scrollToServices = () => {
-    const el = document.getElementById('servicios');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  // No-op placeholders removed after moving services to a dedicated page
 
-  // Scroll a la sección de exploración de servicios
-  const scrollToExplore = () => {
-    const el = document.getElementById('explorar-servicios');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  // Manejar click en el botón
-  const handleExploreClick = () => {
-    scrollToExplore();
-  };
-
-  // Handler to select a service from landing
-  const handleSelectService = (service) => {
-    setSelectedService(service);
-  };
-
-  // Handler to go back
-  const handleBack = () => {
-    setShowLanding(false);
-    setSelectedService(null);
-  };
 
   // Handler para cambiar idioma
   const handleLang = () => {
@@ -122,12 +91,12 @@ export default function App() {
         </button>
       </div>
       <div className="fixed top-8 left-1/2 -translate-x-1/2 transform z-50">
-        <button
-          onClick={scrollToExplore}
-          className="text-lg md:text-xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-4 py-2 btn-rounded border-0 hover:bg-[var(--color-highlight)] transition-all shadow-lg"
+        <Link
+          to="/services"
+          className="text-lg md:text-xl font-bold uppercase text-[var(--color-highlight)] bg-transparent px-4 py-2 hover:text-[var(--color-accent)] transition-colors"
         >
           {t('services.exploreButton')}
-        </button>
+        </Link>
       </div>
       <div className="fixed top-8 right-8 md:right-8 z-50">
         <button
@@ -161,14 +130,12 @@ export default function App() {
         <Moon
           position={{
             x: currentSection === 'hero' ? '85vw' : // Derecha en home
-               currentSection === 'services' ? '85vw' : // Esquina inferior derecha en servicios
                currentSection === 'about' ? '100vw' : // Totalmente a la derecha en Sobre Nosotros
                currentSection === 'benefits' ? '85vw' : // Esquina en beneficios
                currentSection === 'process' ? '50vw' : // Centro abajo en proceso
                currentSection === 'contact' ? '85vw' : // En el último div a la derecha
                '50vw',
             y: currentSection === 'hero' ? '35vh' :
-               currentSection === 'services' ? '85vh' :
                currentSection === 'about' ? '50vh' : // Centrado vertical en Sobre Nosotros
                currentSection === 'benefits' ? '25vh' :
                currentSection === 'process' ? '85vh' :
@@ -221,110 +188,14 @@ export default function App() {
             >
               {t('hero.motivational', "The universe of digital possibilities awaits your brand")}
             </motion.div>
-            <button
-              onClick={scrollToServices}
+            <Link
+              to="/services"
               className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors"
             >
               {t('hero.cta', "Discover how")}
-            </button>
+            </Link>
           </div>
         </motion.section>
-
-        {/* Services Section - mobile optimized, mejor espaciado y tarjetas grandes */}
-        <motion.section
-          id="servicios"
-          ref={servicesRef}
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
-          className="py-16 md:py-24 px-2 md:px-8 flex flex-col items-center mb-32 bg-[#0C0D13]"
-        >
-          <div className="w-full max-w-6xl mx-auto flex flex-col items-center mt-2 mb-8">
-            <h2 className="headline mb-4 md:mb-8 text-center text-[#FFFFFF] drop-shadow-lg">
-              {t('services.title', "Our Services")}
-            </h2>
-            <div className="flex flex-col md:flex-row gap-8 w-full">
-              <div className="md:w-1/2 w-full md:mb-0 mb-8 flex justify-center items-center">
-                <div className="w-full max-w-xl">
-                  <Stack
-                    randomRotation={false}
-                    sensitivity={180}
-                    sendToBackOnClick={false}
-                    cardDimensions={{ width: "100%", height: 350 }}
-                    fontSizeTitle="text-2xl"
-                    fontSizeShort="text-lg"
-                    fontSizeDetail="text-base"
-                  />
-                </div>
-              </div>
-              <div className="md:w-1/2 w-full md:flex md:flex-col md:justify-center">
-                <h3 className="text-2xl md:text-3xl font-bold mb-2 text-[#6F47FF] font-sans md:text-left text-center">
-                  {t('services.subtitle')}
-                </h3>
-                <p className="text-[#D6D6D6] mb-4 leading-relaxed text-base md:max-w-lg md:mx-0 max-w-xs mx-auto font-sans md:text-left text-center">
-                  {t('services.description')}
-                </p>
-                <button
-                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 mt-4 md:mt-0 mx-auto md:mx-0 border-0 hover:shadow-[0_0_12px_var(--color-accent)] transition-all"
-                  style={{ borderRadius: '8px', maxWidth: '250px' }}
-                  onClick={handleExploreClick}
-                >
-                  {t('services.exploreButton')}
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Modal/landing de servicio */}
-        {showLanding && selectedService && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xl">
-            <div className="bg-[var(--color-slate)] container-rounded shadow-2xl p-10 max-w-sm w-full relative flex flex-col items-center border-0">
-              <button onClick={handleBack} className="absolute top-4 right-4 text-[var(--color-highlight)] text-2xl font-bold btn-rounded w-10 h-10 flex items-center justify-center">×</button>
-              <div className="mb-8">{selectedService.icon}</div>
-              <h3 className="text-3xl font-bold mb-4 text-[var(--color-accent)] text-center">{selectedService.title}</h3>
-              <p className="text-lg text-[var(--color-text)] text-center mb-8">{selectedService.description}</p>
-              <Link
-                to="/contact"
-                className="relative z-1 text-center font-bold text-2xl border-0"
-                style={{
-                  backgroundColor: "var(--color-accent)",
-                  color: "var(--color-text)",
-                  padding: "0.75rem 1.5rem",
-                  cursor: "pointer",
-                  display: "inline-block",
-                  textDecoration: "none",
-                  borderRadius: "30px"
-                }}
-              >
-                Descúbrelo
-              </Link>
-            </div>
-          </div>
-        )}
-
-        {/* Explore Services Section */}
-        <section
-          id="explorar-servicios"
-          ref={exploreRef}
-          className="py-16 md:py-24 px-4 md:px-8 space-y-12"
-        >
-          <div className="max-w-5xl mx-auto">
-            <div className="container-rounded p-8 md:p-12 mb-8 bg-gradient-to-r from-purple-800 to-slate-900 md:mr-auto md:w-3/4">
-              <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">Desarrollo Web y Diseño Web</h3>
-              <p className="text-lg text-[var(--color-text)]">
-                Impulsa tu presencia digital con sitios de alto impacto apoyados en inteligencia artificial. Diseñamos y desarrollamos plataformas que conquistan clientes y hacen crecer tu negocio.
-              </p>
-            </div>
-            <div className="container-rounded p-8 md:p-12 bg-gradient-to-r from-blue-800 to-slate-900 md:ml-auto md:w-3/4">
-              <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">Automatización de Operaciones</h3>
-              <p className="text-lg text-[var(--color-text)]">
-                Integra inventarios, órdenes de compra y ventas en un único flujo automatizado. Nuestras soluciones sincronizan tus procesos para que te dediques a hacer crecer tu empresa.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* About Us Section */}
         <motion.section
