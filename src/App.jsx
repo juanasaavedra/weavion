@@ -124,7 +124,7 @@ export default function App() {
       <div className="fixed top-8 left-1/2 -translate-x-1/2 transform z-50">
         <button
           onClick={scrollToExplore}
-          className="text-lg md:text-xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-4 py-2 btn-rounded border-0 hover:bg-[var(--color-highlight)] transition-all shadow-lg"
+          className="text-lg md:text-xl font-bold uppercase text-[var(--color-highlight)] bg-transparent px-4 py-2 hover:text-[var(--color-accent)] transition-colors"
         >
           {t('services.exploreButton')}
         </button>
@@ -266,7 +266,7 @@ export default function App() {
                   {t('services.description')}
                 </p>
                 <button
-                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 mt-4 md:mt-0 mx-auto md:mx-0 border-0 hover:shadow-[0_0_12px_var(--color-accent)] transition-all"
+                  className="relative z-10 text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 mt-4 md:mt-0 mx-auto border-0 hover:shadow-[0_0_12px_var(--color-accent)] transition-all"
                   style={{ borderRadius: '8px', maxWidth: '250px' }}
                   onClick={handleExploreClick}
                 >
