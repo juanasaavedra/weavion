@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import DecryptedText from './DecryptedText';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
-import CardSwap, { Card } from './CardSwap';
 import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
 
@@ -70,9 +69,6 @@ export default function App() {
   }, []);
 
 
-  // No-op placeholders removed after moving services to a dedicated page
-
-
   // Handler para cambiar idioma
   const handleLang = () => {
     i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
@@ -89,7 +85,7 @@ export default function App() {
       <div className="fixed top-8 left-1/2 -translate-x-1/2 transform z-50">
         <Link
           to="/services"
-          className="text-lg md:text-xl font-medium uppercase text-white bg-transparent px-4 py-2 hover:text-[var(--color-highlight)] transition-colors"
+          className="text-lg md:text-xl font-bold uppercase text-[var(--color-highlight)] bg-transparent px-4 py-2 hover:text-[var(--color-accent)] transition-colors"
         >
           {t('services.exploreButton')}
         </Link>
@@ -154,27 +150,6 @@ export default function App() {
             </Link>
           </div>
         </motion.section>
-
-        <div className="relative h-[600px] mt-20">
-          <CardSwap cardDistance={60} verticalDistance={70} delay={5000} pauseOnHover={false}>
-            <Card className="flex flex-col items-center justify-center bg-[var(--color-gunmetal)] text-white p-6">
-              <h3 className="text-xl font-bold mb-2">{t('folder.webDevelopment.title')}</h3>
-              <p className="text-sm">{t('folder.webDevelopment.short')}</p>
-            </Card>
-            <Card className="flex flex-col items-center justify-center bg-[var(--color-gunmetal)] text-white p-6">
-              <h3 className="text-xl font-bold mb-2">{t('folder.serviceTitan.title')}</h3>
-              <p className="text-sm">{t('folder.serviceTitan.short')}</p>
-            </Card>
-            <Card className="flex flex-col items-center justify-center bg-[var(--color-gunmetal)] text-white p-6">
-              <h3 className="text-xl font-bold mb-2">{t('folder.emailMarketing.title')}</h3>
-              <p className="text-sm">{t('folder.emailMarketing.short')}</p>
-            </Card>
-            <Card className="flex flex-col items-center justify-center bg-[var(--color-gunmetal)] text-white p-6">
-              <h3 className="text-xl font-bold mb-2">{t('folder.analytics.title')}</h3>
-              <p className="text-sm">{t('folder.analytics.short')}</p>
-            </Card>
-          </CardSwap>
-        </div>
 
         {/* About Us Section */}
         <motion.section
