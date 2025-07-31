@@ -308,21 +308,59 @@ export default function App() {
         <section
           id="explorar-servicios"
           ref={exploreRef}
-          className="py-16 md:py-24 px-4 md:px-8 space-y-12"
+          className="py-16 md:py-24 px-4 md:px-8"
         >
-          <div className="max-w-5xl mx-auto">
-            <div className="container-rounded p-8 md:p-12 mb-8 bg-gradient-to-r from-purple-800 to-slate-900 md:mr-auto md:w-3/4">
-              <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">Desarrollo Web y Diseño Web</h3>
-              <p className="text-lg text-[var(--color-text)]">
-                Impulsa tu presencia digital con sitios de alto impacto apoyados en inteligencia artificial. Diseñamos y desarrollamos plataformas que conquistan clientes y hacen crecer tu negocio.
-              </p>
-            </div>
-            <div className="container-rounded p-8 md:p-12 bg-gradient-to-r from-blue-800 to-slate-900 md:ml-auto md:w-3/4">
-              <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">Automatización de Operaciones</h3>
-              <p className="text-lg text-[var(--color-text)]">
-                Integra inventarios, órdenes de compra y ventas en un único flujo automatizado. Nuestras soluciones sincronizan tus procesos para que te dediques a hacer crecer tu empresa.
-              </p>
-            </div>
+          <div className="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
+            {[
+              {
+                title: t('folder.webDevelopment.title', 'Desarrollo web'),
+                desc: t(
+                  'folder.webDevelopment.detail',
+                  'Creamos sitios web modernos, rápidos y responsivos, adaptados a las necesidades de tu negocio, optimizados para SEO y con las mejores prácticas de accesibilidad.'
+                ),
+                gradient: 'from-purple-800 to-slate-900'
+              },
+              {
+                title: t('folder.webDesign.title', 'Diseño web'),
+                desc: t(
+                  'folder.webDesign.detail',
+                  'Diseñamos interfaces atractivas, intuitivas y centradas en el usuario, asegurando una experiencia visual coherente y profesional.'
+                ),
+                gradient: 'from-blue-800 to-slate-900'
+              },
+              {
+                title: t('folder.serviceTitan.title', 'Integración a ServiceTitan'),
+                desc: t(
+                  'folder.serviceTitan.detail',
+                  'Integramos tu negocio con ServiceTitan para automatizar procesos, mejorar la gestión y conectar tus sistemas de manera eficiente.'
+                ),
+                gradient: 'from-pink-800 to-slate-900'
+              },
+              {
+                title: t('folder.analytics.title', 'Analíticas de negocio y predicción de inventario'),
+                desc: t(
+                  'folder.analytics.detail',
+                  'Implementamos sistemas de analítica avanzada y predicción de inventario usando IA, para que tomes decisiones informadas y optimices tus recursos.'
+                ),
+                gradient: 'from-green-800 to-slate-900'
+              },
+              {
+                title: t('folder.emailMarketing.title', 'Email marketing'),
+                desc: t(
+                  'folder.emailMarketing.detail',
+                  'Diseñamos campañas de email marketing automatizadas que fidelizan y convierten, integradas con tus herramientas de ventas.'
+                ),
+                gradient: 'from-yellow-700 to-slate-900'
+              }
+            ].map((card, idx) => (
+              <div
+                key={idx}
+                className={`container-rounded p-8 md:p-12 bg-gradient-to-r ${card.gradient}`}
+              >
+                <h3 className="text-3xl font-bold mb-4 text-[var(--color-highlight)]">{card.title}</h3>
+                <p className="text-lg text-[var(--color-text)]">{card.desc}</p>
+              </div>
+            ))}
           </div>
         </section>
 
