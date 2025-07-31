@@ -69,9 +69,6 @@ export default function App() {
   }, []);
 
 
-  // No-op placeholders removed after moving services to a dedicated page
-
-
   // Handler para cambiar idioma
   const handleLang = () => {
     i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
@@ -119,6 +116,7 @@ export default function App() {
           returnDuration={1.5}
         />
       </div>
+
 
       {/* Content */}
       <div className="relative z-10">
