@@ -6,30 +6,24 @@ import { useTranslation } from 'react-i18next';
 const getCardsData = (t) => [
   {
     id: 1,
-    title: t('folder.webDevelopment.title', 'Desarrollo web'),
-    short: t('folder.webDevelopment.short', 'Webs modernas y rápidas'),
-    detail: t('folder.webDevelopment.detail', 'Creamos sitios web modernos, rápidos y responsivos, adaptados a las necesidades de tu negocio, optimizados para SEO y con las mejores prácticas de accesibilidad.')
-  },
-  {
-    id: 2,
     title: t('folder.webDesign.title', 'Diseño web'),
     short: t('folder.webDesign.short', 'Diseño atractivo y funcional'),
     detail: t('folder.webDesign.detail', 'Diseñamos interfaces atractivas, intuitivas y centradas en el usuario, asegurando una experiencia visual coherente y profesional.')
   },
   {
-    id: 3,
+    id: 2,
     title: t('folder.serviceTitan.title', 'Integración a ServiceTitan'),
     short: t('folder.serviceTitan.short', 'Automatiza tu operación'),
     detail: t('folder.serviceTitan.detail', 'Integramos tu negocio con ServiceTitan para automatizar procesos, mejorar la gestión y conectar tus sistemas de manera eficiente.')
   },
   {
-    id: 4,
+    id: 3,
     title: t('folder.analytics.title', 'Analíticas de negocio y predicción de inventario'),
     short: t('folder.analytics.short', 'Toma decisiones inteligentes'),
     detail: t('folder.analytics.detail', 'Implementamos sistemas de analítica avanzada y predicción de inventario usando IA, para que tomes decisiones informadas y optimices tus recursos.')
   },
   {
-    id: 5,
+    id: 4,
     title: t('folder.emailMarketing.title', 'Email marketing'),
     short: t('folder.emailMarketing.short', 'Conecta con tus clientes'),
     detail: t('folder.emailMarketing.detail', 'Diseñamos campañas de email marketing automatizadas que fidelizan y convierten, integradas con tus herramientas de ventas.')
