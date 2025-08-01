@@ -33,21 +33,25 @@ export default function StatsSection() {
         {t('whyus.title', '¿Por qué nuestros servicios?')}
       </h2>
       <div className="stats-container grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-        <div className="stat-item stat-animate flex flex-col items-center p-8 rounded-3xl bg-gradient-to-br from-purple-700 via-purple-800 to-black shadow-lg">
-          <span className="number text-white font-bold text-5xl md:text-7xl mb-4 number-glow">
-            {t('whyus.stat1.number', '20 %')}
-          </span>
-          <p className="text-gray-300 text-center text-lg">
-            {t('whyus.stat1.text', 'De empresas pierden más de 2 500 USD/mes por downtime')}
-          </p>
+        <div className="stat-item stat-animate gradient-border rounded-3xl">
+          <div className="flex flex-col items-center p-8 rounded-3xl bg-black">
+            <span className="number text-white font-bold text-6xl md:text-8xl mb-4 number-glow">
+              {t('whyus.stat1.number', '20 %')}
+            </span>
+            <p className="text-gray-300 text-center text-lg">
+              {t('whyus.stat1.text', 'De empresas pierden más de 2 500 USD/mes por downtime')}
+            </p>
+          </div>
         </div>
-        <div className="stat-item stat-animate flex flex-col items-center p-8 rounded-3xl bg-gradient-to-br from-purple-700 via-purple-800 to-black shadow-lg">
-          <span className="number text-white font-bold text-5xl md:text-7xl mb-4 number-glow">
-            {t('whyus.stat2.number', '42 %')}
-          </span>
-          <p className="text-gray-300 text-center text-lg">
-            {t('whyus.stat2.text', 'Mejora de ventas gracias al rendimiento web')}
-          </p>
+        <div className="stat-item stat-animate gradient-border rounded-3xl">
+          <div className="flex flex-col items-center p-8 rounded-3xl bg-black">
+            <span className="number text-white font-bold text-6xl md:text-8xl mb-4 number-glow">
+              {t('whyus.stat2.number', '42 %')}
+            </span>
+            <p className="text-gray-300 text-center text-lg">
+              {t('whyus.stat2.text', 'Mejora de ventas gracias al rendimiento web')}
+            </p>
+          </div>
         </div>
       </div>
     </section>
