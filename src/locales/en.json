@@ -47,6 +47,17 @@
       "description": "Solutions that grow with your business. Flexible architecture for the future."
     }
   },
+  "whyus": {
+    "title": "Why our services?",
+    "stat1": {
+      "number": "20 %",
+      "text": "of companies lose over $2,500/month due to downtime"
+    },
+    "stat2": {
+      "number": "42 %",
+      "text": "increase sales thanks to web performance"
+    }
+  },
   "process": {
     "title": "How does our work process work?",
     "step1": "Initial Meeting",

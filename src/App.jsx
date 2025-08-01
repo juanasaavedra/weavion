@@ -8,6 +8,7 @@ import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
 import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
+import StatsSection from './StatsSection';
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -20,7 +21,7 @@ export default function App() {
   const heroRef = useRef(null);
 
   const aboutRef = useRef(null);
-  const benefitsRef = useRef(null);
+  const statsRef = useRef(null);
   const processRef = useRef(null);
   const contactRef = useRef(null);
   
@@ -44,7 +45,7 @@ export default function App() {
       const sections = [
         { ref: heroRef, id: 'hero' },
         { ref: aboutRef, id: 'about' },
-        { ref: benefitsRef, id: 'benefits' },
+        { ref: statsRef, id: 'benefits' },
         { ref: processRef, id: 'process' },
         { ref: contactRef, id: 'contact' }
       ];
@@ -188,39 +189,10 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* Benefits Section */}
-        <motion.section
-          ref={benefitsRef}
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
-          className="py-24 md:py-32 px-4"
-        >
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center text-[#D6D6D6] font-sans">
-              {t('benefits.title')}
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="bg-[var(--color-gunmetal)] backdrop-blur-sm container-rounded p-6 border-0 shadow-2xl text-center flex flex-col items-center mb-6">
-                <h3 className="text-xl font-bold mb-1 text-[var(--color-accent)] mt-2 subtitle">{t('benefits.fast.title')}</h3>
-                <p className="text-[var(--color-text)] text-sm body-text">{t('benefits.fast.description')}</p>
-              </div>
-              <div className="bg-[var(--color-gunmetal)] backdrop-blur-sm container-rounded p-6 border-0 shadow-2xl text-center flex flex-col items-center mb-6">
-                <h3 className="text-xl font-bold mb-1 text-[var(--color-accent)] mt-2 subtitle">{t('benefits.economic.title')}</h3>
-                <p className="text-[var(--color-text)] text-sm body-text">{t('benefits.economic.description')}</p>
-              </div>
-              <div className="bg-[var(--color-gunmetal)] backdrop-blur-sm container-rounded p-6 border-0 shadow-2xl text-center flex flex-col items-center mb-6">
-                <h3 className="text-xl font-bold mb-1 text-[var(--color-accent)] mt-2 subtitle">{t('benefits.secure.title')}</h3>
-                <p className="text-[var(--color-text)] text-sm body-text">{t('benefits.secure.description')}</p>
-              </div>
-              <div className="bg-[var(--color-gunmetal)] backdrop-blur-sm container-rounded p-6 border-0 shadow-2xl text-center flex flex-col items-center mb-6">
-                <h3 className="text-xl font-bold mb-1 text-[var(--color-accent)] mt-2 subtitle">{t('benefits.scalable.title')}</h3>
-                <p className="text-[var(--color-text)] text-sm body-text">{t('benefits.scalable.description')}</p>
-              </div>
-            </div>
-          </div>
-        </motion.section>
+        {/* Why Us Stats Section */}
+        <section ref={statsRef} className="py-24 md:py-32 px-4">
+          <StatsSection />
+        </section>
 
         {/* Process Section */}
         <section ref={processRef} className="py-24 md:py-32 px-4 bg-[var(--color-dark-bg)] mt-24" style={{ minHeight: 'auto' }}>

@@ -47,6 +47,17 @@
       "description": "Soluciones que crecen con tu negocio. Arquitectura flexible para el futuro."
     }
   },
+  "whyus": {
+    "title": "¿Por qué nuestros servicios?",
+    "stat1": {
+      "number": "20 %",
+      "text": "De empresas pierden más de 2 500 USD/mes por downtime"
+    },
+    "stat2": {
+      "number": "42 %",
+      "text": "Mejora de ventas gracias al rendimiento web"
+    }
+  },
   "process": {
     "title": "¿Cómo es nuestro proceso de trabajo?",
     "step1": "Reunión Inicial",
