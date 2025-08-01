@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Stack from './Folder';
-import FluidGlass from './FluidGlass';
+import logo from './assets/weavion.logo.png';
 
 export default function ServicesPage() {
   const { t } = useTranslation();
@@ -17,11 +17,11 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-[var(--color-dark-bg)] text-[var(--color-text)] font-sans">
       <header className="text-center py-8">
-        <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-highlight)] mb-4">
-          {t('services.title')}
-        </h1>
-        <Link to="/" className="text-[var(--color-accent)] hover:underline font-semibold">
-          {t('common.backHome') || 'Volver al inicio'}
+        <Link to="/" className="flex items-center justify-center gap-4 mb-4 hover:opacity-90">
+          <img src={logo} alt="Logo" className="w-12 h-12" />
+          <h1 className="text-4xl md:text-5xl font-bold text-white">
+            {t('services.title')}
+          </h1>
         </Link>
       </header>
 
