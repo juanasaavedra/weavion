@@ -375,8 +375,13 @@ html, body {
   transform: none !important;
 }
 .number-glow {
-  text-shadow: 0 0 10px rgba(111, 71, 255, 0.8);
+  text-shadow: 0 0 15px rgba(111, 71, 255, 1);
   animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+.gradient-border {
+  background: linear-gradient(to bottom right, #6b21a8, #6f47ff, #000);
+  padding: 2px;
 }
 @keyframes pulse-glow {
   from {
