@@ -92,3 +92,48 @@ body {
   opacity: 1;
 }
 
+
+/* Slide-specific animations */
+#slide-1 .monitor {
+  animation: monitorFloat 3s ease-in-out infinite alternate;
+}
+@keyframes monitorFloat {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+#slide-2 .envelope {
+  transform-origin: center top;
+  animation: envelopeFlap 4s ease-in-out infinite;
+}
+@keyframes envelopeFlap {
+  0%, 100% { transform: rotateX(0deg); }
+  50% { transform: rotateX(-20deg); }
+}
+
+#slide-3 .bar {
+  transform-origin: bottom;
+  animation: barGrow 2s ease-in-out infinite alternate;
+}
+@keyframes barGrow {
+  from { transform: scaleY(0.7); }
+  to { transform: scaleY(1); }
+}
+
+#slide-4 .cloud {
+  animation: cloudDrift 5s ease-in-out infinite alternate;
+}
+@keyframes cloudDrift {
+  from { transform: translateX(-4px); }
+  to { transform: translateX(4px); }
+}
+
+#slide-4 .shape:nth-child(2),
+#slide-4 .shape:nth-child(3) {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: drawArrow 2s ease-in-out infinite;
+}
+@keyframes drawArrow {
+  to { stroke-dashoffset: 0; }
+}

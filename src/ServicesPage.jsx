@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Stack from './Folder';
+import FluidGlass from './FluidGlass';
 
 export default function ServicesPage() {
   const { t } = useTranslation();
   const services = [
-    { key: 'webDevelopment', bg: 'bg-[var(--color-slate)]' },
     { key: 'webDesign', bg: 'bg-[var(--color-gunmetal)]' },
     { key: 'serviceTitan', bg: 'bg-[var(--color-slate)]' },
     { key: 'analytics', bg: 'bg-[var(--color-gunmetal)]' },
@@ -24,6 +24,19 @@ export default function ServicesPage() {
           {t('common.backHome') || 'Volver al inicio'}
         </Link>
       </header>
+
+      <div style={{ height: '600px', position: 'relative' }} className="mb-8">
+        <FluidGlass
+          mode="lens"
+          lensProps={{
+            scale: 0.25,
+            ior: 1.15,
+            thickness: 5,
+            chromaticAberration: 0.1,
+            anisotropy: 0.01,
+          }}
+        />
+      </div>
 
       <div className="flex justify-center mb-12 px-4">
         <div className="w-full max-w-xl">
@@ -53,11 +66,6 @@ export default function ServicesPage() {
             </h2>
             <p className="text-lg">{t('product.prompt')}</p>
             <div className="mt-6 flex justify-center items-center">
-              {key === 'webDevelopment' && (
-                <motion.div initial={{ y: -50 }} whileInView={{ y: 0 }} transition={{ duration: 0.8 }} className="w-40 h-28 border-4 border-gray-500 rounded-md relative bg-black flex items-center justify-center text-4xl">
-                  💻
-                </motion.div>
-              )}
               {key === 'webDesign' && (
                 <motion.div initial={{ y: -50 }} whileInView={{ y: 0 }} transition={{ duration: 0.8 }} className="w-32 h-32 rounded-full border-4 border-gray-500 bg-black flex items-center justify-center text-4xl">
                   🎨
