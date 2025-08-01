@@ -118,6 +118,9 @@
       "detail": "Diseñamos campañas de email marketing automatizadas que fidelizan y convierten, integradas con tus herramientas de ventas."
     }
   },
+  "product": {
+    "prompt": "Este es tu producto. Veamos cómo lo puede transformar nuestra agencia."
+  },
   "common": {
     "discover": "Descúbrelo",
     "backHome": "Volver al inicio",
