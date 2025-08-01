@@ -31,7 +31,7 @@ head::before {
   --color-slate: #1E1F26;       /* Dark Slate (Surfaces) - Tarjetas, nav */
   --color-gunmetal: #2A2C37;    /* Gunmetal (Detalles) - Bordes, divisores */
   --color-accent: #6F47FF;      /* Tech Purple (Accent) - Botones CTA */
-  --color-highlight: #FFD100;   /* Brillo (Highlight) */
+  --color-highlight: #6F47FF;   /* Brillo (Highlight) */
   --color-text: #ECECEC;        /* Soft White (Texto) - Texto principal */
 }
 

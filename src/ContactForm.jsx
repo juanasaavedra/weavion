@@ -59,9 +59,56 @@ export default function ContactForm() {
     setForm(f => ({ ...f, contacto: { ...f.contacto, [field]: value } }));
   };
 
+  const isStepComplete = () => {
+    if (current === 'servicios') return form.servicios.length > 0;
+    if (current === 'web') {
+      if (!showWeb) return true;
+      if (form.web.tieneWeb === '') return false;
+      if (form.web.tieneWeb === 'si' && !form.web.url.trim()) return false;
+      if (form.web.funcionalidades.length === 0) return false;
+      if (form.web.logotipo === '') return false;
+      if (form.web.objetivo.length === 0) return false;
+      if (form.web.objetivo.includes('Otras') && !form.web.otroObj.trim()) return false;
+      if (form.web.funcionalidades.includes('Otra') && !form.web.otraFunc.trim()) return false;
+      return true;
+    }
+    if (current === 'dashboard') {
+      if (!showDashboard) return true;
+      if (form.dashboard.metricas.length === 0) return false;
+      if (form.dashboard.metricas.includes('Otra') && !form.dashboard.otraMetrica.trim()) return false;
+      if (form.dashboard.datos === '') return false;
+      if (form.dashboard.datos === 'otro' && !form.dashboard.otroDato.trim()) return false;
+      if (form.dashboard.reportes === '') return false;
+      return true;
+    }
+    if (current === 'servicetitan') {
+      if (!showST) return true;
+      if (form.servicetitan.usa === '') return false;
+      if (form.servicetitan.objetivo.length === 0) return false;
+      if (form.servicetitan.objetivo.includes('Otra') && !form.servicetitan.otroObj.trim()) return false;
+      if (!form.servicetitan.sistemas.trim()) return false;
+      return true;
+    }
+    if (current === 'automatizacion') {
+      if (!showAuto) return true;
+      if (form.automatizacion.procesos.length === 0) return false;
+      if (form.automatizacion.procesos.includes('Otra') && !form.automatizacion.otroProc.trim()) return false;
+      if (form.automatizacion.herramientas.length === 0) return false;
+      return true;
+    }
+    if (current === 'contacto') {
+      if (!form.contacto.nombre.trim()) return false;
+      if (!form.contacto.email.trim()) return false;
+      if (form.contacto.llamada === '') return false;
+      if (form.contacto.llamada === 'si' && !form.contacto.horario.trim()) return false;
+      return true;
+    }
+    return true;
+  };
+
   const handleNext = () => {
-    if (current === 'servicios' && form.servicios.length === 0) {
-      setErrors({ servicios: 'Debes seleccionar al menos un servicio.' });
+    if (!isStepComplete()) {
+      alert('Por favor completa todas las respuestas antes de continuar.');
       return;
     }
     setErrors({});
@@ -75,11 +122,19 @@ export default function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Formulario válido, enviando...', form);
-      setSubmitted(true);
-      setErrors({});
+      fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+        .then(() => alert('¡Mensaje enviado correctamente!'))
+        .catch(() => alert('Error al enviar mensaje'))
+        .finally(() => {
+          setSubmitted(true);
+          setErrors({});
+        });
     } else {
-      console.log('Formulario inválido');
+      alert('Formulario inválido');
     }
   };
 
