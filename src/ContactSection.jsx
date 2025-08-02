@@ -18,9 +18,9 @@ export default function ContactSection() {
         <p className="body-text text-[var(--color-text)] mb-12 max-w-3xl mx-auto">
           {t('contact.cta.description') || 'Contáctanos hoy para comenzar a trabajar en tu proyecto. Nuestro equipo está listo para ayudarte a alcanzar tus objetivos.'}
         </p>
-        <Link 
-          to="/contact" 
-          className="inline-block btn-rounded bg-[var(--color-accent)] text-[var(--color-text)] text-2xl font-bold button-text border-0 hover:bg-[var(--color-highlight)] hover:transform hover:scale-105 transition-all duration-300 shadow-lg"
+        <Link
+          to="/contact"
+          className="inline-block btn-rounded text-2xl font-bold button-text hover:transform hover:scale-105 transition-all duration-300 shadow-lg"
         >
           {t('contact.cta.button') || 'Contáctanos'}
         </Link>

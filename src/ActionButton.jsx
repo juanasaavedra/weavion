@@ -11,7 +11,7 @@ export default function ActionButton({ to, children, plain = false, className = 
       className={`
         inline-block text-2xl font-bold button-text
         ${rounded ? 'btn-rounded' : 'btn-primary'}
-        ${plain ? 'text-[var(--color-accent)]' : 'bg-[var(--color-accent)] text-[var(--color-text)]'}
+        ${plain ? 'text-[var(--color-accent)]' : ''}
         ${className}
       `}
     >

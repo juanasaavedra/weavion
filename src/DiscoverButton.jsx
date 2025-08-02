@@ -11,8 +11,7 @@ export default function DiscoverButton({ to, className = '', rounded = true }) {
       className={`
         inline-block text-2xl font-bold button-text
         ${rounded ? 'btn-rounded' : 'btn-primary'}
-        bg-[var(--color-accent)] text-[var(--color-text)] border-2 border-[var(--color-highlight)]
-        hover:bg-[var(--color-highlight)] hover:transform hover:scale-105 transition-all duration-300
+        hover:transform hover:scale-105 transition-all duration-300
         ${className}
       `}
     >
