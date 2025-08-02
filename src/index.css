@@ -76,17 +76,17 @@ html, body {
 
 /* Clases para botones y elementos interactivos */
 .btn-primary {
-  background: linear-gradient(90deg, var(--color-accent), var(--color-highlight));
+  background: transparent;
   color: var(--color-text);
-  border: none;
+  border: 5px solid var(--color-accent);
   border-radius: 50px;
   padding: 14px 28px;
-  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 8px rgba(111, 71, 255, 0.3);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(90deg, var(--color-highlight), var(--color-accent));
+  border-color: var(--color-highlight);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(255, 209, 0, 0.4);
 }
@@ -95,13 +95,14 @@ html, body {
 .btn-rounded {
   border-radius: 9999px; /* Completamente redondeados */
   padding: 16px 32px;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-highlight));
+  background: transparent;
   color: var(--color-text);
-  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  border: 5px solid var(--color-accent);
+  transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-rounded:hover {
-  background: linear-gradient(90deg, var(--color-highlight), var(--color-accent));
+  border-color: var(--color-highlight);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(255, 209, 0, 0.4);
 }
@@ -384,13 +385,21 @@ html, body {
   opacity: 1 !important;
   transform: none !important;
 }
+.number {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-highlight), #8b00ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  border: 1px solid var(--color-accent);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+}
 .number-glow {
   text-shadow: 0 0 15px rgba(111, 71, 255, 1);
   animation: pulse-glow 2s ease-in-out infinite alternate;
 }
 
 .gradient-border {
-  background: linear-gradient(to bottom right, #6b21a8, #6f47ff, #000);
+  background: linear-gradient(to bottom right, #6b21a8, #6f47ff, #8b00ff);
   padding: 2px;
 }
 @keyframes pulse-glow {
