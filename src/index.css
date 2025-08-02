@@ -78,11 +78,11 @@ html, body {
 .btn-primary {
   background: transparent;
   color: var(--color-text);
-  border: 2px solid var(--color-accent);
+  border: 5px solid var(--color-accent);
   border-radius: 50px;
   padding: 14px 28px;
   transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 6px rgba(217, 70, 239, 0.3);
+  box-shadow: 0 4px 8px rgba(111, 71, 255, 0.3);
 }
 
 .btn-primary:hover {
@@ -97,9 +97,8 @@ html, body {
   padding: 16px 32px;
   background: transparent;
   color: var(--color-text);
-  border: 2px solid var(--color-accent);
+  border: 5px solid var(--color-accent);
   transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 6px rgba(217, 70, 239, 0.3);
 }
 
 .btn-rounded:hover {
@@ -387,14 +386,29 @@ html, body {
   transform: none !important;
 }
 .number {
-  background: linear-gradient(90deg, #ff00ff, var(--color-accent), #9f00ff);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-highlight), #8b00ff);
   -webkit-background-clip: text;
   color: transparent;
+  border: 1px solid var(--color-accent);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+}
+.number-glow {
+  text-shadow: 0 0 15px rgba(111, 71, 255, 1);
+  animation: pulse-glow 2s ease-in-out infinite alternate;
 }
 
 .gradient-border {
-  background: linear-gradient(to bottom right, #ff00ff, var(--color-accent), #9f00ff);
-  padding: 1px;
+  background: linear-gradient(to bottom right, #6b21a8, #6f47ff, #8b00ff);
+  padding: 2px;
+}
+@keyframes pulse-glow {
+  from {
+    text-shadow: 0 0 10px rgba(111, 71, 255, 0.8);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(111, 71, 255, 1);
+  }
 }
 
 @tailwind base;
