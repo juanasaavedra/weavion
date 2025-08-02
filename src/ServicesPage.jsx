@@ -25,19 +25,6 @@ export default function ServicesPage() {
         </Link>
       </header>
 
-      <div style={{ height: '600px', position: 'relative' }} className="mb-8">
-        <FluidGlass
-          mode="lens"
-          lensProps={{
-            scale: 0.25,
-            ior: 1.15,
-            thickness: 5,
-            chromaticAberration: 0.1,
-            anisotropy: 0.01,
-          }}
-        />
-      </div>
-
       <div className="flex justify-center mb-12 px-4">
         <div className="w-full max-w-xl">
           <Stack randomRotation={false} sendToBackOnClick={false} cardDimensions={{ width: '100%', height: 350 }} />
