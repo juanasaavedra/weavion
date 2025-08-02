@@ -30,8 +30,8 @@ head::before {
   --color-dark-bg: #0C0D13;     /* Shale (Background) - Fondo principal */
   --color-slate: #1E1F26;       /* Dark Slate (Surfaces) - Tarjetas, nav */
   --color-gunmetal: #2A2C37;    /* Gunmetal (Detalles) - Bordes, divisores */
-  --color-accent: #6F47FF;      /* Tech Purple (Accent) - Botones CTA */
-  --color-highlight: #A66AFF;   /* Brillo (Highlight) */
+  --color-accent: #D946EF;      /* Tech Purple (Accent) - Botones CTA */
+  --color-highlight: #FF00FF;   /* Brillo (Highlight) */
   --color-text: #ECECEC;        /* Soft White (Texto) - Texto principal */
 }
 
@@ -88,7 +88,7 @@ html, body {
 .btn-primary:hover {
   border-color: var(--color-highlight);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(255, 209, 0, 0.4);
+  box-shadow: 0 4px 8px rgba(255, 0, 255, 0.4);
 }
 
 /* Clase específica para botones con bordes más redondeados */
@@ -104,7 +104,7 @@ html, body {
 .btn-rounded:hover {
   border-color: var(--color-highlight);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(255, 209, 0, 0.4);
+  box-shadow: 0 4px 8px rgba(255, 0, 255, 0.4);
 }
 
 /* Botones de formulario para navegación */
