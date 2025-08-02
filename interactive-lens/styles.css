@@ -8,132 +8,81 @@ body {
 
 .slide {
   min-height: 100vh;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 2rem;
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.slide.active {
+.slide.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.content {
-  max-width: 500px;
-  text-align: center;
-  margin-bottom: 2rem;
+.text {
+  max-width: 480px;
+}
+
+.text h2 {
+  margin: 0 0 1rem;
+  font-size: 3rem;
+  color: #FFFFFF;
+}
+
+.text p {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #DDDDDD;
 }
 
 .graphic {
-  width: 300px;
-  height: 300px;
-  transition: transform 0.6s ease;
+  width: 200px;
+  height: 200px;
 }
 
-.slide.active .graphic {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+.graphic svg {
+  width: 100%;
+  height: 100%;
 }
 
 .shape {
-  fill: url(#grad) #5F00FF;
-  stroke: #fff;
-  stroke-width: 2;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  fill: url(#grad);
+  stroke: #FFFFFF;
+  stroke-width: 4;
 }
 
-.shape.highlight {
-  transform: scale(1.2);
-  filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
-}
-
-.lens {
-  position: fixed;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  pointer-events: none;
-  mix-blend-mode: screen;
-  background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,0,255,0.1) 60%, rgba(0,0,0,0) 80%);
-  backdrop-filter: blur(2px);
-  z-index: 10;
-  transform: translate(-1000px, -1000px);
-  transition: transform 0.1s ease;
-}
-
-@media (min-width: 1024px) {
-  .slide {
-    flex-direction: row;
-    text-align: left;
-  }
-  .content {
-    flex: 1;
-    margin-right: 2rem;
-    text-align: left;
-  }
-  .graphic {
-    flex: 1;
-  }
-  .slide:nth-child(even) {
-    flex-direction: row-reverse;
-  }
-}
-
-#morph-wrapper .morph-shape {
+#morph-1,
+#morph-2 {
   opacity: 0;
+  transition: opacity 0.6s ease-in-out;
 }
 
-#morph-wrapper .morph-shape.active {
+#morph-1.active,
+#morph-2.active {
   opacity: 1;
 }
 
-
-/* Slide-specific animations */
-#slide-1 .monitor {
-  animation: monitorFloat 3s ease-in-out infinite alternate;
-}
-@keyframes monitorFloat {
-  from { transform: translateY(0); }
-  to { transform: translateY(-8px); }
-}
-
-#slide-2 .envelope {
-  transform-origin: center top;
-  animation: envelopeFlap 4s ease-in-out infinite;
-}
-@keyframes envelopeFlap {
-  0%, 100% { transform: rotateX(0deg); }
-  50% { transform: rotateX(-20deg); }
+@media (max-width: 1023px) {
+  .slide {
+    flex-direction: column;
+    text-align: center;
+  }
+  .graphic {
+    width: 150px;
+    height: 150px;
+    margin-top: 2rem;
+  }
+  .text h2 {
+    font-size: 2.25rem;
+  }
 }
 
-#slide-3 .bar {
-  transform-origin: bottom;
-  animation: barGrow 2s ease-in-out infinite alternate;
-}
-@keyframes barGrow {
-  from { transform: scaleY(0.7); }
-  to { transform: scaleY(1); }
-}
-
-#slide-4 .cloud {
-  animation: cloudDrift 5s ease-in-out infinite alternate;
-}
-@keyframes cloudDrift {
-  from { transform: translateX(-4px); }
-  to { transform: translateX(4px); }
-}
-
-#slide-4 .shape:nth-child(2),
-#slide-4 .shape:nth-child(3) {
-  stroke-dasharray: 20;
-  stroke-dashoffset: 20;
-  animation: drawArrow 2s ease-in-out infinite;
-}
-@keyframes drawArrow {
-  to { stroke-dashoffset: 0; }
+@media (min-width: 1024px) {
+  .slide:nth-child(even) {
+    flex-direction: row-reverse;
+  }
 }
