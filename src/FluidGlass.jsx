@@ -218,7 +218,7 @@ function NavItems({ items }) {
   useFrame(() => {
     if (!group.current) return
     const v = viewport.getCurrentViewport(camera, [0, 0, 15])
-    group.current.position.set(0, -v.height / 2 + 0.2, 15.1)
+    group.current.position.set(0, -v.height / 2 + 0.05, 15.1)
 
     group.current.children.forEach((child, i) => {
       child.position.x = (i - (items.length - 1) / 2) * spacing
