@@ -1,57 +1,20 @@
-// Intersection Observer for slides
+// Intersection Observer for slide fade-in
 const slides = document.querySelectorAll('.slide');
-const options = { threshold: 0.4 };
-const obs = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('active');
+      entry.target.classList.add('visible');
     }
   });
-}, options);
-slides.forEach(s => obs.observe(s));
+}, { threshold: 0.3 });
+slides.forEach(slide => observer.observe(slide));
 
-// Morphing shapes in intro
-const morphShapes = document.querySelectorAll('#morph-wrapper .morph-shape');
-let morphIndex = 0;
+// Morphing shapes on intro slide
+const groups = document.querySelectorAll('#slide-0 svg g');
+let idx = 0;
 function cycleMorph() {
-  morphShapes.forEach(s => s.classList.remove('active'));
-  morphShapes[morphIndex % morphShapes.length].classList.add('active');
-  morphIndex++;
+  groups.forEach((g, i) => g.classList.toggle('active', i === idx));
+  idx = (idx + 1) % groups.length;
 }
 cycleMorph();
 setInterval(cycleMorph, 3000);
-
-// Lens movement and highlight logic
-const lens = document.getElementById('lens');
-let activeShape = null;
-
-function moveLens(e) {
-  const x = e.clientX - lens.offsetWidth / 2;
-  const y = e.clientY - lens.offsetHeight / 2;
-  lens.style.transform = `translate(${x}px, ${y}px)`;
-  const el = document.elementFromPoint(e.clientX, e.clientY);
-  if (el && el.classList.contains('shape')) {
-    if (activeShape && activeShape !== el) {
-      activeShape.classList.remove('highlight');
-    }
-    activeShape = el;
-    activeShape.classList.add('highlight');
-  } else if (activeShape) {
-    activeShape.classList.remove('highlight');
-    activeShape = null;
-  }
-}
-
-document.addEventListener('pointermove', moveLens);
-
-document.addEventListener('pointerdown', (e) => {
-  moveLens(e);
-});
-
-document.addEventListener('pointerleave', () => {
-  lens.style.transform = 'translate(-1000px, -1000px)';
-  if (activeShape) {
-    activeShape.classList.remove('highlight');
-    activeShape = null;
-  }
-});
