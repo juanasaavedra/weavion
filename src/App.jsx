@@ -94,7 +94,7 @@ export default function App() {
       <div className="fixed top-8 right-8 md:right-8 z-50">
         <button
           onClick={handleLang}
-          className="md:text-2xl text-lg font-bold bg-[var(--color-accent)] text-[var(--color-text)] md:px-6 px-4 md:py-3 py-2 btn-rounded border-0 hover:bg-[var(--color-highlight)] hover:transform hover:scale-105 transition-all duration-300 shadow-lg"
+          className="md:text-2xl text-lg font-bold btn-rounded md:px-6 px-4 md:py-3 py-2 hover:transform hover:scale-105 shadow-lg"
         >
           {i18n.language === 'es' ? 'EN' : 'ES'}
         </button>
@@ -145,7 +145,7 @@ export default function App() {
             </motion.div>
             <Link
               to="/services"
-              className="text-2xl font-bold bg-[var(--color-accent)] text-[var(--color-text)] px-6 py-3 rounded-xl border-0 hover:bg-[var(--color-highlight)] transition-colors mt-4"
+              className="inline-block btn-rounded text-2xl font-bold button-text mt-4 shadow-lg"
             >
               {t('hero.cta', "Discover how")}
             </Link>
