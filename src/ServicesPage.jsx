@@ -42,31 +42,9 @@ export default function ServicesPage() {
         </defs>
       </svg>
 
-      <section id="slide-0" className="slide">
-        <div className="text">
-          <h2>Tu página web simplificada</h2>
-          <p>Este es tu punto de partida: un producto digital reducido a formas geométricas. Descubre sus detalles.</p>
-        </div>
-        <div className="graphic">
-          <svg viewBox="0 0 200 200">
-            <g id="morph-1">
-              <rect className="shape" x="30" y="30" width="140" height="140" rx="10" />
-              <circle className="shape" cx="100" cy="100" r="70" />
-              <polygon className="shape" points="100,30 130,170 70,170" />
-            </g>
-            <g id="morph-2">
-              <rect className="shape" x="20" y="60" width="160" height="80" rx="10" />
-              <polygon className="shape" points="50,50 150,50 100,150" />
-              <circle className="shape" cx="100" cy="100" r="50" />
-            </g>
-          </svg>
-        </div>
-      </section>
-
-      <section id="slide-1" className="slide">
-        <div className="text">
-          <h2>Desarrollo web</h2>
-          <p>Transformamos tu idea en una experiencia digital de alto impacto.</p>
+      <div className="flex justify-center mb-12 px-4">
+        <div className="w-full max-w-xl">
+          <Stack randomRotation={false} sendToBackOnClick={false} cardDimensions={{ width: '100%', height: 350 }} />
         </div>
         <div className="graphic">
           <svg viewBox="0 0 200 200">

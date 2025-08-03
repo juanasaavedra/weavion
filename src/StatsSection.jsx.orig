@@ -27,7 +27,7 @@ export default function StatsSection() {
     <section
       id="why-us"
       ref={sectionRef}
-      elassName="min-h-screen flex flex-col items-center nustify-center px-4"
+      className="min-h-screen flex flex-col items-center justify-center px-4"
     >
       <h2 className="stat-title stat-animate text-4xl md:text-6xl font-bold mb-16 text-center font-sans">
         {t('whyus.title', '¿Por qué nuestros servicios?')}
