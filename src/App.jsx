@@ -83,13 +83,7 @@ export default function App() {
           <img src={logo} alt="Logo" className="md:w-16 md:h-16 w-14 h-14 object-cover rounded-full" />
         </button>
       </div>
-      <div className="fixed top-8 right-8 md:right-8 z-50 flex items-center gap-4">
-        <Link
-          to="/services"
-          className="md:text-2xl text-lg font-bold btn-rounded md:px-6 px-4 md:py-3 py-2 hover:transform hover:scale-105 shadow-lg"
-        >
-          {t('common.exploreServices', 'Explore services')}
-        </Link>
+      <div className="fixed top-8 right-8 md:right-8 z-50">
         <button
           onClick={handleLang}
           className="md:text-2xl text-lg font-bold btn-rounded md:px-6 px-4 md:py-3 py-2 hover:transform hover:scale-105 shadow-lg"
@@ -142,7 +136,7 @@ export default function App() {
               {t('hero.motivational', "The universe of digital possibilities awaits your brand")}
             </motion.div>
             <Link
-              to="/services"
+              to="/contact"
               className="inline-block btn-rounded text-2xl font-bold button-text mt-4 shadow-lg"
             >
               {t('hero.cta', "Discover how")}
