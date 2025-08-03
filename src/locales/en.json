@@ -121,6 +121,7 @@
   "common": {
     "discover": "Discover it",
     "backHome": "Back to home",
-    "clickToCollapse": "Click to collapse"
+    "clickToCollapse": "Click to collapse",
+    "exploreServices": "Explore services"
   }
 }

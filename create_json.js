@@ -101,7 +101,8 @@ const enJson = {
   "common": {
     "discover": "Discover it",
     "backHome": "Back to home",
-    "clickToCollapse": "Click to collapse"
+    "clickToCollapse": "Click to collapse",
+    "exploreServices": "Explore services"
   }
 };
 
@@ -210,7 +211,8 @@ const esJson = {
   "common": {
     "discover": "Descúbrelo",
     "backHome": "Volver al inicio",
-    "clickToCollapse": "Haz clic para colapsar"
+    "clickToCollapse": "Haz clic para colapsar",
+    "exploreServices": "Explorar servicios"
   }
 };
 

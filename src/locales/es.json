@@ -134,6 +134,7 @@
   "common": {
     "discover": "Descúbrelo",
     "backHome": "Volver al inicio",
-    "clickToCollapse": "Haz clic para colapsar"
+    "clickToCollapse": "Haz clic para colapsar",
+    "exploreServices": "Explorar servicios"
   }
 }
