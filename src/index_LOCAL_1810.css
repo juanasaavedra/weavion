@@ -77,7 +77,6 @@ html, body {
 /* Clases para botones y elementos interactivos */
 
 .btn-primary {
-<<<<<<< HEAD
   background: linear-gradient(transparent, transparent) padding-box,
               linear-gradient(90deg, var(--color-accent), #7f00ff) border-box;
   color: var(--color-text);
@@ -91,19 +90,6 @@ html, body {
 .btn-primary:hover {
   background: linear-gradient(transparent, transparent) padding-box,
               linear-gradient(90deg, var(--color-highlight), #7f00ff) border-box;
-=======
-  background: transparent;
-  color: var(--color-text);
-  border: 5px solid var(--color-accent);
-  border-radius: 50px;
-  padding: 14px 28px;
-  transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(111, 71, 255, 0.3);
-}
-
-.btn-primary:hover {
-  border-color: var(--color-highlight);
->>>>>>> main
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(255, 0, 255, 0.4);
 }
@@ -112,7 +98,6 @@ html, body {
 .btn-rounded {
   border-radius: 9999px; /* Completamente redondeados */
   padding: 16px 32px;
-<<<<<<< HEAD
   background: linear-gradient(transparent, transparent) padding-box,
               linear-gradient(90deg, var(--color-accent), #7f00ff) border-box;
   color: var(--color-text);
@@ -124,16 +109,6 @@ html, body {
 .btn-rounded:hover {
   background: linear-gradient(transparent, transparent) padding-box,
               linear-gradient(90deg, var(--color-highlight), #7f00ff) border-box;
-=======
-  background: transparent;
-  color: var(--color-text);
-  border: 5px solid var(--color-accent);
-  transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-rounded:hover {
-  border-color: var(--color-highlight);
->>>>>>> main
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(255, 0, 255, 0.4);
 }
@@ -417,7 +392,6 @@ html, body {
   transform: none !important;
 }
 .number {
-<<<<<<< HEAD
   background: linear-gradient(90deg, var(--color-accent), #7f00ff);
   -webkit-background-clip: text;
   color: transparent;
@@ -428,31 +402,6 @@ html, body {
 .gradient-border {
   background: linear-gradient(to bottom right, #ff00ff, var(--color-accent), #9f00ff);
   padding: 1px;
-=======
-  background: linear-gradient(90deg, var(--color-accent), var(--color-highlight), #8b00ff);
-  -webkit-background-clip: text;
-  color: transparent;
-  border: 1px solid var(--color-accent);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-}
-.number-glow {
-  text-shadow: 0 0 15px rgba(111, 71, 255, 1);
-  animation: pulse-glow 2s ease-in-out infinite alternate;
-}
-
-.gradient-border {
-  background: linear-gradient(to bottom right, #6b21a8, #6f47ff, #8b00ff);
-  padding: 2px;
-}
-@keyframes pulse-glow {
-  from {
-    text-shadow: 0 0 10px rgba(111, 71, 255, 0.8);
-  }
-  to {
-    text-shadow: 0 0 20px rgba(111, 71, 255, 1);
-  }
->>>>>>> main
 }
 
 @tailwind base;
