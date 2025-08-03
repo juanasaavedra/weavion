@@ -21,8 +21,7 @@ const enJson = {
   "services": {
     "title": "What do you gain with us?",
     "subtitle": "Digital Solutions for your business",
-    "description": "We offer core services that cover all your business digital needs. Click on the cards to see more details.",
-    "exploreButton": "Explore Services"
+    "description": "We offer core services that cover all your business digital needs. Click on the cards to see more details."
   },
   "about": {
     "title": "About Us",
@@ -102,7 +101,8 @@ const enJson = {
   "common": {
     "discover": "Discover it",
     "backHome": "Back to home",
-    "clickToCollapse": "Click to collapse"
+    "clickToCollapse": "Click to collapse",
+    "exploreServices": "Explore services"
   }
 };
 
@@ -126,8 +126,7 @@ const esJson = {
   "services": {
     "title": "¿Qué ganas con nosotros?",
     "subtitle": "Soluciones Digitales para tu empresa",
-    "description": "Ofrecemos servicios principales que cubren todas las necesidades digitales de tu empresa. Haz clic en las tarjetas para ver más detalles.",
-    "exploreButton": "Explorar Servicios"
+    "description": "Ofrecemos servicios principales que cubren todas las necesidades digitales de tu empresa. Haz clic en las tarjetas para ver más detalles."
   },
   "about": {
     "title": "Sobre Nosotros",
@@ -212,7 +211,8 @@ const esJson = {
   "common": {
     "discover": "Descúbrelo",
     "backHome": "Volver al inicio",
-    "clickToCollapse": "Haz clic para colapsar"
+    "clickToCollapse": "Haz clic para colapsar",
+    "exploreServices": "Explorar servicios"
   }
 };
 
