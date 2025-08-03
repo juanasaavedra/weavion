@@ -15,7 +15,6 @@ export default function ServicesPage() {
       { threshold: 0.3 }
     );
     slides.forEach(slide => observer.observe(slide));
-
     const groups = document.querySelectorAll('#slide-0 svg g');
     let idx = 0;
     function cycleMorph() {
@@ -42,10 +41,19 @@ export default function ServicesPage() {
         </defs>
       </svg>
 
-      <div className="flex justify-center mb-12 px-4">
-        <div className="w-full max-w-xl">
-          <Stack randomRotation={false} sendToBackOnClick={false} cardDimensions={{ width: '100%', height: 350 }} />
+      <section id="slide-4" className="slide">
+        <div className="text">
+          <h2>Integraciones CRM</h2>
+          <p>Centraliza tu información y optimiza la comunicación en un solo lugar.</p>
         </div>
+        <div className="graphic">
+          <svg viewBox="0 0 200 200">
+            <path className="shape" d="M50,120 a30,25 0 0,1 60,-20 a20,18 0 0,1 40,15 h10 a15,12 0 0,1 0,25 h-110 a15,12 0 0,1 0,-20 z" fill="none" />
+            <path className="shape" d="M90,110 l15,15 l-15,15" fill="none" strokeWidth="3" />
+            <path className="shape" d="M110,110 l-15,15 l15,15" fill="none" strokeWidth="3" />
+          </svg>
+        </div>
+
         <div className="graphic">
           <svg viewBox="0 0 200 200">
             <rect className="shape" x="0" y="0" width="200" height="200" fill="none" />
