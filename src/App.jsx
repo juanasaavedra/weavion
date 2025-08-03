@@ -1,6 +1,6 @@
 import DotGrid from './DotGrid';
 import { useTranslation } from 'react-i18next';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DecryptedText from './DecryptedText';
@@ -9,47 +9,34 @@ import ContactSection from './ContactSection';
 import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
 import StatsSection from './StatsSection';
+import ServicesSection from './full_screen_services_section';
 
 export default function App() {
   const { t, i18n } = useTranslation();
   const [folderOpen, setFolderOpen] = useState(false);
-  const folderRef = useRef(null);
   const [folderSize, setFolderSize] = useState(2.0);
   const [currentSection, setCurrentSection] = useState('hero');
-  
-  // Referencias para las secciones
-  const heroRef = useRef(null);
 
+  // Refs for sections
+  const heroRef = useRef(null);
+  const servicesRef = useRef(null);
   const aboutRef = useRef(null);
   const statsRef = useRef(null);
   const processRef = useRef(null);
   const contactRef = useRef(null);
-  
-  // Para el scroll y animaciones
-  const { scrollY } = useScroll();
 
-  useEffect(() => {
-      const updateSize = () => {
-        setFolderSize(window.innerWidth < 640 ? 1.1 : 2.0);
-      };
-    updateSize();
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  
-  // Detectar la sección actual basada en el scroll
+  // Scroll listener
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight / 3;
-      
       const sections = [
         { ref: heroRef, id: 'hero' },
+        { ref: servicesRef, id: 'services' },
         { ref: aboutRef, id: 'about' },
         { ref: statsRef, id: 'benefits' },
         { ref: processRef, id: 'process' },
         { ref: contactRef, id: 'contact' }
       ];
-      
       for (const section of sections) {
         if (section.ref.current) {
           const { top, bottom } = section.ref.current.getBoundingClientRect();
@@ -60,43 +47,52 @@ export default function App() {
         }
       }
     };
-    
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial position
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Resize listener for folder size
+  useEffect(() => {
+    const updateSize = () => {
+      setFolderSize(window.innerWidth < 640 ? 1.1 : 2.0);
+    };
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
-  // Handler para cambiar idioma
   const handleLang = () => {
     i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
   };
 
+  const scrollToServices = () => {
+    servicesRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-[var(--color-dark-bg)] text-[var(--color-text)] font-sans">
-      {/* Logo y selector de idioma */}
-      <div className="fixed top-8 left-8 md:left-8 z-50 flex items-center">
-        <button className="w-16 h-16 md:w-18 md:h-18 rounded-full bg-[var(--color-slate)] flex items-center justify-center shadow-xl border border-[var(--color-slate)]">
-          <img src={logo} alt="Logo" className="md:w-16 md:h-16 w-14 h-14 object-cover rounded-full" />
+      {/* Fixed header: logo, Crear button, language selector */}
+      <div className="fixed top-8 inset-x-0 z-50 flex items-center justify-between px-8">
+        {/* Logo */}
+        <button className="w-16 h-16 rounded-full bg-[var(--color-slate)] flex items-center justify-center shadow-xl border border-[var(--color-slate)]">
+          <img src={logo} alt="Logo" className="w-14 h-14 object-cover rounded-full" />
         </button>
-      </div>
-      <div className="fixed top-8 right-8 md:right-8 z-50">
-        <button
-          onClick={handleLang}
-          className="md:text-2xl text-lg font-bold btn-rounded md:px-6 px-4 md:py-3 py-2 hover:transform hover:scale-105 shadow-lg"
-        >
+        {/* Crear Button */}
+        <Link to="/create" className="text-2xl font-bold text-[#6F47FF] hover:scale-105 transition-transform">
+          {t('header.create', 'Crear')}
+        </Link>
+        {/* Language Toggle */}
+        <button onClick={handleLang} className="text-lg md:text-2xl font-bold btn-rounded px-4 py-2 shadow-lg">
           {i18n.language === 'es' ? 'EN' : 'ES'}
         </button>
       </div>
 
-      {/* Background */}
+      {/* Background Layers */}
       <div className="fixed inset-0 z-0" style={{ backgroundColor: '#000000' }}>
         <StarryBackground />
       </div>
-      <div className="fixed inset-0 z-5" style={{ pointerEvents: 'none' }}>
+      <div className="fixed inset-0 z-5 pointer-events-none">
         <DotGrid
           dotSize={3}
           gap={12}
@@ -110,7 +106,7 @@ export default function App() {
         />
       </div>
 
-      {/* Content */}
+      {/* Main Content */}
       <div className="relative z-10">
         {/* Hero Section */}
         <motion.section
@@ -121,28 +117,35 @@ export default function App() {
           className="min-h-screen flex flex-col items-center justify-center px-4"
         >
           <div className="text-center max-w-3xl mx-auto space-y-8 mt-16 mb-2">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-[#D6D6D6] leading-tight font-sans">
-              <DecryptedText text={t('hero.title', "Take your company to space and beyond")} animateOn="view" />
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-[#D6D6D6] leading-tight">
+              <DecryptedText text={t('hero.title', 'Take your company to space and beyond')} animateOn="view" />
             </h1>
-            <p className="text-2xl md:text-3xl mb-10 text-[#D6D6D6] max-w-2xl mx-auto font-sans">
-              <DecryptedText text={t('hero.subtitle', "Your business deserves a stellar online presence. We'll help you reach for the stars.")} animateOn="view" speed={20} />
+            <p className="text-2xl md:text-3xl mb-10 text-[#D6D6D6] max-w-2xl mx-auto">
+              <DecryptedText
+                text={t(
+                  'hero.subtitle',
+                  "Your business deserves a stellar online presence. We'll help you reach for the stars."
+                )}
+                animateOn="view"
+                speed={20}
+              />
             </p>
-            <motion.div
+            <motion.button
+              onClick={scrollToServices}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              className="text-xl text-[#6F47FF] mb-10 font-semibold"
+              className="inline-block btn-rounded text-2xl font-bold text-[#6F47FF] mt-4 shadow-lg"
             >
-              {t('hero.motivational', "The universe of digital possibilities awaits your brand")}
-            </motion.div>
-            <Link
-              to="/contact"
-              className="inline-block btn-rounded text-2xl font-bold button-text mt-4 shadow-lg"
-            >
-              {t('hero.cta', "Discover how")}
-            </Link>
+              {t('hero.cta', 'Descubre cómo')}
+            </motion.button>
           </div>
         </motion.section>
+
+        {/* Services Section */}
+        <div ref={servicesRef}>
+          <ServicesSection />
+        </div>
 
         {/* About Us Section */}
         <motion.section
@@ -151,31 +154,35 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
-          className="py-24 md:py-32 relative mt-8"
+          className="py-24 md:py-32 mt-8 relative"
         >
-          <div className="absolute inset-0 w-full h-full z-0 bg-black bg-opacity-90" />
+          <div className="absolute inset-0 bg-black bg-opacity-90 z-0" />
           <div className="relative z-10 max-w-6xl mx-auto px-4">
-            <div className="p-12 md:p-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-[#D6D6D6] font-sans">
-                {t('about.title', "About Us")}
-              </h2>
-              <div className="grid md:grid-cols-2 gap-10 items-center">
-                <div>
-                  <p className="text-lg text-[#D6D6D6] mb-8 leading-relaxed font-sans font-medium">
-                    {t('about.paragraph1', "We're a team of passionate digital creators dedicated to launching your business into the digital stratosphere.")}
-                  </p>
-                  <p className="text-lg text-[#D6D6D6] leading-relaxed font-sans font-medium">
-                    {t('about.paragraph2', "Our mission is to help businesses of all sizes achieve orbital success with cutting-edge web solutions and service integrations.")}
-                  </p>
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.5, duration: 1 }}
-                    className="mt-8 text-[#6F47FF] text-lg font-bold"
-                  >
-                    {t('about.quote', "Your vision, our mission - reaching for the stars together.")}
-                  </motion.div>
-                </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-[#D6D6D6]">
+              {t('about.title', 'About Us')}
+            </h2>
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+              <div>
+                <p className="text-lg text-[#D6D6D6] mb-8 leading-relaxed">
+                  {t(
+                    'about.paragraph1',
+                    "We're a team of passionate digital creators dedicated to launching your business into the digital stratosphere."
+                  )}
+                </p>
+                <p className="text-lg text-[#D6D6D6] leading-relaxed">
+                  {t(
+                    'about.paragraph2',
+                    "Our mission is to help businesses of all sizes achieve orbital success with cutting-edge web solutions and service integrations."
+                  )}
+                </p>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 1 }}
+                  className="mt-8 text-[#6F47FF] text-lg font-bold"
+                >
+                  {t('about.quote', 'Your vision, our mission - reaching for the stars together.')}
+                </motion.div>
               </div>
             </div>
           </div>
@@ -187,22 +194,25 @@ export default function App() {
         </section>
 
         {/* Process Section */}
-        <section ref={processRef} className="py-24 md:py-32 px-4 bg-[var(--color-dark-bg)] mt-24" style={{ minHeight: 'auto' }}>
+        <section
+          ref={processRef}
+          className="py-24 md:py-32 px-4 bg-[var(--color-dark-bg)] mt-24"
+          style={{ minHeight: 'auto' }}
+        >
           <h2 className="headline mb-10 text-center text-[var(--color-text)]">
-            {t('process.title', "Our Process")}
+            {t('process.title', 'Our Process')}
           </h2>
           <ProcessTimeline />
         </section>
-        
+
         {/* Contact Section */}
         <div ref={contactRef}>
           <ContactSection />
         </div>
-        
+
         {/* Extra space for mobile view */}
         <div className="h-16 md:h-0"></div>
       </div>
     </div>
   );
 }
-
