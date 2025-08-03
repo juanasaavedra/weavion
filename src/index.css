@@ -100,17 +100,17 @@ html, body {
   border-radius: 9999px; /* Completamente redondeados */
   padding: 16px 32px;
   background: linear-gradient(transparent, transparent) padding-box,
-              linear-gradient(90deg, var(--color-accent), #7f00ff) border-box;
+              linear-gradient(90deg, #a855f7, #6d28d9) border-box;
   color: var(--color-text);
-  border: 3px solid transparent;
+  border: 1px solid transparent;
   transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 2px 6px rgba(217, 70, 239, 0.3);
 }
 
 .btn-rounded:hover {
   background: linear-gradient(transparent, transparent) padding-box,
-              linear-gradient(90deg, var(--color-highlight), #7f00ff) border-box;
-  border-color: var(--color-highlight);
+              linear-gradient(90deg, #c084fc, #8b5cf6) border-box;
+  border-color: transparent;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(255, 0, 255, 0.4);
 }
