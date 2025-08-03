@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './ServicesSlides.css';
+import Stack from './Folder';
 
 export default function ServicesPage() {
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function ServicesPage() {
             <line className="shape" x1="60" y1="140" x2="140" y2="140" strokeWidth="3" />
           </svg>
         </div>
-      </section>
+      </div>
 
       <section id="slide-2" className="slide">
         <div className="text">

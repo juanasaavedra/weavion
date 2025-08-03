@@ -27,42 +27,12 @@ export default function StatsSection() {
     <section
       id="why-us"
       ref={sectionRef}
-      elassName="min-h-screen flex flex-col items-center nustify-center px-4"
+      className="min-h-screen flex flex-col items-center justify-center px-4"
     >
       <h2 className="stat-title stat-animate text-4xl md:text-6xl font-bold mb-16 text-center font-sans">
         {t('whyus.title', '¿Por qué nuestros servicios?')}
       </h2>
       <div className="stats-container grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
-        <div className="stat-item stat-animate flex flex-col items-center p-8">
-          <span className="number font-bold text-7xl md:text-9xl mb-4 inline-block">
-            {t('whyus.stat1.number', '20 %')}
-          </span>
-          <p className="text-gray-300 text-center text-lg">
-            {t('whyus.stat1.text', 'De empresas pierden más de 2 500 USD/mes por downtime')}
-          </p>
-<<<<<<< HEAD
-        </div>
-        <div className="stat-item stat-animate flex flex-col items-center p-8">
-          <span className="number font-bold text-7xl md:text-9xl mb-4 inline-block">
-            {t('whyus.stat2.number', '42 %')}
-          </span>
-          <p className="text-gray-300 text-center text-lg">
-            {t('whyus.stat2.text', 'Mejora de ventas gracias al rendimiento web')}
-          </p>
-=======
-        </div>
-        <div className="stat-item stat-animate flex flex-col items-center p-8">
-          <span className="number font-bold text-7xl md:text-9xl mb-4 inline-block">
-            {t('whyus.stat2.number', '42 %')}
-          </span>
-          <p className="text-gray-300 text-center text-lg">
-            {t('whyus.stat2.text', 'Mejora de ventas gracias al rendimiento web')}
-          </p>
-=======
         <div className="stat-item stat-animate gradient-border rounded-3xl">
           <div className="flex flex-col items-center p-8 rounded-3xl bg-black">
             <span className="number font-bold text-7xl md:text-9xl mb-4 number-glow inline-block">
@@ -82,10 +52,9 @@ export default function StatsSection() {
               {t('whyus.stat2.text', 'Mejora de ventas gracias al rendimiento web')}
             </p>
           </div>
->>>>>>> main
->>>>>>> main
         </div>
       </div>
     </section>
   );
 }
+
