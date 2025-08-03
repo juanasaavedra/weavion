@@ -78,9 +78,6 @@ html, body {
 
 .btn-primary {
 <<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
   background: linear-gradient(transparent, transparent) padding-box,
               linear-gradient(90deg, var(--color-accent), #7f00ff) border-box;
   color: var(--color-text);
@@ -89,13 +86,6 @@ html, body {
   padding: 14px 28px;
   transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 2px 6px rgba(217, 70, 239, 0.3);
-<<<<<<< HEAD
-}
-
-.btn-primary:hover {
-  background: linear-gradient(transparent, transparent) padding-box,
-              linear-gradient(90deg, var(--color-highlight), #7f00ff) border-box;
-=======
 }
 
 .btn-primary:hover {
@@ -114,7 +104,6 @@ html, body {
 .btn-primary:hover {
   border-color: var(--color-highlight);
 >>>>>>> main
->>>>>>> main
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(255, 0, 255, 0.4);
 }
@@ -124,9 +113,6 @@ html, body {
   border-radius: 9999px; /* Completamente redondeados */
   padding: 16px 32px;
 <<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
   background: linear-gradient(transparent, transparent) padding-box,
               linear-gradient(90deg, var(--color-accent), #7f00ff) border-box;
   color: var(--color-text);
@@ -138,8 +124,6 @@ html, body {
 .btn-rounded:hover {
   background: linear-gradient(transparent, transparent) padding-box,
               linear-gradient(90deg, var(--color-highlight), #7f00ff) border-box;
-<<<<<<< HEAD
-=======
 =======
   background: transparent;
   color: var(--color-text);
@@ -149,7 +133,6 @@ html, body {
 
 .btn-rounded:hover {
   border-color: var(--color-highlight);
->>>>>>> main
 >>>>>>> main
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(255, 0, 255, 0.4);
@@ -435,21 +418,11 @@ html, body {
 }
 .number {
 <<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
   background: linear-gradient(90deg, var(--color-accent), #7f00ff);
   -webkit-background-clip: text;
   color: transparent;
   text-shadow: none;
   box-shadow: none;
-<<<<<<< HEAD
-}
-
-.gradient-border {
-  background: linear-gradient(to bottom right, #ff00ff, var(--color-accent), #9f00ff);
-  padding: 1px;
-=======
 }
 
 .gradient-border {
@@ -479,7 +452,6 @@ html, body {
   to {
     text-shadow: 0 0 20px rgba(111, 71, 255, 1);
   }
->>>>>>> main
 >>>>>>> main
 }
 

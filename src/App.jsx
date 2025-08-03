@@ -86,7 +86,7 @@ export default function App() {
       <div className="fixed top-8 left-1/2 -translate-x-1/2 transform z-50">
         <Link
           to="/services"
-          className="text-lg md:text-xl font-light uppercase text-white bg-transparent px-4 py-2 hover:text-[var(--color-accent)] transition-colors"
+          className="text-lg md:text-xl font-light text-white px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors"
         >
           {t('services.exploreButton')}
         </Link>
