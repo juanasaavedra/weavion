@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 import { useTranslation } from 'react-i18next';
 
@@ -43,9 +42,6 @@ export default function Stack({
   const [activeIndex, setActiveIndex] = useState(0);
   const [expanded, setExpanded] = useState(true);
 
-  const spread = 30; // Reducimos el espacio entre tarjetas
-  const scaleStep = 0.05; // Reducimos la diferencia de escala
-  const maxVisible = 2;
 
   // Navegación circular
   const goTo = (idx) => {
@@ -57,53 +53,15 @@ export default function Stack({
 
   return (
     <div
-      className="relative flex items-center justify-center select-none mx-auto card-stack-container"
-      style={{
-        perspective: 600,
-        perspectiveOrigin: '50% 50%',
-        transformStyle: 'preserve-3d',
-        maxWidth: "600px", // Aumentamos el ancho máximo
-        marginBottom: "40px",
-        overflow: "visible" // Allow cards to remain visible
-      }}
+      className="relative flex flex-col items-center justify-center select-none w-screen"
     >
       {/* Stack de tarjetas */}
       {cards.map((card, i) => {
-        // Offset circular para simetría perfecta
-        let offset = i - activeIndex;
-        if (offset > cards.length / 2) offset -= cards.length;
-        if (offset < -cards.length / 2) offset += cards.length;
-        const absOffset = Math.abs(offset);
-        if (absOffset > maxVisible) return null;
         const isActive = i === activeIndex;
-        // Ángulo reducido para evitar que las tarjetas se salgan de pantalla
-        const rotationAngle = window.innerWidth < 768 ? offset * 5 : offset * 6;
-        // Centrado perfectoleft 50% y translateX(-50% + offset)
         return (
-          <motion.div
+          <div
             key={card.id}
-            className={`container-rounded bg-white shadow-xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 px-6 py-8 border-0`}
-            style={{
-              width: window.innerWidth < 640 ? (isActive ? "270px" : "240px") : (isActive ? "320px" : "280px"),
-              height: window.innerWidth < 640 ? (isActive ? "280px" : "240px") : (isActive ? "330px" : "290px"),
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              zIndex: isActive ? 20 : 10 - absOffset,
-              boxShadow: isActive ? '0 10px 30px 0 rgba(0, 0, 0, 0.15)' : '0 4px 12px 0 rgba(0, 0, 0, 0.1)',
-              marginBottom: "0px",
-              overflow: "hidden"
-            }}
-            animate={{
-              scale: isActive && expanded ? 1.08 : 1 - absOffset * scaleStep,
-              rotate: rotationAngle * 0.3, // Rotación mucho menos pronunciada
-              opacity: 1 - absOffset * 0.08, // Aún menos diferencia de opacidad
-              filter: isActive && expanded ? 'brightness(1)' : 'brightness(0.95)',
-              x: offset * (window.innerWidth < 768 ? 30 : 40), // Mayor separación entre tarjetas
-              y: offset * (window.innerWidth < 768 ? 5 : 8) // Ligero desplazamiento vertical
-            }}
-            transformTemplate={(transform) => `translate(-50%, -50%) ${transform}`}
-            transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+            className="w-screen h-screen flex flex-col items-center justify-center cursor-pointer"
             onClick={() => {
               if (isActive) {
                 setExpanded((prev) => !prev);
@@ -112,7 +70,7 @@ export default function Stack({
               }
             }}
           >
-            <div className="flex-1 flex flex-col items-center justify-center text-center">
+            <div className="flex flex-col items-center justify-center text-center w-full h-full">
               <div className={`${fontSizeTitle} font-bold text-[#0A122E] mb-2 subtitle`}>
                 {isActive && expanded ? card.title : card.short}
               </div>
@@ -123,9 +81,11 @@ export default function Stack({
               </div>
             </div>
             {isActive && expanded && (
-              <div className="text-xs text-[#0A122E] pb-2 cursor-pointer select-none">{t('folder.clickToCollapse', 'Haz clic para colapsar')}</div>
+              <div className="text-xs text-[#0A122E] pb-2 cursor-pointer select-none">
+                {t('folder.clickToCollapse', 'Haz clic para colapsar')}
+              </div>
             )}
-          </motion.div>
+          </div>
         );
       })}
     </div>
