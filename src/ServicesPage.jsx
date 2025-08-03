@@ -15,7 +15,6 @@ export default function ServicesPage() {
       { threshold: 0.3 }
     );
     slides.forEach(slide => observer.observe(slide));
-
     const groups = document.querySelectorAll('#slide-0 svg g');
     let idx = 0;
     function cycleMorph() {
@@ -42,32 +41,19 @@ export default function ServicesPage() {
         </defs>
       </svg>
 
-      <section id="slide-0" className="slide">
+      <section id="slide-4" className="slide">
         <div className="text">
-          <h2>Tu página web simplificada</h2>
-          <p>Este es tu punto de partida: un producto digital reducido a formas geométricas. Descubre sus detalles.</p>
+          <h2>Integraciones CRM</h2>
+          <p>Centraliza tu información y optimiza la comunicación en un solo lugar.</p>
         </div>
         <div className="graphic">
           <svg viewBox="0 0 200 200">
-            <g id="morph-1">
-              <rect className="shape" x="30" y="30" width="140" height="140" rx="10" />
-              <circle className="shape" cx="100" cy="100" r="70" />
-              <polygon className="shape" points="100,30 130,170 70,170" />
-            </g>
-            <g id="morph-2">
-              <rect className="shape" x="20" y="60" width="160" height="80" rx="10" />
-              <polygon className="shape" points="50,50 150,50 100,150" />
-              <circle className="shape" cx="100" cy="100" r="50" />
-            </g>
+            <path className="shape" d="M50,120 a30,25 0 0,1 60,-20 a20,18 0 0,1 40,15 h10 a15,12 0 0,1 0,25 h-110 a15,12 0 0,1 0,-20 z" fill="none" />
+            <path className="shape" d="M90,110 l15,15 l-15,15" fill="none" strokeWidth="3" />
+            <path className="shape" d="M110,110 l-15,15 l15,15" fill="none" strokeWidth="3" />
           </svg>
         </div>
-      </section>
 
-      <section id="slide-1" className="slide">
-        <div className="text">
-          <h2>Desarrollo web</h2>
-          <p>Transformamos tu idea en una experiencia digital de alto impacto.</p>
-        </div>
         <div className="graphic">
           <svg viewBox="0 0 200 200">
             <rect className="shape" x="0" y="0" width="200" height="200" fill="none" />
@@ -115,19 +101,6 @@ export default function ServicesPage() {
             <path className="shape" d="M50,120 a30,25 0 0,1 60,-20 a20,18 0 0,1 40,15 h10 a15,12 0 0,1 0,25 h-110 a15,12 0 0,1 0,-20 z" fill="none" />
             <path className="shape" d="M90,110 l15,15 l-15,15" fill="none" strokeWidth="3" />
             <path className="shape" d="M110,110 l-15,15 l15,15" fill="none" strokeWidth="3" />
-          </svg>
-        </div>
-      </section>
-
-      <section id="slide-5" className="slide">
-        <div className="text">
-          <h2>Service Title</h2>
-          <p>Descripción breve del servicio.</p>
-        </div>
-        <div className="graphic">
-          <svg viewBox="0 0 200 200">
-            <polygon className="shape" points="100,30 170,100 100,170 30,100" />
-            <circle className="shape" cx="100" cy="100" r="40" />
           </svg>
         </div>
       </section>
