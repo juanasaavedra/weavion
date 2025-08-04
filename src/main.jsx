@@ -16,7 +16,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/weavion" element={<App />} />
         <Route path="/weavion/" element={<App />} />
-        <Route path="/weavion/services" element={<ServicesPage />} />
       </Routes>
     </HashRouter>
   </React.StrictMode>
