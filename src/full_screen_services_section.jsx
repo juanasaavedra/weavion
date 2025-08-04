@@ -1,124 +1,150 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Static SVGs or image placeholders for teddy and service icons
-const TeddySVG = () => (
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-1/2 h-auto">
-    <circle cx="100" cy="100" r="80" fill="#dbc3e0" stroke="#6B46C1" strokeWidth="4" />
-    <circle cx="70" cy="80" r="10" fill="#6B46C1" />
-    <circle cx="130" cy="80" r="10" fill="#6B46C1" />
-    <path d="M70,130 Q100,160 130,130" fill="none" stroke="#6B46C1" strokeWidth="4" />
-  </svg>
-);
-const DesignIcon = () => (
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-1/3 h-auto">
-    <rect x="20" y="40" width="160" height="100" rx="10" fill="none" stroke="#6B46C1" strokeWidth="4" />
-    <line x1="20" y1="80" x2="180" y2="80" stroke="#6B46C1" strokeWidth="3" />
-    <circle cx="40" cy="60" r="6" fill="#6B46C1" />
-    <circle cx="60" cy="60" r="6" fill="#6B46C1" />
-  </svg>
-);
-const EmailIcon = () => (
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-1/3 h-auto">
-    <rect x="20" y="60" width="160" height="80" rx="8" fill="none" stroke="#6B46C1" strokeWidth="4" />
-    <polyline points="20,60 100,120 180,60" fill="none" stroke="#6B46C1" strokeWidth="3" />
-  </svg>
-);
-const CRMIcon = () => (
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-1/3 h-auto">
-    <circle cx="80" cy="120" r="20" fill="none" stroke="#6B46C1" strokeWidth="3" />
-    <circle cx="120" cy="120" r="20" fill="none" stroke="#6B46C1" strokeWidth="3" />
-    <line x1="100" y1="100" x2="100" y2="140" stroke="#6B46C1" strokeWidth="2" />
-  </svg>
-);
-const AnalyticsIcon = () => (
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-1/3 h-auto">
-    <rect x="60" y="120" width="20" height="40" fill="none" stroke="#6B46C1" strokeWidth="3" />
-    <rect x="100" y="100" width="20" height="60" fill="none" stroke="#6B46C1" strokeWidth="3" />
-    <rect x="140" y="80" width="20" height="80" fill="none" stroke="#6B46C1" strokeWidth="3" />
+// Base SVG for the full-body teddy
+const TeddyBase = ({ children }) => (
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="100" cy="130" rx="60" ry="50" fill="none" stroke="#6B46C1" strokeWidth="4" />
+    <circle cx="100" cy="70" r="45" fill="none" stroke="#6B46C1" strokeWidth="4" />
+    <circle cx="60" cy="30" r="12" fill="none" stroke="#6B46C1" strokeWidth="3" />
+    <circle cx="140" cy="30" r="12" fill="none" stroke="#6B46C1" strokeWidth="3" />
+    <path d="M40,110 Q20,140 60,150" fill="none" stroke="#6B46C1" strokeWidth="4" />
+    <path d="M160,110 Q180,140 140,150" fill="none" stroke="#6B46C1" strokeWidth="4" />
+    <path d="M80,180 Q80,200 100,200" fill="none" stroke="#6B46C1" strokeWidth="4" />
+    <path d="M120,180 Q120,200 100,200" fill="none" stroke="#6B46C1" strokeWidth="4" />
+    <circle cx="85" cy="60" r="5" fill="#6B46C1" />
+    <circle cx="115" cy="60" r="5" fill="#6B46C1" />
+    <path d="M80,80 Q100,90 120,80" fill="none" stroke="#6B46C1" strokeWidth="3" />
+    {children}
   </svg>
 );
 
-// Section definitions with background gradients
+// Overlays representing commercial impact per tool
+const WebDesignOverlay = () => (
+  <g>
+    {/* Browser window frame */}
+    <rect x="20" y="20" width="160" height="100" rx="8" fill="none" stroke="#FFFFFF" strokeWidth="3" />
+    {/* Product card with teddy prominently */}
+    <rect x="40" y="40" width="120" height="60" rx="4" fill="none" stroke="#FFFFFF" strokeWidth="2" />
+    <text x="100" y="75" textAnchor="middle" fontSize="12" fill="#FFFFFF">Tienda Virtual</text>
+    {/* Teddy silhouette inside card */}
+    <ellipse cx="100" cy="95" rx="20" ry="15" fill="none" stroke="#6B46C1" strokeWidth="2" />
+  </g>
+);
+
+const EmailOverlay = () => (
+  <g>
+    {/* Device outlines */}
+    <rect x="10" y="30" width="50" height="80" rx="4" fill="none" stroke="#FFFFFF" strokeWidth="2" />
+    <rect x="140" y="50" width="50" height="60" rx="4" fill="none" stroke="#FFFFFF" strokeWidth="2" />
+    {/* Envelope icon with teddy face inside */}
+    <rect x="60" y="20" width="80" height="50" rx="4" fill="none" stroke="#FFFFFF" strokeWidth="3" />
+    <text x="100" y="45" textAnchor="middle" fontSize="10" fill="#FFFFFF">E-mail</text>
+    <circle cx="100" cy="50" r="8" fill="none" stroke="#6B46C1" strokeWidth="2" />
+  </g>
+);
+
+const CRMOverlay = () => (
+  <g>
+    {/* Kanban-style columns */}
+    <rect x="30" y="40" width="40" height="100" rx="4" fill="none" stroke="#FFFFFF" strokeWidth="2" />
+    <rect x="90" y="40" width="40" height="100" rx="4" fill="none" stroke="#FFFFFF" strokeWidth="2" />
+    <rect x="150" y="40" width="40" height="100" rx="4" fill="none" stroke="#FFFFFF" strokeWidth="2" />
+    {/* Teddy cards in columns */}
+    <circle cx="50" cy="60" r="8" fill="none" stroke="#6B46C1" strokeWidth="2" />
+    <circle cx="110" cy="90" r="8" fill="none" stroke="#6B46C1" strokeWidth="2" />
+    <circle cx="170" cy="120" r="8" fill="none" stroke="#6B46C1" strokeWidth="2" />
+  </g>
+);
+
+const AnalyticsOverlay = () => (
+  <g>
+    {/* Bar chart */}
+    <rect x="70" y="140" width="15" height="40" fill="none" stroke="#FFFFFF" strokeWidth="2" />
+    <rect x="95" y="120" width="15" height="60" fill="none" stroke="#FFFFFF" strokeWidth="2" />
+    <rect x="120" y="100" width="15" height="80" fill="none" stroke="#FFFFFF" strokeWidth="2" />
+    {/* Upward trend line */}
+    <polyline points="70,140 95,120 120,100" fill="none" stroke="#6B46C1" strokeWidth="3" markerEnd="url(#arrow)" />
+    <defs>
+      <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3">
+        <path d="M0,0 L6,3 L0,6" fill="#6B46C1" />
+      </marker>
+    </defs>
+  </g>
+);
+
+// Section data: commercial descriptions of impact
 const sections = [
   {
-    id: 'hero',
-    title: 'Así es tu marca o producto digital',
-    subtitle: 'Mira cómo un osito de peluche cobra vida y se transforma con cada paso.',
-    background: 'linear-gradient(135deg, #0e001c 0%, #2b0042 100%)',
-    Content: TeddySVG,
-  },
-  {
     id: 'diseno',
-    title: 'Diseño Web Innovador',
-    subtitle: 'El osito ahora sostiene un boceto que cobra forma de interfaz.',
-    background: 'linear-gradient(135deg, #1a0020 0%, #4a016f 100%)',
-    Content: DesignIcon,
+    title: 'Diseño Web',
+    description: 'Convierte tu producto en una tienda virtual premium que genera ventas 24/7.',
+    Overlay: WebDesignOverlay,
+    bg: 'bg-gradient-to-br from-purple-900 to-purple-800'
   },
   {
     id: 'email',
-    title: 'Email Marketing Efectivo',
-    subtitle: 'Mira el osito compartir mensajes envolventes directamente al inbox.',
-    background: 'linear-gradient(135deg, #25005a 0%, #6b26c1 100%)',
-    Content: EmailIcon,
+    title: 'Email Marketing',
+    description: 'Mantén tu marca en la bandeja de entrada en múltiples dispositivos.',
+    Overlay: EmailOverlay,
+    bg: 'bg-gradient-to-br from-purple-800 to-purple-700'
   },
   {
     id: 'crm',
-    title: 'Integración CRM Inteligente',
-    subtitle: 'Nuestro osito conecta tus datos como si fueran engranajes perfectamente sincronizados.',
-    background: 'linear-gradient(135deg, #33009f 0%, #8c4acf 100%)',
-    Content: CRMIcon,
+    title: 'Gestión CRM',
+    description: 'Organiza cada interacción y seguimiento de clientes de forma eficiente.',
+    Overlay: CRMOverlay,
+    bg: 'bg-gradient-to-br from-purple-700 to-purple-600'
   },
   {
     id: 'analiticas',
-    title: 'Analíticas y Automatizaciones',
-    subtitle: 'Observa al osito analizar patrones y ejecutar flujos con precisión.',
-    background: 'linear-gradient(135deg, #4a00d6 0%, #b36ffb 100%)',
-    Content: AnalyticsIcon,
-  },
+    title: 'Analíticas Inteligentes',
+    description: 'Obtén insights de uso y optimiza tus estrategias basadas en datos reales.',
+    Overlay: AnalyticsOverlay,
+    bg: 'bg-gradient-to-br from-purple-600 to-purple-500'
+  }
 ];
 
-// Full-screen section with entry animations
-export default function FullScreenServicesSection() {
+export default function ServicesSection() {
   return (
-    <div className="overflow-y-scroll snap-y snap-mandatory h-screen">
-      {sections.map(({ id, title, subtitle, background, Content }) => (
+    <div className="overflow-y-auto snap-y snap-mandatory h-screen">
+      {sections.map(({ id, title, description, Overlay, bg }) => (
         <motion.section
           key={id}
-          className="w-screen h-screen flex flex-col items-center justify-center"
-          style={{ background }}
+          className={`h-screen snap-start flex flex-col items-center justify-center ${bg}`}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center px-8"
-          >
+          <div className="w-full h-full flex flex-col items-center justify-center text-center px-6">
             <motion.h2
-              className="text-8xl font-bold text-white"
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.2 }}
+              className="text-6xl md:text-8xl font-bold text-white mb-3"
+              initial={{ y: -40, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 100, damping: 20 }}
             >
               {title}
             </motion.h2>
             <motion.p
-              className="mt-4 text-2xl text-gray-200"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-xl md:text-2xl text-gray-200 max-w-2xl mb-8"
+              initial={{ y: -20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
             >
-              {subtitle}
+              {description}
             </motion.p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.6 }}
-            className="mt-12"
-          >
-            <Content />
-          </motion.div>
+            <motion.div
+              className="w-64 h-64"
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+            >
+              <TeddyBase>
+                <Overlay />
+              </TeddyBase>
+            </motion.div>
+          </div>
         </motion.section>
       ))}
     </div>
