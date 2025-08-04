@@ -10,7 +10,7 @@ import ContactSection from './ContactSection';
 import logo from './assets/weavion.logo.png';
 import StarryBackground from './StarryBackground';
 import StatsSection from './StatsSection';
-import ServicesSection from './full_screen_services_section';
+import services from './full_screen_services_section';
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -131,7 +131,7 @@ export default function App() {
                 speed={20}
               />
             </p>
-            <DiscoverButton to="/services" />
+            <DiscoverButton to="./services" />
           </div>
         </motion.section>
 
