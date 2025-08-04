@@ -142,10 +142,7 @@ export default function App() {
           </div>
         </motion.section>
 
-        {/* Services Section */}
-        <div ref={servicesRef}>
-          <ServicesSection />
-        </div>
+
 
         {/* About Us Section */}
         <motion.section

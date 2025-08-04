@@ -7,7 +7,7 @@ export default function DiscoverButton({ to, className = '', rounded = true }) {
   
   return (
     <Link
-      to={to}
+      to={'./full_screen_services_section' || to}
       className={`
         inline-block text-2xl font-bold button-text
         ${rounded ? 'btn-rounded' : 'btn-primary'}
