@@ -394,16 +394,11 @@ html, body {
   transform: none !important;
 }
 .number {
-  background: linear-gradient(90deg, var(--color-accent), #7f00ff);
+  background: linear-gradient(to right, #6b21a8, #6f47ff, #8b00ff);
   -webkit-background-clip: text;
   color: transparent;
   text-shadow: none;
   box-shadow: none;
-}
-
-.number-glow {
-  text-shadow: 0 0 15px rgba(111, 71, 255, 1);
-  animation: pulse-glow 2s ease-in-out infinite alternate;
 }
 
 .gradient-border {
