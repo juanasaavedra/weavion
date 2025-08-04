@@ -83,15 +83,15 @@ export default function App() {
           <img src={logo} alt="Logo" className="md:w-16 md:h-16 w-14 h-14 object-cover rounded-full" />
         </button>
       </div>
-      <div className="fixed top-8 left-1/2 -translate-x-1/2 transform z-50">
+      <div className="fixed top-8 right-8 md:right-8 z-50 flex items-center gap-4">
         <Link
           to="/services"
-          className="text-lg md:text-xl font-light text-white px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors"
+          replace
+          aria-label={t('common.exploreServices', 'Explore services')}
+          className="md:text-2xl text-lg font-bold btn-rounded md:px-6 px-4 md:py-3 py-2 hover:transform hover:scale-105 shadow-lg"
         >
-          {t('services.exploreButton')}
+          {t('common.exploreServices', 'Explore services')}
         </Link>
-      </div>
-      <div className="fixed top-8 right-8 md:right-8 z-50">
         <button
           onClick={handleLang}
           className="md:text-2xl text-lg font-bold btn-rounded md:px-6 px-4 md:py-3 py-2 hover:transform hover:scale-105 shadow-lg"
@@ -145,6 +145,8 @@ export default function App() {
             </motion.div>
             <Link
               to="/services"
+              replace
+              aria-label={t('hero.cta', 'Discover how')}
               className="inline-block btn-rounded text-2xl font-bold button-text mt-4 shadow-lg"
             >
               {t('hero.cta', "Discover how")}
