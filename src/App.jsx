@@ -4,6 +4,7 @@ import { motion, useScroll } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DecryptedText from './DecryptedText';
+import DiscoverButton from './DiscoverButton';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
 import logo from './assets/weavion.logo.png';
@@ -130,22 +131,9 @@ export default function App() {
                 speed={20}
               />
             </p>
-            <motion.button
-              onClick={scrollToServices}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-              className="inline-block btn-rounded text-2xl font-bold text-[#6F47FF] mt-4 shadow-lg"
-            >
-              {t('hero.cta', 'Descubre cómo')}
-            </motion.button>
+            <DiscoverButton to="/services" />
           </div>
         </motion.section>
-
-        {/* Services Section */}
-        <div ref={servicesRef}>
-          <ServicesSection />
-        </div>
 
         {/* About Us Section */}
         <motion.section
