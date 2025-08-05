@@ -21,7 +21,6 @@ export default function App() {
       <main className="relative z-10">
         <Routes>
           <Route path="/services" element={<ServicesSection />} />
-          <Route path="/create" element={<CreatePage />} />
         </Routes>
       </main>
     </BrowserRouter>
