@@ -17,9 +17,9 @@ export default function App() {
     <>
       <Header />
       <BackgroundLayers />
+        <Landing />
       {/* Main content wrapper with z-index to sit above backgrounds */}
       <div className="relative z-10">
-        <Landing />
       </div>
     </>
   );
@@ -110,7 +110,7 @@ function Landing() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
         <StatsSection />
       </section>
 
@@ -120,7 +120,7 @@ function Landing() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
         <ContactSection />
       </section>
     </>
