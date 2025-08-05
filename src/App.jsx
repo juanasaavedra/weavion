@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
@@ -15,11 +14,11 @@ import logo from './assets/weavion.logo.png';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <BackgroundLayers />
       <Landing />
-    </BrowserRouter>
+    </>
   );
 }
 
