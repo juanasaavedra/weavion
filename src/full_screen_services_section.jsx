@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Asset imports (replace with actual filenames in your assets folder)
+// Imágenes de servicios
 import webDesignImg from './assets/diseño y desarrollo web.png';
 import emailMarketingImg from './assets/email marketing.png';
 import crmImg from './assets/crm y service titan.png';
 import automationImg from './assets/automatizaciones.png';
 
-// Sections configuration with expanded descriptions
+// Configuración de cada sección de servicio
 const sections = [
   {
     id: 'diseno',
