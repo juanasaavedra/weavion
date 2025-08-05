@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 // Asset imports (replace with actual filenames in your assets folder)
-import webDesignImg from './assets/diseno-desarrollo-web.svg';
-import emailMarketingImg from './assets/email-marketing.svg';
-import crmImg from './assets/crm-service-titan.svg';
-import automationImg from './assets/automatizaciones.svg';
+import webDesignImg from './assets/diseño y desarrollo web.png';
+import emailMarketingImg from './assets/email marketing.png';
+import crmImg from './assets/crm y service titan.png';
+import automationImg from './assets/automatizaciones.png';
 
 // Sections configuration with expanded descriptions
 const sections = [
