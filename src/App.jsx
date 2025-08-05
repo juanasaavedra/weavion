@@ -18,11 +18,7 @@ export default function App() {
     <BrowserRouter>
       <Header />
       <BackgroundLayers />
-      <main className="relative z-10">
-        <Routes>
-          <Route path="/services" element={<ServicesSection />} />
-        </Routes>
-      </main>
+      <Landing />
     </BrowserRouter>
   );
 }
