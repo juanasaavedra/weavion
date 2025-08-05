@@ -10,7 +10,6 @@ import StatsSection from './StatsSection';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
 import DiscoverButton from './DiscoverButton';
-import ServicesSection from './full_screen_services_section';
 import logo from './assets/weavion.logo.png';
 
 export default function App() {
@@ -18,7 +17,10 @@ export default function App() {
     <>
       <Header />
       <BackgroundLayers />
-      <Landing />
+      {/* Main content wrapper with z-index to sit above backgrounds */}
+      <div className="relative z-10">
+        <Landing />
+      </div>
     </>
   );
 }
@@ -33,11 +35,11 @@ function Header() {
         <img src={logo} alt="Logo" className="w-14 h-14 rounded-full" />
       </Link>
       <div className="flex items-center gap-6">
-        <DiscoverButton to="/services" />
-        <Link to="/create" className="text-2xl font-bold text-[#6F47FF]">
+        <DiscoverButton to="/services" className="btn shadow-md active:shadow-lg" />
+        <Link to="/services" className="btn text-2xl font-bold shadow-md active:shadow-lg">
           {t('header.create', 'Crear')}
         </Link>
-        <button onClick={toggleLang} className="text-lg md:text-2xl font-bold">
+        <button onClick={toggleLang} className="btn text-lg md:text-2xl shadow-md active:shadow-lg">
           {i18n.language === 'es' ? 'EN' : 'ES'}
         </button>
       </div>
@@ -47,7 +49,7 @@ function Header() {
 
 function BackgroundLayers() {
   return (
-    <>  
+    <>
       <div className="fixed inset-0 z-0 bg-black">
         <StarryBackground />
       </div>
@@ -70,9 +72,11 @@ function BackgroundLayers() {
 
 function Landing() {
   const { t } = useTranslation();
+
   return (
     <>
-      <section className="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+      {/* Hero Section */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-4 text-center rounded-xl overflow-hidden">
         <motion.h1
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
@@ -89,40 +93,36 @@ function Landing() {
         >
           {t('hero.subtitle', 'Your business deserves a stellar online presence. We’ll help you reach for the stars.')}
         </motion.p>
-        <DiscoverButton to="/services" />
+        <DiscoverButton to="/services" className="btn shadow-md active:shadow-lg" />
       </section>
 
-      <section className="py-24 px-4">
+      {/* About Us Section */}
+      <section className="py-24 px-4 rounded-xl overflow-hidden">
         <h2 className="text-4xl font-bold text-center text-[#D6D6D6] mb-6">
           {t('about.title', 'About Us')}
         </h2>
         <p className="text-lg text-[#D6D6D6] max-w-3xl mx-auto text-center">
           {t(
             'about.paragraph1',
-            'We’re a team of passionate digital creators dedicated to launching your business into the digital stratosphere.'
+            "We're a team of passionate digital creators dedicated to launching your business into the digital stratosphere."
           )}
         </p>
       </section>
 
+      {/* Stats Section */}
       <section className="py-24 px-4">
         <StatsSection />
       </section>
 
-      <section className="py-24 px-4 bg-black">
+      {/* Process Section */}
+      <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
         <ProcessTimeline />
       </section>
 
+      {/* Contact Section */}
       <section className="py-24 px-4">
         <ContactSection />
       </section>
     </>
-  );
-}
-
-function CreatePage() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white">
-      <h1 className="text-4xl">Página de creación en construcción</h1>
-    </div>
   );
 }
