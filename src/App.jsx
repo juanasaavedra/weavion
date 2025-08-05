@@ -95,7 +95,7 @@ export default function App() {
       </div>
       <div className="fixed inset-0 z-5 pointer-events-none">
         <DotGrid
-          dotSize={3}
+          dotSize={4}
           gap={12}
           baseColor="#000000"
           activeColor="#6F47FF"
@@ -131,7 +131,7 @@ export default function App() {
                 speed={20}
               />
             </p>
-            <DiscoverButton to="./services" />
+            <DiscoverButton to="services"/>
           </div>
         </motion.section>
 
