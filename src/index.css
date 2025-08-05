@@ -87,13 +87,6 @@ html, body {
   box-shadow: 0 2px 6px rgba(217, 70, 239, 0.3);
 }
 
-.btn-primary:hover {
-  background: linear-gradient(transparent, transparent) padding-box,
-              linear-gradient(90deg, var(--color-highlight), #7f00ff) border-box;
-  border-color: var(--color-highlight);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(255, 0, 255, 0.4);
-}
 
 /* Clase específica para botones con bordes más redondeados */
 .btn-rounded {
