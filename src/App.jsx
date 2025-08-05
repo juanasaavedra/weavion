@@ -12,7 +12,6 @@ import ContactSection from './ContactSection';
 import DiscoverButton from './DiscoverButton';
 import ServicesSection from './full_screen_services_section';
 import logo from './assets/weavion.logo.png';
-import css from './index.css';
 
 export default function App() {
   return (
@@ -21,7 +20,6 @@ export default function App() {
       <BackgroundLayers />
       <main className="relative z-10">
         <Routes>
-          <Route path="/" element={<Landing />} />
           <Route path="/services" element={<ServicesSection />} />
           <Route path="/create" element={<CreatePage />} />
         </Routes>
