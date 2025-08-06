@@ -1,5 +1,5 @@
+// src/App.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
@@ -9,7 +9,7 @@ import StarryBackground from './StarryBackground';
 import StatsSection from './StatsSection';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
-import DiscoverButton from './DiscoverButton';
+import DiscoverButton from './DiscoverButton'; // Solo para el Hero
 import logo from './assets/weavion.logo.png';
 
 export default function App() {
@@ -17,32 +17,27 @@ export default function App() {
     <>
       <Header />
       <BackgroundLayers />
-        <div className="relative z-10">
-          <Landing />
-        </div>
+      <main className="relative z-10">
+        <Landing />
+      </main>
     </>
   );
 }
 
 function Header() {
   const { t, i18n } = useTranslation();
-  const toggleLang = () => i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
+  const toggleLang = () =>
+    i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
 
   return (
-    <div className="fixed top-8 inset-x-0 z-50 flex items-center justify-between px-8">
-      <Link to="">
-        <img src={logo} alt="Logo" className="w-14 h-14 rounded-full" />
-      </Link>
-      <div className="flex items-center gap-6">
-        <DiscoverButton to="services" className="btn shadow-md active:shadow-lg" />
-        <Link to="services" className="btn text-2xl font-bold shadow-md active:shadow-lg">
-          {t('header.create', 'Crear')}
-        </Link>
-        <button onClick={toggleLang} className="btn text-lg md:text-2xl shadow-md active:shadow-lg">
-          {i18n.language === 'es' ? 'EN' : 'ES'}
-        </button>
-      </div>
-    </div>
+    <header className="fixed top-8 inset-x-0 z-50 flex justify-end px-8">
+      <button
+        onClick={toggleLang}
+        className="btn rounded-full text-lg md:text-2xl"
+      >
+        {i18n.language === 'es' ? 'EN' : 'ES'}
+      </button>
+    </header>
   );
 }
 
@@ -71,57 +66,81 @@ function BackgroundLayers() {
 
 function Landing() {
   const { t } = useTranslation();
-
   return (
-    <>
-      {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-4 text-center rounded-xl overflow-hidden">
+    <section className="flex flex-col items-center text-center text-white">
+      {/* Hero */}
+      <div className="min-h-screen flex flex-col items-center justify-center px-4">
         <motion.h1
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold text-[#D6D6D6] mb-6"
+          className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6"
         >
-          {t('hero.title', 'Take your company to space and beyond')}
+          {t(
+            'hero.title',
+            'Impulsa tu empresa con soluciones web orbitadas en innovación y seguridad.'
+          )}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-2xl md:text-3xl text-[#D6D6D6] max-w-2xl mb-8"
+          className="text-base sm:text-lg md:text-2xl max-w-2xl mb-8 sm:mb-10"
         >
-          {t('hero.subtitle', 'Your business deserves a stellar online presence. We’ll help you reach for the stars.')}
+          {t(
+            'hero.subtitle',
+            'Tu negocio merece una presencia estelar en línea. Te ayudaremos a alcanzar las estrellas.'
+          )}
         </motion.p>
-        <DiscoverButton to="services" className="btn shadow-md active:shadow-lg" />
-      </section>
+        {/* El botón “Descúbrelo” se quita del Hero */}
+      </div>
 
-      {/* About Us Section */}
-      <section className="py-24 px-4 rounded-xl overflow-hidden">
-        <h2 className="text-4xl font-bold text-center text-[#D6D6D6] mb-6">
+      {/* Separador extra en móvil y desktop */}
+      <div className="h-12 md:h-24" />
+
+      {/* About Us */}
+      <div className="py-16 md:py-24 px-4">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 sm:mb-6"
+        >
           {t('about.title', 'About Us')}
-        </h2>
-        <p className="text-lg text-[#D6D6D6] max-w-3xl mx-auto text-center">
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto"
+        >
           {t(
             'about.paragraph1',
             "We're a team of passionate digital creators dedicated to launching your business into the digital stratosphere."
           )}
-        </p>
-      </section>
+        </motion.p>
+      </div>
+
+      <div className="h-12 md:h-24" />
 
       {/* Stats Section */}
-      <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
+      <div className="py-16 md:py-24 px-4">
         <StatsSection />
-      </section>
+      </div>
+
+      <div className="h-12 md:h-24" />
 
       {/* Process Section */}
-      <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
+      <div className="py-16 md:py-24 px-4 bg-black">
         <ProcessTimeline />
-      </section>
+      </div>
+
+      <div className="h-12 md:h-24" />
 
       {/* Contact Section */}
-      <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
+      <div className="py-16 md:py-24 px-4">
         <ContactSection />
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
