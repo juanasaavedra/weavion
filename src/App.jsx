@@ -17,10 +17,9 @@ export default function App() {
     <>
       <Header />
       <BackgroundLayers />
-        <Landing />
-      {/* Main content wrapper with z-index to sit above backgrounds */}
-      <div className="relative z-10">
-      </div>
+        <div className="relative z-10">
+          <Landing />
+        </div>
     </>
   );
 }
