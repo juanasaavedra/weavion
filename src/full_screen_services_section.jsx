@@ -1,3 +1,4 @@
+// full_screen_services_section.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -14,71 +15,82 @@ const sections = [
     title: 'Diseño y Desarrollo Web',
     description: `Creamos tiendas virtuales y portales web escalables, optimizados para SEO y conversión. Tu producto estará disponible 24/7 con una experiencia de usuario intuitiva y adaptativa.`,
     image: webDesignImg,
-    bg: 'bg-gradient-to-br from-purple-900 to-purple-800'
+    bgColor: '#010207'
   },
   {
     id: 'email',
     title: 'Email Marketing',
     description: `Diseñamos campañas de correo que llegan directamente a la bandeja de entrada, adaptándose a todos los dispositivos. Aumentamos el engagement mediante segmentación inteligente y automatización de envíos.`,
     image: emailMarketingImg,
-    bg: 'bg-gradient-to-br from-purple-800 to-purple-700'
+    bgColor: '#010207'
   },
   {
     id: 'crm',
     title: 'Gestión CRM',
     description: `Implementamos flujos de trabajo que centralizan datos de clientes y actividades en un tablero visual. Automatizamos seguimientos y recordatorios para fortalecer la relación con tus usuarios.`,
     image: crmImg,
-    bg: 'bg-gradient-to-br from-purple-700 to-purple-600'
+    bgColor: '#12073e'
   },
   {
     id: 'automatizaciones',
     title: 'Analíticas y Automatizaciones',
     description: `Integración de herramientas de analítica que recopilan métricas en tiempo real y generan reportes automáticos. Usa workflows inteligentes para automatizar tareas repetitivas y escalar operaciones sin esfuerzo.`,
     image: automationImg,
-    bg: 'bg-gradient-to-br from-purple-600 to-purple-500'
+    bgColor: '#141524'
   }
 ];
 
 export default function ServicesSection() {
   return (
-    <div className="overflow-y-auto snap-y snap-mandatory h-screen">
-      {sections.map(({ id, title, description, image, bg }) => (
-        <motion.section
-          key={id}
-          className={`h-screen snap-start flex flex-col items-center justify-center ${bg}`}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="w-full h-full flex flex-col items-center justify-center text-center px-6">
-            <motion.h2
-              className="text-6xl md:text-8xl font-bold text-white mb-4"
-              initial={{ y: -40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+    <div className="h-screen overflow-y-auto snap-y snap-mandatory">
+      {sections.map(({ id, title, description, image, bgColor }, index) => {
+        // Alternar orden: en desktop las secciones pares llevan imagen a la derecha
+        const isReversed = index % 2 === 0;
+        return (
+          <motion.section
+            key={id}
+            className="h-screen snap-start flex flex-col md:flex-row items-center justify-center text-white"
+            style={{ backgroundColor: bgColor }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div
+              className={`flex-1 px-6 py-12 flex flex-col justify-center ${
+                isReversed ? 'md:order-2' : 'md:order-1'
+              } text-center md:text-left`}
             >
-              {title}
-            </motion.h2>
-            <motion.p
-              className="text-xl md:text-2xl text-gray-200 max-w-3xl mb-8 whitespace-pre-line"
-              initial={{ y: -20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              {description}
-            </motion.p>
-            <motion.img
-              src={image}
-              alt={title}
-              className="w-64 h-64 object-contain mb-10"
+              <motion.h2
+                className="text-4xl md:text-6xl font-bold mb-4"
+                initial={{ y: -40, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+              >
+                {title}
+              </motion.h2>
+              <motion.p
+                className="text-lg md:text-xl max-w-lg mx-auto md:mx-0"
+                initial={{ y: -20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+              >
+                {description}
+              </motion.p>
+            </div>
+            <motion.div
+              className={`flex-1 flex items-center justify-center px-6 py-12 ${
+                isReversed ? 'md:order-1' : 'md:order-2'
+              }`}
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-            />
-          </div>
-        </motion.section>
-      ))}
+            >
+              <img src={image} alt={title} className="w-64 h-64 md:w-80 md:h-80 object-contain" />
+            </motion.div>
+          </motion.section>
+        );
+      })}
     </div>
   );
 }
