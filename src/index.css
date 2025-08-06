@@ -363,6 +363,20 @@ html, body {
 }
 
 @media (max-width: 768px) {
+  .headline {
+    /* Tamaño máximo algo menor en móvil */
+    font-size: clamp(28px, 6vw, 48px);
+  }
+  .subtitle {
+    font-size: clamp(18px, 4vw, 28px);
+  }
+  .body-text,
+  .body-text-bold {
+    font-size: clamp(14px, 2.5vw, 18px);
+  }
+  .button-text {
+    font-size: 20px;
+  }
   .card-stack-container {
     width: 100%;
     height: 380px;
