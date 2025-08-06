@@ -1,3 +1,4 @@
+// src/App.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -24,23 +25,18 @@ export default function App() {
 }
 
 function Header() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const toggleLang = () =>
     i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
 
   return (
-    <div className="fixed top-8 inset-x-0 z-50 flex items-center justify-between px-8">
-      <Link to="">
-        <img src={logo} alt="Logo" className="w-14 h-14 rounded-full" />
-      </Link>
-      <div className="flex items-center gap-6">
-        <button
-          onClick={toggleLang}
-          className="btn text-lg md:text-2xl shadow-md active:shadow-lg"
-        >
-          {i18n.language === 'es' ? 'EN' : 'ES'}
-        </button>
-      </div>
+    <div className="fixed top-8 inset-x-0 z-50 flex justify-end px-8">
+      <button
+        onClick={toggleLang}
+        className="btn rounded-full text-lg md:text-2xl shadow-md active:shadow-lg"
+      >
+        {i18n.language === 'es' ? 'EN' : 'ES'}
+      </button>
     </div>
   );
 }
@@ -74,14 +70,20 @@ function Landing() {
   return (
     <>
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-4 text-center rounded-xl overflow-hidden">
+      <section
+        className="min-h-screen flex flex-col items-center justify-center px-4 text-center rounded-xl overflow-hidden"
+        style={{ backgroundColor: '#010207' }}
+      >
         <motion.h1
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-5xl md:text-7xl font-bold text-[#D6D6D6] mb-6"
         >
-          {t('hero.title', 'Take your company to space and beyond')}
+          {t(
+            'hero.title',
+            'Take your company to space and beyond'
+          )}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 60 }}
@@ -95,20 +97,22 @@ function Landing() {
           )}
         </motion.p>
 
-        <div className="mx-auto flex h-screen w-screen items-center justify-center bg-gray-900">
-          <button
-            type="button"
-            className="transition group flex h-10 w-32 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
-          >
-            <div className="flex h-full w-full items-center justify-center rounded-full bg-gray-900 transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900">
-              Click me
-            </div>
-          </button>
-        </div>
+        {/* Botón integrado justo debajo del texto */}
+        <button
+          type="button"
+          className="transition group mt-4 flex h-10 w-32 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+        >
+          <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900">
+            {t('hero.cta', 'Descúbrelo')}
+          </div>
+        </button>
       </section>
 
+      {/* Spacer */}
+      <div className="h-12 md:h-24" />
+
       {/* About Us Section */}
-      <section className="py-24 px-4 rounded-xl overflow-hidden">
+      <section className="py-24 px-4 rounded-xl overflow-hidden bg-[var(--color-slate)]">
         <h2 className="text-4xl font-bold text-center text-[#D6D6D6] mb-6">
           {t('about.title', 'About Us')}
         </h2>
@@ -120,15 +124,24 @@ function Landing() {
         </p>
       </section>
 
+      {/* Spacer */}
+      <div className="h-12 md:h-24" />
+
       {/* Stats Section */}
       <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
         <StatsSection />
       </section>
 
+      {/* Spacer */}
+      <div className="h-12 md:h-24" />
+
       {/* Process Section */}
       <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
         <ProcessTimeline />
       </section>
+
+      {/* Spacer */}
+      <div className="h-12 md:h-24" />
 
       {/* Contact Section */}
       <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
