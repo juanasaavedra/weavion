@@ -92,7 +92,7 @@ function Landing() {
         >
           {t('hero.subtitle', 'Your business deserves a stellar online presence. We’ll help you reach for the stars.')}
         </motion.p>
-        <DiscoverButton to="services" class="btn shadow-md active:shadow-lg"></DiscoverButton>
+        <a class="inline-block text-2x1 font-bold button-text btn-rounded hover:scale-105 transition-all duration-300" href="#/services" data-discover="true">Descúbrelo</a>
       </section>
 
       {/* About Us Section */}
