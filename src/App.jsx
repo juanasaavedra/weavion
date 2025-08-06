@@ -89,9 +89,9 @@ function Landing() {
           {t('hero.subtitle', 'Your business deserves a stellar online presence. We’ll help you reach for the stars.')}
         </motion.p>
         <div class="mx-auto flex h-screen w-screen bg-gray-900 items-center justify-center">
-          <DiscoverButton to="services" className="flex items-center justify-center h-10 w-32 rounded full bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 text-white p-[1.5px]" >
+          <button to="services" className="flex items-center justify-center h-10 w-32 rounded full bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 text-white p-[1.5px]" >
           <div class="rounded-full bg-gray-900 h-full w-full flex items-center justify-center"></div>
-          </DiscoverButton>
+          </button>
         </div>
       </section>
 
