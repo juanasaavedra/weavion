@@ -409,23 +409,30 @@ html, body {
 }
 /* --- Estilo global para todos los botones --- */
 .btn {
-  /* Borde degradado */
-  border: 2px solid transparent;
-  border-image-source: linear-gradient(90deg, #a855f7, #6d28d9);
-  border-image-slice: 1;
-
-  /* Texto degradado */
-  background: none; /* Para que no pinte fondo bloqueando el texto */
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(90deg, #a855f7, #6d28d9);
-
-  /* Relleno y radio */
-  padding: 0.75rem 1.5rem;
   border-radius: 9999px;
 
-  /* Sombra base y transición */
+  /* 2. Definimos el “grosor” del borde sin usar border-image */
+  --border-width: 2px;
+
+  /* 3. Padding interno + espacio para el borde */
+  padding: calc(0.75rem + var(--border-width)) calc(1.5rem + var(--border-width));
+
+  /* 4. Dos fondos:
+     - Capa 1 (padding-box): transparente, para el interior
+     - Capa 2 (border-box): degradado, para el borde
+  */
+  background-image:
+    linear-gradient(transparent, transparent),                /* fondo interior transparente */
+    linear-gradient(90deg, #a855f7, #6d28d9);               /* degradado del borde */
+
+  /* 5. Control de dónde pinta cada fondo */
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+
+  /* 6. Color del texto (o trasparente si quieres degradado texto) */
+  color: var(--color-text);
+
+  /* 7. Transiciones y sombra base */
   box-shadow: 0 2px 6px rgba(111, 71, 255, 0.3);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
