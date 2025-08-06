@@ -9,7 +9,6 @@ import StarryBackground from './StarryBackground';
 import StatsSection from './StatsSection';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
-import DiscoverButton from './DiscoverButton';
 import logo from './assets/weavion.logo.png';
 
 export default function App() {
@@ -17,16 +16,17 @@ export default function App() {
     <>
       <Header />
       <BackgroundLayers />
-        <div className="relative z-10">
-          <Landing />
-        </div>
+      <div className="relative z-10">
+        <Landing />
+      </div>
     </>
   );
 }
 
 function Header() {
   const { t, i18n } = useTranslation();
-  const toggleLang = () => i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
+  const toggleLang = () =>
+    i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
 
   return (
     <div className="fixed top-8 inset-x-0 z-50 flex items-center justify-between px-8">
@@ -34,7 +34,10 @@ function Header() {
         <img src={logo} alt="Logo" className="w-14 h-14 rounded-full" />
       </Link>
       <div className="flex items-center gap-6">
-        <button onClick={toggleLang} className="btn text-lg md:text-2xl shadow-md active:shadow-lg">
+        <button
+          onClick={toggleLang}
+          className="btn text-lg md:text-2xl shadow-md active:shadow-lg"
+        >
           {i18n.language === 'es' ? 'EN' : 'ES'}
         </button>
       </div>
@@ -86,11 +89,20 @@ function Landing() {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="text-2xl md:text-3xl text-[#D6D6D6] max-w-2xl mb-8"
         >
-          {t('hero.subtitle', 'Your business deserves a stellar online presence. We’ll help you reach for the stars.')}
+          {t(
+            'hero.subtitle',
+            'Your business deserves a stellar online presence. We’ll help you reach for the stars.'
+          )}
         </motion.p>
-        <div class="mx-auto flex h-screen w-screen bg-gray-900 items-center justify-center">
-          <button to="services" className="flex items-center justify-center h-10 w-32 rounded full bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 text-white p-[1.5px]" >
-          <div class="rounded-full bg-gray-900 h-full w-full flex items-center justify-center"></div>
+
+        <div className="mx-auto flex h-screen w-screen items-center justify-center bg-gray-900">
+          <button
+            type="button"
+            className="transition group flex h-10 w-32 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+          >
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-gray-900 transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900">
+              Click me
+            </div>
           </button>
         </div>
       </section>
