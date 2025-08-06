@@ -8,7 +8,6 @@ import emailMarketingImg from './assets/email marketing.png';
 import crmImg from './assets/crm y service titan.png';
 import automationImg from './assets/automatizaciones.png';
 
-// Configuración de cada sección de servicio
 const sections = [
   {
     id: 'diseno',
@@ -44,7 +43,6 @@ export default function ServicesSection() {
   return (
     <div className="h-screen overflow-y-auto snap-y snap-mandatory">
       {sections.map(({ id, title, description, image, bgColor }, index) => {
-        // Alternar orden: en desktop las secciones pares llevan imagen a la derecha
         const isReversed = index % 2 === 0;
         return (
           <motion.section
@@ -56,13 +54,18 @@ export default function ServicesSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
+            {/* Texto */}
             <div
-              className={`flex-1 px-6 py-12 flex flex-col justify-center ${
-                isReversed ? 'md:order-2' : 'md:order-1'
-              } text-center md:text-left`}
+              className={`
+                flex-1 py-12 
+                flex flex-col justify-center 
+                text-center md:text-left 
+                px-4 md:px-6 
+                ${isReversed ? 'md:order-2' : 'md:order-1 md:pl-20'}
+              `}
             >
               <motion.h2
-                className="text-4xl md:text-6xl font-bold mb-4"
+                className="text-4xl md:text-6xl font-bold mb-6"
                 initial={{ y: -40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ type: 'spring', stiffness: 100, damping: 20 }}
@@ -78,15 +81,23 @@ export default function ServicesSection() {
                 {description}
               </motion.p>
             </div>
+
+            {/* Imagen */}
             <motion.div
-              className={`flex-1 flex items-center justify-center px-6 py-12 ${
-                isReversed ? 'md:order-1' : 'md:order-2'
-              }`}
+              className={`
+                flex-1 flex items-center justify-center 
+                px-4 md:px-6 py-12 
+                ${isReversed ? 'md:order-1 md:pr-20' : 'md:order-2'}
+              `}
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 200, damping: 15 }}
             >
-              <img src={image} alt={title} className="w-64 h-64 md:w-80 md:h-80 object-contain" />
+              <img
+                src={image}
+                alt={title}
+                className="w-72 h-72 md:w-96 md:h-96 object-contain"
+              />
             </motion.div>
           </motion.section>
         );
