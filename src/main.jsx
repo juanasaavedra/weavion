@@ -11,10 +11,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HashRouter>
       <Routes>
-        <Route path=""           element={<App />} />
+        <Route path=""           element={<Landing />} />
         <Route path="services"   element={<ServicesSection />} />
         <Route path="contact"    element={<ContactPage />} />
-        <Route path="*"          element={<App />} />  {/* fallback a landing */}
+        <Route path="*"          element={<Landing />} />  {/* fallback a landing */}
       </Routes>
     </HashRouter>
   </React.StrictMode>
