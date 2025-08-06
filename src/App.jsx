@@ -31,12 +31,12 @@ function Header() {
 
   return (
     <div className="fixed top-8 inset-x-0 z-50 flex items-center justify-between px-8">
-      <Link to="/">
+      <Link to="">
         <img src={logo} alt="Logo" className="w-14 h-14 rounded-full" />
       </Link>
       <div className="flex items-center gap-6">
-        <DiscoverButton to="/services" className="btn shadow-md active:shadow-lg" />
-        <Link to="/services" className="btn text-2xl font-bold shadow-md active:shadow-lg">
+        <DiscoverButton to="services" className="btn shadow-md active:shadow-lg" />
+        <Link to="services" className="btn text-2xl font-bold shadow-md active:shadow-lg">
           {t('header.create', 'Crear')}
         </Link>
         <button onClick={toggleLang} className="btn text-lg md:text-2xl shadow-md active:shadow-lg">
@@ -93,7 +93,7 @@ function Landing() {
         >
           {t('hero.subtitle', 'Your business deserves a stellar online presence. We’ll help you reach for the stars.')}
         </motion.p>
-        <DiscoverButton to="/services" className="btn shadow-md active:shadow-lg" />
+        <DiscoverButton to="services" className="btn shadow-md active:shadow-lg" />
       </section>
 
       {/* About Us Section */}
