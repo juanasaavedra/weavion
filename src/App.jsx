@@ -30,14 +30,14 @@ function Header() {
     i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
 
   return (
-    <div className="fixed top-8 inset-x-0 z-50 flex justify-end px-8">
+    <header className="fixed top-8 inset-x-0 z-50 flex justify-end px-8">
       <button
         onClick={toggleLang}
-        className="btn rounded-full text-lg md:text-2xl shadow-md active:shadow-lg"
+        className="btn rounded-full text-lg md:text-2xl shadow active:shadow-lg"
       >
         {i18n.language === 'es' ? 'EN' : 'ES'}
       </button>
-    </div>
+    </header>
   );
 }
 
@@ -66,84 +66,86 @@ function BackgroundLayers() {
 
 function Landing() {
   const { t } = useTranslation();
-
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero */}
       <section
-        className="min-h-screen flex flex-col items-center justify-center px-4 text-center rounded-xl overflow-hidden"
+        className="min-h-screen flex flex-col items-center justify-center px-4 text-center"
         style={{ backgroundColor: '#010207' }}
       >
         <motion.h1
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold text-[#D6D6D6] mb-6"
+          className="text-4xl sm:text-5xl md:text-7xl font-bold text-[#D6D6D6] mb-4"
         >
           {t(
             'hero.title',
-            'Take your company to space and beyond'
+            'Impulsa tu empresa con soluciones web orbitadas en innovación y seguridad.'
           )}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-2xl md:text-3xl text-[#D6D6D6] max-w-2xl mb-8"
+          className="text-base sm:text-lg md:text-2xl text-[#D6D6D6] max-w-2xl mb-8"
         >
           {t(
             'hero.subtitle',
-            'Your business deserves a stellar online presence. We’ll help you reach for the stars.'
+            'Tu negocio merece una presencia estelar en línea. Te ayudaremos a alcanzar las estrellas.'
           )}
         </motion.p>
 
-        {/* Botón integrado justo debajo del texto */}
-        <button
-          type="button"
-          className="transition group mt-4 flex h-10 w-32 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+        {/* Botón grande que lleva a /services */}
+        <Link
+          to="services"
+          className="btn-lg glass flex items-center space-x-3 px-8 py-4 rounded-full"
         >
-          <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900">
-            {t('hero.cta', 'Descúbrelo')}
-          </div>
-        </button>
+          <span>Nuestros Servicios</span>
+          <svg
+            className="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </Link>
       </section>
 
-      {/* Spacer */}
       <div className="h-12 md:h-24" />
 
-      {/* About Us Section */}
+      {/* About Us */}
       <section className="py-24 px-4 rounded-xl overflow-hidden bg-[var(--color-slate)]">
-        <h2 className="text-4xl font-bold text-center text-[#D6D6D6] mb-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#D6D6D6] mb-6">
           {t('about.title', 'About Us')}
         </h2>
-        <p className="text-lg text-[#D6D6D6] max-w-3xl mx-auto text-center">
+        <p className="text-base sm:text-lg md:text-xl text-[#D6D6D6] max-w-3xl mx-auto text-center">
           {t(
             'about.paragraph1',
-            "We're a team of passionate digital creators dedicated to launching your business into the digital stratosphere."
+            "Somos un equipo de creadores digitales apasionados por lanzar tu negocio a la estratosfera."
           )}
         </p>
       </section>
 
-      {/* Spacer */}
       <div className="h-12 md:h-24" />
 
-      {/* Stats Section */}
+      {/* Stats */}
       <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
         <StatsSection />
       </section>
 
-      {/* Spacer */}
       <div className="h-12 md:h-24" />
 
-      {/* Process Section */}
+      {/* Process */}
       <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
         <ProcessTimeline />
       </section>
 
-      {/* Spacer */}
       <div className="h-12 md:h-24" />
 
-      {/* Contact Section */}
+      {/* Contact */}
       <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
         <ContactSection />
       </section>

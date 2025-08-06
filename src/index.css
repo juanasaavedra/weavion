@@ -407,6 +407,41 @@ html, body {
     text-shadow: 0 0 20px rgba(111, 71, 255, 1);
   }
 }
+/* Botón base con degradado morado claro → oscuro */
+.btn,
+.btn-lg {
+  border: 3px solid transparent;
+  border-radius: 9999px;
+  background-image:
+    linear-gradient(transparent, transparent),
+    linear-gradient(90deg, #a855f7, #6d28d9);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Sombra y hover uniforme */
+.btn:hover,
+.btn-lg:hover,
+.btn:focus,
+.btn-lg:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(111, 71, 255, 0.4);
+}
+
+/* Tamaño específico para el botón grande */
+.btn-lg {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+}
+
+/* Efecto glass (fondo semitransparente) */
+.glass {
+  background-color: rgba(28, 28, 36, 0.5);
+  backdrop-filter: blur(10px);
+}
+
 /* --- Estilo global para todos los botones --- */
 /*
 .btn {
