@@ -98,14 +98,21 @@ function Landing() {
         </motion.p>
 
         {/* Botón integrado justo debajo del texto */}
-        <button
-          type="button"
-          className="transition group mt-4 flex h-10 w-32 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
-        >
-          <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900">
-            {t('hero.cta', 'Descúbrelo')}
-          </div>
-        </button>
+        <Link to="/services">
+          <button
+            type="button"
+            className="transition group mt-4 flex h-10 w-32 items-center justify-center rounded-full
+                      bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 p-[1.5px]
+                      text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+         >
+           <div className="flex h-full w-full items-center justify-center rounded-full
+                            bg-[#010207] transition duration-300 ease-in-out
+                            group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900"
+            >
+             {t('hero.cta', 'Descúbrelo')}
+           </div>
+          </button>
+        </Link>
       </section>
 
       {/* Spacer */}
