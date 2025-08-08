@@ -102,7 +102,7 @@ function Landing() {
           <button
             type="button"
             className="transition group mt-4 flex h-10 w-32 items-center justify-center rounded-full
-                      bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 p-[1.5px]
+                      bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 p-[2.5px]
                       text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
          >
            <div className="flex h-full w-full items-center justify-center rounded-full
@@ -117,19 +117,6 @@ function Landing() {
 
       {/* Spacer */}
       <div className="h-12 md:h-24" />
-
-      {/* About Us Section */}
-      <section className="py-24 px-4 rounded-xl overflow-hidden bg-[var(--color-slate)]">
-        <h2 className="text-4xl font-bold text-center text-[#D6D6D6] mb-6">
-          {t('about.title', 'About Us')}
-        </h2>
-        <p className="text-lg text-[#D6D6D6] max-w-3xl mx-auto text-center">
-          {t(
-            'about.paragraph1',
-            "We're a team of passionate digital creators dedicated to launching your business into the digital stratosphere."
-          )}
-        </p>
-      </section>
 
       {/* Spacer */}
       <div className="h-12 md:h-24" />
