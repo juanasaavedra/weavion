@@ -69,54 +69,54 @@ function Landing() {
 
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero Section con fondo de estrellas visible */}
       <section
-        className="min-h-screen flex flex-col items-center justify-center px-4 text-center rounded-xl overflow-hidden"
-        style={{ backgroundColor: '#010207' }}
+        className="relative min-h-screen flex flex-col items-center justify-center px-4 text-center"
       >
-        <motion.h1
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold text-[#D6D6D6] mb-6"
-        >
-          {t(
-            'hero.title',
-            'Take your company to space and beyond'
-          )}
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-2xl md:text-3xl text-[#D6D6D6] max-w-2xl mb-8"
-        >
-          {t(
-            'hero.subtitle',
-            'Your business deserves a stellar online presence. We’ll help you reach for the stars.'
-          )}
-        </motion.p>
+        {/* Overlay suave para mejorar legibilidad sobre las estrellas */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
 
-        {/* Botón integrado justo debajo del texto */}
-        <Link to="/services">
-          <button
-            type="button"
-            className="transition group mt-4 flex h-10 w-32 items-center justify-center rounded-full
-                      bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 p-[2.5px]
-                      text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
-         >
-           <div className="flex h-full w-full items-center justify-center rounded-full
-                            bg-[#010207] transition duration-300 ease-in-out
-                            group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900"
+        <div className="relative z-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-7xl font-bold text-[#D6D6D6] mb-6"
+          >
+            {t('hero.title', 'Take your company to space and beyond')}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-2xl md:text-3xl text-[#D6D6D6] max-w-2xl mb-8 mx-auto"
+          >
+            {t(
+              'hero.subtitle',
+              'Your business deserves a stellar online presence. We’ll help you reach for the stars.'
+            )}
+          </motion.p>
+
+          {/* Botón ➜ /services (mantiene tus estilos) */}
+          <Link to="/services" className="inline-block">
+            <button
+              type="button"
+              className="transition group mt-4 flex h-10 w-32 items-center justify-center rounded-full
+                         bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 p-[2.5px]
+                         text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
             >
-             {t('hero.cta', 'Descúbrelo')}
-           </div>
-          </button>
-        </Link>
+              <div
+                className="flex h-full w-full items-center justify-center rounded-full
+                           bg-transparent transition duration-300 ease-in-out
+                           group-hover:bg-gradient-to-br group-hover:from-gray-700/60 group-hover:to-gray-900/60"
+              >
+                {t('hero.cta', 'Descúbrelo')}
+              </div>
+            </button>
+          </Link>
+        </div>
       </section>
-
-      {/* Spacer */}
-      <div className="h-12 md:h-24" />
 
       {/* Spacer */}
       <div className="h-12 md:h-24" />
