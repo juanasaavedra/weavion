@@ -181,6 +181,18 @@ html, body {
   color: var(--color-text);
   font-weight: 500;
 }
+.font-script {
+  font-family: "pf-pixelscript", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-clean {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  letter-spacing: 0.2px;
+}
+
 
 /* Estilos para checkboxes personalizados */
 .custom-checkbox {

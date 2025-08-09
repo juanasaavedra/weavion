@@ -1,26 +1,53 @@
 // src/App.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
-// Componentes de layout
+// 3D
+import { Canvas, useFrame } from '@react-three/fiber';
+import { useGLTF, Environment } from '@react-three/drei';
+
+// Layout
 import DotGrid from './DotGrid';
 import StarryBackground from './StarryBackground';
 import StatsSection from './StatsSection';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
-// import logo from './assets/weavion.logo.png'; // si lo necesitas, descomenta
+import logo from './assets/weavion.logo.png';
 
 export default function App() {
   return (
     <>
       <Header />
       <BackgroundLayers />
-      {/* Canvas de estrellitas que siguen el cursor */}
       <CursorStars />
       <div className="relative z-10">
         <Landing />
+
+        {/* Spacer */}
+        <div className="h-12 md:h-24" />
+
+        {/* Stats Section */}
+        <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
+          <StatsSection />
+        </section>
+
+        {/* Spacer */}
+        <div className="h-12 md:h-24" />
+
+        {/* Process Section */}
+        <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
+          <ProcessTimeline />
+        </section>
+
+        {/* Spacer */}
+        <div className="h-12 md:h-24" />
+
+        {/* Contact Section */}
+        <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
+          <ContactSection />
+        </section>
       </div>
     </>
   );
@@ -32,12 +59,22 @@ function Header() {
     i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
 
   return (
-    <div className="fixed top-8 inset-x-0 z-50 flex justify-end px-8">
+    <div className="fixed top-8 inset-x-0 z-50 flex items-center justify-between px-8">
+      {/* Logo izquierda */}
+      <Link to="/">
+        <img src={logo} alt="Logo" className="w-14 h-14 object-contain" />
+      </Link>
+
+      {/* Selector idioma con borde degradado */}
       <button
         onClick={toggleLang}
-        className="btn glass text-lg md:text-2xl shadow-md active:shadow-lg rounded-full"
+        className="transition group flex h-10 w-20 items-center justify-center rounded-full 
+                   bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 p-[2px] text-white
+                   duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
       >
-        {i18n.language === 'es' ? 'EN' : 'ES'}
+        <div className="flex h-full w-full items-center justify-center rounded-full bg-black">
+          {i18n.language === 'es' ? 'EN' : 'ES'}
+        </div>
       </button>
     </div>
   );
@@ -66,10 +103,7 @@ function BackgroundLayers() {
   );
 }
 
-/**
- * Canvas de partículas: dibuja "estrellas" (polígonos) en la posición del mouse.
- * Eficiente con requestAnimationFrame, soporta HiDPI y se limpia solo.
- */
+/** Partículas que siguen el cursor */
 function CursorStars() {
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
@@ -90,33 +124,29 @@ function CursorStars() {
     };
 
     const spawn = (x, y) => {
-      // Genera 5–8 partículas por movimiento
       const count = 6 + Math.floor(Math.random() * 3);
       for (let i = 0; i < count; i++) {
         const angle = Math.random() * Math.PI * 2;
         const speed = 0.6 + Math.random() * 1.2;
         particlesRef.current.push({
-          x,
-          y,
+          x, y,
           vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 0.4, // un poco hacia arriba
-          life: 1,               // 1 → 0
+          vy: Math.sin(angle) * speed - 0.4,
+          life: 1,
           decay: 0.015 + Math.random() * 0.02,
           size: 3 + Math.random() * 3,
-          hue: Math.random() < 0.6 ? 0 : 270, // 0=blanco, 270≈morado
-          sat: Math.random() < 0.6 ? 0 : 70,  // blanco puro o morado saturado
-          light: 100,           // brillo alto
-          spin: Math.random() * Math.PI, // rotación del star path
-          spikes: 5,            // puntas de estrella
+          hue: Math.random() < 0.6 ? 0 : 270,
+          sat: Math.random() < 0.6 ? 0 : 70,
+          light: 100,
+          spin: Math.random() * Math.PI,
+          spikes: 5,
         });
       }
     };
 
     const onMove = (e) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      spawn(x, y);
+      spawn(e.clientX - rect.left, e.clientY - rect.top);
     };
 
     const drawStar = (cx, cy, spikes, outerRadius, innerRadius, rotation) => {
@@ -125,56 +155,35 @@ function CursorStars() {
       ctx.rotate(rotation);
       ctx.beginPath();
       let rot = Math.PI / 2 * 3;
-      let x = cx;
-      let y = cy;
       const step = Math.PI / spikes;
-
       ctx.moveTo(0, -outerRadius);
       for (let i = 0; i < spikes; i++) {
-        x = Math.cos(rot) * outerRadius;
-        y = Math.sin(rot) * outerRadius;
-        ctx.lineTo(x, y);
+        ctx.lineTo(Math.cos(rot) * outerRadius, Math.sin(rot) * outerRadius);
         rot += step;
-
-        x = Math.cos(rot) * innerRadius;
-        y = Math.sin(rot) * innerRadius;
-        ctx.lineTo(x, y);
+        ctx.lineTo(Math.cos(rot) * innerRadius, Math.sin(rot) * innerRadius);
         rot += step;
       }
-      ctx.lineTo(0, -outerRadius);
       ctx.closePath();
       ctx.restore();
     };
 
     const tick = () => {
       ctx.clearRect(0, 0, w, h);
-
       const arr = particlesRef.current;
+
       for (let i = arr.length - 1; i >= 0; i--) {
         const p = arr[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.02; // gravedad suave
-        p.life -= p.decay;
-
-        if (p.life <= 0) {
-          arr.splice(i, 1);
-          continue;
-        }
+        p.x += p.vx; p.y += p.vy; p.vy += 0.02; p.life -= p.decay;
+        if (p.life <= 0) { arr.splice(i, 1); continue; }
 
         ctx.globalAlpha = Math.max(p.life, 0);
-        // Color: blanco o morado
-        if (p.sat === 0) {
-          ctx.fillStyle = `rgba(255,255,255,${Math.max(p.life, 0)})`;
-        } else {
-          ctx.fillStyle = `hsla(${p.hue} ${p.sat}% ${p.light}% / ${Math.max(p.life, 0.9)})`;
-        }
+        ctx.fillStyle = p.sat === 0
+          ? `rgba(255,255,255,${Math.max(p.life, 0)})`
+          : `hsla(${p.hue} ${p.sat}% ${p.light}% / ${Math.max(p.life, 0.9)})`;
 
-        // Estrella de 5 puntas
         drawStar(p.x, p.y, p.spikes, p.size, p.size * 0.5, p.spin);
         ctx.fill();
       }
-
       ctx.globalAlpha = 1;
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -182,7 +191,6 @@ function CursorStars() {
     resize();
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', onMove);
-
     rafRef.current = requestAnimationFrame(tick);
 
     return () => {
@@ -206,95 +214,79 @@ function CursorStars() {
 function Landing() {
   const { t } = useTranslation();
 
+  // Modelo GLB que reacciona al cursor
+  function PhoneModel() {
+    const { scene } = useGLTF('/models/phone_with_leads_optimized.glb'); // pon el .glb en /public/models/
+    const ref = useRef();
+
+    useFrame((state) => {
+      const { x, y } = state.pointer; // -1..1
+      const rx = y * 0.35;
+      const ry = x * 0.7;
+      const py = -y * 0.2;
+
+      if (!ref.current) return;
+      ref.current.rotation.x += (rx - ref.current.rotation.x) * 0.12;
+      ref.current.rotation.y += (ry - ref.current.rotation.y) * 0.12;
+      ref.current.position.y += (py - ref.current.position.y) * 0.12;
+      ref.current.rotation.z += (Math.sin(state.clock.elapsedTime * 0.3) * 0.05 - ref.current.rotation.z) * 0.05;
+    });
+
+    return <primitive ref={ref} object={scene} scale={1.1} position={[0, 0, 0]} />;
+  }
+
   return (
     <>
-      {/* Hero Section con estrellas visibles */}
       <section className="relative min-h-screen px-4 md:px-8">
-        {/* Overlay suave para legibilidad */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center min-h-screen">
-          {/* Columna izquierda vacía */}
-          <div className="hidden md:block" />
-
-          {/* Columna derecha: texto a la derecha ocupando ~media pantalla */}
-          <div className="md:col-start-2 md:pl-10 md:justify-self-end text-right w-full md:w-[50vw] max-w-3xl">
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center min-h-screen gap-8">
+          {/* IZQUIERDA: ahora base sans-serif (font-clean) y frase en Pixelscript (font-script) */}
+          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left">
             <motion.h1
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-bold text-[#D6D6D6] mb-4 md:mb-6"
+              className="font-clean text-5xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
             >
-              {t('hero.title', 'Take your company to space and beyond')}
+              Aumenta tu{' '}
+              <span className="font-script text-white">presencia digital</span>, sin trabajar de más
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-xl md:text-3xl text-[#D6D6D6] md:ml-auto md:max-w-none max-w-2xl mb-8 md:mb-10"
-            >
-              {t(
-                'hero.subtitle',
-                'Your business deserves a stellar online presence. We’ll help you reach for the stars.'
-              )}
-            </motion.p>
-
-            {/* Botón grande con SOLO borde degradado e indicador negro antes del texto */}
+            {/* Botón: solo borde degradado + punto negro; texto del botón en Pixelscript */}
             <Link to="/services" className="inline-block">
               <span
-                className="
-                  group inline-flex items-center rounded-full
-                  p-[3px]
-                  bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500
-                  hover:from-pink-500 hover:via-purple-500 hover:to-purple-500
-                  transition
-                "
+                className="group inline-flex items-center rounded-full p-[3px]
+                           bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500
+                           hover:from-pink-500 hover:via-purple-500 hover:to-purple-500 transition"
               >
-                {/* Interior transparente para ver las estrellas (solo borde) */}
-                <span
-                  className="
-                    inline-flex items-center gap-4
-                    rounded-full
-                    px-10 py-4 md:px-14 md:py-5
-                    bg-transparent backdrop-blur-sm
-                  "
-                >
-                  {/* Div negro antes del texto */}
+                <span className="inline-flex items-center gap-4 rounded-full px-12 py-5 md:px-16 md:py-6 bg-transparent">
                   <span className="inline-block w-4 h-4 md:w-5 md:h-5 rounded-full bg-black" />
-                  <span className="text-white text-lg md:text-2xl font-semibold">
-                    {t('hero.cta', 'Descúbrelo')}
+                  <span className="font-script text-white text-xl md:text-2xl">
+                    {t('hero.cta', 'Descubre cómo')}
                   </span>
                 </span>
               </span>
             </Link>
           </div>
+
+          {/* DERECHA: modelo 3D */}
+          <div className="md:pl-6 w-full h-[45vh] md:h-[75vh]">
+            <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 2.6], fov: 35 }} gl={{ antialias: true, alpha: true }}>
+              <ambientLight intensity={0.6} />
+              <directionalLight position={[5, 5, 5]} intensity={0.8} />
+              <directionalLight position={[-5, -3, 2]} intensity={0.3} />
+              <Suspense fallback={null}>
+                <PhoneModel />
+                <Environment preset="night" />
+              </Suspense>
+            </Canvas>
+          </div>
         </div>
       </section>
 
-      {/* Spacer */}
+      {/* Separador para que no pegue con la siguiente sección */}
       <div className="h-12 md:h-24" />
-
-      {/* Stats Section */}
-      <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
-        <StatsSection />
-      </section>
-
-      {/* Spacer */}
-      <div className="h-12 md:h-24" />
-
-      {/* Process Section */}
-      <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
-        <ProcessTimeline />
-      </section>
-
-      {/* Spacer */}
-      <div className="h-12 md:h-24" />
-
-      {/* Contact Section */}
-      <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
-        <ContactSection />
-      </section>
     </>
   );
 }
