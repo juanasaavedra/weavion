@@ -1,8 +1,8 @@
 /* Importación de la fuente Ars Nova con mejora de carga y fallbacks */
 @font-face {
   font-family: 'Ars Nova';
-  src: url('/fonts/ArsNova-Regular.woff2') format('woff2'),
-       url('/fonts/ArsNova-Regular.woff') format('woff');
+  src: url('/weavion/fonts/ArsNova-Regular.woff2') format('woff2'),
+       url('/weavion/fonts/ArsNova-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -11,8 +11,8 @@
 
 @font-face {
   font-family: 'Ars Nova';
-  src: url('/fonts/ArsNova-Bold.woff2') format('woff2'),
-       url('/fonts/ArsNova-Bold.woff') format('woff');
+  src: url('/weavion/fonts/ArsNova-Bold.woff2') format('woff2'),
+       url('/weavion/fonts/ArsNova-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;

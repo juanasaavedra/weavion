@@ -254,19 +254,17 @@ function Landing() {
             </motion.h1>
 
             {/* Botón: solo borde degradado + punto negro; texto del botón en Pixelscript */}
-            <Link to="/services" className="inline-block">
-              <span
-                className="group inline-flex items-center rounded-full p-[3px]
-                           bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500
-                           hover:from-pink-500 hover:via-purple-500 hover:to-purple-500 transition"
-              >
-                <span className="inline-flex items-center gap-4 rounded-full px-12 py-5 md:px-16 md:py-6 bg-transparent">
-                  <span className="inline-block w-4 h-4 md:w-5 md:h-5 rounded-full bg-black" />
-                  <span className="font-script text-white text-xl md:text-2xl">
-                    {t('hero.cta', 'Descubre cómo')}
-                  </span>
-                </span>
-              </span>
+            <Link
+              to="/services"
+              className="transition group mt-4 flex h-12 w-44 items-center justify-center rounded-full
+                         bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300
+                         hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+>
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207]
+                              transition duration-300 ease-in-out group-hover:bg-gradient-to-br
+                              group-hover:from-gray-700 group-hover:to-gray-900">
+                {t('hero.cta', 'Descúbrelo')}
+              </div>
             </Link>
           </div>
 

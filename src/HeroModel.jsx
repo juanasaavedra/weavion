@@ -5,7 +5,7 @@ import { Environment, useGLTF } from '@react-three/drei';
 
 // Ruta absoluta segura para Vite y GitHub Pages
 const MODEL_URL = new URL(
-  '/models/phone_with_leads_optimized.glb',
+  'models/phone_with_leads_optimized.glb',
   import.meta.env.BASE_URL
 ).href;
 
@@ -52,3 +52,8 @@ export default function HeroModel() {
     </Canvas>
   );
 }
+
+loader.load(MODEL_URL, onLoad, undefined, (err) => {
+  console.error('Fallo cargando modelo', err);
+  // aquí puedes ocultar la escena o mostrar un placeholder
+});
