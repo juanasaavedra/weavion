@@ -215,10 +215,7 @@ function CursorStars() {
     const { t } = useTranslation();
 
   // Modelo GLB que reacciona al cursor
-  const MODEL_URL = new URL(
-    'models/phone_with_leads_optimized.glb',
-    import.meta.env.BASE_URL
-  ).href;
+  const MODEL_URL = `${import.meta.env.BASE_URL}models/phone_with_leads_optimized.glb`;
 
   function PhoneModel() {
     const { scene } = useGLTF(MODEL_URL); // pon el .glb en /public/models/
