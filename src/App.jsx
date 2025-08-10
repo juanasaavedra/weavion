@@ -211,12 +211,17 @@ function CursorStars() {
   );
 }
 
-function Landing() {
-  const { t } = useTranslation();
+  function Landing() {
+    const { t } = useTranslation();
 
   // Modelo GLB que reacciona al cursor
+  const MODEL_URL = new URL(
+    'models/phone_with_leads_optimized.glb',
+    import.meta.env.BASE_URL
+  ).href;
+
   function PhoneModel() {
-    const { scene } = useGLTF('/models/phone_with_leads_optimized.glb'); // pon el .glb en /public/models/
+    const { scene } = useGLTF(MODEL_URL); // pon el .glb en /public/models/
     const ref = useRef();
 
     useFrame((state) => {
