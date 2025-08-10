@@ -54,21 +54,38 @@ export default function App() {
 }
 
 function Header() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const toggleLang = () =>
     i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
 
+  const servicesItems = [
+    t('header.servicesItems.webDev', 'Diseño y Desarrollo web'),
+    t('header.servicesItems.crm', 'Integración a CRM o Service Titan'),
+    t('header.servicesItems.analytics', 'Analíticas de negocio'),
+  ];
+
+  const automationItems = [
+    t('header.automationItems.leads', 'Gestiona tus leads'),
+    t('header.automationItems.clients', 'Encuentra más clientes en diferentes plataformas'),
+  ];
+
   return (
-    <div className="fixed top-8 inset-x-0 z-50 flex items-center justify-between px-8">
+    <div className="fixed top-8 inset-x-0 z-50 flex items-center px-8">
       {/* Logo izquierda */}
-      <Link to="/">
+      <Link to="/" className="mr-8">
         <img src={logo} alt="Logo" className="w-14 h-14 object-contain" />
       </Link>
+
+      {/* Menús intermedios */}
+      <div className="flex-1 flex items-center justify-center space-x-8">
+        <DropdownMenu title={t('header.services', 'Servicios')} items={servicesItems} />
+        <DropdownMenu title={t('header.automation', 'Automatiza tu operación')} items={automationItems} />
+      </div>
 
       {/* Selector idioma con borde degradado */}
       <button
         onClick={toggleLang}
-        className="transition group flex h-10 w-20 items-center justify-center rounded-full 
+        className="transition group flex h-10 w-20 items-center justify-center rounded-full
                    bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 p-[2px] text-white
                    duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
       >
@@ -76,6 +93,23 @@ function Header() {
           {i18n.language === 'es' ? 'EN' : 'ES'}
         </div>
       </button>
+    </div>
+  );
+}
+
+function DropdownMenu({ title, items }) {
+  return (
+    <div className="relative group">
+      <div className="cursor-pointer text-white px-2 py-1 rounded-md">
+        {title}
+      </div>
+      <div className="absolute left-1/2 -translate-x-1/2 mt-2 hidden flex-col rounded-md bg-black/80 text-white shadow-lg group-hover:flex">
+        {items.map((item, idx) => (
+          <div key={idx} className="px-4 py-2 whitespace-nowrap hover:bg-purple-700/20">
+            {item}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -215,10 +249,7 @@ function CursorStars() {
     const { t } = useTranslation();
 
   // Modelo GLB que reacciona al cursor
-  const MODEL_URL = new URL(
-    'models/phone_with_leads_optimized.glb',
-    import.meta.env.BASE_URL
-  ).href;
+  const MODEL_URL = `${import.meta.env.BASE_URL}models/phone_with_leads_optimized.glb`;
 
   function PhoneModel() {
     const { scene } = useGLTF(MODEL_URL); // pon el .glb en /public/models/

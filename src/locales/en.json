@@ -10,6 +10,19 @@
     "contact": "Contact",
     "english": "Español"
   },
+  "header": {
+    "services": "Services",
+    "servicesItems": {
+      "webDev": "Web Design & Development",
+      "crm": "CRM or Service Titan integration",
+      "analytics": "Business analytics"
+    },
+    "automation": "Automate your operations",
+    "automationItems": {
+      "leads": "Manage your leads",
+      "clients": "Find more clients across platforms"
+    }
+  },
   "hero": {
     "title": "Boost your business with web solutions orbiting innovation and security.",
     "subtitle": "Your business deserves a stellar online presence. We'll help you reach for the stars.",
