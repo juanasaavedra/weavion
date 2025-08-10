@@ -1,23 +1,23 @@
 /* Importación de la fuente Ars Nova con mejora de carga y fallbacks */
+/* src/index.css */
 @font-face {
   font-family: 'Ars Nova';
-  src: url('/fonts/ArsNova-Regular.woff2') format('woff2'),
-       url('/fonts/ArsNova-Regular.woff') format('woff');
-  font-weight: normal;
+  src: url('./assets/fonts/ArsNova-Regular.woff2') format('woff2'),
+       url('./assets/fonts/ArsNova-Regular.woff') format('woff');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
-  font-display: fallback;
 }
 
 @font-face {
   font-family: 'Ars Nova';
-  src: url('/fonts/ArsNova-Bold.woff2') format('woff2'),
-       url('/fonts/ArsNova-Bold.woff') format('woff');
-  font-weight: bold;
+  src: url('./assets/fonts/ArsNova-Bold.woff2') format('woff2'),
+       url('./assets/fonts/ArsNova-Bold.woff') format('woff');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
-  font-display: fallback;
 }
+
 
 /* Preloading fonts for faster loading */
 head::before {
