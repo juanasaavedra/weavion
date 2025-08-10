@@ -14,6 +14,7 @@ import StatsSection from './StatsSection';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
 import logo from './assets/weavion.logo.png';
+import HorizontalSnapSections from './full_screen_services_section.jsx';
 
 export default function App() {
   return (
@@ -23,6 +24,8 @@ export default function App() {
       <CursorStars />
       <div className="relative z-10">
         <Landing />
+        {/* Services Section */}
+        <HorizontalSnapSections />
 
         {/* Spacer */}
         <div className="h-12 md:h-24" />
