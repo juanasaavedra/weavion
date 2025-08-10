@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function HorizontalSnapSections() {
   const sections = [
@@ -6,11 +7,13 @@ export default function HorizontalSnapSections() {
       title: "Diseño y Desarrollo web",
       blurb:
         "Sitios rápidos, accesibles y listos para convertir. Desde landing pages hasta e-commerce con performance 90+ en Lighthouse.",
+      path: "/services/web",
     },
     {
       title: "Integración a CRM o ServiceTitan",
       blurb:
         "Conecta tu web al flujo comercial: leads entran limpios al CRM, disparan tareas, asignan técnicos y cierran más ventas.",
+      path: "/services/crm",
     },
     {
       title: "Email Marketing",
@@ -21,6 +24,7 @@ export default function HorizontalSnapSections() {
       title: "Analíticas de tu operación",
       blurb:
         "Paneles en tiempo real: costo por lead, tasa de agendamiento, revenue por técnico y ROI de cada canal.",
+      path: "/services/analiticas",
     },
     {
       title: "Automatiza tu operación",
@@ -39,6 +43,7 @@ export default function HorizontalSnapSections() {
 
   const containerRef = useRef(null);
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
 
   const snapTo = (i) => {
     const clamped = Math.max(0, Math.min(i, sections.length - 1));
@@ -123,6 +128,7 @@ export default function HorizontalSnapSections() {
                   {s.blurb}
                 </p>
                 <button
+                  onClick={() => s.path && navigate(s.path)}
                   style={{
                     marginTop: "2rem",
                     border: `2px solid ${palette.purpleBright}`,
