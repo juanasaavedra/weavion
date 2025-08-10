@@ -2,8 +2,8 @@
 /* src/index.css */
 @font-face {
   font-family: 'Ars Nova';
-  src: url('./assets/fonts/ArsNova-Regular.woff2') format('woff2'),
-       url('./assets/fonts/ArsNova-Regular.woff') format('woff');
+  src: url('/fonts/ArsNova-Regular.woff2') format('woff2'),
+       url('/fonts/ArsNova-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -11,8 +11,8 @@
 
 @font-face {
   font-family: 'Ars Nova';
-  src: url('./assets/fonts/ArsNova-Bold.woff2') format('woff2'),
-       url('./assets/fonts/ArsNova-Bold.woff') format('woff');
+  src: url('/fonts/ArsNova-Bold.woff2') format('woff2'),
+       url('/fonts/ArsNova-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
