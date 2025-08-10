@@ -1,107 +1,160 @@
-// full_screen_services_section.jsx
-import React from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from "react";
 
-// Imágenes de servicios
-import webDesignImg from './assets/diseño y desarrollo web.png';
-import emailMarketingImg from './assets/email marketing.png';
-import crmImg from './assets/crm y service titan.png';
-import automationImg from './assets/automatizaciones.png';
+export default function HorizontalSnapSections() {
+  const sections = [
+    {
+      title: "Diseño y Desarrollo web",
+      blurb:
+        "Sitios rápidos, accesibles y listos para convertir. Desde landing pages hasta e-commerce con performance 90+ en Lighthouse.",
+    },
+    {
+      title: "Integración a CRM o ServiceTitan",
+      blurb:
+        "Conecta tu web al flujo comercial: leads entran limpios al CRM, disparan tareas, asignan técnicos y cierran más ventas.",
+    },
+    {
+      title: "Email Marketing",
+      blurb:
+        "Automatizaciones que venden: secuencias, carritos abandonados, newsletters y segmentación basada en comportamiento.",
+    },
+    {
+      title: "Analíticas de tu operación",
+      blurb:
+        "Paneles en tiempo real: costo por lead, tasa de agendamiento, revenue por técnico y ROI de cada canal.",
+    },
+    {
+      title: "Automatiza tu operación",
+      blurb:
+        "BOTS y flujos con n8n/Python para cotizaciones, recordatorios, inventario y postventa 24/7.",
+    },
+  ];
 
-const sections = [
-  {
-    id: 'diseno',
-    title: 'Diseño y Desarrollo Web',
-    description: `Creamos tiendas virtuales y portales web escalables, optimizados para SEO y conversión. Tu producto estará disponible 24/7 con una experiencia de usuario intuitiva y adaptativa.`,
-    image: webDesignImg,
-    bgColor: '#010207'
-  },
-  {
-    id: 'email',
-    title: 'Email Marketing',
-    description: `Diseñamos campañas de correo que llegan directamente a la bandeja de entrada, adaptándose a todos los dispositivos. Aumentamos el engagement mediante segmentación inteligente y automatización de envíos.`,
-    image: emailMarketingImg,
-    bgColor: '#010207'
-  },
-  {
-    id: 'crm',
-    title: 'Gestión CRM',
-    description: `Implementamos flujos de trabajo que centralizan datos de clientes y actividades en un tablero visual. Automatizamos seguimientos y recordatorios para fortalecer la relación con tus usuarios.`,
-    image: crmImg,
-    bgColor: '#12073e'
-  },
-  {
-    id: 'automatizaciones',
-    title: 'Analíticas y Automatizaciones',
-    description: `Integración de herramientas de analítica que recopilan métricas en tiempo real y generan reportes automáticos. Usa workflows inteligentes para automatizar tareas repetitivas y escalar operaciones sin esfuerzo.`,
-    image: automationImg,
-    bgColor: '#141524'
-  }
-];
+  const palette = {
+    purpleDark: "#39166F",
+    purpleBright: "#7328E8",
+    blackPurple: "#170E26",
+    grayLight: "#ACACAC",
+    grayDark: "#565758",
+  };
 
-export default function ServicesSection() {
+  const containerRef = useRef(null);
+  const [index, setIndex] = useState(0);
+
+  const snapTo = (i) => {
+    const clamped = Math.max(0, Math.min(i, sections.length - 1));
+    setIndex(clamped);
+    const container = containerRef.current;
+    if (container) {
+      container.scrollTo({
+        left: clamped * container.clientWidth,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const onResize = () => snapTo(index);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [index]);
+
+  useEffect(() => {
+    let cooldown = false;
+    const container = containerRef.current;
+
+    const wheelHandler = (e) => {
+      e.preventDefault();
+      if (cooldown) return;
+      cooldown = true;
+      if (e.deltaY > 0 || e.deltaX > 0) snapTo(index + 1);
+      else snapTo(index - 1);
+      setTimeout(() => (cooldown = false), 450);
+    };
+
+    const keyHandler = (e) => {
+      if (["ArrowRight", "PageDown"].includes(e.key)) snapTo(index + 1);
+      if (["ArrowLeft", "PageUp"].includes(e.key)) snapTo(index - 1);
+    };
+
+    container.addEventListener("wheel", wheelHandler, { passive: false });
+    window.addEventListener("keydown", keyHandler);
+
+    return () => {
+      container.removeEventListener("wheel", wheelHandler);
+      window.removeEventListener("keydown", keyHandler);
+    };
+  }, [index]);
+
   return (
-    <div className="h-screen overflow-y-auto snap-y snap-mandatory">
-      {sections.map(({ id, title, description, image, bgColor }, index) => {
-        const isReversed = index % 2 === 0;
-        return (
-          <motion.section
-            key={id}
-            className="h-screen snap-start flex flex-col md:flex-row items-center justify-center text-white"
-            style={{ backgroundColor: bgColor }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Texto */}
-            <div
-              className={`
-                flex-1 py-12 
-                flex flex-col justify-center 
-                text-center md:text-left 
-                px-4 md:px-6 
-                ${isReversed ? 'md:order-2' : 'md:order-1 md:pl-20'}
-              `}
+    <div style={{ position: "relative", width: "100vw", height: "100vh", overflow: "hidden" }}>
+      <section ref={containerRef} style={{ height: "100%", width: "100%", overflow: "hidden" }}>
+        <div style={{ display: "flex", height: "100%", width: `${sections.length * 100}vw` }}>
+          {sections.map((s, i) => (
+            <article
+              key={s.title}
+              style={{
+                minWidth: "100vw",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "6rem 8vw",
+                background: i % 2 === 0 ? palette.purpleDark : palette.blackPurple,
+                color: palette.grayLight,
+              }}
             >
-              <motion.h2
-                className="text-4xl md:text-6xl font-bold mb-6"
-                initial={{ y: -40, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-              >
-                {title}
-              </motion.h2>
-              <motion.p
-                className="text-lg md:text-xl max-w-lg mx-auto md:mx-0"
-                initial={{ y: -20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-              >
-                {description}
-              </motion.p>
-            </div>
-
-            {/* Imagen */}
-            <motion.div
-              className={`
-                flex-1 flex items-center justify-center 
-                px-4 md:px-6 py-12 
-                ${isReversed ? 'md:order-1 md:pr-20' : 'md:order-2'}
-              `}
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-            >
-              <img
-                src={image}
-                alt={title}
-                className="w-72 h-72 md:w-96 md:h-96 object-contain"
-              />
-            </motion.div>
-          </motion.section>
-        );
-      })}
+              <div style={{ maxWidth: 920 }}>
+                <h2
+                  style={{
+                    fontSize: "clamp(32px, 6vw, 64px)",
+                    margin: 0,
+                    color: palette.purpleBright,
+                  }}
+                >
+                  {s.title}
+                </h2>
+                <p
+                  style={{
+                    marginTop: "1.2rem",
+                    fontSize: "clamp(16px, 2.2vw, 22px)",
+                    lineHeight: 1.45,
+                  }}
+                >
+                  {s.blurb}
+                </p>
+                <button
+                  style={{
+                    marginTop: "2rem",
+                    border: `2px solid ${palette.purpleBright}`,
+                    background: "transparent",
+                    color: palette.purpleBright,
+                    padding: "0.9rem 1.2rem",
+                    fontSize: 16,
+                    borderRadius: 999,
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 10,
+                    transition: "all .2s ease",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: "50%",
+                      background: palette.purpleBright,
+                      display: "inline-block",
+                    }}
+                  />
+                  Conocer más
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
+
