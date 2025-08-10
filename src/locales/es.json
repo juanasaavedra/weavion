@@ -19,8 +19,11 @@
     },
     "automation": "Automatiza tu operación",
     "automationItems": {
-      "leads": "Gestiona tus leads",
-      "clients": "Encuentra más clientes en diferentes plataformas"
+      "appointments": "Genera citas",
+      "inventoryChat": "Charla con tu inventario y modifícalo",
+      "leads": "Captura y califica tus leads",
+      "quotes": "Entrega cotizaciones inmediatas y ten una postventa inteligente",
+      "contact": "¿Buscas algo más? Contáctanos"
     }
   },
   "hero": {

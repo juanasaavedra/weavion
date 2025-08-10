@@ -19,8 +19,11 @@
     },
     "automation": "Automate your operations",
     "automationItems": {
-      "leads": "Manage your leads",
-      "clients": "Find more clients across platforms"
+      "appointments": "Generate appointments",
+      "inventoryChat": "Chat with and modify your inventory",
+      "leads": "Capture and qualify your leads",
+      "quotes": "Deliver instant quotes and offer smart after-sales",
+      "contact": "Looking for something else? Contact us"
     }
   },
   "hero": {
