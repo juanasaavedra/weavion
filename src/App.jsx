@@ -1,12 +1,11 @@
 // src/App.jsx
-import React, { useEffect, useRef, Suspense } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
 // 3D
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, Environment } from '@react-three/drei';
+import HeroModel from './HeroModel';
 
 // Layout
 import DotGrid from './DotGrid';
@@ -107,10 +106,10 @@ function DropdownMenu({ title, items }) {
       <div className="cursor-pointer text-white px-2 py-1 rounded-md">
         {title}
       </div>
-      <div className="absolute left-1/2 -translate-x-1/2 mt-2 hidden group-hover:flex flex-wrap gap-4 p-4 rounded-xl glass-high text-white shadow-lg">
+      <div className="absolute left-1/2 -translate-x-1/2 mt-2 hidden group-hover:grid grid-rows-2 auto-cols-max grid-flow-col gap-4 p-4 rounded-xl glass-high text-white shadow-lg">
         {items.map((item, idx) => (
           <div key={idx} className={`gradient-border rounded-xl ${sizeClasses[idx % sizeClasses.length]} group/item flex items-center justify-center cursor-pointer`}>
-            <div className="glass rounded-xl w-full h-full flex items-center justify-center text-center p-2 transition-all duration-300 group-hover/item:bg-gradient-to-br group-hover/item:from-purple-500/30 group-hover/item:via-pink-500/30 group-hover/item:to-purple-500/30 group-hover/item:shadow-[0_0_15px_rgba(111,71,255,0.7)]">
+            <div className="rounded-xl w-full h-full flex items-center justify-center text-center p-2 transition-all duration-300 group-hover/item:bg-gradient-to-br group-hover/item:from-purple-500/30 group-hover/item:via-pink-500/30 group-hover/item:to-purple-500/30 group-hover/item:shadow-[0_0_15px_rgba(111,71,255,0.7)]">
               {item}
             </div>
           </div>
@@ -254,79 +253,44 @@ function CursorStars() {
   function Landing() {
     const { t } = useTranslation();
 
-  // Modelo GLB que reacciona al cursor
-  const MODEL_URL = `${import.meta.env.BASE_URL}models/phone_with_leads_optimized.glb`;
+    return (
+      <>
+        <section className="relative min-h-screen px-4 md:px-8">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
 
-  function PhoneModel() {
-    const { scene } = useGLTF(MODEL_URL); // pon el .glb en /public/models/
-    const ref = useRef();
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center min-h-screen gap-8">
+            {/* IZQUIERDA: ahora base sans-serif (font-clean) y frase en Pixelscript (font-script) */}
+            <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left">
+              <motion.h1
+                initial={{ opacity: 0, y: 60 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="font-clean text-5xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
+              >
+                Aumenta tu{' '}
+                <span className="font-script text-white">presencia digital</span>, sin trabajar de más
+              </motion.h1>
 
-    useFrame((state) => {
-      const { x, y } = state.pointer; // -1..1
-      const rx = y * 0.35;
-      const ry = x * 0.7;
-      const py = -y * 0.2;
+              {/* Botón: solo borde degradado + punto negro; texto del botón en Pixelscript */}
+              <Link
+                to="/services"
+                className="transition group mt-4 flex h-12 w-44 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+              >
+                <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900">
+                  {t('hero.cta', 'Descúbrelo')}
+                </div>
+              </Link>
+            </div>
 
-      if (!ref.current) return;
-      ref.current.rotation.x += (rx - ref.current.rotation.x) * 0.12;
-      ref.current.rotation.y += (ry - ref.current.rotation.y) * 0.12;
-      ref.current.position.y += (py - ref.current.position.y) * 0.12;
-      ref.current.rotation.z += (Math.sin(state.clock.elapsedTime * 0.3) * 0.05 - ref.current.rotation.z) * 0.05;
-    });
+            {/* DERECHA: modelo 3D */}
+            <div className="md:pl-6 w-full h-[45vh] md:h-[75vh]">
+              <HeroModel />
+            </div>
+          </div>
+        </section>
 
-    return <primitive ref={ref} object={scene} scale={1.1} position={[0, 0, 0]} />;
+        {/* Separador para que no pegue con la siguiente sección */}
+        <div className="h-12 md:h-24" />
+      </>
+    );
   }
-
-  return (
-    <>
-      <section className="relative min-h-screen px-4 md:px-8">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
-
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center min-h-screen gap-8">
-          {/* IZQUIERDA: ahora base sans-serif (font-clean) y frase en Pixelscript (font-script) */}
-          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left">
-            <motion.h1
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="font-clean text-5xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
-            >
-              Aumenta tu{' '}
-              <span className="font-script text-white">presencia digital</span>, sin trabajar de más
-            </motion.h1>
-
-            {/* Botón: solo borde degradado + punto negro; texto del botón en Pixelscript */}
-            <Link
-              to="/services"
-              className="transition group mt-4 flex h-12 w-44 items-center justify-center rounded-full
-                         bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300
-                         hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
->
-              <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207]
-                              transition duration-300 ease-in-out group-hover:bg-gradient-to-br
-                              group-hover:from-gray-700 group-hover:to-gray-900">
-                {t('hero.cta', 'Descúbrelo')}
-              </div>
-            </Link>
-          </div>
-
-          {/* DERECHA: modelo 3D */}
-          <div className="md:pl-6 w-full h-[45vh] md:h-[75vh]">
-            <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 2.6], fov: 35 }} gl={{ antialias: true, alpha: true }}>
-              <ambientLight intensity={0.6} />
-              <directionalLight position={[5, 5, 5]} intensity={0.8} />
-              <directionalLight position={[-5, -3, 2]} intensity={0.3} />
-              <Suspense fallback={null}>
-                <PhoneModel />
-                <Environment preset="night" />
-              </Suspense>
-            </Canvas>
-          </div>
-        </div>
-      </section>
-
-      {/* Separador para que no pegue con la siguiente sección */}
-      <div className="h-12 md:h-24" />
-    </>
-  );
-}
