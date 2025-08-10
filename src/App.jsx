@@ -65,8 +65,11 @@ function Header() {
   ];
 
   const automationItems = [
-    t('header.automationItems.leads', 'Gestiona tus leads'),
-    t('header.automationItems.clients', 'Encuentra más clientes en diferentes plataformas'),
+    t('header.automationItems.appointments', 'Genera citas'),
+    t('header.automationItems.inventoryChat', 'Charla con tu inventario y modifícalo'),
+    t('header.automationItems.leads', 'Captura y califica tus leads'),
+    t('header.automationItems.quotes', 'Entrega cotizaciones inmediatas y ten una postventa inteligente'),
+    t('header.automationItems.contact', '¿Buscas algo más? Contáctanos'),
   ];
 
   return (
@@ -98,15 +101,18 @@ function Header() {
 }
 
 function DropdownMenu({ title, items }) {
+  const sizeClasses = ['w-28 h-28', 'w-32 h-32', 'w-36 h-36', 'w-40 h-40', 'w-44 h-44'];
   return (
     <div className="relative group">
       <div className="cursor-pointer text-white px-2 py-1 rounded-md">
         {title}
       </div>
-      <div className="absolute left-1/2 -translate-x-1/2 mt-2 hidden flex-col rounded-md bg-black/80 text-white shadow-lg group-hover:flex">
+      <div className="absolute left-1/2 -translate-x-1/2 mt-2 hidden group-hover:flex flex-wrap gap-4 p-4 rounded-xl glass-high text-white shadow-lg">
         {items.map((item, idx) => (
-          <div key={idx} className="px-4 py-2 whitespace-nowrap hover:bg-purple-700/20">
-            {item}
+          <div key={idx} className={`gradient-border rounded-xl ${sizeClasses[idx % sizeClasses.length]} group/item flex items-center justify-center cursor-pointer`}>
+            <div className="glass rounded-xl w-full h-full flex items-center justify-center text-center p-2 transition-all duration-300 group-hover/item:bg-gradient-to-br group-hover/item:from-purple-500/30 group-hover/item:via-pink-500/30 group-hover/item:to-purple-500/30 group-hover/item:shadow-[0_0_15px_rgba(111,71,255,0.7)]">
+              {item}
+            </div>
           </div>
         ))}
       </div>
