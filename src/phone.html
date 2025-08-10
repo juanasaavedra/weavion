@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Phone 3D – vidrio + negro mate</title>
+  <style>
+    html,body { margin:0; height:100%; background:#0b0b0f; overflow:hidden; }
+    #ui { position:fixed; top:12px; left:12px; z-index:2; display:flex; gap:8px; }
+    button { padding:8px 12px; border:0; border-radius:10px; background:#6b46c1; color:#fff; font:600 14px/1.2 system-ui; cursor:pointer; }
+    button:hover { filter:brightness(1.1); }
+  </style>
+</head>
+<body>
+  <div id="ui">
+    <button id="exportGlb">Exportar .glb</button>
+  </div>
+  <canvas id="c"></canvas>
+
+  <script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.159.0/build/three.module.js';
+    import { OrbitControls } from 'https://unpkg.com/three@0.159.0/examples/jsm/controls/OrbitControls.js';
+    import { GLTFExporter } from 'https://unpkg.com/three@0.159.0/examples/jsm/exporters/GLTFExporter.js';
+    import { RoomEnvironment } from 'https://unpkg.com/three@0.159.0/examples/jsm/environments/RoomEnvironment.js';
+
+    // ----- Renderer -----
+    const canvas = document.getElementById('c');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+
+    // ----- Scene / Camera -----
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 0.01, 100);
+    camera.position.set(0.18, 0.14, 0.22);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.target.set(0, 0.085, 0); // hacia el centro del teléfono
+    controls.update();
+
+    // Ambiente para reflejos de vidrio
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.5).texture;
+
+    // Iluminación suave
+    const hemi = new THREE.HemisphereLight(0xffffff, 0x090909, 0.8);
+    scene.add(hemi);
+    const dir = new THREE.DirectionalLight(0xffffff, 1.0);
+    dir.position.set(1, 1, 1);
+    scene.add(dir);
+
+    // ----- Parámetros del teléfono -----
+    const W = 0.076;       // ancho (m)
+    const H = 0.164;       // alto
+    const D = 0.0085;      // grosor
+    const R = 0.011;       // radio de esquina
+    const BEZEL = 0.0042;  // ancho del marco frontal
+    const FRAME_H = 0.0012; // altura del marco
+
+    // Helper: RoundedRect Shape
+    function roundedRectShape(w, h, r) {
+      const hw = w/2, hh = h/2;
+      const s = new THREE.Shape();
+      s.moveTo(-hw + r, -hh);
+      s.lineTo(hw - r, -hh);
+      s.quadraticCurveTo(hw, -hh, hw, -hh + r);
+      s.lineTo(hw, hh - r);
+      s.quadraticCurveTo(hw, hh, hw - r, hh);
+      s.lineTo(-hw + r, hh);
+      s.quadraticCurveTo(-hw, hh, -hw, hh - r);
+      s.lineTo(-hw, -hh + r);
+      s.quadraticCurveTo(-hw, -hh, -hw + r, -hh);
+      return s;
+    }
+
+    // ----- Chasis (negro mate) -----
+    const chassisShape = roundedRectShape(W, H, R);
+    const chassisGeo = new THREE.ExtrudeGeometry(chassisShape, {
+      depth: D,
+      bevelEnabled: true,
+      bevelThickness: 0.0012,
+      bevelSize: 0.0012,
+      bevelSegments: 6,
+      curveSegments: 64,
+      steps: 1
+    });
+    chassisGeo.rotateX(Math.PI/2);         // espesor sobre +Z
+    chassisGeo.translate(0, H/2, 0);       // levantar para que el "suelo" sea y=0
+    const matChassis = new THREE.MeshPhysicalMaterial({
+      color: 0x080808,
+      roughness: 0.95,
+      metalness: 0.05,
+      sheen: 0.0
+    });
+    const chassis = new THREE.Mesh(chassisGeo, matChassis);
+    scene.add(chassis);
+
+    // ----- Marco frontal (bezel anillo) -----
+    const outer = roundedRectShape(W, H, R);
+    const inner = roundedRectShape(W - 2*BEZEL, H - 2*BEZEL, Math.max(0.0008, R - BEZEL));
+    outer.holes.push(inner);
+    const ringGeo = new THREE.ExtrudeGeometry(outer, {
+      depth: FRAME_H,
+      bevelEnabled: false,
+      curveSegments: 64,
+      steps: 1
+    });
+    ringGeo.rotateX(Math.PI/2);
+    ringGeo.translate(0, H/2, -D/2 + 0.0010); // cerca del frente
+    const matRing = new THREE.MeshPhysicalMaterial({
+      color: 0x101010,
+      roughness: 0.6,
+      metalness: 0.2
+    });
+    const ring = new THREE.Mesh(ringGeo, matRing);
+    scene.add(ring);
+
+    // ----- Pantalla (UI + vidrio) -----
+    const screenShape = roundedRectShape(W - 2*BEZEL, H - 2*BEZEL, Math.max(0.0008, R - BEZEL));
+    const screenGeo = new THREE.ShapeGeometry(screenShape, 64);
+    screenGeo.rotateX(Math.PI/2);
+    screenGeo.translate(0, H/2, -D/2 + 0.0009);
+
+    const tex = new THREE.TextureLoader().load(
+      // 👇🏽 Reemplaza por la ruta pública de TU imagen UI
+      'YOUR_UI_IMAGE_URL.png',
+      () => { tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = renderer.capabilities.getMaxAnisotropy(); }
+    );
+
+    const matScreen = new THREE.MeshPhysicalMaterial({
+      map: tex,
+      clearcoat: 0.7,
+      clearcoatRoughness: 0.15,
+      roughness: 0.9,
+      metalness: 0.0,
+      envMapIntensity: 0.8
+    });
+    const screen = new THREE.Mesh(screenGeo, matScreen);
+    scene.add(screen);
+
+    // ----- Botones -----
+    function addButton(x, y, z, sx, sy, sz) {
+      const g = new THREE.BoxGeometry(sx, sy, sz);
+      const m = new THREE.MeshPhysicalMaterial({ color: 0x0f0f0f, roughness: 0.6, metalness: 0.2 });
+      const b = new THREE.Mesh(g, m);
+      b.position.set(x, y, z);
+      scene.add(b);
+    }
+    const t = 0.0020, len = 0.019, hgt = 0.0028;
+    // Power (derecha)
+    addButton( W/2 - t/2, 0.022 + H/2, 0, t, len, hgt);
+    // Volumen (izquierda)
+    addButton(-W/2 + t/2, 0.036 + H/2, 0, t, len, hgt);
+    addButton(-W/2 + t/2, 0.012 + H/2, 0, t, len, hgt);
+    // Ranura altavoz (superior frontal)
+    addButton(0, H - 0.013, -D/2 + 0.0012, 0.016, 0.0022, 0.0008);
+
+    // ----- Animación -----
+    renderer.setAnimationLoop(() => {
+      controls.update();
+      renderer.render(scene, camera);
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth/window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // ----- Exportar a .glb -----
+    document.getElementById('exportGlb').onclick = () => {
+      const exporter = new GLTFExporter();
+      exporter.parse(scene, (bin) => {
+        const blob = new Blob([bin], { type: 'model/gltf-binary' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'phone_glass_black.glb';
+        a.click();
+        URL.revokeObjectURL(a.href);
+      }, { binary: true });
+    };
+  </script>
+</body>
+</html>
