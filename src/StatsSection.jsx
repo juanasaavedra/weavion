@@ -29,7 +29,7 @@ export default function StatsSection() {
       ref={sectionRef}
       className="min-h-screen flex flex-col items-center justify-center px-4"
     >
-      <h2 className="stat-title stat-animate text-4xl md:text-6xl font-bold mb-16 text-center font-sans">
+      <h2 className="stat-title stat-animate text-4xl md:text-6xl font-bold mb-16 text-center">
         {t('whyus.title', '¿Por qué nuestros servicios?')}
       </h2>
       <div className="stats-container grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">

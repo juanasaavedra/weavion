@@ -61,6 +61,10 @@ html, body {
   color: var(--color-text);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'argent-pixel-cf', sans-serif;
+}
+
 /* Clases para titulares y texto */
 .headline {
   font-family: 'Ars Nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;

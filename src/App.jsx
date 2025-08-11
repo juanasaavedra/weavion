@@ -158,20 +158,22 @@ function DropdownMenu({ title, items }) {
     <div ref={menuRef} className="relative mx-4">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="cursor-pointer text-white px-4 py-2 rounded-md"
+        className="cursor-pointer text-white px-4 py-2 rounded-md font-argent"
       >
         {title}
       </button>
       {open && (
-        <div className="absolute left-1/2 -translate-x-1/2 mt-4 glass rounded-2xl flex flex-row space-x-4 p-4 text-white">
+        <div className="absolute left-1/2 -translate-x-1/2 mt-4 glass rounded-2xl grid grid-rows-2 grid-flow-col gap-4 p-4 text-white">
           {items.map(({ label, path }, idx) => (
             <Link
               key={idx}
               to={path}
               onClick={() => setOpen(false)}
-              className="gradient-border rounded-2xl w-40 h-40 flex items-center justify-center text-center transition-shadow hover:shadow-[0_0_15px_rgba(111,71,255,0.7)]"
+              className="group w-40 h-40 rounded-2xl p-[2px] bg-gradient-to-r from-purple-400 to-purple-700 text-white transition duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
             >
-              {label}
+              <div className="flex h-full w-full items-center justify-center rounded-2xl bg-black text-center transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900 font-argent">
+                {label}
+              </div>
             </Link>
           ))}
         </div>
@@ -303,16 +305,16 @@ function Landing() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center min-h-screen gap-8">
-            {/* IZQUIERDA: base sans-serif (font-clean) y frase en Argent Pixel CF (font-argent) */}
+            {/* IZQUIERDA: titulares en Argent Pixel CF */}
             <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left">
               <motion.h1
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="font-clean text-5xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
+                className="font-argent text-5xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
               >
                 Aumenta tu{' '}
-                <span className="font-argent text-white">presencia digital</span>, sin trabajar de más
+                <span className="font-argent-italic text-white">presencia digital</span>, sin trabajar de más
               </motion.h1>
 
               {/* Botón: solo borde degradado + punto negro; texto del botón en Argent Pixel CF */}
