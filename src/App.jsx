@@ -50,7 +50,7 @@ export default function App() {
         <div className="h-12 md:h-24" />
 
         {/* Contact Section */}
-        <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
+        <section className="py-24 px-4 rounded-xl overflow-hidden bg-transparent">
           <ContactSection />
         </section>
 
