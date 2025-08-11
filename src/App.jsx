@@ -38,6 +38,9 @@ export default function App() {
 
         {/* Process Section */}
         <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
+            ¿Cómo funciona nuestro proceso?
+          </h2>
           <ProcessTimeline />
         </section>
 
@@ -47,6 +50,17 @@ export default function App() {
         {/* Contact Section */}
         <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
           <ContactSection />
+        </section>
+
+        {/* Spacer */}
+        <div className="h-12 md:h-24" />
+
+        {/* Sección: Por qué nosotros? */}
+        <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
+            ¿Por qué nosotros?
+          </h2>
+          {/* Aquí puedes agregar el contenido de la sección */}
         </section>
       </div>
     </>
@@ -245,8 +259,8 @@ function CursorStars() {
   );
 }
 
-  function Landing() {
-    const { t } = useTranslation();
+function Landing() {
+  const { t } = useTranslation();
 
   // Modelo GLB que reacciona al cursor
   const MODEL_URL = `${import.meta.env.BASE_URL}models/phone_with_leads_optimized.glb`;
