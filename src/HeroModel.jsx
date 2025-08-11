@@ -3,8 +3,9 @@ import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, useGLTF } from '@react-three/drei';
 
-// Ruta absoluta segura para Vite y GitHub Pages
-const MODEL_URL = `${import.meta.env.BASE_URL}models/phone_with_leads_optimized.glb`;
+// URL del modelo resuelta por Vite (soporta dev y producción)
+import modelUrl from '/models/phone_with_leads_optimized.glb?url';
+const MODEL_URL = modelUrl;
 
 // Precarga del modelo
 useGLTF.preload(MODEL_URL);
