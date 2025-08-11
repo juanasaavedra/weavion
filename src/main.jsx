@@ -12,6 +12,7 @@ import CapturaCalificaLeads from './pages/Automatizaciones/CapturaCalificaLeads'
 import InventarioChat from './pages/Automatizaciones/InventarioChat';
 import CotizacionesPostventa from './pages/Automatizaciones/CotizacionesPostventa';
 import ContactoMas from './pages/Automatizaciones/ContactoMas';
+import Scene from './Scene';
 import './index.css';
 import './i18n';
 
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="automation/inventario-chat" element={<InventarioChat />} />
         <Route path="automation/cotizaciones-postventa" element={<CotizacionesPostventa />} />
         <Route path="automation/contacto" element={<ContactoMas />} />
+        <Route path="phone" element={<Scene />} />
         <Route path="*"          element={<Landing />} />  {/* fallback a landing */}
       </Routes>
     </HashRouter>
