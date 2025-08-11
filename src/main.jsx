@@ -4,9 +4,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import Landing from './App';
 import ServiciosPinnedSlider from './ServiciosPinnedSlider';
 import ContactPage from './ContactPage';
-import DisenoDesarrolloWeb from './pages/DisenoDesarrolloWeb';
-import IntegracionCRM from './pages/IntegracionCRM';
-import AnaliticasNegocio from './pages/AnaliticasNegocio';
+import DisenoDesarrolloWebExt, { IntegracionCRMExt, AnaliticasNegocioExt } from './pages/ServiciosExtendidos';
 import GeneraCitas from './pages/Automatizaciones/GeneraCitas';
 import CapturaCalificaLeads from './pages/Automatizaciones/CapturaCalificaLeads';
 import InventarioChat from './pages/Automatizaciones/InventarioChat';
@@ -21,9 +19,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path=""           element={<Landing />} />
         <Route path="services"   element={<ServiciosPinnedSlider />} />
-        <Route path="services/web"        element={<DisenoDesarrolloWeb />} />
-        <Route path="services/crm"        element={<IntegracionCRM />} />
-        <Route path="services/analiticas" element={<AnaliticasNegocio />} />
+        <Route path="services/web"        element={<DisenoDesarrolloWebExt />} />
+        <Route path="services/crm"        element={<IntegracionCRMExt />} />
+        <Route path="services/analiticas" element={<AnaliticasNegocioExt />} />
         <Route path="contact"    element={<ContactPage />} />
         <Route path="automation/genera-citas" element={<GeneraCitas />} />
         <Route path="automation/captura-califica-leads" element={<CapturaCalificaLeads />} />
