@@ -128,16 +128,16 @@ function Header() {
 
 function DropdownMenu({ title, items }) {
   return (
-    <div className="relative group">
-      <div className="cursor-pointer text-white px-2 py-1 rounded-md">
+    <div className="relative group mx-4">
+      <div className="cursor-pointer text-white px-4 py-2 rounded-md">
         {title}
       </div>
-      <div className="absolute left-1/2 -translate-x-1/2 mt-2 hidden group-hover:grid w-72 h-48 grid-cols-3 grid-rows-2 gap-2 p-2 text-white">
+      <div className="absolute left-1/2 -translate-x-1/2 mt-4 hidden group-hover:grid w-72 h-48 grid-cols-3 grid-rows-2 gap-2 p-4 text-white">
         {items.map(({ label, path }, idx) => (
           <Link
             key={idx}
             to={path}
-            className="gradient-border rounded-xl w-full h-full flex items-center justify-center text-center p-2 transition-shadow hover:shadow-[0_0_15px_rgba(111,71,255,0.7)]"
+            className="gradient-border rounded-xl w-full h-full flex items-center justify-center text-center p-3 transition-shadow hover:shadow-[0_0_15px_rgba(111,71,255,0.7)]"
           >
             {label}
           </Link>
