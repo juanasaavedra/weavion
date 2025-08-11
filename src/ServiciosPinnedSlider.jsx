@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 
 const PALETTE = {
   purpleDark: "#39166F",
@@ -41,9 +41,9 @@ export default function ServiciosPinnedSlider() {
     },
   ];
 
-  const wrapRef = useRef(null);
   const [dims, setDims] = useState({ vw: 0, vh: 0 });
   const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
+  const scrollX = useRef(0);
 
   // Ajustes de sensación
   const SLOW_FACTOR = 1.8; // >1 = más lenta cada transición
@@ -57,25 +57,16 @@ export default function ServiciosPinnedSlider() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  useEffect(() => {
-    let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        if (!wrapRef.current) return;
-        const rect = wrapRef.current.getBoundingClientRect();
-        const start = window.scrollY + rect.top;
-        const perPanel = dims.vh * SLOW_FACTOR;
-        const totalHeight = dims.vh + (items.length - 1) * perPanel;
-        const end = start + totalHeight - dims.vh;
-        const raw = (window.scrollY - start) / Math.max(1, end - start);
-        setProgress(Math.min(1, Math.max(0, raw)));
-      });
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", onScroll); };
-  }, [dims.vh, items.length]);
+  const handleWheel = (e) => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    const perPanel = dims.vw * SLOW_FACTOR;
+    const totalWidth = dims.vw + (items.length - 1) * perPanel;
+    const maxScroll = totalWidth - dims.vw;
+    scrollX.current = clamp(scrollX.current + e.deltaX, 0, maxScroll);
+    const raw = scrollX.current / Math.max(1, maxScroll);
+    setProgress(raw);
+  };
 
   // Derivar estado: cuál panel está activo y cuánto llevamos de su transición
   const steps = items.length - 1;
@@ -100,27 +91,25 @@ export default function ServiciosPinnedSlider() {
     return 0; // futuros aún no visibles
   });
 
-  const wrapperHeight = dims.vh + (items.length - 1) * (dims.vh * SLOW_FACTOR);
+  const wrapperHeight = dims.vh;
 
   return (
-    <div ref={wrapRef} style={{ height: wrapperHeight }}>
-      {/* Sticky mientras dure la sección */}
-      <section
-        style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})` }}
-      >
-        <div style={{ display: "flex", height: "100%", width: "100%" }}>
-          {items.map((it, j) => {
-            const w = Math.round(widths[j] || 0);
-            const thin = w <= THIN + 1;
-            return (
-              <div key={it.title} style={{ flex: `0 0 ${w}px`, height: "100%", position: "relative", overflow: "hidden", transition: "none", borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none" }}>
-                <Panel item={it} thin={thin} palette={PALETTE} />
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    </div>
+    <section
+      onWheel={handleWheel}
+      style={{ height: wrapperHeight, overflow: "hidden", background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})` }}
+    >
+      <div style={{ display: "flex", height: "100%", width: "100%" }}>
+        {items.map((it, j) => {
+          const w = Math.round(widths[j] || 0);
+          const thin = w <= THIN + 1;
+          return (
+            <div key={it.title} style={{ flex: `0 0 ${w}px`, height: "100%", position: "relative", overflow: "hidden", transition: "none", borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none" }}>
+              <Panel item={it} thin={thin} palette={PALETTE} />
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
@@ -139,7 +128,7 @@ function Panel({ item, thin, palette }) {
         </a>
       </div>
       {thin && (
-        <div style={{ position: "absolute", bottom: 20, left: 0, right: 0, writingMode: "vertical-rl", transform: "rotate(180deg)", textAlign: "center", fontSize: 12, letterSpacing: "0.08em", color: "#fff", opacity: 0.75 }} aria-hidden>
+        <div style={{ position: "absolute", bottom: 20, left: 0, right: 0, writingMode: "vertical-rl", transform: "rotate(180deg)", textAlign: "center", fontSize: 16, letterSpacing: "0.08em", color: "#fff", opacity: 0.75 }} aria-hidden>
           {item.title}
         </div>
       )}
