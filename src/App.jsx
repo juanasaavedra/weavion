@@ -61,17 +61,41 @@ function Header() {
     i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
 
   const servicesItems = [
-    t('header.servicesItems.webDev', 'Diseño y Desarrollo web'),
-    t('header.servicesItems.crm', 'Integración a CRM o Service Titan'),
-    t('header.servicesItems.analytics', 'Analíticas de negocio'),
+    {
+      label: t('header.servicesItems.webDev', 'Diseño y Desarrollo web'),
+      path: '/services/web',
+    },
+    {
+      label: t('header.servicesItems.crm', 'Integración a CRM o Service Titan'),
+      path: '/services/crm',
+    },
+    {
+      label: t('header.servicesItems.analytics', 'Analíticas de negocio'),
+      path: '/services/analiticas',
+    },
   ];
 
   const automationItems = [
-    t('header.automationItems.appointments', 'Genera citas'),
-    t('header.automationItems.inventoryChat', 'Charla con tu inventario y modifícalo'),
-    t('header.automationItems.leads', 'Captura y califica tus leads'),
-    t('header.automationItems.quotes', 'Entrega cotizaciones inmediatas y ten una postventa inteligente'),
-    t('header.automationItems.contact', '¿Buscas algo más? Contáctanos'),
+    {
+      label: t('header.automationItems.appointments', 'Genera citas'),
+      path: '/contact',
+    },
+    {
+      label: t('header.automationItems.inventoryChat', 'Charla con tu inventario y modifícalo'),
+      path: '/contact',
+    },
+    {
+      label: t('header.automationItems.leads', 'Captura y califica tus leads'),
+      path: '/contact',
+    },
+    {
+      label: t('header.automationItems.quotes', 'Entrega cotizaciones inmediatas y ten una postventa inteligente'),
+      path: '/contact',
+    },
+    {
+      label: t('header.automationItems.contact', '¿Buscas algo más? Contáctanos'),
+      path: '/contact',
+    },
   ];
 
   return (
@@ -103,19 +127,20 @@ function Header() {
 }
 
 function DropdownMenu({ title, items }) {
-  const sizeClasses = ['w-28 h-28', 'w-32 h-32', 'w-36 h-36', 'w-40 h-40', 'w-44 h-44'];
   return (
     <div className="relative group">
       <div className="cursor-pointer text-white px-2 py-1 rounded-md">
         {title}
       </div>
-      <div className="absolute left-1/2 -translate-x-1/2 mt-2 hidden group-hover:grid grid-rows-2 auto-cols-max grid-flow-col gap-4 p-4 rounded-xl glass-high text-white shadow-lg">
-        {items.map((item, idx) => (
-          <div key={idx} className={`gradient-border rounded-xl ${sizeClasses[idx % sizeClasses.length]} group/item flex items-center justify-center cursor-pointer`}>
-            <div className="rounded-xl w-full h-full flex items-center justify-center text-center p-2 transition-all duration-300 group-hover/item:bg-gradient-to-br group-hover/item:from-purple-500/30 group-hover/item:via-pink-500/30 group-hover/item:to-purple-500/30 group-hover/item:shadow-[0_0_15px_rgba(111,71,255,0.7)]">
-              {item}
-            </div>
-          </div>
+      <div className="absolute left-1/2 -translate-x-1/2 mt-2 hidden group-hover:grid w-72 h-48 grid-cols-3 grid-rows-2 gap-2 p-2 text-white">
+        {items.map(({ label, path }, idx) => (
+          <Link
+            key={idx}
+            to={path}
+            className="gradient-border rounded-xl w-full h-full flex items-center justify-center text-center p-2 transition-shadow hover:shadow-[0_0_15px_rgba(111,71,255,0.7)]"
+          >
+            {label}
+          </Link>
         ))}
       </div>
     </div>

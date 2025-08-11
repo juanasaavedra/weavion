@@ -19,6 +19,7 @@ export default function HorizontalSnapSections() {
       title: "Email Marketing",
       blurb:
         "Automatizaciones que venden: secuencias, carritos abandonados, newsletters y segmentación basada en comportamiento.",
+      path: "/contact",
     },
     {
       title: "Analíticas de tu operación",
@@ -30,6 +31,7 @@ export default function HorizontalSnapSections() {
       title: "Automatiza tu operación",
       blurb:
         "BOTS y flujos con n8n/Python para cotizaciones, recordatorios, inventario y postventa 24/7.",
+      path: "/contact",
     },
   ];
 
