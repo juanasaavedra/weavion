@@ -166,22 +166,20 @@ function CursorStars() {
     };
 
     const spawn = (x, y) => {
-      const count = 6 + Math.floor(Math.random() * 3);
+      const count = 1 + Math.floor(Math.random() * 2); // much fewer stars
       for (let i = 0; i < count; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 0.6 + Math.random() * 1.2;
+        const speed = 0.2 + Math.random() * 0.4;
         particlesRef.current.push({
           x, y,
           vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 0.4,
+          vy: Math.sin(angle) * speed - 0.1,
           life: 1,
-          decay: 0.015 + Math.random() * 0.02,
-          size: 3 + Math.random() * 3,
-          hue: Math.random() < 0.6 ? 0 : 270,
-          sat: Math.random() < 0.6 ? 0 : 70,
-          light: 100,
-          spin: Math.random() * Math.PI,
-          spikes: 5,
+          decay: 0.01 + Math.random() * 0.02,
+          radius: Math.random() * 1.2 + 0.6,
+          pulse: Math.random() * 0.02 + 0.005,
+          pulseFactor: Math.random() * Math.PI * 2,
+          glow: Math.random() < 0.2,
         });
       }
     };
@@ -191,42 +189,27 @@ function CursorStars() {
       spawn(e.clientX - rect.left, e.clientY - rect.top);
     };
 
-    const drawStar = (cx, cy, spikes, outerRadius, innerRadius, rotation) => {
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(rotation);
-      ctx.beginPath();
-      let rot = Math.PI / 2 * 3;
-      const step = Math.PI / spikes;
-      ctx.moveTo(0, -outerRadius);
-      for (let i = 0; i < spikes; i++) {
-        ctx.lineTo(Math.cos(rot) * outerRadius, Math.sin(rot) * outerRadius);
-        rot += step;
-        ctx.lineTo(Math.cos(rot) * innerRadius, Math.sin(rot) * innerRadius);
-        rot += step;
-      }
-      ctx.closePath();
-      ctx.restore();
-    };
-
     const tick = () => {
       ctx.clearRect(0, 0, w, h);
       const arr = particlesRef.current;
 
       for (let i = arr.length - 1; i >= 0; i--) {
         const p = arr[i];
-        p.x += p.vx; p.y += p.vy; p.vy += 0.02; p.life -= p.decay;
+        p.x += p.vx; p.y += p.vy; p.vy += 0.02; p.life -= p.decay; p.pulseFactor += p.pulse;
         if (p.life <= 0) { arr.splice(i, 1); continue; }
-
-        ctx.globalAlpha = Math.max(p.life, 0);
-        ctx.fillStyle = p.sat === 0
-          ? `rgba(255,255,255,${Math.max(p.life, 0)})`
-          : `hsla(${p.hue} ${p.sat}% ${p.light}% / ${Math.max(p.life, 0.9)})`;
-
-        drawStar(p.x, p.y, p.spikes, p.size, p.size * 0.5, p.spin);
+        const pulseOpacity = 0.8 + Math.sin(p.pulseFactor) * 0.2;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(p.life * pulseOpacity, 1)})`;
         ctx.fill();
+        if (p.glow) {
+          const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 4);
+          gradient.addColorStop(0, `rgba(111, 71, 255, ${0.4 * p.life})`);
+          gradient.addColorStop(1, 'transparent');
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        }
       }
-      ctx.globalAlpha = 1;
       rafRef.current = requestAnimationFrame(tick);
     };
 
