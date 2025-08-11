@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -141,22 +141,41 @@ function Header() {
 }
 
 function DropdownMenu({ title, items }) {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
   return (
-    <div className="relative group mx-4">
-      <div className="cursor-pointer text-white px-4 py-2 rounded-md">
+    <div ref={menuRef} className="relative mx-4">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="cursor-pointer text-white px-4 py-2 rounded-md"
+      >
         {title}
-      </div>
-      <div className="absolute left-1/2 -translate-x-1/2 mt-4 hidden group-hover:flex flex-row space-x-4 p-4 text-white">
-        {items.map(({ label, path }, idx) => (
-          <Link
-            key={idx}
-            to={path}
-            className="glass gradient-border rounded-2xl w-40 h-40 flex items-center justify-center text-center transition-shadow hover:shadow-[0_0_15px_rgba(111,71,255,0.7)]"
-          >
-            {label}
-          </Link>
-        ))}
-      </div>
+      </button>
+      {open && (
+        <div className="absolute left-1/2 -translate-x-1/2 mt-4 glass rounded-2xl flex flex-row space-x-4 p-4 text-white">
+          {items.map(({ label, path }, idx) => (
+            <Link
+              key={idx}
+              to={path}
+              onClick={() => setOpen(false)}
+              className="gradient-border rounded-2xl w-40 h-40 flex items-center justify-center text-center transition-shadow hover:shadow-[0_0_15px_rgba(111,71,255,0.7)]"
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
