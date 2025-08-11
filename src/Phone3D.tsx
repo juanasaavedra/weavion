@@ -28,13 +28,13 @@ function roundedRectShape(w: number, h: number, r: number) {
 }
 
 export default function Phone3D({ uiTextureUrl, scale = 1 }: Phone3DProps) {
-  // Medidas (m) realistas
-  const W = 0.076;
-  const H = 0.164;
-  const D = 0.0085;
-  const R = 0.011;
-  const BEZEL = 0.0042;
-  const FRAME_H = 0.0012;
+  // Medidas (m) realistas aproximadas a un smartphone moderno
+  const W = 0.071; // ancho
+  const H = 0.147; // alto
+  const D = 0.0076; // grosor
+  const R = 0.01; // radio de esquina
+  const BEZEL = 0.004; // marco frontal
+  const FRAME_H = 0.001; // altura del marco
 
   // TEXTURA UI
   const texture = useLoader(THREE.TextureLoader, uiTextureUrl);
@@ -157,6 +157,19 @@ export default function Phone3D({ uiTextureUrl, scale = 1 }: Phone3DProps) {
         <boxGeometry args={[0.016, 0.0022, 0.0008]} />
         <meshPhysicalMaterial color="#111" roughness={0.6} metalness={0.2} />
       </mesh>
+
+      {/* Puerto USB-C inferior */}
+      <mesh position={[0, 0.013, -D / 2 + 0.0012]}>
+        <boxGeometry args={[0.012, 0.0024, 0.0008]} />
+        <meshPhysicalMaterial color="#111" roughness={0.6} metalness={0.2} />
+      </mesh>
+      {/* Altavoces inferiores */}
+      {[-0.02, -0.015, -0.01, 0.01, 0.015, 0.02].map((x, i) => (
+        <mesh key={i} position={[x, 0.013, -D / 2 + 0.0012]}>
+          <boxGeometry args={[0.002, 0.0024, 0.0008]} />
+          <meshPhysicalMaterial color="#111" roughness={0.6} metalness={0.2} />
+        </mesh>
+      ))}
     </group>
   );
 }
