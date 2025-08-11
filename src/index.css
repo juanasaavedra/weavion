@@ -421,8 +421,8 @@ html, body {
 }
 
 .gradient-border {
-  background: linear-gradient(to bottom right, #6b21a8, #6f47ff, #8b00ff);
-  padding: 2px;
+  border: 2px solid transparent;
+  border-image: linear-gradient(to bottom right, #6b21a8, #6f47ff, #8b00ff) 1;
 }
 
 @keyframes pulse-glow {

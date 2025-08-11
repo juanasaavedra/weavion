@@ -33,8 +33,21 @@ export default function HorizontalPinnedSlider() {
   const items = [
     {
       title: "Diseño y Desarrollo web",
-      desc: "Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.",
-      bg: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`,
+      blurb:
+        "Sitios rápidos, accesibles y listos para convertir. Desde landing pages hasta e-commerce con performance 90+ en Lighthouse.",
+      path: "/services/web",
+    },
+    {
+      title: "Integración a CRM o ServiceTitan",
+      blurb:
+        "Conecta tu web al flujo comercial: leads entran limpios al CRM, disparan tareas, asignan técnicos y cierran más ventas.",
+      path: "/services/crm",
+    },
+    {
+      title: "Email Marketing",
+      blurb:
+        "Automatizaciones que venden: secuencias, carritos abandonados, newsletters y segmentación basada en comportamiento.",
+      path: "/contact",
     },
     {
       title: "Integración a CRM o Service Titan",
@@ -42,9 +55,10 @@ export default function HorizontalPinnedSlider() {
       bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, #1a1530, ${PALETTE.purpleDark})`,
     },
     {
-      title: "Analíticas de negocio",
-      desc: "Paneles en tiempo real: CPL, tasa de agendamiento, revenue por técnico y ROI por canal.",
-      bg: `radial-gradient(60% 80% at 50% 50%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(120deg, #201a34, #2a2146)`,
+      title: "Automatiza tu operación",
+      blurb:
+        "BOTS y flujos con n8n/Python para cotizaciones, recordatorios, inventario y postventa 24/7.",
+      path: "/contact",
     },
   ];
 
