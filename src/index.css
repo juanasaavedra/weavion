@@ -2,8 +2,8 @@
 /* src/index.css */
 @font-face {
   font-family: 'Ars Nova';
-  src: url('./assets/fonts/ArsNova-Regular.woff2') format('woff2'),
-       url('./assets/fonts/ArsNova-Regular.woff') format('woff');
+  src: url('/fonts/ArsNova-Regular.woff2') format('woff2'),
+       url('/fonts/ArsNova-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -11,8 +11,8 @@
 
 @font-face {
   font-family: 'Ars Nova';
-  src: url('./assets/fonts/ArsNova-Bold.woff2') format('woff2'),
-       url('./assets/fonts/ArsNova-Bold.woff') format('woff');
+  src: url('/fonts/ArsNova-Bold.woff2') format('woff2'),
+       url('/fonts/ArsNova-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -421,8 +421,8 @@ html, body {
 }
 
 .gradient-border {
-  background: linear-gradient(to bottom right, #6b21a8, #6f47ff, #8b00ff);
-  padding: 2px;
+  border: 2px solid transparent;
+  border-image: linear-gradient(to bottom right, #6b21a8, #6f47ff, #8b00ff) 1;
 }
 
 @keyframes pulse-glow {
@@ -454,6 +454,11 @@ html, body {
 .glass {
   background-color: rgba(28, 28, 36, 0.5);
   backdrop-filter: blur(10px);
+}
+
+.glass-high {
+  background-color: rgba(28, 28, 36, 0.7);
+  backdrop-filter: blur(12px);
 }
 
 /* --- Estilo global para todos los botones --- */
