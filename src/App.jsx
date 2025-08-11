@@ -14,7 +14,7 @@ import StatsSection from './StatsSection';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
 import logo from './assets/weavion.logo.png';
-import HorizontalSnapSections from './full_screen_services_section.jsx';
+import HorizontalPinnedSlider from './full_screen_services_section.jsx';
 
 export default function App() {
   return (
@@ -25,7 +25,7 @@ export default function App() {
       <div className="relative z-10">
         <Landing />
         {/* Services Section */}
-        <HorizontalSnapSections />
+        <HorizontalPinnedSlider />
 
         {/* Spacer */}
         <div className="h-12 md:h-24" />
