@@ -18,6 +18,25 @@
   font-display: swap;
 }
 
+/* Argent Pixel CF font (regular and italic) */
+@font-face {
+  font-family: 'argent-pixel-cf';
+  src: url('/fonts/ArgentPixelCF-Regular.woff2') format('woff2'),
+       url('/fonts/ArgentPixelCF-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'argent-pixel-cf';
+  src: url('/fonts/ArgentPixelCF-Italic.woff2') format('woff2'),
+       url('/fonts/ArgentPixelCF-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 
 /* Preloading fonts for faster loading */
 head::before {
@@ -181,10 +200,16 @@ html, body {
   color: var(--color-text);
   font-weight: 500;
 }
-.font-script {
-  font-family: "pf-pixelscript", sans-serif;
+.font-argent {
+  font-family: 'argent-pixel-cf', sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+.font-argent-italic {
+  font-family: 'argent-pixel-cf', sans-serif;
+  font-weight: 400;
+  font-style: italic;
 }
 
 .font-clean {
