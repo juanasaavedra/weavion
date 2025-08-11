@@ -266,7 +266,7 @@ export default function ContactForm() {
       : 0;
 
   return (
-    <div className="contact-theme max-w-2xl mx-auto rounded-3xl p-6 md:p-10 shadow-2xl bg-[var(--color-slate)] backdrop-blur-sm">
+    <div className="contact-theme max-w-2xl mx-auto rounded-3xl p-6 md:p-10 shadow-2xl bg-white/10 backdrop-blur-md text-white">
       {/* Progress Bar */}
       <div className="w-full h-2 bg-[var(--color-gunmetal)] rounded-full mb-8">
         <div
@@ -284,7 +284,7 @@ export default function ContactForm() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <div className="subtitle text-[var(--color-accent)] text-center mb-4">
+              <div className="subtitle text-white text-center mb-4">
                 ¡Gracias por tu interés!
               </div>
               <div className="body-text text-white text-center">
@@ -332,7 +332,7 @@ export default function ContactForm() {
                     ))}
                   </div>
                   {errors.servicios && (
-                    <div className="text-[var(--color-accent)] mb-2">{errors.servicios}</div>
+                  <div className="text-white mb-2">{errors.servicios}</div>
                   )}
                   <button type="button" className="form-btn-next" onClick={handleNext}>
                     Siguiente
@@ -343,7 +343,7 @@ export default function ContactForm() {
               {/* Paso 2: Web */}
               {current === 'web' && (
                 <div>
-                  <div className="subtitle text-[var(--color-accent)] mb-4">
+                  <div className="subtitle text-white mb-4">
                     Sobre tu sitio web
                   </div>
 
@@ -481,7 +481,7 @@ export default function ContactForm() {
               {/* Paso: Dashboard */}
               {current === 'dashboard' && (
                 <div>
-                  <div className="subtitle text-[var(--color-accent)] mb-4">
+                  <div className="subtitle text-white mb-4">
                     Sobre tu dashboard de analítica
                   </div>
 
@@ -583,7 +583,7 @@ export default function ContactForm() {
               {/* Paso: ServiceTitan */}
               {current === 'servicetitan' && (
                 <div>
-                  <div className="subtitle text-[var(--color-accent)] mb-4">
+                  <div className="subtitle text-white mb-4">
                     Sobre integración con Service Titan
                   </div>
 
@@ -668,7 +668,7 @@ export default function ContactForm() {
               {/* Paso: Automatización */}
               {current === 'automatizacion' && (
                 <div>
-                  <div className="subtitle text-[var(--color-accent)] mb-4">
+                  <div className="subtitle text-white mb-4">
                     Sobre automatización de procesos
                   </div>
 
@@ -758,7 +758,7 @@ export default function ContactForm() {
               {/* Paso final: Contacto */}
               {current === 'contacto' && (
                 <div>
-                  <div className="subtitle text-[var(--color-accent)] mb-4">Datos de contacto</div>
+                  <div className="subtitle text-white mb-4">Datos de contacto</div>
 
                   <div className="mb-4">
                     <label className="block text-white mb-2">¿Cuál es tu nombre y empresa?</label>
@@ -771,7 +771,7 @@ export default function ContactForm() {
                       required
                     />
                     {errors.nombre && (
-                      <div className="text-[var(--color-accent)] mt-1">{errors.nombre}</div>
+                      <div className="text-white mt-1">{errors.nombre}</div>
                     )}
                   </div>
 
@@ -788,14 +788,14 @@ export default function ContactForm() {
                       required
                     />
                     {errors.email && (
-                      <div className="text-[var(--color-accent)] mt-1">{errors.email}</div>
+                      <div className="text-white mt-1">{errors.email}</div>
                     )}
                   </div>
 
                   <div className="mb-4">
                     <label className="block text-white mb-2">
                       ¿Cuál es tu presupuesto estimado para este proyecto?{' '}
-                      <span className="text-[var(--color-accent)]">(opcional)</span>
+                      <span className="text-white">(opcional)</span>
                     </label>
                     <input
                       type="text"
