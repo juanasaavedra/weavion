@@ -4,9 +4,12 @@ import * as THREE from "three";
 import React, { useMemo } from "react";
 import { useLoader } from "@react-three/fiber";
 
-type Phone3DProps = {
-  uiTextureUrl: string; // URL pública de tu imagen de la UI morada
-};
+export interface Phone3DProps {
+  /** URL pública de tu imagen de la UI morada */
+  uiTextureUrl: string;
+  /** Escala opcional del teléfono (1 = tamaño realista) */
+  scale?: number;
+}
 
 function roundedRectShape(w: number, h: number, r: number) {
   const hw = w / 2,
@@ -24,7 +27,7 @@ function roundedRectShape(w: number, h: number, r: number) {
   return s;
 }
 
-export default function Phone3D({ uiTextureUrl }: Phone3DProps) {
+export default function Phone3D({ uiTextureUrl, scale = 1 }: Phone3DProps) {
   // Medidas (m) realistas
   const W = 0.076;
   const H = 0.164;
@@ -130,7 +133,7 @@ export default function Phone3D({ uiTextureUrl }: Phone3DProps) {
     hgt = 0.0028;
 
   return (
-    <group>
+    <group scale={scale}>
       <mesh geometry={chassisGeo} material={matChassis} />
       <mesh geometry={ringGeo} material={matRing} />
       <mesh geometry={screenGeo} material={matScreen} />
