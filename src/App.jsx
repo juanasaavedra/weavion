@@ -78,23 +78,23 @@ function Header() {
   const automationItems = [
     {
       label: t('header.automationItems.appointments', 'Genera citas'),
-      path: '/contact',
+      path: '/automation/genera-citas',
     },
     {
       label: t('header.automationItems.inventoryChat', 'Charla con tu inventario y modifícalo'),
-      path: '/contact',
+      path: '/automation/inventario-chat',
     },
     {
       label: t('header.automationItems.leads', 'Captura y califica tus leads'),
-      path: '/contact',
+      path: '/automation/captura-califica-leads',
     },
     {
       label: t('header.automationItems.quotes', 'Entrega cotizaciones inmediatas y ten una postventa inteligente'),
-      path: '/contact',
+      path: '/automation/cotizaciones-postventa',
     },
     {
       label: t('header.automationItems.contact', '¿Buscas algo más? Contáctanos'),
-      path: '/contact',
+      path: '/automation/contacto',
     },
   ];
 
