@@ -284,7 +284,7 @@ function Landing() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center min-h-screen gap-8">
-            {/* IZQUIERDA: ahora base sans-serif (font-clean) y frase en Pixelscript (font-script) */}
+            {/* IZQUIERDA: base sans-serif (font-clean) y frase en Argent Pixel CF (font-argent) */}
             <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left">
               <motion.h1
                 initial={{ opacity: 0, y: 60 }}
@@ -293,15 +293,15 @@ function Landing() {
                 className="font-clean text-5xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
               >
                 Aumenta tu{' '}
-                <span className="font-script text-white">presencia digital</span>, sin trabajar de más
+                <span className="font-argent text-white">presencia digital</span>, sin trabajar de más
               </motion.h1>
 
-              {/* Botón: solo borde degradado + punto negro; texto del botón en Pixelscript */}
+              {/* Botón: solo borde degradado + punto negro; texto del botón en Argent Pixel CF */}
               <Link
                 to="/services"
                 className="transition group mt-4 flex h-12 w-44 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
               >
-                <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900">
+                <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900 font-argent">
                   {t('hero.cta', 'Descúbrelo')}
                 </div>
               </Link>
