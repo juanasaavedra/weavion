@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Landing from './App';
-import HorizontalSnapSections from './full_screen_services_section';
+import ServiciosPinnedSlider from './ServiciosPinnedSlider';
 import ContactPage from './ContactPage';
 import DisenoDesarrolloWeb from './pages/DisenoDesarrolloWeb';
 import IntegracionCRM from './pages/IntegracionCRM';
@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <HashRouter>
       <Routes>
         <Route path=""           element={<Landing />} />
-        <Route path="services"   element={<HorizontalSnapSections />} />
+        <Route path="services"   element={<ServiciosPinnedSlider />} />
         <Route path="services/web"        element={<DisenoDesarrolloWeb />} />
         <Route path="services/crm"        element={<IntegracionCRM />} />
         <Route path="services/analiticas" element={<AnaliticasNegocio />} />
