@@ -120,8 +120,8 @@ function Panel({ item, thin, palette }) {
         <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, rgba(115,40,232,.7), rgba(115,40,232,.2))`, opacity: 0.25, pointerEvents: "none" }} />
       )}
       <div style={{ maxWidth: 920, opacity: thin ? 0.0 : 1.0, transition: "opacity .15s linear", color: palette.grayLight, textAlign: "left" }}>
-        <h2 style={{ margin: 0, fontWeight: 800, fontSize: "clamp(36px, 7vw, 84px)", letterSpacing: "-0.02em", backgroundImage: `linear-gradient(90deg, ${palette.purpleBright}, #fff)`, WebkitBackgroundClip: "text", color: "transparent" }}>{item.title}</h2>
-        <p style={{ marginTop: "1.1rem", fontSize: "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45 }}>{item.desc}</p>
+        <h2 style={{ margin: 0, fontWeight: 800, fontSize: "clamp(36px, 7vw, 84px)", letterSpacing: "-0.02em", backgroundImage: `linear-gradient(90deg, ${palette.purpleBright}, #fff)`, WebkitBackgroundClip: "text", color: "transparent", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.title}</h2>
+        <p style={{ marginTop: "1.1rem", fontSize: "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
         <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: palette.purpleBright, textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
           <span style={{ width: 10, height: 10, borderRadius: "50%", background: palette.purpleBright, display: "inline-block" }} />
           Conocer más
@@ -143,6 +143,8 @@ function Panel({ item, thin, palette }) {
             color: "#fff",
             opacity: 0.75,
             padding: "1rem 0",
+            fontFamily: "'argent-pixel-cf', sans-serif",
+            overflow: "hidden",
           }}
           aria-hidden
         >
