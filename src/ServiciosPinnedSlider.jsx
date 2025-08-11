@@ -128,7 +128,24 @@ function Panel({ item, thin, palette }) {
         </a>
       </div>
       {thin && (
-        <div style={{ position: "absolute", bottom: 20, left: 0, right: 0, writingMode: "vertical-rl", transform: "rotate(180deg)", textAlign: "center", fontSize: 16, letterSpacing: "0.08em", color: "#fff", opacity: 0.75 }} aria-hidden>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            writingMode: "vertical-rl",
+            transform: "rotate(180deg)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            fontSize: "clamp(20px, 8vh, 48px)",
+            letterSpacing: "0.1em",
+            color: "#fff",
+            opacity: 0.75,
+            padding: "1rem 0",
+          }}
+          aria-hidden
+        >
           {item.title}
         </div>
       )}
