@@ -233,20 +233,19 @@ function Landing() {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen px-4 md:px-8">
+    <section className="relative flex items-center min-h-screen px-4 md:px-8">
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center min-h-screen gap-8">
         {/* IZQUIERDA: titulares */}
-        <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left">
+        <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-center md:text-left mx-auto md:mx-0">
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-argent text-5xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
+            className="font-argent text-4xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
           >
-            Aumenta tu{" "}
-            <h1 className="font-ars text-4x1">presencia digital</h1>, sin trabajar de más
+            Aumenta tu <span className="font-ars text-4xl md:text-5xl">presencia digital</span>, sin trabajar de más
           </motion.h1>
 
           <Link

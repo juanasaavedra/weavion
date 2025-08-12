@@ -41,9 +41,9 @@ export default function ServiciosPinnedSlider() {
     },
   ];
 
-  const [dims, setDims] = useState({ vw: 0, vh: 0 });
-  const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
-  const scrollX = useRef(0);
+    const [dims, setDims] = useState({ vw: 0, vh: 0 });
+    const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
+    const scrollX = useRef(0);
 
   // Ajustes de sensación
   const SLOW_FACTOR = 1.8; // >1 = más lenta cada transición
@@ -91,7 +91,8 @@ export default function ServiciosPinnedSlider() {
     return 0; // futuros aún no visibles
   });
 
-  const wrapperHeight = dims.vh;
+    const vertical = dims.vh > dims.vw;
+    const wrapperHeight = vertical ? dims.vh * 0.8 : dims.vh;
 
   return (
     <section
@@ -100,22 +101,22 @@ export default function ServiciosPinnedSlider() {
     >
       <div style={{ display: "flex", height: "100%", width: "100%" }}>
         {items.map((it, j) => {
-          const w = Math.round(widths[j] || 0);
-          const thin = w <= THIN + 1;
-          return (
-            <div key={it.title} style={{ flex: `0 0 ${w}px`, height: "100%", position: "relative", overflow: "hidden", transition: "none", borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none" }}>
-              <Panel item={it} thin={thin} palette={PALETTE} />
-            </div>
-          );
+            const w = Math.round(widths[j] || 0);
+            const thin = w <= THIN + 1;
+            return (
+              <div key={it.title} style={{ flex: `0 0 ${w}px`, height: "100%", position: "relative", overflow: "hidden", transition: "none", borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none" }}>
+                <Panel item={it} thin={thin} palette={PALETTE} vertical={vertical} />
+              </div>
+            );
         })}
       </div>
     </section>
   );
 }
 
-function Panel({ item, thin, palette }) {
-  return (
-    <div style={{ height: "100%", background: item.bg, display: "grid", placeItems: "center", padding: thin ? 0 : "6rem 8vw", position: "relative" }}>
+  function Panel({ item, thin, palette, vertical }) {
+    return (
+      <div style={{ height: "100%", background: item.bg, display: "grid", placeItems: "center", padding: thin ? 0 : vertical ? "3rem 4vw" : "6rem 8vw", position: "relative" }}>
       {thin && (
         <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, rgba(115,40,232,.7), rgba(115,40,232,.2))`, opacity: 0.25, pointerEvents: "none" }} />
       )}

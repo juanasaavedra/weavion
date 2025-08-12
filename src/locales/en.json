@@ -17,7 +17,7 @@
       "crm": "CRM or Service Titan integration",
       "analytics": "Business analytics"
     },
-    "automation": "Automate your operations",
+    "automation": "Automate",
     "automationItems": {
       "appointments": "Generate appointments",
       "inventoryChat": "Chat with and modify your inventory",
