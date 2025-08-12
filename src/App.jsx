@@ -260,7 +260,7 @@ function Landing() {
         </div>
 
         {/* DERECHA: modelo 3D (altura controlada) */}
-        <div className="w-full h-[150vh] md:h-[95vh] rounded-xl overflow-hidden bg-black/60">
+        <div className="w-full h-[50vh] md:h-[150vh] rounded-xl overflow-hidden bg-black/60">
           <SplineViewerBox />
         </div>
       </div>
