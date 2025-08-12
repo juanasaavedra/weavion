@@ -203,7 +203,7 @@ function Landing() {
                 className="font-argent text-5xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
               >
                 Aumenta tu{' '}
-                <span className="font-argent-italic text-white">presencia digital</span>, sin trabajar de más
+                <span className="font-ars-pixel italic text-white">presencia digital</span>, sin trabajar de más
               </motion.h1>
 
               {/* Botón: solo borde degradado + punto negro; texto del botón en Argent Pixel CF */}
