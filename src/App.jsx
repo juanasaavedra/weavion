@@ -16,7 +16,7 @@ import StarryBackground from './StarryBackground';
 import StatsSection from './StatsSection';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
-import ServiciosPinnedSlider from './ServiciosPinnedSlider.jsx';
+import ServicesSection from './full_screen_services_section.jsx';
 
 export default function App() {
   return (
@@ -26,7 +26,7 @@ export default function App() {
       <div className="relative z-10">
         <Landing />
         {/* Services Section */}
-        <ServiciosPinnedSlider />
+        <ServicesSection />
 
         {/* Spacer */}
         <div className="h-12 md:h-24" />
