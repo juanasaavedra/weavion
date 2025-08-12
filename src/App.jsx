@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 // package export instead so Spline renders normally in the browser.
 import {Canvas} from "@react-three/fiber";
 import { OrbitControls, useGLFT } from "@react-three/drei";
-import modeloUrl from :/src/animated_mockup_i_phone_14_pro.gflt
+import modeloUrl from :/src/animated_mockup_i_phone_14_pro.gflt;
 
 // Layout
 import DotGrid from './DotGrid';
