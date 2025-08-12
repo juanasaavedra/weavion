@@ -264,7 +264,7 @@ function Landing() {
           <SplineViewerBox />
           <spline-viewer
           url="https://prod.spline.desing/XKb4wzOQ2b05Zhac/scene.splinecode"
-          style={{width="100%", height="100vh"}}/>
+          style={{width: "100%", height: "100vh"}}/>
         </div>
       </div>
     </section>
