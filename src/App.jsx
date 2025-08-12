@@ -227,12 +227,10 @@ function useSplineScript() {
 
   useEffect(() => {
     if (ready) return;
-    // Si ya está registrado el web component, no cargamos nada
     if (customElements.get("spline-viewer")) {
       setReady(true);
       return;
     }
-    // Inyecta el script (type="module") en <head>
     const s = document.createElement("script");
     s.type = "module";
     s.src = SPLINE_SRC;
@@ -252,8 +250,8 @@ export default function App() {
     <div
       style={{
         width: "100%",
-        height: "100vh",       // 👈 importante: dale altura real
-        background: "#05070c", // para que no se vea “vacío”
+        height: "100vh",       
+        background: "#05070c",
         overflow: "hidden",
       }}
     >
@@ -268,7 +266,7 @@ export default function App() {
         </div>
       ) : (
         <spline-viewer
-          key={SCENE_URL}        // 👈 fuerza render si cambias la URL
+          key={SCENE_URL}        
           url={SCENE_URL}
           style={{ display: "block", width: "100%", height: "100%" }}
         />
