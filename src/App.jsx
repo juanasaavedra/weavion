@@ -263,7 +263,7 @@ function Landing() {
         <div className="w-full h-[150vh] md:h-[100vh] rounded-xl overflow-hidden bg-black/60">
           <SplineViewerBox />
           <spline-viewer
-          url="https://prod.spline.desing/XKb4wzOQ2b05Zhac/scene.splinecode"/>
+          url="https://prod.spline.desing/XKb4wzOQ2b05Zhac/scene.splinecode"/>>
         </div>
       </div>
     </section>
