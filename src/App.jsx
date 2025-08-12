@@ -8,7 +8,9 @@ import { motion } from 'framer-motion';
 // The Next.js-specific entry point returns a Promise-based component which
 // causes React to try to render a Promise and crash. Use the standard
 // package export instead so Spline renders normally in the browser.
-import Spline from '@splinetool/react-spline';
+import {Canvas} from "@react-three/fiber";
+import { OrbitControls, useGLFT } from "@react-three/drei";
+import modeloUrl from :/src/animated_mockup_i_phone_14_pro.gflt
 
 // Layout
 import DotGrid from './DotGrid';
@@ -17,6 +19,8 @@ import StatsSection from './StatsSection';
 import ProcessTimeline from './ProcessTimeline';
 import ContactSection from './ContactSection';
 import ServiciosPinnedSlider from './ServiciosPinnedSlider.jsx';
+import react from 'react';
+import { AmbientLight, DirectionalLight } from 'three';
 
 export default function App() {
   return (
@@ -219,8 +223,17 @@ function Landing() {
 
             {/* DERECHA: modelo 3D */}
             <div className="md:pl-6 w-full h-[45vh] md:h-[75vh]">
-              <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.45/build/spline-viewer.js"></script>
-<spline-viewer url="https://prod.spline.design/XKb4wzOQ2b05Zhac/scene.splinecode"></spline-viewer>
+              function Escena() {
+              const {scene}=useGLFT(modeloUrl);
+              return(
+                <Canvas camera={{position: [0, 1, 5]}}>
+                  <AmbientLight intensity={0.5}/>
+                  <DirectionalLight position {[5, 5, 5]}/>
+                  <primitive object={scene} />
+                  <OrbitControls/>
+                </Canvas>
+              );
+              }
             </div>
           </div>
         </section>
