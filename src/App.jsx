@@ -219,7 +219,8 @@ function Landing() {
 
             {/* DERECHA: modelo 3D */}
             <div className="md:pl-6 w-full h-[45vh] md:h-[75vh]">
-              <Spline scene="https://prod.spline.design/XKb4wzOQ2b05Zhac/scene.splinecode" />
+              <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.45/build/spline-viewer.js"></script>
+<spline-viewer url="https://prod.spline.design/XKb4wzOQ2b05Zhac/scene.splinecode"></spline-viewer>
             </div>
           </div>
         </section>
