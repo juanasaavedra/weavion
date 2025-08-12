@@ -522,3 +522,14 @@ h1, h2, h3, h4, h5, h6 {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+module.exports ={
+  theme: {
+    extend:{
+      fontFamily:{
+        ars:['"Ars Nova"', 'sans-serif'],
+        argent:['"Argent Pixel"', 'sans-serif'],
+      },
+    },
+  },
+};

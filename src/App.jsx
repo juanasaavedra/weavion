@@ -246,7 +246,7 @@ function Landing() {
             className="font-argent text-5xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
           >
             Aumenta tu{" "}
-            <span className="font-argent-italic text-white">presencia digital</span>, sin trabajar de más
+            <h1 className="font-ars text-4x1">presencia digital</h1>, sin trabajar de más
           </motion.h1>
 
           <Link
@@ -260,7 +260,7 @@ function Landing() {
         </div>
 
         {/* DERECHA: modelo 3D (altura controlada) */}
-        <div className="w-full h-[50vh] md:h-[70vh] rounded-xl overflow-hidden bg-black/60">
+        <div className="w-full h-[75vh] md:h-[95vh] rounded-xl overflow-hidden bg-black/60">
           <SplineViewerBox />
         </div>
       </div>
