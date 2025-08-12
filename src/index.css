@@ -1,18 +1,16 @@
-/* Importación de la fuente Ars Nova con mejora de carga y fallbacks */
+/* Importación de la fuente Arial Nova con fallbacks locales */
 /* src/index.css */
 @font-face {
-  font-family: 'Ars Nova';
-  src: url('/fonts/ArsNova-Regular.woff2') format('woff2'),
-       url('/fonts/ArsNova-Regular.woff') format('woff');
+  font-family: 'arial-nova';
+  src: local('Arial Nova'), local('Arial');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Ars Nova';
-  src: url('/fonts/ArsNova-Bold.woff2') format('woff2'),
-       url('/fonts/ArsNova-Bold.woff') format('woff');
+  font-family: 'arial-nova';
+  src: local('Arial Nova Bold'), local('Arial Bold'), local('Arial');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -55,7 +53,7 @@ head::before {
 }
 
 html, body {
-  font-family: 'Ars Nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'arial-nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--color-dark-bg);
   font-size: 16px;
   color: var(--color-text);
@@ -70,31 +68,31 @@ spline-viewer canvas#spline {
 }
 /* Clases para titulares y texto */
 .headline {
-  font-family: 'Ars Nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'arial-nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 700; /* Bold */
   font-size: clamp(36px, 5vw, 64px);
 }
 
 .subtitle {
-  font-family: 'Ars Nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'arial-nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 600; /* Semi-bold */
   font-size: clamp(24px, 3vw, 36px);
 }
 
 .body-text {
-  font-family: 'Ars Nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'arial-nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400; /* Normal */
   font-size: clamp(16px, 1.1vw, 20px);
 }
 
 .body-text-bold {
-  font-family: 'Ars Nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'arial-nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 700; /* Bold */
   font-size: clamp(16px, 1.1vw, 20px);
 }
 
 .button-text {
-  font-family: 'Ars Nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'arial-nova', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 600; /* Semi-bold */
   font-size: 24px;
   letter-spacing: 0.5px;
@@ -525,14 +523,3 @@ spline-viewer canvas#spline {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-module.exports ={
-  theme: {
-    extend:{
-      fontFamily:{
-        ars:['"Ars Nova"', 'sans-serif'],
-        argent:['"Argent Pixel"', 'sans-serif'],
-      },
-    },
-  },
-};
