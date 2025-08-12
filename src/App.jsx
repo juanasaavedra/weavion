@@ -262,8 +262,6 @@ function Landing() {
         {/* DERECHA: modelo 3D (altura controlada) */}
         <div className="w-full h-[150vh] md:h-[100vh] rounded-xl overflow-hidden bg-black/60">
           <SplineViewerBox />
-          <spline-viewer url="https://prod.spline.design/XKb4wzOQ2b05Zhac/secen.splinecode"
-          />
         </div>
       </div>
     </section>
