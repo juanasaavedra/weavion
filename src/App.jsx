@@ -5,7 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
 // 3D
-import Spline from '@splinetool/react-spline/next';
+// The Next.js-specific entry point returns a Promise-based component which
+// causes React to try to render a Promise and crash. Use the standard
+// package export instead so Spline renders normally in the browser.
+import Spline from '@splinetool/react-spline';
 
 // Layout
 import DotGrid from './DotGrid';
