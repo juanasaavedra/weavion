@@ -41,9 +41,9 @@ export default function ServiciosPinnedSlider() {
     },
   ];
 
-  const [dims, setDims] = useState({ vw: 0, vh: 0 });
-  const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
-  const scrollX = useRef(0);
+    const [dims, setDims] = useState({ vw: 0, vh: 0 });
+    const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
+    const scrollX = useRef(0);
 
   // Ajustes de sensación
   const SLOW_FACTOR = 1.8; // >1 = más lenta cada transición
@@ -91,7 +91,8 @@ export default function ServiciosPinnedSlider() {
     return 0; // futuros aún no visibles
   });
 
-  const wrapperHeight = dims.vh;
+    const vertical = dims.vh > dims.vw;
+    const wrapperHeight = vertical ? dims.vh * 0.8 : dims.vh;
 
   return (
     <section
@@ -100,28 +101,28 @@ export default function ServiciosPinnedSlider() {
     >
       <div style={{ display: "flex", height: "100%", width: "100%" }}>
         {items.map((it, j) => {
-          const w = Math.round(widths[j] || 0);
-          const thin = w <= THIN + 1;
-          return (
-            <div key={it.title} style={{ flex: `0 0 ${w}px`, height: "100%", position: "relative", overflow: "hidden", transition: "none", borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none" }}>
-              <Panel item={it} thin={thin} palette={PALETTE} />
-            </div>
-          );
+            const w = Math.round(widths[j] || 0);
+            const thin = w <= THIN + 1;
+            return (
+              <div key={it.title} style={{ flex: `0 0 ${w}px`, height: "100%", position: "relative", overflow: "hidden", transition: "none", borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none" }}>
+                <Panel item={it} thin={thin} palette={PALETTE} vertical={vertical} />
+              </div>
+            );
         })}
       </div>
     </section>
   );
 }
 
-function Panel({ item, thin, palette }) {
-  return (
-    <div style={{ height: "100%", background: item.bg, display: "grid", placeItems: "center", padding: thin ? 0 : "6rem 8vw", position: "relative" }}>
+  function Panel({ item, thin, palette, vertical }) {
+    return (
+      <div style={{ height: "100%", background: item.bg, display: "grid", placeItems: "center", padding: thin ? 0 : vertical ? "3rem 4vw" : "6rem 8vw", position: "relative" }}>
       {thin && (
         <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, rgba(115,40,232,.7), rgba(115,40,232,.2))`, opacity: 0.25, pointerEvents: "none" }} />
       )}
-      <div style={{ maxWidth: 920, opacity: thin ? 0.0 : 1.0, transition: "opacity .15s linear", color: palette.grayLight, textAlign: "left" }}>
-        <h2 style={{ margin: 0, fontWeight: 800, fontSize: "clamp(36px, 7vw, 84px)", letterSpacing: "-0.02em", backgroundImage: `linear-gradient(90deg, ${palette.purpleBright}, #fff)`, WebkitBackgroundClip: "text", color: "transparent", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.title}</h2>
-        <p style={{ marginTop: "1.1rem", fontSize: "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
+        <div style={{ maxWidth: 920, opacity: thin ? 0.0 : 1.0, transition: "opacity .15s linear", color: palette.grayLight, textAlign: "left" }}>
+          <h2 style={{ margin: 0, fontWeight: 800, fontSize: vertical ? "clamp(24px,5vw,48px)" : "clamp(36px, 7vw, 84px)", letterSpacing: "-0.02em", backgroundImage: `linear-gradient(90deg, ${palette.purpleBright}, #fff)`, WebkitBackgroundClip: "text", color: "transparent", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.title}</h2>
+          <p style={{ marginTop: "1.1rem", fontSize: vertical ? "clamp(14px,1.8vw,18px)" : "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
         <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: palette.purpleBright, textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
           <span style={{ width: 10, height: 10, borderRadius: "50%", background: palette.purpleBright, display: "inline-block" }} />
           Conocer más
