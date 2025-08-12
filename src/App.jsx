@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
-// Layout
 import DotGrid from "./DotGrid";
 import StarryBackground from "./StarryBackground";
 import StatsSection from "./StatsSection";
@@ -259,8 +259,11 @@ function Landing() {
         </div>
 
         {/* DERECHA: modelo 3D (altura controlada) */}
-        <div className="w-full h-[50vh] md:h-[95vh] rounded-xl overflow-hidden bg-black/60">
+        <div className="w-full h-[150vh] md:h-[600-px] rounded-xl overflow-hidden bg-black/60">
           <SplineViewerBox />
+          <spline-viewer
+          url="https://prod.spline.desing/XKb4wzOQ2b05Zhac/scene.splinecode"
+          style={{width: "100%", height: "100vh"}}/>
         </div>
       </div>
     </section>
@@ -277,6 +280,16 @@ export default function App() {
       <CursorStars />
       <div className="relative z-10">
         <Landing />
+
+        {/* Services intro */}
+        <section className="py-24 px-4 text-center">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white">Nuestros servicios</h2>
+          <p className="mt-4 text-lg text-gray-300 flex items-center justify-center gap-2">
+            <ArrowLeft className="w-5 h-5" />
+            Mueve hacia los lados para explorar cada panel
+            <ArrowRight className="w-5 h-5" />
+          </p>
+        </section>
 
         {/* Services Section */}
         <ServiciosPinnedSlider />
