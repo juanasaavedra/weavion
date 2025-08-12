@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 
-// Layout
 import DotGrid from "./DotGrid";
 import StarryBackground from "./StarryBackground";
 import StatsSection from "./StatsSection";
