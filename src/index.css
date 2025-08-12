@@ -526,13 +526,3 @@ spline-viewer canvas#spline {
 @tailwind components;
 @tailwind utilities;
 
-module.exports ={
-  theme: {
-    extend:{
-      fontFamily:{
-        ars:['"Ars Nova"', 'sans-serif'],
-        argent:['"Argent Pixel"', 'sans-serif'],
-      },
-    },
-  },
-};
