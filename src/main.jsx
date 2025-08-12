@@ -12,10 +12,12 @@ import CotizacionesPostventa from './pages/Automatizaciones/CotizacionesPostvent
 import ContactoMas from './pages/Automatizaciones/ContactoMas';
 import './index.css';
 import './i18n';
+import Header from './Header';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HashRouter>
+      <Header />
       <Routes>
         <Route path=""           element={<Landing />} />
         <Route path="services"   element={<ServiciosPinnedSlider />} />
