@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 // Layout
 import DotGrid from "./DotGrid";
@@ -278,6 +279,16 @@ export default function App() {
       <CursorStars />
       <div className="relative z-10">
         <Landing />
+
+        {/* Services intro */}
+        <section className="py-24 px-4 text-center">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white">Nuestros servicios</h2>
+          <p className="mt-4 text-lg text-gray-300 flex items-center justify-center gap-2">
+            <ArrowLeft className="w-5 h-5" />
+            Mueve hacia los lados para explorar cada panel
+            <ArrowRight className="w-5 h-5" />
+          </p>
+        </section>
 
         {/* Services Section */}
         <ServiciosPinnedSlider />
