@@ -23,7 +23,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Ars Nova', ...defaultTheme.fontFamily.sans],
+        sans: ['arial-nova', ...defaultTheme.fontFamily.sans],
         argent: ['argent-pixel-cf', ...defaultTheme.fontFamily.sans],
       },
       colors: {
