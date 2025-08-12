@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 export default function Header() {
-  const { t, i18n } = useTranslation();
-  const toggleLang = () => i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
+  const { t } = useTranslation();
 
   const servicesItems = [
     {
@@ -57,15 +57,8 @@ export default function Header() {
         <DropdownMenu title={t('header.automation', 'Automatiza tu operación')} items={automationItems} />
       </div>
 
-      {/* Selector idioma con borde degradado */}
-      <button
-        onClick={toggleLang}
-        className="transition group flex h-10 w-20 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 p-[2px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
-      >
-        <div className="flex h-full w-full items-center justify-center rounded-full bg-black">
-          {i18n.language === 'es' ? 'EN' : 'ES'}
-        </div>
-      </button>
+      {/* Selector idioma */}
+      <LanguageSelector />
     </div>
   );
 }
