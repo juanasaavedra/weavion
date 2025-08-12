@@ -219,6 +219,63 @@ function Landing() {
             </div>
 
             {/* DERECHA: modelo 3D */}
+            const SPLINE_SRC = "https://unpkg.com/@splinetool/viewer@1.10.45/build/spline-viewer.js";
+const SCENE_URL  = "https://prod.spline.design/XKb4wzOQ2b05Zhac/scene.splinecode";
+
+function useSplineScript() {
+  const [ready, setReady] = useState(() => !!customElements.get("spline-viewer"));
+
+  useEffect(() => {
+    if (ready) return;
+    // Si ya está registrado el web component, no cargamos nada
+    if (customElements.get("spline-viewer")) {
+      setReady(true);
+      return;
+    }
+    // Inyecta el script (type="module") en <head>
+    const s = document.createElement("script");
+    s.type = "module";
+    s.src = SPLINE_SRC;
+    s.onload = () => setReady(true);
+    s.onerror = () => console.error("No se pudo cargar spline-viewer:", SPLINE_SRC);
+    document.head.appendChild(s);
+    return () => { s.remove(); };
+  }, [ready]);
+
+  return ready;
+}
+
+export default function App() {
+  const ready = useSplineScript();
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100vh",       // 👈 importante: dale altura real
+        background: "#05070c", // para que no se vea “vacío”
+        overflow: "hidden",
+      }}
+    >
+      {!ready ? (
+        <div style={{
+          color: "#cbd5e1",
+          height: "100%",
+          display: "grid",
+          placeItems: "center"
+        }}>
+          Cargando visor 3D…
+        </div>
+      ) : (
+        <spline-viewer
+          key={SCENE_URL}        // 👈 fuerza render si cambias la URL
+          url={SCENE_URL}
+          style={{ display: "block", width: "100%", height: "100%" }}
+        />
+      )}
+    </div>
+  );
+}
             <iframe
   src="https://prod.spline.design/XKb4wzOQ2b05Zhac/scene.splinecode"
   style={{ width: "100%", height: "100vh", border: 0 }}
