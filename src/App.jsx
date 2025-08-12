@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
 // 3D
-import HeroModel from './HeroModel';
+import Spline from '@splinetool/react-spline/next';
 
 // Layout
 import DotGrid from './DotGrid';
@@ -330,7 +330,7 @@ function Landing() {
 
             {/* DERECHA: modelo 3D */}
             <div className="md:pl-6 w-full h-[45vh] md:h-[75vh]">
-              <HeroModel />
+              <Spline scene="https://prod.spline.design/XKb4wzOQ2b05Zhac/scene.splinecode" />
             </div>
           </div>
         </section>
