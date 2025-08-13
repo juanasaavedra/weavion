@@ -159,18 +159,6 @@
       "detail": "We create automated email marketing campaigns that build loyalty and boost conversions, integrated with your sales tools."
     }
   },
-  "product": {
-    "prompt": "This is your product. Let's see how our agency can transform it."
-  },
-  "products": {
-    "interestTitle": "Interested in another product?",
-    "interestSubtitle": "Discover the advantages of our other solutions:",
-    "web": {"title": "Websites", "desc": "Modern, optimized designs."},
-    "analytics": {"title": "Analytics", "desc": "Data-driven decisions."},
-    "servicetitan": {"title": "ServiceTitan", "desc": "Frictionless integrated operation."},
-    "automation": {"title": "Automation", "desc": "Efficient automated processes."},
-    "contact": "Contact us for details."
-  },
   "common": {
     "discover": "Discover it",
     "backHome": "Back to home",
@@ -202,6 +190,27 @@
         "desc": "Flows that work for you: reminders, inventory and more."
       }
     }
+  },
+  "products": {
+    "interestTitle": "You may also be interested",
+    "interestSubtitle": "Explore more of our solutions",
+    "web": {
+      "title": "Web Design & Development",
+      "desc": "Fast, accessible sites that convert."
+    },
+    "analytics": {
+      "title": "Business Analytics",
+      "desc": "Real-time data to decide with confidence."
+    },
+    "servicetitan": {
+      "title": "ServiceTitan Integration",
+      "desc": "From lead to revenue with full control."
+    },
+    "automation": {
+      "title": "Automations",
+      "desc": "Workflows that run for you all day."
+    },
+    "contact": "Contact us"
   },
   "pages": {
     "web": {

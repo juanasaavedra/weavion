@@ -1,4 +1,5 @@
 import React from "react";
+import ProductInterestSection from "../components/ProductInterestSection";
 
 /* Tooltip */
 function TermHint({ term, children }) {
@@ -153,9 +154,9 @@ export default function AnaliticasNegocio() {
           <li>Alertas (caída de conversión, picos de CAC, baja de retención).</li>
           <li>Playbook de decisiones para priorizar inversión y esfuerzos.</li>
         </ul>
-      </section>
-
-    </main>
-  );
-}
+        </section>
+        <ProductInterestSection />
+      </main>
+    );
+  }
 
