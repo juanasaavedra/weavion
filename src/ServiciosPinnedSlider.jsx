@@ -69,9 +69,9 @@ export default function ServiciosPinnedSlider() {
 
   // Derivar estado: cuál panel está activo y cuánto llevamos de su transición
   const steps = items.length - 1;
-  const t = steps > 0 ? progress * steps : 0; // 0..(n-1)
-  const active = Math.floor(t);
-  const local = t - active; // 0..1 dentro de la transición actual
+  const stepProgress = steps > 0 ? progress * steps : 0; // 0..(n-1)
+  const active = Math.floor(stepProgress);
+  const local = stepProgress - active; // 0..1 dentro de la transición actual
 
   // Limitar a transición entre activo y el siguiente (evita saltos)
   const renderIndex = active;
