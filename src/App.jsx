@@ -236,9 +236,9 @@ function Landing() {
     <section className="relative flex items-center min-h-screen px-4 md:px-8 pt-24 md:pt-32">
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
 
-      <div className="relative z-10 grid w-full grid-cols-1 md:grid-cols-2 items-center gap-8">
-        {/* IZQUIERDA: titulares */}
-        <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-center md:text-left mx-auto md:mx-0">
+        <div className="relative z-10 grid w-full grid-cols-1 md:grid-cols-2 items-center gap-8">
+          {/* IZQUIERDA: titulares */}
+          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left">
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
@@ -259,11 +259,11 @@ function Landing() {
         </div>
 
         {/* DERECHA: modelo 3D (altura controlada) */}
-        <SplineViewerBox className="w-full h-[500px] md:h-[700px] rounded-xl overflow-hidden bg-black/60 mx-auto" />
-      </div>
-    </section>
-  );
-}
+        <SplineViewerBox className="w-full h-[500px] md:h-[700px] rounded-xl overflow-hidden bg-black/60 mx-auto z-10" />
+        </div>
+      </section>
+    );
+  }
 
 /* -------------------------------------------------------
    App principal
