@@ -7,11 +7,10 @@ import ContactPage from './ContactPage';
 import WebDesign from './pages/WebDesign';
 import ServiceTitan from './pages/ServiceTitan';
 import Analytics from './pages/Analytics';
-import GeneraCitas from './pages/Automatizaciones/GeneraCitas';
-import CapturaCalificaLeads from './pages/Automatizaciones/CapturaCalificaLeads';
-import InventarioChat from './pages/Automatizaciones/InventarioChat';
-import CotizacionesPostventa from './pages/Automatizaciones/CotizacionesPostventa';
-import ContactoMas from './pages/Automatizaciones/ContactoMas';
+import GeneraCitas from './pages/GeneraCitas';
+import InventarioInteractivo from './pages/InventarioInteractivo';
+import CotizacionesInmediatas from './pages/CotizacionesInmediatas';
+import PostventaInteligente from './pages/PostventaInteligente';
 import './index.css';
 import './i18n';
 import Header from './Header';
@@ -27,11 +26,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="services/servicetitan" element={<ServiceTitan />} />
         <Route path="services/analytics"    element={<Analytics />} />
         <Route path="contact"    element={<ContactPage />} />
-        <Route path="automation/genera-citas" element={<GeneraCitas />} />
-        <Route path="automation/captura-califica-leads" element={<CapturaCalificaLeads />} />
-        <Route path="automation/inventario-chat" element={<InventarioChat />} />
-        <Route path="automation/cotizaciones-postventa" element={<CotizacionesPostventa />} />
-        <Route path="automation/contacto" element={<ContactoMas />} />
+          <Route path="services/genera-citas" element={<GeneraCitas />} />
+          <Route path="services/inventario" element={<InventarioInteractivo />} />
+          <Route path="services/cotizaciones" element={<CotizacionesInmediatas />} />
+          <Route path="services/postventa" element={<PostventaInteligente />} />
         <Route path="*"          element={<Landing />} />  {/* fallback a landing */}
       </Routes>
     </HashRouter>

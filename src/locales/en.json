@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "about": "About Us",
     "services": "Our Services",
@@ -20,10 +20,9 @@
     "automation": "Automate",
     "automationItems": {
       "appointments": "Generate appointments",
-      "inventoryChat": "Chat with and modify your inventory",
-      "leads": "Capture and qualify your leads",
-      "quotes": "Deliver instant quotes and offer smart after-sales",
-      "contact": "Looking for something else? Contact us"
+      "inventory": "Chat with and modify your inventory",
+      "quotes": "Deliver instant quotes",
+      "postSale": "Smart post-sale"
     }
   },
   "hero": {

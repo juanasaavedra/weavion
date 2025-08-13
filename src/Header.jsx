@@ -26,23 +26,19 @@ export default function Header() {
   const automationItems = [
     {
       label: t('header.automationItems.appointments', 'Genera citas'),
-      path: '/automation/genera-citas',
+      path: '/services/genera-citas',
     },
     {
-      label: t('header.automationItems.inventoryChat', 'Charla con tu inventario y modifícalo'),
-      path: '/automation/inventario-chat',
+      label: t('header.automationItems.inventory', 'Charla con tu inventario y modifícalo'),
+      path: '/services/inventario',
     },
     {
-      label: t('header.automationItems.leads', 'Captura y califica tus leads'),
-      path: '/automation/captura-califica-leads',
+      label: t('header.automationItems.quotes', 'Entrega cotizaciones inmediatas'),
+      path: '/services/cotizaciones',
     },
     {
-      label: t('header.automationItems.quotes', 'Entrega cotizaciones inmediatas y ten una postventa inteligente'),
-      path: '/automation/cotizaciones-postventa',
-    },
-    {
-      label: t('header.automationItems.contact', '¿Buscas algo más? Contáctanos'),
-      path: '/automation/contacto',
+      label: t('header.automationItems.postSale', 'Postventa inteligente'),
+      path: '/services/postventa',
     },
   ];
 
