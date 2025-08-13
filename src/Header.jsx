@@ -15,11 +15,11 @@ export default function Header() {
     },
     {
       label: t('header.servicesItems.crm', 'Integración a CRM o Service Titan'),
-      path: '/services/crm',
+      path: '/services/crm-servicetitan',
     },
     {
       label: t('header.servicesItems.analytics', 'Analíticas de negocio'),
-      path: '/services/analiticas',
+      path: '/services/analiticas-negocio',
     },
   ];
 
