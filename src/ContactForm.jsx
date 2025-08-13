@@ -43,10 +43,15 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-purple-800/40 p-6 rounded-2xl">
-      <h2 className="text-3xl font-bold text-white mb-4">{t('contact.formTitle')}</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6 container-rounded bg-white/[0.06] backdrop-blur-md p-8 md:p-10 ring-1 ring-white/10 shadow-[inset_0_0_0_1px_rgba(182,146,255,.22),0_10px_28px_rgba(108,72,237,.18)]"
+    >
+      <h2 className="text-3xl font-bold text-white mb-6">
+        {t('contact.formTitle')}
+      </h2>
       <div>
-        <label className="block mb-1 text-white" htmlFor="service">
+        <label className="block mb-2 text-white" htmlFor="service">
           {t('contact.serviceLabel')}
         </label>
         <select
@@ -54,7 +59,7 @@ export default function ContactForm() {
           name="service"
           value={form.service}
           onChange={handleChange}
-          className="w-full p-2 rounded bg-white text-purple-800"
+          className="w-full p-3 rounded-full bg-black/40 text-white border border-white/20 focus:border-purple-500 focus:outline-none"
           required
         >
           <option value="" disabled>
@@ -68,7 +73,7 @@ export default function ContactForm() {
         </select>
       </div>
       <div>
-        <label className="block mb-1 text-white" htmlFor="company">
+        <label className="block mb-2 text-white" htmlFor="company">
           {t('contact.company')}
         </label>
         <input
@@ -76,12 +81,12 @@ export default function ContactForm() {
           name="company"
           value={form.company}
           onChange={handleChange}
-          className="w-full p-2 rounded bg-white text-purple-800"
+          className="w-full p-3 rounded-full bg-black/40 text-white border border-white/20 focus:border-purple-500 focus:outline-none"
           required
         />
       </div>
       <div>
-        <label className="block mb-1 text-white" htmlFor="name">
+        <label className="block mb-2 text-white" htmlFor="name">
           {t('contact.name')}
         </label>
         <input
@@ -89,12 +94,12 @@ export default function ContactForm() {
           name="name"
           value={form.name}
           onChange={handleChange}
-          className="w-full p-2 rounded bg-white text-purple-800"
+          className="w-full p-3 rounded-full bg-black/40 text-white border border-white/20 focus:border-purple-500 focus:outline-none"
           required
         />
       </div>
       <div>
-        <label className="block mb-1 text-white" htmlFor="email">
+        <label className="block mb-2 text-white" htmlFor="email">
           {t('contact.email')}
         </label>
         <input
@@ -103,12 +108,12 @@ export default function ContactForm() {
           name="email"
           value={form.email}
           onChange={handleChange}
-          className="w-full p-2 rounded bg-white text-purple-800"
+          className="w-full p-3 rounded-full bg-black/40 text-white border border-white/20 focus:border-purple-500 focus:outline-none"
           required
         />
       </div>
       <div>
-        <label className="block mb-1 text-white" htmlFor="phone">
+        <label className="block mb-2 text-white" htmlFor="phone">
           {t('contact.phone')}
         </label>
         <input
@@ -116,12 +121,12 @@ export default function ContactForm() {
           name="phone"
           value={form.phone}
           onChange={handleChange}
-          className="w-full p-2 rounded bg-white text-purple-800"
+          className="w-full p-3 rounded-full bg-black/40 text-white border border-white/20 focus:border-purple-500 focus:outline-none"
         />
       </div>
       <button
         type="submit"
-        className="w-full py-2 bg-purple-600 text-white font-semibold rounded hover:bg-purple-500"
+        className="w-full py-3 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold hover:from-purple-500 hover:to-indigo-500"
       >
         {t('contact.submitButton')}
       </button>
