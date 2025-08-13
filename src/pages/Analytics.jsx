@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import TermHint from '../components/TermHint';
+import { useTranslation, Trans } from 'react-i18next';
 
 /* Combo Area + Line para ROI */
 function ComboROI({ months, cac, roi }) {
+  const { t } = useTranslation();
   const W=360, H=200, chartH=130, top=30, left=28;
   const max = Math.max(...cac, ...roi, 1);
   const scale = v => top + chartH - (v/max)*chartH;
@@ -33,7 +35,7 @@ function ComboROI({ months, cac, roi }) {
           <text key={m} x={left+i*step} y={H-6} fontSize="10" fill="#bdb8d8" textAnchor="middle">{m}</text>
         ))}
       </svg>
-      <p className="chart-note">ROI sube mientras el CAC se contiene: más rentabilidad por campaña.</p>
+      <p className="chart-note">{t('pages.analytics.combo.note')}</p>
     </div>
   );
 }
@@ -53,44 +55,42 @@ function KPIList({ items }) {
 }
 
 export default function Analytics() {
+  const { t } = useTranslation();
+  const kpis = t('pages.analytics.kpis', { returnObjects: true });
+  const months = t('pages.analytics.combo.months', { returnObjects: true });
+  const getItems = t('pages.analytics.get.items', { returnObjects: true });
   return (
     <div className="page-wrap metal-bg-4 text-white">
       <header className="hero">
-        <h1 className="headline-xl">Analíticas que guían inversión y crecimiento</h1>
+        <h1 className="headline-xl">{t('pages.analytics.hero.title')}</h1>
         <p className="sublead">
-          Paneles en tiempo real: <TermHint term="CAC">Costo de Adquisición de Cliente: inversión total / clientes nuevos.</TermHint>, <TermHint term="ROAS">Retorno de la inversión publicitaria: revenue atribuible / gasto publicitario.</TermHint>, tasa de cierre y revenue por canal. Decisiones
-          con datos, no corazonadas.
+          <Trans i18nKey="pages.analytics.hero.subtitle" components={{ CAC: <TermHint term={t('pages.analytics.hero.cacTerm')} />, ROAS: <TermHint term={t('pages.analytics.hero.roasTerm')} /> }} />
         </p>
       </header>
 
       <section className="section">
-        <KPIList items={[
-          { value:'-18%', label:'CAC', desc:'Costo por adquisición controlado mes a mes.' },
-          { value:'+34%', label:'ROAS', desc:'Mayor retorno por cada dólar invertido.' },
-          { value:'+22%', label:'Tasa de cierre', desc:'Seguimiento y nurturing que convierten.' },
-        ]}/>
+        <KPIList items={kpis}/>
       </section>
 
       <section className="section grid md:grid-cols-2 gap-6">
         <motion.article initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="glass p-6 rounded-2xl">
-          <h3 className="card-title">ROI vs CAC (últimos 6 meses)</h3>
+          <h3 className="card-title">{t('pages.analytics.combo.title')}</h3>
           <p className="card-copy">
-            Redistribuimos presupuesto a los canales con mejor <TermHint term="ROAS">retorno por gasto publicitario</TermHint> y pausamos
-            los que drenan inversión.
+            <Trans i18nKey="pages.analytics.combo.description" components={{ ROAS: <TermHint term={t('pages.analytics.combo.roasTerm')} /> }} />
           </p>
           <ComboROI
-            months={['Ene','Feb','Mar','Abr','May','Jun']}
+            months={months}
             cac={[62,58,55,53,52,49]}
             roi={[1.2,1.4,1.5,1.7,1.9,2.1]}
           />
         </motion.article>
 
         <motion.article initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="glass p-6 rounded-2xl">
-          <h3 className="card-title">Qué obtienes</h3>
+          <h3 className="card-title">{t('pages.analytics.get.title')}</h3>
           <ul className="list-bullets">
-            <li>Tableros ejecutivos por canal, campaña y equipo.</li>
-            <li>Alertas de desviación para reaccionar a tiempo.</li>
-            <li>Reportes automáticos a tu correo cada semana.</li>
+            {getItems.map((g, i) => (
+              <li key={i}>{g}</li>
+            ))}
           </ul>
         </motion.article>
       </section>

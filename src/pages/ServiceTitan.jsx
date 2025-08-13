@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import TermHint from '../components/TermHint';
+import { useTranslation, Trans } from 'react-i18next';
 
 /* Embudo simple para visualizar control operacional */
 function Funnel({ stages = [] }) {
+  const { t } = useTranslation();
   const width = 360, height = 200, topW = 300, stepH = 36;
   return (
     <div className="chart">
@@ -28,23 +30,20 @@ function Funnel({ stages = [] }) {
           );
         })}
       </svg>
-      <p className="chart-note">Visibilidad por etapa: menos fugas, más cierres.</p>
+      <p className="chart-note">{t('pages.servicetitan.funnel.note')}</p>
     </div>
   );
 }
 
 function SLAKpis() {
+  const { t } = useTranslation();
+  const items = t('pages.servicetitan.kpis', { returnObjects: true });
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {[
-        {v:'< 5 min', l:(<>Primer respuesta <TermHint term="SLA">Acuerdo de nivel de servicio: tiempos objetivo de respuesta y resolución.</TermHint></>)},
-        {v:'98%',   l:'Citas confirmadas'},
-        {v:'-35%',  l:'No-shows'},
-        {v:'+27%',  l:'Cierres por técnico'},
-      ].map((k, i)=>(
+      {items.map((k, i)=>(
         <div key={i} className="kpi glass">
-          <p className="kpi-v">{k.v}</p>
-          <p className="kpi-l">{k.l}</p>
+          <p className="kpi-v">{k.value}</p>
+          <p className="kpi-l">{k.label}</p>
         </div>
       ))}
     </div>
@@ -52,13 +51,14 @@ function SLAKpis() {
 }
 
 export default function ServiceTitan() {
+  const { t } = useTranslation();
+  const stages = t('pages.servicetitan.funnel.stages', { returnObjects: true }).map((label, i) => ({ label, value: [100,82,74,55,41][i] }));
+  const activate = t('pages.servicetitan.activate.items', { returnObjects: true });
   return (
     <div className="page-wrap metal-bg-3 text-white">
       <header className="hero">
-        <h1 className="headline-xl">ServiceTitan integrado: operación sin fricción</h1>
-        <p className="sublead">
-          Agenda, asigna, factura y reporta desde un mismo flujo. Menos errores, más tiempo productivo.
-        </p>
+        <h1 className="headline-xl">{t('pages.servicetitan.hero.title')}</h1>
+        <p className="sublead">{t('pages.servicetitan.hero.subtitle')}</p>
       </header>
 
       {/* KPIs de eficiencia operativa */}
@@ -69,27 +69,19 @@ export default function ServiceTitan() {
       {/* Pipeline/Embudo + promesa comercial */}
       <section className="section grid md:grid-cols-2 gap-6">
         <motion.article initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="glass p-6 rounded-2xl">
-          <h3 className="card-title">Pipeline controlado de punta a punta</h3>
+          <h3 className="card-title">{t('pages.servicetitan.funnel.title')}</h3>
           <p className="card-copy">
-            Cada lead avanza con reglas claras. Asignación automática, recordatorios y
-            documentación unificada para cumplir <TermHint term="SLA">tiempos comprometidos</TermHint> y reducir no-shows.
+            <Trans i18nKey="pages.servicetitan.funnel.description" components={{ TermHint: <TermHint term={t('pages.servicetitan.funnel.term')} /> }} />
           </p>
-          <Funnel stages={[
-            {label:'Web / Lead', value:'100%'},
-            {label:'Agenda', value:'82%'},
-            {label:'Visita', value:'74%'},
-            {label:'Cotiza', value:'55%'},
-            {label:'Cierra', value:'41%'},
-          ]}/>
+          <Funnel stages={stages}/>
         </motion.article>
 
         <motion.article initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="glass p-6 rounded-2xl">
-          <h3 className="card-title">Qué activamos</h3>
+          <h3 className="card-title">{t('pages.servicetitan.activate.title')}</h3>
           <ul className="list-bullets">
-            <li>Integración de formularios/llamadas → ServiceTitan.</li>
-            <li>Rutas y asignación automática por zona y carga.</li>
-            <li>Plantillas y cobros listos para salir a campo.</li>
-            <li>Reportes de desempeño por técnico y cuadrilla.</li>
+            {activate.map((a, i) => (
+              <li key={i}>{a}</li>
+            ))}
           </ul>
         </motion.article>
       </section>
