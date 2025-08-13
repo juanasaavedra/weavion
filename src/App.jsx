@@ -269,6 +269,8 @@ function Landing() {
    App principal
 ------------------------------------------------------- */
 export default function App() {
+  const { t } = useTranslation();
+
   return (
     <>
       <BackgroundLayers />
@@ -301,7 +303,7 @@ export default function App() {
         {/* Process Section */}
         <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
-            ¿Cómo funciona nuestro proceso?
+            {t('process.title', '¿Cómo funciona nuestro proceso?')}
           </h2>
           <ProcessTimeline />
         </section>

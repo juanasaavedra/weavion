@@ -488,6 +488,7 @@ spline-viewer canvas#spline {
 .gradient-border {
   border: 2px solid transparent;
   border-image: linear-gradient(to bottom right, #6b21a8, #6f47ff, #8b00ff) 1;
+  border-radius: 1.5rem;
 }
 
 @keyframes pulse-glow {
