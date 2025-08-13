@@ -10,26 +10,32 @@ const PALETTE = {
 
 export default function ServiciosPinnedSlider() {
   const { t } = useTranslation();
-  const items = [
-    {
-      title: t('servicesSlider.items.web.title', 'Diseño & Desarrollo Web'),
-      desc: t('servicesSlider.items.web.desc', 'Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.'),
-      bg: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`,
-      href: `#${t('routes.services.web', '/services/web')}`,
-    },
-    {
-      title: t('servicesSlider.items.servicetitan.title', 'Integración a ServiceTitan'),
-      desc: t('servicesSlider.items.servicetitan.desc', 'De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.'),
-      bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.15), rgba(0,0,0,0) 60%), linear-gradient(120deg, #352a6e, ${PALETTE.purpleDark})`,
-      href: `#${t('routes.services.crm', '/services/crm-servicetitan')}`,
-    },
-    {
-      title: t('servicesSlider.items.analytics.title', 'Analíticas de Negocio'),
-      desc: t('servicesSlider.items.analytics.desc', 'Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.'),
-      bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2b2554, #43327a)` ,
-      href: `#${t('routes.services.analytics', '/services/analiticas-negocio')}`,
-    },
-  ];
+    const items = [
+      {
+        title: t('servicesSlider.items.web.title', 'Diseño & Desarrollo Web'),
+        desc: t('servicesSlider.items.web.desc', 'Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.'),
+        bg: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`,
+        href: `#${t('routes.services.web', '/services/web')}`,
+      },
+      {
+        title: t('servicesSlider.items.servicetitan.title', 'Integración a ServiceTitan'),
+        desc: t('servicesSlider.items.servicetitan.desc', 'De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.'),
+        bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.15), rgba(0,0,0,0) 60%), linear-gradient(120deg, #352a6e, ${PALETTE.purpleDark})`,
+        href: `#${t('routes.services.crm', '/services/crm-servicetitan')}`,
+      },
+      {
+        title: t('servicesSlider.items.analytics.title', 'Analíticas de Negocio'),
+        desc: t('servicesSlider.items.analytics.desc', 'Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.'),
+        bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2b2554, #43327a)` ,
+        href: `#${t('routes.services.analytics', '/services/analiticas-negocio')}`,
+      },
+      {
+        title: t('servicesSlider.items.automation.title', 'Automatizaciones'),
+        desc: t('servicesSlider.items.automation.desc', 'Flujos que trabajan por ti: recordatorios, inventario y más.'),
+        bg: `radial-gradient(60% 80% at 80% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #261241, #3b1b6a)`,
+        href: `#${t('routes.automation.appointments', '/services/genera-citas')}`,
+      },
+    ];
 
     const [dims, setDims] = useState({ vw: 0, vh: 0 });
     const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
@@ -115,48 +121,76 @@ export default function ServiciosPinnedSlider() {
   );
 }
 
-  function Panel({ item, thin, palette, vertical }) {
-    const { t } = useTranslation();
-    return (
-      <div style={{ height: "100%", background: item.bg, display: "grid", placeItems: "center", padding: thin ? 0 : vertical ? "3rem 4vw" : "6rem 8vw", position: "relative" }}>
-      {thin && (
-        <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, rgba(115,40,232,.7), rgba(115,40,232,.2))`, opacity: 0.25, pointerEvents: "none" }} />
-      )}
-      <div style={{ maxWidth: 920, opacity: thin ? 0.0 : 1.0, transition: "opacity .15s linear", color: palette.grayLight, textAlign: "left" }}>
-        <h2 style={{ margin: 0, fontWeight: 800, fontSize: "clamp(36px, 7vw, 84px)", letterSpacing: "-0.02em", background:'#F3EDFF', WebkitBackgroundClip: "text", color: "transparent", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.title}</h2>
-        <p style={{ marginTop: "1.1rem", fontSize: "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
-        <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: '#fff', textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
-          <span style={{ width: 10, height: 10, borderRadius: "50%", background: palette.purpleBright, display: "inline-block" }} />
-          {t('servicesSlider.learnMore', 'Conocer más')}
-        </a>
-      </div>
-      {thin && !vertical && (
+    function Panel({ item, thin, palette, vertical }) {
+      const { t } = useTranslation();
+      const ref = useRef(null);
+      const [pos, setPos] = useState({ x: 50, y: 50 });
+
+      useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const onMove = (e) => {
+          const r = el.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width) * 100;
+          const y = ((e.clientY - r.top) / r.height) * 100;
+          setPos({ x, y });
+        };
+        el.addEventListener('mousemove', onMove);
+        return () => el.removeEventListener('mousemove', onMove);
+      }, []);
+
+      return (
         <div
+          ref={ref}
+          style={{ height: "100%", background: item.bg, display: "grid", placeItems: "center", padding: thin ? 0 : vertical ? "3rem 4vw" : "6rem 8vw", position: "relative", overflow: "hidden" }}
+        >
+        <div
+          className="pointer-events-none"
           style={{
             position: "absolute",
             inset: 0,
-            writingMode: "vertical-rl",
-            transform: "rotate(180deg)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            fontSize: "clamp(20px, 8vh, 48px)",
-            letterSpacing: "0.1em",
-            color: "#fff",
-            opacity: 0.75,
-            padding: "1rem 0",
-            fontFamily: "'argent-pixel-cf', sans-serif",
-            overflow: "hidden",
+            background: `radial-gradient(800px 600px at ${pos.x}% ${pos.y}%, rgba(255,255,255,.08), transparent 70%)`,
+            transition: "background-position .15s linear",
           }}
-          aria-hidden
-        >
-          {item.title}
+        />
+        {thin && (
+          <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, rgba(115,40,232,.7), rgba(115,40,232,.2))`, opacity: 0.25, pointerEvents: "none" }} />
+        )}
+        <div style={{ maxWidth: 920, opacity: thin ? 0.0 : 1.0, transition: "opacity .15s linear", color: palette.grayLight, textAlign: "left", background: "rgba(255,255,255,0.07)", backdropFilter: "blur(8px)", padding: vertical ? "2rem" : "3rem", borderRadius: 20 }}>
+          <h2 style={{ margin: 0, fontWeight: 800, fontSize: "clamp(36px, 7vw, 84px)", letterSpacing: "-0.02em", background:'#F3EDFF', WebkitBackgroundClip: "text", color: "transparent", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.title}</h2>
+          <p style={{ marginTop: "1.1rem", fontSize: "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
+          <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: '#fff', textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
+            <span style={{ width: 10, height: 10, borderRadius: "50%", background: palette.purpleBright, display: "inline-block" }} />
+            {t('servicesSlider.learnMore', 'Conocer más')}
+          </a>
         </div>
-      )}
-    </div>
-  );
-}
+        {thin && !vertical && (
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              writingMode: "vertical-rl",
+              transform: "rotate(180deg)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              fontSize: "clamp(20px, 8vh, 48px)",
+              letterSpacing: "0.1em",
+              color: "#fff",
+              opacity: 0.75,
+              padding: "1rem 0",
+              fontFamily: "'argent-pixel-cf', sans-serif",
+              overflow: "hidden",
+            }}
+            aria-hidden
+          >
+            {item.title}
+          </div>
+        )}
+      </div>
+    );
+  }
 
 function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
 function lerp(a, b, t) { return a + (b - a) * t; }

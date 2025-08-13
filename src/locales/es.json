@@ -195,6 +195,10 @@
       "analytics": {
         "title": "Analíticas de Negocio",
         "desc": "Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos."
+      },
+      "automation": {
+        "title": "Automatizaciones",
+        "desc": "Flujos que trabajan por ti: recordatorios, inventario y más."
       }
     }
   },
