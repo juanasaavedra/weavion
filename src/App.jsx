@@ -239,7 +239,7 @@ function Landing() {
 
         <div className="relative z-10 grid w-full grid-cols-1 md:grid-cols-2 items-center gap-8">
           {/* IZQUIERDA: titulares */}
-          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left relative top-10 md:top-0">
+          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left relative z-[9999] top-20 md:top-10 lg:top-0">
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
