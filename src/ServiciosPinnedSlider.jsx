@@ -10,34 +10,22 @@ const PALETTE = {
 export default function ServiciosPinnedSlider() {
   const items = [
     {
-      title: "Diseño y Desarrollo web",
+      title: "Diseño & Desarrollo Web",
       desc: "Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.",
       bg: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`,
       href: "/services/web",
     },
     {
-      title: "Integración a CRM o ServiceTitan",
-      desc: "De lead a ingreso sin fricción: captura limpia, enriquecimiento, tareas automáticas y asignación de técnicos.",
+      title: "Integración a ServiceTitan",
+      desc: "De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.",
       bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, #21183e, ${PALETTE.purpleDark})`,
-      href: "/services/crm",
+      href: "/services/servicetitan",
     },
     {
-      title: "Email Marketing",
-      desc: "Automatizaciones que venden: onboarding, carritos abandonados, newsletters y triggers por comportamiento.",
+      title: "Analíticas de Negocio",
+      desc: "Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.",
       bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(120deg, #1a1530, #2a2146)` ,
-      href: "/services/email",
-    },
-    {
-      title: "Integración a CRM o Service Titan",
-      desc: "Formularios → leads limpios → tareas automáticas → técnicos asignados.",
-      bg: `radial-gradient(60% 80% at 70% 30%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2a2146, #331d5f)` ,
-      href: "/services/crm",
-    },
-    {
-      title: "Automatiza tu operación",
-      desc: "Bots y flujos con n8n/Python para cotizaciones, recordatorios, inventario y postventa 24/7.",
-      bg: `radial-gradient(60% 80% at 50% 50%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(120deg, #232032, ${PALETTE.blackPurple})` ,
-      href: "/automatizaciones/genera-citas",
+      href: "/services/analytics",
     },
   ];
 

@@ -619,3 +619,156 @@ spline-viewer canvas#spline {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Tipografía Ars Pixel (ajusta ruta si la tienes en otra carpeta) */
+@font-face{
+  font-family:'Ars Pixel';
+  src:url('./assets/fonts/ArsPixel-Regular.woff2') format('woff2'),
+      url('./assets/fonts/ArsPixel-Regular.woff') format('woff');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+
+:root{
+  --text:#ECECEC;
+  --metal1:#0b0a12; --metal2:#1a1828; --metal3:#1d1a2e; --metal4:#201d36;
+}
+
+/* contenedor página */
+.page-wrap{min-height:100vh;padding:48px 18px;}
+@media(min-width:768px){.page-wrap{padding:64px 28px;}}
+.hero{max-width:900px;margin:0 auto 28px;}
+.headline-xl{font-family:'Ars Pixel',system-ui,sans-serif;font-weight:700;line-height:1.08;font-size:clamp(28px,4.5vw,48px);color:#fff;}
+.sublead{font-family:'Ars Pixel',system-ui,sans-serif;color:#e7e4ff;opacity:.92;margin-top:.5rem;font-size:clamp(14px,1.4vw,18px);line-height:1.6}
+.section{max-width:1100px;margin:20px auto}
+.text-white{color:#fff}
+
+/* fondos metálicos */
+.metal-bg-1{background:radial-gradient(120% 140% at 80% 20%,#2c2a40 0%,#151322 55%,var(--metal1) 100%);}
+.metal-bg-2{background:radial-gradient(120% 140% at 20% 20%,#34324a 0%,#1a1828 55%,var(--metal1) 100%);}
+.metal-bg-3{background:radial-gradient(120% 140% at 80% 80%,#3a3854 0%,#1d1a2e 55%,var(--metal1) 100%);}
+.metal-bg-4{background:radial-gradient(120% 140% at 20% 80%,#423f62 0%,#201d36 55%,var(--metal1) 100%);}
+
+/* glass card */
+.glass{
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid rgba(167,139,250,.22);
+  box-shadow:0 6px 24px rgba(124,58,237,.18), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter:blur(6px);
+}
+
+/* tipografía componentes */
+.card-title{font-family:'Ars Pixel',system-ui,sans-serif;font-weight:700;font-size:clamp(18px,2.2vw,26px);margin-bottom:.4rem}
+.card-copy{font-family:'Ars Pixel',system-ui,sans-serif;color:#e7e4ff;opacity:.9}
+
+/* kpis */
+.kpi{padding:16px;border-radius:18px;text-align:center}
+.kpi-v{font-family:'Ars Pixel',system-ui,sans-serif;font-size:clamp(20px,2.8vw,28px);font-weight:700}
+.kpi-l{font-family:'Ars Pixel',system-ui,sans-serif;font-size:12px;color:#d9d4ff;opacity:.9}
+
+/* bullets */
+.list-bullets{margin:0;padding-left:1.1rem;display:grid;gap:.4rem}
+.list-bullets li{list-style:disc}
+
+/* charts */
+.chart{margin-top:.75rem}
+.chart svg{width:100%;height:auto;display:block}
+.chart-note{font-size:12px;color:#cfc8f4;opacity:.85;margin-top:.5rem}
+
+/* --- TermHint (glosario interactivo) --- */
+.termhint-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.termhint-link {
+  background: none;
+  border: 0;
+  padding: 0 2px;
+  cursor: pointer;
+  font: inherit;
+  color: #cbb6ff;
+  /* subrayado “barra” con degradé metálico */
+  background-image: linear-gradient(90deg, #b692ff, #7c3aed);
+  background-size: 100% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: color .2s ease, opacity .2s ease;
+}
+.termhint-link:hover,
+.termhint-link:focus-visible {
+  color: #ffffff;
+  outline: none;
+  opacity: 1;
+}
+
+.termhint-bubble {
+  position: absolute;
+  z-index: 40;
+  min-width: 220px;
+  max-width: 320px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  color: #f6f4ff;
+  font-size: 12.5px;
+  line-height: 1.45;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px) scale(.98);
+  transition: opacity .18s ease, transform .18s ease;
+  /* efecto glass + metálico */
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+  border: 1px solid rgba(167,139,250,.35);
+  box-shadow:
+    0 8px 28px rgba(124,58,237,.22),
+    inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(6px);
+  /* posición por defecto (top) */
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform-origin: bottom center;
+  translate: -50% 0;
+}
+.termhint-bubble.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.termhint-bubble::after {
+  content: "";
+  position: absolute;
+  width: 12px; height: 12px;
+  background: inherit;
+  border-left: inherit; border-top: inherit;
+  bottom: -7px; left: 50%;
+  translate: -50% 0;
+  transform: rotate(45deg);
+}
+
+/* Posiciones alternativas si las necesitas */
+.termhint-bubble.right {
+  left: calc(100% + 10px);
+  bottom: 50%;
+  transform-origin: center left;
+  translate: 0 50%;
+}
+.termhint-bubble.right::after {
+  bottom: 50%; left: -6px; translate: 0 50%;
+  border-left: inherit; border-top: inherit;
+}
+
+.termhint-bubble.left {
+  right: calc(100% + 10px);
+  left: auto;
+  bottom: 50%;
+  transform-origin: center right;
+  translate: 0 50%;
+}
+.termhint-bubble.left::after {
+  bottom: 50%; right: -6px; left: auto; translate: 0 50%;
+  border-left: inherit; border-top: inherit;
+}
+
+/* accesibilidad: respeta usuarios que prefieren menos motion */
+@media (prefers-reduced-motion: reduce) {
+  .termhint-bubble { transition: none; }
+  .termhint-link { transition: none; }
+}
