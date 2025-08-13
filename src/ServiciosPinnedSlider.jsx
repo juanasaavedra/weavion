@@ -50,6 +50,8 @@ export default function ServiciosPinnedSlider() {
   const SLOW_FACTOR = 1.8; // >1 = más lenta cada transición
   const THIN_MIN_BASE = 68;     // ancho min de tiras comprimidas en desktop
   const THIN_MAX_BASE = 104;    // ancho max de tiras comprimidas en desktop
+  const THIN_MIN_MOBILE = 24;   // ancho min en dispositivos móviles
+  const THIN_MAX_MOBILE = 40;   // ancho max en dispositivos móviles
 
   useLayoutEffect(() => {
     const onResize = () => setDims({ vw: window.innerWidth, vh: window.innerHeight });
@@ -85,8 +87,8 @@ export default function ServiciosPinnedSlider() {
   const renderIndex = active;
 
   const vertical = dims.vh > dims.vw;
-  const THIN_MIN = vertical ? 32 : THIN_MIN_BASE;
-  const THIN_MAX = vertical ? 56 : THIN_MAX_BASE;
+  const THIN_MIN = vertical ? THIN_MIN_MOBILE : THIN_MIN_BASE;
+  const THIN_MAX = vertical ? THIN_MAX_MOBILE : THIN_MAX_BASE;
   const THIN = Math.round(Math.max(THIN_MIN, Math.min(THIN_MAX, dims.vw * 0.07)));
   const widths = items.map((_, j) => {
     if (j < renderIndex) return THIN; // ya pasados → tiras

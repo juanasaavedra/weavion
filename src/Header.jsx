@@ -79,29 +79,34 @@ function DropdownMenu({ title, items }) {
   }, []);
 
   return (
-    <div ref={menuRef} className="relative mx-4">
-        <button
-          onClick={() => setOpen((o) => !o)}
-          className="cursor-pointer text-white px-3 py-2 rounded-md font-argent glass-triangle text-sm md:text-base"
-        >
-          {title}
-        </button>
-        {open && (
-          <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-11/12 max-w-sm md:max-w-none glass-triangle rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4 p-4 text-white">
-            {items.map(({ label, path }, idx) => (
-              <Link
-                key={idx}
-                to={path}
-                onClick={() => setOpen(false)}
-                className="group w-full min-h-20 rounded-2xl p-[2px] bg-gradient-to-r from-purple-400 to-purple-700 text-white transition duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
-              >
-                <div className="flex h-full w-full items-center justify-center rounded-2xl bg-black text-center text-lg md:text-base transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900 font-argent">
-                  {label}
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+    <div
+      ref={menuRef}
+      className="relative mx-4"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="cursor-pointer text-white px-3 py-2 rounded-md font-argent glass text-sm md:text-base"
+      >
+        {title}
+      </button>
+      {open && (
+        <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-full max-w-md md:max-w-2xl glass rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4 p-4 text-white">
+          {items.map(({ label, path }, idx) => (
+            <Link
+              key={idx}
+              to={path}
+              onClick={() => setOpen(false)}
+              className="group w-full min-h-20 md:min-h-24 rounded-2xl p-[2px] bg-gradient-to-r from-purple-400 to-purple-700 text-white transition duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+            >
+              <div className="flex h-full w-full items-center justify-center rounded-2xl bg-black text-center text-lg md:text-base transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900 font-argent px-4">
+                {label}
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
