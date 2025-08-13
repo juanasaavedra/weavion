@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { GradientBg, PALETTE } from "./common";
+import ProductInterestSection from "../../components/ProductInterestSection";
 
 export default function InventarioChat() {
   const msgs = [
@@ -88,6 +89,7 @@ export default function InventarioChat() {
           </div>
         </div>
       </section>
+      <ProductInterestSection />
     </GradientBg>
   );
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ProductInterestSection from '../components/ProductInterestSection';
 import TermHint from '../components/TermHint';
+import { useTranslation, Trans } from 'react-i18next';
 
 /* ---------- Gráficos SVG ---------- */
 function TrendBars({ labels, values, note }) {
@@ -47,51 +49,47 @@ function KPIGrid({ items }) {
 
 /* ---------- Página ---------- */
 export default function WebDesign() {
+  const { t } = useTranslation();
+  const kpis = t('pages.web.kpis', { returnObjects: true });
+  const months = t('pages.web.sales.months', { returnObjects: true });
+  const deliver = t('pages.web.deliver.items', { returnObjects: true });
   return (
     <div className="page-wrap metal-bg-1 text-white">
       {/* Hero */}
       <header className="hero">
-        <h1 className="headline-xl">Sitios web que convierten visitas en ventas</h1>
+        <h1 className="headline-xl">{t('pages.web.hero.title')}</h1>
         <p className="sublead">
-          Rendimiento real, <TermHint term="SEO">Optimización para buscadores: estructura, contenido y performance que elevan ranking y tráfico orgánico.</TermHint> técnico y UX enfocada en acción. Tu marca luce premium
-          y cada pantalla empuja a “comprar”, “agendar” o “pedir cotización”.
+          <Trans i18nKey="pages.web.hero.subtitle" components={{ TermHint: <TermHint term={t('pages.web.hero.term')} /> }} />
         </p>
       </header>
 
       {/* KPIs de promesa comercial */}
       <section className="section">
-        <KPIGrid items={[
-          { value:'+38%', label:'Tasa de conversión' },
-          { value:'-42%', label:'Rebote en landing' },
-          { value:'+2.3x', label:'Velocidad percibida' },
-          { value:'+61%', label:'Ingresos por sesión' },
-        ]}/>
+        <KPIGrid items={kpis}/>
       </section>
 
       {/* Tendencia de ventas (muestra impacto de performance + UX) */}
       <section className="section grid md:grid-cols-2 gap-6">
         <motion.article initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="glass p-6 rounded-2xl">
-          <h3 className="card-title">Ventas cerradas por mes</h3>
-          <p className="card-copy">
-            La velocidad y claridad reducen fricción. Más usuarios completan el flujo de compra.
-          </p>
+          <h3 className="card-title">{t('pages.web.sales.title')}</h3>
+          <p className="card-copy">{t('pages.web.sales.description')}</p>
           <TrendBars
-            labels={['Ene','Feb','Mar','Abr','May','Jun']}
+            labels={months}
             values={[24,31,38,46,54,66]}
-            note="Tendencia sostenida tras optimizar tiempos de carga y jerarquía visual."
+            note={t('pages.web.sales.note')}
           />
         </motion.article>
 
         <motion.article initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="glass p-6 rounded-2xl">
-          <h3 className="card-title">Qué entregamos</h3>
+          <h3 className="card-title">{t('pages.web.deliver.title')}</h3>
           <ul className="list-bullets">
-            <li>Arquitectura <TermHint term="SEO">Mapa de URLs, metadatos, schema y rápidos tiempos TTFB/CLS/INP para mejor posicionamiento.</TermHint> + contenido que posiciona y vende.</li>
-            <li>Checkout fluido e integraciones de pago.</li>
-            <li>Diseño adaptable con micro-interacciones que guían.</li>
-            <li>Métricas de conversión para iterar cada mes.</li>
+            {deliver.map((d, i) => (
+              <li key={i}>{d}</li>
+            ))}
           </ul>
         </motion.article>
       </section>
+      <ProductInterestSection />
     </div>
   );
 }

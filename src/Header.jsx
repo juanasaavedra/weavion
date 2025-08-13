@@ -11,34 +11,34 @@ export default function Header() {
   const servicesItems = [
     {
       label: t('header.servicesItems.webDev', 'Diseño y Desarrollo web'),
-      path: '/services/web',
+      path: t('routes.services.web', '/services/web'),
     },
     {
       label: t('header.servicesItems.crm', 'Integración a CRM o Service Titan'),
-      path: '/services/crm-servicetitan',
+      path: t('routes.services.crm', '/services/crm-servicetitan'),
     },
     {
       label: t('header.servicesItems.analytics', 'Analíticas de negocio'),
-      path: '/services/analiticas-negocio',
+      path: t('routes.services.analytics', '/services/analiticas-negocio'),
     },
   ];
 
   const automationItems = [
     {
       label: t('header.automationItems.appointments', 'Genera citas'),
-      path: '/services/genera-citas',
+      path: t('routes.automation.appointments', '/services/genera-citas'),
     },
     {
       label: t('header.automationItems.inventory', 'Charla con tu inventario y modifícalo'),
-      path: '/services/inventario',
+      path: t('routes.automation.inventory', '/services/inventario'),
     },
     {
       label: t('header.automationItems.quotes', 'Entrega cotizaciones inmediatas'),
-      path: '/services/cotizaciones',
+      path: t('routes.automation.quotes', '/services/cotizaciones'),
     },
     {
       label: t('header.automationItems.postSale', 'Postventa inteligente'),
-      path: '/services/postventa',
+      path: t('routes.automation.postSale', '/services/postventa'),
     },
   ];
 

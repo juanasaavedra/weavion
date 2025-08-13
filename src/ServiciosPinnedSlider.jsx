@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 const PALETTE = {
   purpleDark: "#39166F",
@@ -8,24 +9,25 @@ const PALETTE = {
 };
 
 export default function ServiciosPinnedSlider() {
+  const { t } = useTranslation();
   const items = [
     {
-      title: "Diseño & Desarrollo Web",
-      desc: "Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.",
+      title: t('servicesSlider.items.web.title', 'Diseño & Desarrollo Web'),
+      desc: t('servicesSlider.items.web.desc', 'Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.'),
       bg: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`,
-      href: "#/services/web",
+      href: `#${t('routes.services.web', '/services/web')}`,
     },
     {
-      title: "Integración a ServiceTitan",
-      desc: "De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.",
+      title: t('servicesSlider.items.servicetitan.title', 'Integración a ServiceTitan'),
+      desc: t('servicesSlider.items.servicetitan.desc', 'De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.'),
       bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.15), rgba(0,0,0,0) 60%), linear-gradient(120deg, #352a6e, ${PALETTE.purpleDark})`,
-      href: "#/services/crm-servicetitan",
+      href: `#${t('routes.services.crm', '/services/crm-servicetitan')}`,
     },
     {
-      title: "Analíticas de Negocio",
-      desc: "Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.",
+      title: t('servicesSlider.items.analytics.title', 'Analíticas de Negocio'),
+      desc: t('servicesSlider.items.analytics.desc', 'Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.'),
       bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2b2554, #43327a)` ,
-      href: "#/services/analiticas-negocio",
+      href: `#${t('routes.services.analytics', '/services/analiticas-negocio')}`,
     },
   ];
 
@@ -67,9 +69,9 @@ export default function ServiciosPinnedSlider() {
 
   // Derivar estado: cuál panel está activo y cuánto llevamos de su transición
   const steps = items.length - 1;
-  const t = steps > 0 ? progress * steps : 0; // 0..(n-1)
-  const active = Math.floor(t);
-  const local = t - active; // 0..1 dentro de la transición actual
+  const stepProgress = steps > 0 ? progress * steps : 0; // 0..(n-1)
+  const active = Math.floor(stepProgress);
+  const local = stepProgress - active; // 0..1 dentro de la transición actual
 
   // Limitar a transición entre activo y el siguiente (evita saltos)
   const renderIndex = active;
@@ -114,6 +116,7 @@ export default function ServiciosPinnedSlider() {
 }
 
   function Panel({ item, thin, palette, vertical }) {
+    const { t } = useTranslation();
     return (
       <div style={{ height: "100%", background: item.bg, display: "grid", placeItems: "center", padding: thin ? 0 : vertical ? "3rem 4vw" : "6rem 8vw", position: "relative" }}>
       {thin && (
@@ -124,7 +127,7 @@ export default function ServiciosPinnedSlider() {
         <p style={{ marginTop: "1.1rem", fontSize: "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
         <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: '#fff', textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
           <span style={{ width: 10, height: 10, borderRadius: "50%", background: palette.purpleBright, display: "inline-block" }} />
-          Conocer más
+          {t('servicesSlider.learnMore', 'Conocer más')}
         </a>
       </div>
       {thin && !vertical && (

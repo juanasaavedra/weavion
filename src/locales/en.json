@@ -25,6 +25,19 @@
       "postSale": "Smart post-sale"
     }
   },
+  "routes": {
+    "services": {
+      "web": "/services/web",
+      "crm": "/services/crm-servicetitan",
+      "analytics": "/services/business-analytics"
+    },
+    "automation": {
+      "appointments": "/services/generate-appointments",
+      "inventory": "/services/inventory",
+      "quotes": "/services/instant-quotes",
+      "postSale": "/services/smart-post-sale"
+    }
+  },
   "hero": {
     "title": "Boost your business with web solutions orbiting innovation and security.",
     "subtitle": "Your business deserves a stellar online presence. We'll help you reach for the stars.",
@@ -91,6 +104,8 @@
     "name": "Full Name",
     "email": "Email",
     "phone": "Phone (optional)",
+    "company": "Company name",
+    "serviceLabel": "Which service are you looking for?",
     "message": "Tell us about your project",
     "submitButton": "Send Message",
     "formTitle": "Start your project now",
@@ -100,7 +115,14 @@
     "success": "Message sent successfully! We will contact you soon.",
     "error": "There was an error sending your message. Please try again later.",
     "schedulePrompt": "Choose your preferred time slot and let's launch your project today.",
-    "scheduleButton": "Schedule call"
+    "scheduleButton": "Schedule call",
+    "services": {
+      "web": "Website design or redesign",
+      "dashboard": "Business analytics dashboard",
+      "serviceTitan": "Service Titan integration or support",
+      "automation": "Process or workflow automation",
+      "other": "Other"
+    }
   },
   "folder": {
     "clickToCollapse": "Click to collapse",
@@ -133,6 +155,15 @@
   "product": {
     "prompt": "This is your product. Let's see how our agency can transform it."
   },
+  "products": {
+    "interestTitle": "Interested in another product?",
+    "interestSubtitle": "Discover the advantages of our other solutions:",
+    "web": {"title": "Websites", "desc": "Modern, optimized designs."},
+    "analytics": {"title": "Analytics", "desc": "Data-driven decisions."},
+    "servicetitan": {"title": "ServiceTitan", "desc": "Frictionless integrated operation."},
+    "automation": {"title": "Automation", "desc": "Efficient automated processes."},
+    "contact": "Contact us for details."
+  },
   "common": {
     "discover": "Discover it",
     "backHome": "Back to home",
@@ -143,5 +174,108 @@
   "meta": {
     "title": "Weavion",
     "description": "Weavion - Web development and digital experience design"
+  },
+  "servicesSlider": {
+    "learnMore": "Learn more",
+    "items": {
+      "web": {
+        "title": "Web Design & Development",
+        "desc": "Ultra-fast, accessible sites. Micro-interactions, SEO and 90+ Lighthouse performance."
+      },
+      "servicetitan": {
+        "title": "ServiceTitan Integration",
+        "desc": "From lead to revenue without friction: clean capture, automatic assignment and full operational control."
+      },
+      "analytics": {
+        "title": "Business Analytics",
+        "desc": "Real-time dashboards: CAC, ROAS and revenue per channel to decide with data."
+      }
+    }
+  },
+  "pages": {
+    "web": {
+      "hero": {
+        "title": "Websites that turn visits into sales",
+        "subtitle": "Real performance, <TermHint>Search engine optimization: structure, content and speed that boost ranking and organic traffic.</TermHint> plus action-focused UX. Your brand looks premium and every screen pushes users to “buy”, “book” or “request a quote”.",
+        "term": "SEO"
+      },
+      "kpis": [
+        { "value": "+38%", "label": "Conversion rate" },
+        { "value": "-42%", "label": "Landing bounce" },
+        { "value": "+2.3x", "label": "Perceived speed" },
+        { "value": "+61%", "label": "Revenue per session" }
+      ],
+      "sales": {
+        "title": "Closed sales per month",
+        "description": "Speed and clarity reduce friction. More users complete the purchase flow.",
+        "note": "Sustained trend after optimizing load times and visual hierarchy.",
+        "months": ["Jan","Feb","Mar","Apr","May","Jun"]
+      },
+      "deliver": {
+        "title": "What we deliver",
+        "items": [
+          "SEO architecture + content that ranks and sells.",
+          "Smooth checkout and payment integrations.",
+          "Adaptive design with guiding micro-interactions.",
+          "Conversion metrics to iterate each month."
+        ]
+      }
+    },
+    "servicetitan": {
+      "hero": {
+        "title": "ServiceTitan integrated: frictionless operation",
+        "subtitle": "Schedule, assign, invoice and report from a single flow. Fewer errors, more productive time."
+      },
+      "kpis": [
+        { "value": "< 5 min", "label": "First response SLA" },
+        { "value": "98%", "label": "Confirmed appointments" },
+        { "value": "-35%", "label": "No-shows" },
+        { "value": "+27%", "label": "Closings per technician" }
+      ],
+      "funnel": {
+        "title": "End-to-end controlled pipeline",
+        "description": "Each lead moves forward with clear rules. Automatic assignment, reminders and unified documentation to meet <TermHint>committed times</TermHint> and reduce no-shows.",
+        "term": "SLA",
+        "note": "Stage visibility: fewer leaks, more closes.",
+        "stages": ["Web / Lead","Schedule","Visit","Quote","Close"]
+      },
+      "activate": {
+        "title": "What we activate",
+        "items": [
+          "Integration of forms/calls → ServiceTitan.",
+          "Routes and automatic assignment by area and workload.",
+          "Templates and charges ready for the field.",
+          "Performance reports by technician and crew."
+        ]
+      }
+    },
+    "analytics": {
+      "hero": {
+        "title": "Analytics that guide investment and growth",
+        "subtitle": "Real-time dashboards: <CAC>Customer Acquisition Cost: total spend / new customers.</CAC>, <ROAS>Return on ad spend: attributable revenue / ad spend.</ROAS>, close rate and revenue per channel. Data-driven decisions, not gut feelings.",
+        "cacTerm": "CAC",
+        "roasTerm": "ROAS"
+      },
+      "kpis": [
+        { "value": "-18%", "label": "CAC", "desc": "Customer acquisition cost controlled month by month." },
+        { "value": "+34%", "label": "ROAS", "desc": "Higher return for every dollar invested." },
+        { "value": "+22%", "label": "Close rate", "desc": "Follow-up and nurturing that convert." }
+      ],
+      "combo": {
+        "title": "ROI vs CAC (last 6 months)",
+        "description": "We reallocate budget to the channels with better <ROAS>return on ad spend</ROAS> and pause those that drain investment.",
+        "roasTerm": "ROAS",
+        "note": "ROI rises while CAC is contained: more profitability per campaign.",
+        "months": ["Jan","Feb","Mar","Apr","May","Jun"]
+      },
+      "get": {
+        "title": "What you get",
+        "items": [
+          "Executive dashboards by channel, campaign and team.",
+          "Deviation alerts to react in time.",
+          "Automatic reports to your email every week."
+        ]
+      }
+    }
   }
 }

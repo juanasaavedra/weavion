@@ -239,7 +239,7 @@ function Landing() {
 
         <div className="relative z-10 grid w-full grid-cols-1 md:grid-cols-2 items-center gap-8">
           {/* IZQUIERDA: titulares */}
-          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left relative top-10 md:top-0">
+          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left relative z-[9999] top-20 md:top-10 lg:top-0">
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
@@ -293,9 +293,7 @@ export default function App() {
         <div className="h-12 md:h-24" />
 
         {/* Stats Section */}
-        <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
-          <StatsSection />
-        </section>
+        <StatsSection />
 
         {/* Spacer */}
         <div className="h-12 md:h-24" />
@@ -318,14 +316,6 @@ export default function App() {
 
         {/* Spacer */}
         <div className="h-12 md:h-24" />
-
-        {/* Sección: Por qué nosotros? */}
-        <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
-            ¿Por qué nosotros?
-          </h2>
-          {/* Contenido adicional aquí */}
-        </section>
       </div>
     </>
   );
