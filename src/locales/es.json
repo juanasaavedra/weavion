@@ -158,18 +158,6 @@
       "detail": "Diseñamos campañas de email marketing automatizadas que fidelizan y convierten, integradas con tus herramientas de ventas."
     }
   },
-  "product": {
-    "prompt": "Este es tu producto. Veamos cómo lo puede transformar nuestra agencia."
-  },
-  "products": {
-    "interestTitle": "¿Interesado en otro producto?",
-    "interestSubtitle": "Descubre las ventajas de nuestras otras soluciones:",
-    "web": {"title": "Sitios web", "desc": "Diseños modernos y optimizados."},
-    "analytics": {"title": "Analíticas", "desc": "Decisiones basadas en datos."},
-    "servicetitan": {"title": "ServiceTitan", "desc": "Operación integrada sin fricción."},
-    "automation": {"title": "Automatización", "desc": "Procesos eficientes y automáticos."},
-    "contact": "Contáctanos para más detalles."
-  },
   "common": {
     "discover": "Descúbrelo",
     "backHome": "Volver al inicio",
@@ -181,13 +169,13 @@
     "title": "Weavion",
     "description": "Weavion - Desarrollo web y diseño de experiencias digitales"
   },
-  "servicesSlider": {
-    "learnMore": "Conocer más",
-    "items": {
-      "web": {
-        "title": "Diseño & Desarrollo Web",
-        "desc": "Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse."
-      },
+    "servicesSlider": {
+      "learnMore": "Conocer más",
+      "items": {
+        "web": {
+          "title": "Diseño & Desarrollo Web",
+          "desc": "Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse."
+        },
       "servicetitan": {
         "title": "Integración a ServiceTitan",
         "desc": "De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación."
@@ -200,12 +188,33 @@
         "title": "Automatizaciones",
         "desc": "Flujos que trabajan por ti: recordatorios, inventario y más."
       }
-    }
-  },
-  "pages": {
-    "web": {
-      "hero": {
-        "title": "Sitios web que convierten visitas en ventas",
+      }
+    },
+    "products": {
+      "interestTitle": "También te puede interesar",
+      "interestSubtitle": "Explora más de nuestras soluciones",
+      "web": {
+        "title": "Diseño & Desarrollo Web",
+        "desc": "Sitios rápidos y accesibles que convierten."
+      },
+      "analytics": {
+        "title": "Analíticas de Negocio",
+        "desc": "Datos en tiempo real para decidir con confianza."
+      },
+      "servicetitan": {
+        "title": "Integración a ServiceTitan",
+        "desc": "De lead a ingreso sin fricción y control total."
+      },
+      "automation": {
+        "title": "Automatizaciones",
+        "desc": "Flujos que trabajan por ti todo el día."
+      },
+      "contact": "Quiero saber más"
+    },
+    "pages": {
+      "web": {
+        "hero": {
+          "title": "Sitios web que convierten visitas en ventas",
         "subtitle": "Rendimiento real, <TermHint>Optimización para buscadores: estructura, contenido y performance que elevan ranking y tráfico orgánico.</TermHint> técnico y UX enfocada en acción. Tu marca luce premium y cada pantalla empuja a “comprar”, “agendar” o “pedir cotización”.",
         "term": "SEO"
       },

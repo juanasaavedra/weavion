@@ -43,7 +43,7 @@ export default function Header() {
   ];
 
   return (
-      <div className="fixed top-4 inset-x-0 z-50 flex items-center px-4 md:px-8 drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]">
+    <div className="fixed top-4 inset-x-0 z-50 flex items-center px-4 md:px-8 drop-shadow-[0_8px_20px_rgba(0,0,0,0.8)]">
       {/* Logo izquierda */}
         <Link to="/" className="mr-4 md:mr-8">
           <div className="w-14 h-14 rounded-full overflow-hidden">
