@@ -167,5 +167,108 @@
   "meta": {
     "title": "Weavion",
     "description": "Weavion - Desarrollo web y diseño de experiencias digitales"
+  },
+  "servicesSlider": {
+    "learnMore": "Conocer más",
+    "items": {
+      "web": {
+        "title": "Diseño & Desarrollo Web",
+        "desc": "Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse."
+      },
+      "servicetitan": {
+        "title": "Integración a ServiceTitan",
+        "desc": "De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación."
+      },
+      "analytics": {
+        "title": "Analíticas de Negocio",
+        "desc": "Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos."
+      }
+    }
+  },
+  "pages": {
+    "web": {
+      "hero": {
+        "title": "Sitios web que convierten visitas en ventas",
+        "subtitle": "Rendimiento real, <TermHint>Optimización para buscadores: estructura, contenido y performance que elevan ranking y tráfico orgánico.</TermHint> técnico y UX enfocada en acción. Tu marca luce premium y cada pantalla empuja a “comprar”, “agendar” o “pedir cotización”.",
+        "term": "SEO"
+      },
+      "kpis": [
+        { "value": "+38%", "label": "Tasa de conversión" },
+        { "value": "-42%", "label": "Rebote en landing" },
+        { "value": "+2.3x", "label": "Velocidad percibida" },
+        { "value": "+61%", "label": "Ingresos por sesión" }
+      ],
+      "sales": {
+        "title": "Ventas cerradas por mes",
+        "description": "La velocidad y claridad reducen fricción. Más usuarios completan el flujo de compra.",
+        "note": "Tendencia sostenida tras optimizar tiempos de carga y jerarquía visual.",
+        "months": ["Ene","Feb","Mar","Abr","May","Jun"]
+      },
+      "deliver": {
+        "title": "Qué entregamos",
+        "items": [
+          "Arquitectura SEO + contenido que posiciona y vende.",
+          "Checkout fluido e integraciones de pago.",
+          "Diseño adaptable con micro-interacciones que guían.",
+          "Métricas de conversión para iterar cada mes."
+        ]
+      }
+    },
+    "servicetitan": {
+      "hero": {
+        "title": "ServiceTitan integrado: operación sin fricción",
+        "subtitle": "Agenda, asigna, factura y reporta desde un mismo flujo. Menos errores, más tiempo productivo."
+      },
+      "kpis": [
+        { "value": "< 5 min", "label": "Primer respuesta SLA" },
+        { "value": "98%", "label": "Citas confirmadas" },
+        { "value": "-35%", "label": "No-shows" },
+        { "value": "+27%", "label": "Cierres por técnico" }
+      ],
+      "funnel": {
+        "title": "Pipeline controlado de punta a punta",
+        "description": "Cada lead avanza con reglas claras. Asignación automática, recordatorios y documentación unificada para cumplir <TermHint>tiempos comprometidos</TermHint> y reducir no-shows.",
+        "term": "SLA",
+        "note": "Visibilidad por etapa: menos fugas, más cierres.",
+        "stages": ["Web / Lead","Agenda","Visita","Cotiza","Cierra"]
+      },
+      "activate": {
+        "title": "Qué activamos",
+        "items": [
+          "Integración de formularios/llamadas → ServiceTitan.",
+          "Rutas y asignación automática por zona y carga.",
+          "Plantillas y cobros listos para salir a campo.",
+          "Reportes de desempeño por técnico y cuadrilla."
+        ]
+      }
+    },
+    "analytics": {
+      "hero": {
+        "title": "Analíticas que guían inversión y crecimiento",
+        "subtitle": "Paneles en tiempo real: <CAC>Costo de Adquisición de Cliente: inversión total / clientes nuevos.</CAC>, <ROAS>Retorno de la inversión publicitaria: revenue atribuible / gasto publicitario.</ROAS>, tasa de cierre y revenue por canal. Decisiones con datos, no corazonadas.",
+        "cacTerm": "CAC",
+        "roasTerm": "ROAS"
+      },
+      "kpis": [
+        { "value": "-18%", "label": "CAC", "desc": "Costo por adquisición controlado mes a mes." },
+        { "value": "+34%", "label": "ROAS", "desc": "Mayor retorno por cada dólar invertido." },
+        { "value": "+22%", "label": "Tasa de cierre", "desc": "Seguimiento y nurturing que convierten." }
+      ],
+      "combo": {
+        "title": "ROI vs CAC (últimos 6 meses)",
+        "description": "Redistribuimos presupuesto a los canales con mejor <ROAS>retorno por gasto publicitario</ROAS> y pausamos los que drenan inversión.",
+        "roasTerm": "ROAS",
+        "note": "ROI sube mientras el CAC se contiene: más rentabilidad por campaña.",
+        "months": ["Ene","Feb","Mar","Abr","May","Jun"]
+      },
+      "get": {
+        "title": "Qué obtienes",
+        "items": [
+          "Tableros ejecutivos por canal, campaña y equipo.",
+          "Alertas de desviación para reaccionar a tiempo.",
+          "Reportes automáticos a tu correo cada semana."
+        ]
+      }
+    }
   }
 }
