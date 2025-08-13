@@ -35,7 +35,7 @@ function QuoteTimeBars({ me=2.3, avg=19.1 }) {
 /* Página */
 export default function CotizacionesInmediatas() {
   return (
-    <main className="mx-auto max-w-[1200px] px-4 py-10 space-y-8">
+    <main className="mx-auto max-w-[1200px] px-4 py-10 mt-24 space-y-8">
       {/* HERO */}
       <section className="rounded-2xl p-8 bg-gradient-to-b from-[#151427] to-[#0c0d16] ring-1 ring-white/10">
         <h1 className="text-white font-extrabold text-4xl md:text-6xl leading-tight">
@@ -78,13 +78,6 @@ export default function CotizacionesInmediatas() {
       </section>
 
       <ProductInterestSection />
-
-      {/* CTA */}
-      <div className="text-center">
-        <a href="#/contact" className="inline-flex items-center justify-center rounded-full px-6 py-3 text-white bg-gradient-to-r from-[#b692ff] to-[#7c3aed] shadow-md hover:shadow-lg transition">
-          Quiero cotizar ya
-        </a>
-      </div>
     </main>
   );
 }

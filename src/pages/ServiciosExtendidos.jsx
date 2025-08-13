@@ -12,7 +12,7 @@ const PALETTE = {
 };
 
 const GradientBg = ({ children }) => (
-  <div className="min-h-screen w-full overflow-hidden text-white" style={{
+  <div className="min-h-screen w-full overflow-hidden text-white pt-24" style={{
     background: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`
   }}>{children}</div>
 );

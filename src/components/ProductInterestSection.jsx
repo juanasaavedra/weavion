@@ -18,7 +18,10 @@ export default function ProductInterestSection() {
         ))}
       </div>
       <div className="mt-6">
-        <Link to="/contact" className="text-purple-300 underline">
+        <Link
+          to="/contact"
+          className="inline-block px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold"
+        >
           {t('products.contact')}
         </Link>
       </div>
