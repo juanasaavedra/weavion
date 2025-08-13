@@ -12,7 +12,7 @@ export default function ContactPage() {
       <div className="fixed inset-0 z-0 bg-black">
         <StarryBackground />
       </div>
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-4 text-white">
+      <div className="relative z-10 min-h-screen flex flex-col items-center px-4 pt-40 pb-10 text-white">
         <div className="w-full max-w-4xl mx-auto">
           <ContactForm />
         </div>
