@@ -19,13 +19,13 @@ export default function ServiciosPinnedSlider() {
       title: "Integración a ServiceTitan",
       desc: "De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.",
       bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.15), rgba(0,0,0,0) 60%), linear-gradient(120deg, #352a6e, ${PALETTE.purpleDark})`,
-      href: "#/services/servicetitan",
+      href: "#/services/crm-servicetitan",
     },
     {
       title: "Analíticas de Negocio",
       desc: "Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.",
       bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2b2554, #43327a)` ,
-      href: "#/services/analytics",
+      href: "#/services/analiticas-negocio",
     },
   ];
 
