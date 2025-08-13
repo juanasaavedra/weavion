@@ -13,19 +13,19 @@ export default function ServiciosPinnedSlider() {
       title: "Diseño & Desarrollo Web",
       desc: "Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.",
       bg: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`,
-      href: "/services/web",
+      href: "#/services/web",
     },
     {
       title: "Integración a ServiceTitan",
       desc: "De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.",
-      bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, #21183e, ${PALETTE.purpleDark})`,
-      href: "/services/servicetitan",
+      bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.15), rgba(0,0,0,0) 60%), linear-gradient(120deg, #352a6e, ${PALETTE.purpleDark})`,
+      href: "#/services/servicetitan",
     },
     {
       title: "Analíticas de Negocio",
       desc: "Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.",
-      bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(120deg, #1a1530, #2a2146)` ,
-      href: "/services/analytics",
+      bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2b2554, #43327a)` ,
+      href: "#/services/analytics",
     },
   ];
 
@@ -122,7 +122,7 @@ export default function ServiciosPinnedSlider() {
       <div style={{ maxWidth: 920, opacity: thin ? 0.0 : 1.0, transition: "opacity .15s linear", color: palette.grayLight, textAlign: "left" }}>
         <h2 style={{ margin: 0, fontWeight: 800, fontSize: "clamp(36px, 7vw, 84px)", letterSpacing: "-0.02em", background:'#F3EDFF', WebkitBackgroundClip: "text", color: "transparent", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.title}</h2>
         <p style={{ marginTop: "1.1rem", fontSize: "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
-        <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: palette.purpleBright, textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
+        <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: '#fff', textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
           <span style={{ width: 10, height: 10, borderRadius: "50%", background: palette.purpleBright, display: "inline-block" }} />
           Conocer más
         </a>
