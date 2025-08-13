@@ -138,7 +138,7 @@ export default function AnaliticasNegocio() {
         <article className="rounded-2xl p-6 bg-gradient-to-b from-white/10 to-white/5 ring-1 ring-white/10">
           <h3 className="font-bold text-xl mb-1">Cohortes: ¿quién vuelve?</h3>
           <p className="text-[#e9e7f7]/90 text-sm mb-2">
-            Retención por cohorte para detectar productos y campañas que fidelizan.
+            Retención por <TermHint term="Grupo de clientes que comparte el mes de su primera compra">cohorte</TermHint> para detectar productos y campañas que fidelizan. Cada fila permite seguir cómo regresan esos clientes mes a mes y descubrir patrones de lealtad o abandono.
           </p>
           <CohortHeatmap />
         </article>
