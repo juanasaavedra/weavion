@@ -233,10 +233,10 @@ function Landing() {
   const { t } = useTranslation();
 
   return (
-    <section className="relative flex items-center min-h-screen px-4 md:px-8">
+    <section className="relative flex items-start min-h-screen px-4 md:px-8">
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
 
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center min-h-screen gap-8">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-start min-h-screen gap-8">
         {/* IZQUIERDA: titulares */}
         <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-center md:text-left mx-auto md:mx-0">
           <motion.h1
@@ -259,11 +259,8 @@ function Landing() {
         </div>
 
         {/* DERECHA: modelo 3D (altura controlada) */}
-        <div className="w-full h-[150vh] md:h-[600-px] rounded-xl overflow-hidden bg-black/60">
+        <div className="w-full rounded-xl overflow-hidden bg-black/60">
           <SplineViewerBox />
-          <spline-viewer
-          url="https://prod.spline.desing/XKb4wzOQ2b05Zhac/scene.splinecode"
-          style={{width: "100%", height: "100vh"}}/>
         </div>
       </div>
     </section>
