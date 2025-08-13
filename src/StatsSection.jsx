@@ -27,13 +27,13 @@ export default function StatsSection() {
     <section
       id="why-us"
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-center px-4"
+      className="py-24 px-4 bg-black rounded-xl overflow-hidden flex flex-col items-center justify-center"
     >
       <h2 className="stat-title stat-animate text-4xl md:text-6xl font-bold mb-16 text-center">
         {t('whyus.title', '¿Por qué nuestros servicios?')}
       </h2>
       <div className="stats-container grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-        <div className="stat-item stat-animate gradient-border rounded-3xl">
+        <div className="stat-item stat-animate gradient-border rounded-3xl overflow-hidden">
           <div className="flex flex-col items-center p-8 rounded-3xl bg-black">
             <span className="number font-bold text-7xl md:text-9xl mb-4 inline-block">
               {t('whyus.stat1.number', '20 %')}
@@ -43,7 +43,7 @@ export default function StatsSection() {
             </p>
           </div>
         </div>
-        <div className="stat-item stat-animate gradient-border rounded-3xl">
+        <div className="stat-item stat-animate gradient-border rounded-3xl overflow-hidden">
           <div className="flex flex-col items-center p-8 rounded-3xl bg-black">
             <span className="number font-bold text-7xl md:text-9xl mb-4 inline-block">
               {t('whyus.stat2.number', '42 %')}
