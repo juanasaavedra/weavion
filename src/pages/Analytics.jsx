@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import TermHint from '../components/TermHint';
+import ProductInterestSection from '../components/ProductInterestSection';
 
 /* Combo Area + Line para ROI */
 function ComboROI({ months, cac, roi }) {
@@ -94,6 +95,7 @@ export default function Analytics() {
           </ul>
         </motion.article>
       </section>
+      <ProductInterestSection />
     </div>
   );
 }

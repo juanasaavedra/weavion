@@ -91,6 +91,8 @@
     "name": "Nombre completo",
     "email": "Correo electrónico",
     "phone": "Teléfono (opcional)",
+    "company": "Nombre de la empresa",
+    "serviceLabel": "¿Qué servicio buscas?",
     "message": "Cuéntanos sobre tu proyecto",
     "submitButton": "Enviar mensaje",
     "formTitle": "Inicia tu proyecto ahora",
@@ -145,6 +147,15 @@
   },
   "product": {
     "prompt": "Este es tu producto. Veamos cómo lo puede transformar nuestra agencia."
+  },
+  "products": {
+    "interestTitle": "¿Interesado en otro producto?",
+    "interestSubtitle": "Descubre las ventajas de nuestras otras soluciones:",
+    "web": {"title": "Sitios web", "desc": "Diseños modernos y optimizados."},
+    "analytics": {"title": "Analíticas", "desc": "Decisiones basadas en datos."},
+    "servicetitan": {"title": "ServiceTitan", "desc": "Operación integrada sin fricción."},
+    "automation": {"title": "Automatización", "desc": "Procesos eficientes y automáticos."},
+    "contact": "Contáctanos para más detalles."
   },
   "common": {
     "discover": "Descúbrelo",

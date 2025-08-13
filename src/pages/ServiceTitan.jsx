@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import TermHint from '../components/TermHint';
+import ProductInterestSection from '../components/ProductInterestSection';
 
 /* Embudo simple para visualizar control operacional */
 function Funnel({ stages = [] }) {
@@ -93,6 +94,7 @@ export default function ServiceTitan() {
           </ul>
         </motion.article>
       </section>
+      <ProductInterestSection />
     </div>
   );
 }

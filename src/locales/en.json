@@ -91,6 +91,8 @@
     "name": "Full Name",
     "email": "Email",
     "phone": "Phone (optional)",
+    "company": "Company name",
+    "serviceLabel": "Which service are you looking for?",
     "message": "Tell us about your project",
     "submitButton": "Send Message",
     "formTitle": "Start your project now",
@@ -100,7 +102,14 @@
     "success": "Message sent successfully! We will contact you soon.",
     "error": "There was an error sending your message. Please try again later.",
     "schedulePrompt": "Choose your preferred time slot and let's launch your project today.",
-    "scheduleButton": "Schedule call"
+    "scheduleButton": "Schedule call",
+    "services": {
+      "web": "Website design or redesign",
+      "dashboard": "Business analytics dashboard",
+      "serviceTitan": "Service Titan integration or support",
+      "automation": "Process or workflow automation",
+      "other": "Other"
+    }
   },
   "folder": {
     "clickToCollapse": "Click to collapse",
@@ -132,6 +141,15 @@
   },
   "product": {
     "prompt": "This is your product. Let's see how our agency can transform it."
+  },
+  "products": {
+    "interestTitle": "Interested in another product?",
+    "interestSubtitle": "Discover the advantages of our other solutions:",
+    "web": {"title": "Websites", "desc": "Modern, optimized designs."},
+    "analytics": {"title": "Analytics", "desc": "Data-driven decisions."},
+    "servicetitan": {"title": "ServiceTitan", "desc": "Frictionless integrated operation."},
+    "automation": {"title": "Automation", "desc": "Efficient automated processes."},
+    "contact": "Contact us for details."
   },
   "common": {
     "discover": "Discover it",
