@@ -1,3 +1,6 @@
+@import url('https://fonts.cdnfonts.com/css/arial-nova');
+@import url('https://fonts.cdnfonts.com/css/argent-pixel-cf');
+
 /* Importación de la fuente Arial Nova con fallbacks locales */
 /* src/index.css */
 @font-face {
@@ -58,6 +61,15 @@
 head::before {
   content: '';
   display: none;
+}
+
+/* Reset global styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Definir variables para la paleta de colores */
