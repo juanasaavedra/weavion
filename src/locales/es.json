@@ -20,10 +20,9 @@
     "automation": "Automatiza",
     "automationItems": {
       "appointments": "Genera citas",
-      "inventoryChat": "Charla con tu inventario y modifícalo",
-      "leads": "Captura y califica tus leads",
-      "quotes": "Entrega cotizaciones inmediatas y ten una postventa inteligente",
-      "contact": "¿Buscas algo más? Contáctanos"
+      "inventory": "Charla con tu inventario y modifícalo",
+      "quotes": "Entrega cotizaciones inmediatas",
+      "postSale": "Postventa inteligente"
     }
   },
   "hero": {
