@@ -123,6 +123,13 @@
       "automation": "Process or workflow automation",
       "other": "Other"
     }
+    ,
+    "cta": {
+      "title": "Ready to take the next step?",
+      "subtitle": "Boost your agency today",
+      "description": "Contact us today to start working on your project. Our team is ready to help you reach your goals.",
+      "button": "Contact us"
+    }
   },
   "folder": {
     "clickToCollapse": "Click to collapse",
@@ -189,6 +196,10 @@
       "analytics": {
         "title": "Business Analytics",
         "desc": "Real-time dashboards: CAC, ROAS and revenue per channel to decide with data."
+      },
+      "automation": {
+        "title": "Automation",
+        "desc": "Flows that work for you: reminders, inventory and more."
       }
     }
   },
