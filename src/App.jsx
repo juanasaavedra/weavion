@@ -293,9 +293,7 @@ export default function App() {
         <div className="h-12 md:h-24" />
 
         {/* Stats Section */}
-        <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
-          <StatsSection />
-        </section>
+        <StatsSection />
 
         {/* Spacer */}
         <div className="h-12 md:h-24" />
@@ -318,14 +316,6 @@ export default function App() {
 
         {/* Spacer */}
         <div className="h-12 md:h-24" />
-
-        {/* Sección: Por qué nosotros? */}
-        <section className="py-24 px-4 bg-black rounded-xl overflow-hidden">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
-            ¿Por qué nosotros?
-          </h2>
-          {/* Contenido adicional aquí */}
-        </section>
       </div>
     </>
   );
