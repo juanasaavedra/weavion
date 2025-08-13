@@ -26,7 +26,7 @@ export default function ServiciosPinnedSlider() {
       {
         title: t('servicesSlider.items.analytics.title', 'Analíticas de Negocio'),
         desc: t('servicesSlider.items.analytics.desc', 'Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.'),
-        bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2b2554, #43327a)` ,
+        bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #3a3272, ${PALETTE.purpleBright})` ,
         href: `#${t('routes.services.analytics', '/services/analiticas-negocio')}`,
       },
       {
@@ -149,7 +149,7 @@ export default function ServiciosPinnedSlider() {
           style={{
             position: "absolute",
             inset: 0,
-            background: `radial-gradient(800px 600px at ${pos.x}% ${pos.y}%, rgba(255,255,255,.08), transparent 70%)`,
+            background: `radial-gradient(800px 600px at ${pos.x}% ${pos.y}%, rgba(115,40,232,.2), transparent 70%)`,
             transition: "background-position .15s linear",
           }}
         />
