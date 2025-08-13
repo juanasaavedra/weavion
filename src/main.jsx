@@ -5,8 +5,8 @@ import Landing from './App';
 import ServiciosPinnedSlider from './ServiciosPinnedSlider';
 import ContactPage from './ContactPage';
 import WebDesign from './pages/WebDesign';
-import ServiceTitan from './pages/ServiceTitan';
-import Analytics from './pages/Analytics';
+import CRMServiceTitan from './pages/CRMServiceTitan';
+import AnaliticasNegocio from './pages/AnaliticasNegocio';
 import GeneraCitas from './pages/GeneraCitas';
 import InventarioInteractivo from './pages/InventarioInteractivo';
 import CotizacionesInmediatas from './pages/CotizacionesInmediatas';
@@ -23,8 +23,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path=""           element={<Landing />} />
         <Route path="services"   element={<ServiciosPinnedSlider />} />
         <Route path="services/web"          element={<WebDesign />} />
-        <Route path="services/servicetitan" element={<ServiceTitan />} />
-        <Route path="services/analytics"    element={<Analytics />} />
+        <Route path="services/crm-servicetitan" element={<CRMServiceTitan />} />
+        <Route path="services/analiticas-negocio"    element={<AnaliticasNegocio />} />
         <Route path="contact"    element={<ContactPage />} />
           <Route path="services/genera-citas" element={<GeneraCitas />} />
           <Route path="services/inventario" element={<InventarioInteractivo />} />
