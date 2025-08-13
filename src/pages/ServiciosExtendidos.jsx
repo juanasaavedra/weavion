@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Zap, MousePointer2, Rocket, Workflow, Gauge } from "lucide-react";
+import BenefitRail from "../components/BenefitRail";
 
 const PALETTE = {
   purpleDark: "#39166F",
@@ -67,6 +68,16 @@ function DisenoDesarrolloWebExt() {
       <section className="mx-auto max-w-[1180px] px-6 py-20 md:py-28">
         <SectionTitle caption="Performance 90+, accesibilidad y SEO listos. Microinteracciones que convierten y UI consistente.">Sitios ultra‑rápidos que convierten.</SectionTitle>
         <div className="mt-6"><CTAButton>Quiero mi web <Rocket size={16} /></CTAButton></div>
+        <BenefitRail
+          title="Tu sitio listo para convertir"
+          subtitle="Arquitectura, velocidad y UX que venden."
+          items={[
+            "Checkout sin fricción",
+            "Componentes reutilizables",
+            "SEO técnico y de contenidos",
+            "Integración con pagos y CRM",
+          ]}
+        />
 
         {/* Vitals */}
         <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -108,6 +119,17 @@ function IntegracionCRMExt() {
     <GradientBg>
       <section className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
         <SectionTitle caption="Formularios → leads limpios → tareas automáticas → técnicos asignados → ventas cerradas.">De lead a ingreso, sin fricción.</SectionTitle>
+        <BenefitRail
+          title="Automatiza tu operación"
+          subtitle="Menos pasos manuales, más trabajos cerrados."
+          items={[
+            "Genera citas",
+            "Charla con tu inventario y modifícalo",
+            "Captura y califica tus leads",
+            "Entrega cotizaciones inmediatas",
+            "Postventa inteligente",
+          ]}
+        />
 
         <div className="grid gap-6 md:grid-cols-2">
           <Card>
@@ -140,6 +162,16 @@ function AnaliticasNegocioExt() {
     <GradientBg>
       <section className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
         <SectionTitle caption="KPIs en tiempo real: CPL, tasa de agendamiento, revenue por técnico, canales que sí convierten y ROI por campaña.">Decisiones con datos, no con corazonadas.</SectionTitle>
+        <BenefitRail
+          title="Datos que mueven presupuesto"
+          subtitle="Atribución clara y alertas de desviación."
+          items={[
+            "Panel en tiempo real",
+            "ROI y CAC por canal",
+            "Alertas automáticas",
+            "Reporte ejecutivo semanal",
+          ]}
+        />
 
         <div className="grid gap-6 md:grid-cols-2">
           <Card>
