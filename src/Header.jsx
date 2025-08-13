@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
-import logo from './assets/weavionLogoBase64.js';
+import logo from './assets/logo.png';
 
 export default function Header() {
   const { t } = useTranslation();
