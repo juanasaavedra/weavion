@@ -25,6 +25,19 @@
       "postSale": "Smart post-sale"
     }
   },
+  "routes": {
+    "services": {
+      "web": "/services/web",
+      "crm": "/services/crm-servicetitan",
+      "analytics": "/services/business-analytics"
+    },
+    "automation": {
+      "appointments": "/services/generate-appointments",
+      "inventory": "/services/inventory",
+      "quotes": "/services/instant-quotes",
+      "postSale": "/services/smart-post-sale"
+    }
+  },
   "hero": {
     "title": "Boost your business with web solutions orbiting innovation and security.",
     "subtitle": "Your business deserves a stellar online presence. We'll help you reach for the stars.",

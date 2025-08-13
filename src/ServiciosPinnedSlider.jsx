@@ -15,19 +15,19 @@ export default function ServiciosPinnedSlider() {
       title: t('servicesSlider.items.web.title', 'Diseño & Desarrollo Web'),
       desc: t('servicesSlider.items.web.desc', 'Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.'),
       bg: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`,
-      href: "#/services/web",
+      href: `#${t('routes.services.web', '/services/web')}`,
     },
     {
       title: t('servicesSlider.items.servicetitan.title', 'Integración a ServiceTitan'),
       desc: t('servicesSlider.items.servicetitan.desc', 'De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.'),
       bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.15), rgba(0,0,0,0) 60%), linear-gradient(120deg, #352a6e, ${PALETTE.purpleDark})`,
-      href: "#/services/crm-servicetitan",
+      href: `#${t('routes.services.crm', '/services/crm-servicetitan')}`,
     },
     {
       title: t('servicesSlider.items.analytics.title', 'Analíticas de Negocio'),
       desc: t('servicesSlider.items.analytics.desc', 'Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.'),
       bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2b2554, #43327a)` ,
-      href: "#/services/analiticas-negocio",
+      href: `#${t('routes.services.analytics', '/services/analiticas-negocio')}`,
     },
   ];
 
