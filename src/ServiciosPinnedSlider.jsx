@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const PALETTE = {
   purpleDark: "#39166F",
@@ -44,11 +44,12 @@ export default function ServiciosPinnedSlider() {
     const [dims, setDims] = useState({ vw: 0, vh: 0 });
     const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
     const scrollX = useRef(0);
+    const sectionRef = useRef(null);
 
   // Ajustes de sensación
   const SLOW_FACTOR = 1.8; // >1 = más lenta cada transición
-  const THIN_MIN = 68;     // ancho min de tiras comprimidas
-  const THIN_MAX = 104;    // ancho max de tiras comprimidas
+  const THIN_MIN_BASE = 68;     // ancho min de tiras comprimidas en desktop
+  const THIN_MAX_BASE = 104;    // ancho max de tiras comprimidas en desktop
 
   useLayoutEffect(() => {
     const onResize = () => setDims({ vw: window.innerWidth, vh: window.innerHeight });
@@ -57,16 +58,22 @@ export default function ServiciosPinnedSlider() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const handleWheel = (e) => {
-    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
-    e.preventDefault();
-    const perPanel = dims.vw * SLOW_FACTOR;
-    const totalWidth = dims.vw + (items.length - 1) * perPanel;
-    const maxScroll = totalWidth - dims.vw;
-    scrollX.current = clamp(scrollX.current + e.deltaX, 0, maxScroll);
-    const raw = scrollX.current / Math.max(1, maxScroll);
-    setProgress(raw);
-  };
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const handleWheel = (e) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      const perPanel = dims.vw * SLOW_FACTOR;
+      const totalWidth = dims.vw + (items.length - 1) * perPanel;
+      const maxScroll = totalWidth - dims.vw;
+      scrollX.current = clamp(scrollX.current + e.deltaX, 0, maxScroll);
+      const raw = scrollX.current / Math.max(1, maxScroll);
+      setProgress(raw);
+    };
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
+  }, [dims]);
 
   // Derivar estado: cuál panel está activo y cuánto llevamos de su transición
   const steps = items.length - 1;
@@ -77,6 +84,9 @@ export default function ServiciosPinnedSlider() {
   // Limitar a transición entre activo y el siguiente (evita saltos)
   const renderIndex = active;
 
+  const vertical = dims.vh > dims.vw;
+  const THIN_MIN = vertical ? 32 : THIN_MIN_BASE;
+  const THIN_MAX = vertical ? 56 : THIN_MAX_BASE;
   const THIN = Math.round(Math.max(THIN_MIN, Math.min(THIN_MAX, dims.vw * 0.07)));
   const widths = items.map((_, j) => {
     if (j < renderIndex) return THIN; // ya pasados → tiras
@@ -91,12 +101,11 @@ export default function ServiciosPinnedSlider() {
     return 0; // futuros aún no visibles
   });
 
-    const vertical = dims.vh > dims.vw;
     const wrapperHeight = vertical ? dims.vh * 0.8 : dims.vh;
 
   return (
     <section
-      onWheel={handleWheel}
+      ref={sectionRef}
       style={{ height: wrapperHeight, overflow: "hidden", background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})` }}
     >
       <div style={{ display: "flex", height: "100%", width: "100%" }}>
@@ -128,7 +137,7 @@ export default function ServiciosPinnedSlider() {
           Conocer más
         </a>
       </div>
-      {thin && (
+      {thin && !vertical && (
         <div
           style={{
             position: "absolute",

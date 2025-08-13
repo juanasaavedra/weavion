@@ -25,6 +25,7 @@ module.exports = {
       fontFamily: {
         sans: ['arial-nova', ...defaultTheme.fontFamily.sans],
         argent: ['argent-pixel-cf', ...defaultTheme.fontFamily.sans],
+        ars: ['Ars Nova', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         'primary': '#D6D6D6',
