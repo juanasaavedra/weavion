@@ -25,6 +25,19 @@
       "postSale": "Postventa inteligente"
     }
   },
+  "routes": {
+    "services": {
+      "web": "/services/web",
+      "crm": "/services/crm-servicetitan",
+      "analytics": "/services/analiticas-negocio"
+    },
+    "automation": {
+      "appointments": "/services/genera-citas",
+      "inventory": "/services/inventario",
+      "quotes": "/services/cotizaciones",
+      "postSale": "/services/postventa"
+    }
+  },
   "hero": {
     "title": "Impulsa tu empresa con soluciones web orbitadas en innovación y seguridad.",
     "subtitle": "Tu negocio merece una presencia estelar en línea. Te ayudaremos a alcanzar las estrellas.",

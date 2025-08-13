@@ -24,12 +24,17 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="services"   element={<ServiciosPinnedSlider />} />
         <Route path="services/web"          element={<WebDesign />} />
         <Route path="services/crm-servicetitan" element={<CRMServiceTitan />} />
-        <Route path="services/analiticas-negocio"    element={<AnaliticasNegocio />} />
+        <Route path="services/analiticas-negocio" element={<AnaliticasNegocio />} />
+        <Route path="services/business-analytics" element={<AnaliticasNegocio />} />
         <Route path="contact"    element={<ContactPage />} />
           <Route path="services/genera-citas" element={<GeneraCitas />} />
+          <Route path="services/generate-appointments" element={<GeneraCitas />} />
           <Route path="services/inventario" element={<InventarioInteractivo />} />
+          <Route path="services/inventory" element={<InventarioInteractivo />} />
           <Route path="services/cotizaciones" element={<CotizacionesInmediatas />} />
+          <Route path="services/instant-quotes" element={<CotizacionesInmediatas />} />
           <Route path="services/postventa" element={<PostventaInteligente />} />
+          <Route path="services/smart-post-sale" element={<PostventaInteligente />} />
         <Route path="*"          element={<Landing />} />  {/* fallback a landing */}
       </Routes>
     </HashRouter>
