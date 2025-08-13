@@ -233,7 +233,7 @@ function Landing() {
   const { t } = useTranslation();
 
   return (
-    <section className="relative flex items-center min-h-screen px-4 md:px-8 pt-32 md:pt-40">
+    <section className="relative flex items-center min-h-screen px-4 md:px-8 pt-24 md:pt-32">
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 pointer-events-none" />
 
         <div className="relative z-10 grid w-full grid-cols-1 md:grid-cols-2 items-center gap-8">
@@ -243,20 +243,20 @@ function Landing() {
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-argent text-4xl md:text-7xl text-[#D6D6D6] mb-6 leading-tight"
+            className="font-argent text-4xl md:text-7xl text-[#D6D6D6] mb-10 md:mb-16 leading-tight"
           >
             Aumenta tu <span className="font-ars text-4xl md:text-5xl">presencia digital</span>, sin trabajar de más
           </motion.h1>
 
-            <Link
-              to="/services"
-              className="transition group mt-4 relative top-10 md:top-0 z-20 flex h-12 w-44 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
-            >
-              <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900 font-argent">
-                {t("hero.cta", "Descúbrelo")}
-              </div>
-            </Link>
-          </div>
+          <Link
+            to="/services"
+            className="transition group mt-2 md:mt-4 flex h-12 w-44 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+          >
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900 font-argent">
+              {t("hero.cta", "Descúbrelo")}
+            </div>
+          </Link>
+        </div>
 
         {/* DERECHA: modelo 3D (altura controlada) */}
         <SplineViewerBox className="w-full h-[500px] md:h-[700px] rounded-xl overflow-hidden bg-black/60 mx-auto z-10" />
