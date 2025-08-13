@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductInterestSection from '../components/ProductInterestSection';
 
 /* --- Helpers locales: TermHint + mini-charts SVG --- */
 function TermHint({ term, children }) {
@@ -136,6 +137,8 @@ export default function GeneraCitas() {
           <li className="bg-white/5 rounded-xl p-3 ring-1 ring-white/10">Reporte inicial y ajuste fino.</li>
         </ol>
       </section>
+
+      <ProductInterestSection />
 
       {/* CTA */}
       <div className="text-center">

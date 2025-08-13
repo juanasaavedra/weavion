@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ProductInterestSection from '../components/ProductInterestSection';
 import TermHint from '../components/TermHint';
 import { useTranslation, Trans } from 'react-i18next';
 
@@ -88,6 +89,7 @@ export default function WebDesign() {
           </ul>
         </motion.article>
       </section>
+      <ProductInterestSection />
     </div>
   );
 }

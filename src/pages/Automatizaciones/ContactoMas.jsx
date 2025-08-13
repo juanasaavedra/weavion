@@ -7,6 +7,7 @@ import {
   FormTextarea,
   FormSelect,
 } from "./common";
+import ProductInterestSection from "../../components/ProductInterestSection";
 
 export default function ContactoMas() {
   const SUBMIT_URL = "/api/contact";
@@ -154,6 +155,7 @@ export default function ContactoMas() {
           </div>
         </form>
       </section>
+      <ProductInterestSection />
     </GradientBg>
   );
 }

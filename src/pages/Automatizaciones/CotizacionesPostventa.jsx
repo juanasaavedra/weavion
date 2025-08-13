@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { GradientBg, CTAButton, PALETTE } from "./common";
+import ProductInterestSection from "../../components/ProductInterestSection";
 
 export default function CotizacionesPostventa() {
   return (
@@ -72,6 +73,7 @@ export default function CotizacionesPostventa() {
           </div>
         </div>
       </section>
+      <ProductInterestSection />
     </GradientBg>
   );
 }

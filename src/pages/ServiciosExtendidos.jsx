@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Zap, MousePointer2, Rocket, Workflow, Gauge } from "lucide-react";
 import BenefitRail from "../components/BenefitRail";
+import ProductInterestSection from "../components/ProductInterestSection";
 
 const PALETTE = {
   purpleDark: "#39166F",
@@ -107,6 +108,7 @@ function DisenoDesarrolloWebExt() {
           </Card>
         </div>
       </section>
+      <ProductInterestSection />
     </GradientBg>
   );
 }
@@ -148,6 +150,7 @@ function IntegracionCRMExt() {
           </Card>
         </div>
       </section>
+      <ProductInterestSection />
     </GradientBg>
   );
 }
@@ -186,6 +189,7 @@ function AnaliticasNegocioExt() {
           </Card>
         </div>
       </section>
+      <ProductInterestSection />
     </GradientBg>
   );
 }
