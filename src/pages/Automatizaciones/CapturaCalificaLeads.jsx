@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { GradientBg, CTAButton, PALETTE } from "./common";
+import ProductInterestSection from "../../components/ProductInterestSection";
 
 export default function CapturaCalificaLeads() {
   const scores = [65, 72, 82, 91, 77, 88];
@@ -76,6 +77,7 @@ export default function CapturaCalificaLeads() {
           ))}
         </div>
       </section>
+      <ProductInterestSection />
     </GradientBg>
   );
 }

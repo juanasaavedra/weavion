@@ -1,14 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import ActionButton from './ActionButton';
+import StarryBackground from './StarryBackground';
 
 export default function ContactSection() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 px-4 md:px-8 pb-32 bg-transparent" id="contactSection">
-      <div className="max-w-5xl mx-auto text-center container-rounded bg-white/10 backdrop-blur-md p-6 md:p-10 shadow-xl text-white">
+    <section className="relative py-20 px-4 md:px-8 pb-32" id="contactSection">
+      <div className="absolute inset-0 z-0">
+        <StarryBackground />
+      </div>
+      <div className="relative z-10 max-w-5xl mx-auto text-center container-rounded bg-purple-800/40 backdrop-blur-md p-6 md:p-10 shadow-xl text-white">
         <h2 className="headline text-white mb-6">
           {t('contact.cta.title') || '¿Listo para dar el siguiente paso?'}
         </h2>
@@ -20,7 +23,7 @@ export default function ContactSection() {
         </p>
         <Link
           to="/contact"
-          className="inline-block btn-rounded text-2xl font-bold text-white hover:transform hover:scale-105 transition-all duration-300 shadow-lg"
+          className="inline-block btn-rounded text-2xl font-bold text-white bg-purple-600 hover:bg-purple-500 transition-all duration-300 shadow-lg"
         >
           {t('contact.cta.button') || 'Contáctanos'}
         </Link>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ProductInterestSection from '../components/ProductInterestSection';
 import TermHint from '../components/TermHint';
 
 /* ---------- Gráficos SVG ---------- */
@@ -92,6 +93,7 @@ export default function WebDesign() {
           </ul>
         </motion.article>
       </section>
+      <ProductInterestSection />
     </div>
   );
 }

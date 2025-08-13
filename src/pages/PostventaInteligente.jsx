@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductInterestSection from '../components/ProductInterestSection';
 
 /* Helpers */
 function TermHint({ term, children }) {
@@ -104,6 +105,8 @@ export default function PostventaInteligente() {
           <li className="bg-white/5 rounded-xl p-3 ring-1 ring-white/10">KPIs y optimización.</li>
         </ol>
       </section>
+
+      <ProductInterestSection />
 
       {/* CTA */}
       <div className="text-center">
