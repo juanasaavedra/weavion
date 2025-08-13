@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const PALETTE = {
   purpleDark: "#39166F",
@@ -10,45 +10,36 @@ const PALETTE = {
 export default function ServiciosPinnedSlider() {
   const items = [
     {
-      title: "Diseño y Desarrollo web",
+      title: "Diseño & Desarrollo Web",
       desc: "Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.",
       bg: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`,
-      href: "/services/web",
+      href: "#/services/web",
     },
     {
-      title: "Integración a CRM o ServiceTitan",
-      desc: "De lead a ingreso sin fricción: captura limpia, enriquecimiento, tareas automáticas y asignación de técnicos.",
-      bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, #21183e, ${PALETTE.purpleDark})`,
-      href: "/services/crm",
+      title: "Integración a ServiceTitan",
+      desc: "De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.",
+      bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.15), rgba(0,0,0,0) 60%), linear-gradient(120deg, #352a6e, ${PALETTE.purpleDark})`,
+      href: "#/services/crm-servicetitan",
     },
     {
-      title: "Email Marketing",
-      desc: "Automatizaciones que venden: onboarding, carritos abandonados, newsletters y triggers por comportamiento.",
-      bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(120deg, #1a1530, #2a2146)` ,
-      href: "/services/email",
-    },
-    {
-      title: "Integración a CRM o Service Titan",
-      desc: "Formularios → leads limpios → tareas automáticas → técnicos asignados.",
-      bg: `radial-gradient(60% 80% at 70% 30%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2a2146, #331d5f)` ,
-      href: "/services/crm",
-    },
-    {
-      title: "Automatiza tu operación",
-      desc: "Bots y flujos con n8n/Python para cotizaciones, recordatorios, inventario y postventa 24/7.",
-      bg: `radial-gradient(60% 80% at 50% 50%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(120deg, #232032, ${PALETTE.blackPurple})` ,
-      href: "/automatizaciones/genera-citas",
+      title: "Analíticas de Negocio",
+      desc: "Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.",
+      bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #2b2554, #43327a)` ,
+      href: "#/services/analiticas-negocio",
     },
   ];
 
     const [dims, setDims] = useState({ vw: 0, vh: 0 });
     const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
     const scrollX = useRef(0);
+    const sectionRef = useRef(null);
 
   // Ajustes de sensación
   const SLOW_FACTOR = 1.8; // >1 = más lenta cada transición
-  const THIN_MIN = 68;     // ancho min de tiras comprimidas
-  const THIN_MAX = 104;    // ancho max de tiras comprimidas
+  const THIN_MIN_BASE = 68;     // ancho min de tiras comprimidas en desktop
+  const THIN_MAX_BASE = 104;    // ancho max de tiras comprimidas en desktop
+  const THIN_MIN_MOBILE = 24;   // ancho min en dispositivos móviles
+  const THIN_MAX_MOBILE = 40;   // ancho max en dispositivos móviles
 
   useLayoutEffect(() => {
     const onResize = () => setDims({ vw: window.innerWidth, vh: window.innerHeight });
@@ -57,16 +48,22 @@ export default function ServiciosPinnedSlider() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const handleWheel = (e) => {
-    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
-    e.preventDefault();
-    const perPanel = dims.vw * SLOW_FACTOR;
-    const totalWidth = dims.vw + (items.length - 1) * perPanel;
-    const maxScroll = totalWidth - dims.vw;
-    scrollX.current = clamp(scrollX.current + e.deltaX, 0, maxScroll);
-    const raw = scrollX.current / Math.max(1, maxScroll);
-    setProgress(raw);
-  };
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const handleWheel = (e) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      const perPanel = dims.vw * SLOW_FACTOR;
+      const totalWidth = dims.vw + (items.length - 1) * perPanel;
+      const maxScroll = totalWidth - dims.vw;
+      scrollX.current = clamp(scrollX.current + e.deltaX, 0, maxScroll);
+      const raw = scrollX.current / Math.max(1, maxScroll);
+      setProgress(raw);
+    };
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
+  }, [dims]);
 
   // Derivar estado: cuál panel está activo y cuánto llevamos de su transición
   const steps = items.length - 1;
@@ -77,6 +74,9 @@ export default function ServiciosPinnedSlider() {
   // Limitar a transición entre activo y el siguiente (evita saltos)
   const renderIndex = active;
 
+  const vertical = dims.vh > dims.vw;
+  const THIN_MIN = vertical ? THIN_MIN_MOBILE : THIN_MIN_BASE;
+  const THIN_MAX = vertical ? THIN_MAX_MOBILE : THIN_MAX_BASE;
   const THIN = Math.round(Math.max(THIN_MIN, Math.min(THIN_MAX, dims.vw * 0.07)));
   const widths = items.map((_, j) => {
     if (j < renderIndex) return THIN; // ya pasados → tiras
@@ -91,12 +91,11 @@ export default function ServiciosPinnedSlider() {
     return 0; // futuros aún no visibles
   });
 
-    const vertical = dims.vh > dims.vw;
     const wrapperHeight = vertical ? dims.vh * 0.8 : dims.vh;
 
   return (
     <section
-      onWheel={handleWheel}
+      ref={sectionRef}
       style={{ height: wrapperHeight, overflow: "hidden", background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})` }}
     >
       <div style={{ display: "flex", height: "100%", width: "100%" }}>
@@ -123,12 +122,12 @@ export default function ServiciosPinnedSlider() {
       <div style={{ maxWidth: 920, opacity: thin ? 0.0 : 1.0, transition: "opacity .15s linear", color: palette.grayLight, textAlign: "left" }}>
         <h2 style={{ margin: 0, fontWeight: 800, fontSize: "clamp(36px, 7vw, 84px)", letterSpacing: "-0.02em", background:'#F3EDFF', WebkitBackgroundClip: "text", color: "transparent", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.title}</h2>
         <p style={{ marginTop: "1.1rem", fontSize: "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
-        <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: palette.purpleBright, textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
+        <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: '#fff', textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
           <span style={{ width: 10, height: 10, borderRadius: "50%", background: palette.purpleBright, display: "inline-block" }} />
           Conocer más
         </a>
       </div>
-      {thin && (
+      {thin && !vertical && (
         <div
           style={{
             position: "absolute",

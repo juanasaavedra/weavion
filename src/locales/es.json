@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "about": "Sobre Nosotros",
     "services": "Nuestros Servicios",
@@ -20,16 +20,15 @@
     "automation": "Automatiza",
     "automationItems": {
       "appointments": "Genera citas",
-      "inventoryChat": "Charla con tu inventario y modifícalo",
-      "leads": "Captura y califica tus leads",
-      "quotes": "Entrega cotizaciones inmediatas y ten una postventa inteligente",
-      "contact": "¿Buscas algo más? Contáctanos"
+      "inventory": "Charla con tu inventario y modifícalo",
+      "quotes": "Entrega cotizaciones inmediatas",
+      "postSale": "Postventa inteligente"
     }
   },
   "hero": {
     "title": "Impulsa tu empresa con soluciones web orbitadas en innovación y seguridad.",
     "subtitle": "Tu negocio merece una presencia estelar en línea. Te ayudaremos a alcanzar las estrellas.",
-    "motivational": "",
+    "motivational": "El universo de posibilidades digitales espera tu marca",
     "cta": "Descubre cómo"
   },
   "services": {
@@ -151,6 +150,11 @@
     "discover": "Descúbrelo",
     "backHome": "Volver al inicio",
     "clickToCollapse": "Haz clic para colapsar",
-    "exploreServices": "Explorar servicios"
+    "exploreServices": "Explorar servicios",
+    "loading3d": "Cargando visor 3D…"
+  },
+  "meta": {
+    "title": "Weavion",
+    "description": "Weavion - Desarrollo web y diseño de experiencias digitales"
   }
 }

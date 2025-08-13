@@ -47,7 +47,7 @@ export const CTAButton = ({ children }) => (
   <motion.button
     whileHover={{ scale: 1.04 }}
     whileTap={{ scale: 0.98 }}
-    className="group relative inline-flex items-center gap-2 rounded-full border-2 px-5 py-3 text-base"
+    className="group relative inline-flex items-center gap-2 rounded-full border-2 px-8 md:px-12 py-3 text-base whitespace-nowrap md:min-w-[260px]"
     style={{ borderColor: PALETTE.purpleBright, color: PALETTE.grayLight }}
   >
     <span
