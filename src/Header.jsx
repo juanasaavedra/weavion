@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Triangle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
 import logo from './assets/weavionLogoBase64.js';
 
@@ -55,7 +55,7 @@ export default function Header() {
 
       {/* Menús intermedios */}
         <div className="flex-1 flex items-center justify-center">
-          <div className="glass-high rounded-2xl flex flex-col md:flex-row">
+          <div className="glass-high rounded-2xl flex flex-row">
             <DropdownMenu title={t('header.services', 'Servicios')} items={servicesItems} />
             <DropdownMenu title={t('header.automation', 'Automatiza')} items={automationItems} />
           </div>
@@ -100,10 +100,10 @@ function DropdownMenu({ title, items }) {
     >
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex w-full items-center justify-between px-6 py-3 font-argent text-white text-sm md:text-base"
+        className="flex w-full items-center justify-center gap-2 px-6 py-3 font-argent text-white text-sm md:text-base"
       >
         <span>{title}</span>
-        <Triangle className="w-3 h-3 rotate-180" />
+        <ChevronDown className="w-3 h-3" />
       </button>
       {open && (
         <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-full max-w-xl md:max-w-3xl glass-high rounded-2xl flex flex-col md:flex-row gap-4 p-4 text-white">
@@ -117,6 +117,13 @@ function DropdownMenu({ title, items }) {
               {label}
             </Link>
           ))}
+          <Link
+            to="/contact"
+            onClick={() => setOpen(false)}
+            className="flex-1 text-center py-3 rounded-xl bg-purple-600 text-white hover:bg-purple-500 transition"
+          >
+            Contacto
+          </Link>
         </div>
       )}
     </div>
