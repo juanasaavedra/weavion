@@ -43,10 +43,12 @@ export default function Header() {
   ];
 
   return (
-      <div className="fixed top-4 inset-x-0 z-50 flex items-center px-4 md:px-8">
+      <div className="fixed top-4 inset-x-0 z-50 flex items-center px-4 md:px-8 drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]">
       {/* Logo izquierda */}
         <Link to="/" className="mr-4 md:mr-8">
-          <img src={logo} alt="Weavion logo" className="w-14 h-14 object-contain rounded-full" />
+          <div className="w-14 h-14 rounded-full overflow-hidden">
+            <img src={logo} alt="Weavion logo" className="w-full h-full object-cover" />
+          </div>
         </Link>
 
       {/* Menús intermedios */}
@@ -84,7 +86,7 @@ function DropdownMenu({ title, items }) {
   };
 
   const handleLeave = () => {
-    closeTimer.current = setTimeout(() => setOpen(false), 2000);
+    closeTimer.current = setTimeout(() => setOpen(false), 900);
   };
 
   return (
@@ -113,13 +115,6 @@ function DropdownMenu({ title, items }) {
               {label}
             </Link>
           ))}
-          <Link
-            to="/contact"
-            onClick={() => setOpen(false)}
-            className="flex-1 text-center py-3 rounded-xl bg-purple-600 text-white hover:bg-purple-500 transition"
-          >
-            Contacto
-          </Link>
         </div>
       )}
     </div>

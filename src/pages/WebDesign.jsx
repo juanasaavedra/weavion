@@ -54,7 +54,7 @@ export default function WebDesign() {
   const months = t('pages.web.sales.months', { returnObjects: true });
   const deliver = t('pages.web.deliver.items', { returnObjects: true });
   return (
-    <div className="page-wrap metal-bg-1 text-white">
+    <div className="page-wrap metal-bg-1 text-white mt-24">
       {/* Hero */}
       <header className="hero">
         <h1 className="headline-xl">{t('pages.web.hero.title')}</h1>

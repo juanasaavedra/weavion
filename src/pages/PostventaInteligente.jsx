@@ -57,7 +57,7 @@ function LinearRetention({ months=['M1','M2','M3','M4','M5','M6'], pct=[100,92,8
 /* Página */
 export default function PostventaInteligente() {
   return (
-    <main className="mx-auto max-w-[1200px] px-4 py-10 space-y-8">
+    <main className="mx-auto max-w-[1200px] px-4 py-10 mt-24 space-y-8">
       {/* HERO */}
       <section className="rounded-2xl p-8 bg-gradient-to-b from-[#151427] to-[#0c0d16] ring-1 ring-white/10">
         <h1 className="text-white font-extrabold text-4xl md:text-6xl leading-tight">
@@ -107,13 +107,6 @@ export default function PostventaInteligente() {
       </section>
 
       <ProductInterestSection />
-
-      {/* CTA */}
-      <div className="text-center">
-        <a href="#/contact" className="inline-flex items-center justify-center rounded-full px-6 py-3 text-white bg-gradient-to-r from-[#b692ff] to-[#7c3aed] shadow-md hover:shadow-lg transition">
-          Quiero mejorar mi postventa
-        </a>
-      </div>
     </main>
   );
 }

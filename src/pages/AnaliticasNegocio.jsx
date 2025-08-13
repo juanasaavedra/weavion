@@ -93,7 +93,7 @@ function CohortHeatmap({ rows = 4, cols = 6 }) {
 
 export default function AnaliticasNegocio() {
   return (
-    <main className="max-w-[1200px] mx-auto px-4 py-10 space-y-8 bg-gradient-to-b from-[#0b0b12] to-[#0e0d16] text-white">
+    <main className="max-w-[1200px] mx-auto px-4 py-10 mt-24 space-y-8 bg-gradient-to-b from-[#0b0b12] to-[#0e0d16] text-white">
       {/* HERO */}
       <section className="rounded-2xl p-8 bg-gradient-to-b from-white/10 to-white/5 ring-1 ring-white/10 backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(182,146,255,.22),0_10px_28px_rgba(108,72,237,.18)]">
         <h1 className="font-black text-4xl md:text-6xl leading-tight">
@@ -155,12 +155,6 @@ export default function AnaliticasNegocio() {
         </ul>
       </section>
 
-      {/* CTA */}
-      <div className="text-center">
-        <a href="#/contact" className="inline-block rounded-full px-6 py-3 bg-gradient-to-r from-[#7c3aed] to-[#b692ff] text-white font-bold shadow-lg hover:shadow-purple-500/30">
-          Quiero ver mis números claros
-        </a>
-      </div>
     </main>
   );
 }
