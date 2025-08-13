@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "about": "About Us",
     "services": "Our Services",
@@ -138,6 +138,11 @@
     "discover": "Discover it",
     "backHome": "Back to home",
     "clickToCollapse": "Click to collapse",
-    "exploreServices": "Explore services"
+    "exploreServices": "Explore services",
+    "loading3d": "Loading 3D viewer…"
+  },
+  "meta": {
+    "title": "Weavion",
+    "description": "Weavion - Web development and digital experience design"
   }
 }

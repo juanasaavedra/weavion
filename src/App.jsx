@@ -54,6 +54,7 @@ function SplineViewerBox({
   style,
   showFallback = true,
 }) {
+  const { t } = useTranslation();
   const ready = useSplineScript();
 
   return (
@@ -77,7 +78,7 @@ function SplineViewerBox({
               background: "#05070c",
             }}
           >
-            Cargando visor 3D…
+            {t('common.loading3d', 'Cargando visor 3D…')}
           </div>
         ) : null
       ) : (
