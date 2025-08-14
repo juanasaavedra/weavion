@@ -1,5 +1,6 @@
 import React from "react";
 import ProductInterestSection from "../components/ProductInterestSection";
+import ContactSection from "../ContactSection";
 
 /* Tooltip sencillo: término subrayado + globo al hover */
 function TermHint({ term, children }) {
@@ -185,6 +186,7 @@ export default function CRMServiceTitan() {
         </ul>
         </section>
         <ProductInterestSection />
+        <ContactSection />
       </main>
     );
   }
