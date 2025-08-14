@@ -1,5 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/arial-nova');
 @import url('https://fonts.cdnfonts.com/css/argent-pixel-cf');
+@import url('https://use.typekit.net/dyf0yaq.css');
 
 /* Importación de la fuente Arial Nova con fallbacks locales */
 /* src/index.css */
@@ -57,6 +58,15 @@
   font-display: swap;
 }
 
+/*Lo-Res 21 OT serif Regular Font*/
+@font-face {
+  font-family: 'Lo-Res';
+  src: url('/fonts/lo-res.woff2') format('woff2'),
+  url('/fonts/lo-res.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 /* Preloading fonts for faster loading */
 head::before {
   content: '';
