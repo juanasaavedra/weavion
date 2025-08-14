@@ -11,8 +11,8 @@ export default function ContactSection() {
     >
       {/* Glass card with animated gradient border */}
       <div className="relative z-10 w-full max-w-5xl text-center group">
-        <div className="p-[1px] rounded-2xl bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 animate-gradient-slow">
-          <div className="rounded-2xl bg-purple-950/40 backdrop-blur-lg p-6 md:p-10 shadow-[0_8px_40px_rgba(0,0,0,0.3)] transition-transform duration-300 group-hover:scale-[1.02] group-hover:shadow-purple-500/20">
+        <div className="p-[1px] rounded-2xl bg-gradient-to-r from-purple-500 via-purple-700 to-purple-500 animate-gradient-slow">
+          <div className="rounded-2xl bg-black backdrop-blur-lg p-6 md:p-10 shadow-[0_8px_40px_rgba(0,0,0,0.3)] transition-transform duration-300 group-hover:scale-[1.02] group-hover:shadow-purple-500/20">
             <h2 className="text-3xl font-bold mb-6 text-purple-200">
               {t('contact.cta.title') || '¿Listo para dar el siguiente paso?'}
             </h2>
