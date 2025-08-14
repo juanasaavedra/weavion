@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // Dropdown menu used in the header for Services and Automate sections.
 // It features a subtle purple gradient border and a dark glassy background.
-export default function TechMenu({ items, onSelect, className = "", dividerIndex }) {
+export default function TechMenu({ items, onSelect, className = "", dividerIndex, dividerLabel }) {
   return (
     <div
       className={`rounded-xl p-[1.5px] bg-gradient-to-r from-purple-600 to-purple-400 w-64 ${className}`}
@@ -13,6 +13,16 @@ export default function TechMenu({ items, onSelect, className = "", dividerIndex
       <div className="rounded-xl bg-black/80 backdrop-blur-sm py-2">
         {items.map((item, idx) => (
           <React.Fragment key={item.id}>
+            {dividerIndex === idx && (
+              <>
+                <div className="my-2 border-t border-white/10" />
+                {dividerLabel && (
+                  <div className="px-4 py-1 text-xs font-semibold text-white/60">
+                    {dividerLabel}
+                  </div>
+                )}
+              </>
+            )}
             <Link
               to={item.path}
               onClick={() => onSelect?.(item.id)}
@@ -22,9 +32,6 @@ export default function TechMenu({ items, onSelect, className = "", dividerIndex
             >
               {item.label}
             </Link>
-            {dividerIndex === idx + 1 && (
-              <div className="my-2 border-t border-white/10" />
-            )}
           </React.Fragment>
         ))}
       </div>

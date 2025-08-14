@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import ContactForm from './ContactForm';
 
 const PALETTE = {
   purpleDark: "#39166F",
@@ -131,22 +132,57 @@ export default function ServiciosPinnedSlider() {
     const wrapperHeight = vertical ? dims.vh * 0.8 : dims.vh;
 
   return (
-    <section
-      ref={sectionRef}
-      style={{ height: wrapperHeight, overflow: "hidden", background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})` }}
-    >
-      <div style={{ display: "flex", height: "100%", width: "100%" }}>
-        {items.map((it, j) => {
-            const w = Math.round(widths[j] || 0);
-            const thin = w <= THIN + 1;
-            return (
-              <div key={it.title} style={{ flex: `0 0 ${w}px`, height: "100%", position: "relative", overflow: "hidden", transition: "none", borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none" }}>
-                <Panel item={it} thin={thin} palette={PALETTE} vertical={vertical} />
-              </div>
-            );
-        })}
-      </div>
-    </section>
+    <>
+      <section
+        ref={sectionRef}
+        style={{ height: wrapperHeight, overflow: "hidden", background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})` }}
+      >
+        <div style={{ display: "flex", height: "100%", width: "100%" }}>
+          {items.map((it, j) => {
+              const w = Math.round(widths[j] || 0);
+              const thin = w <= THIN + 1;
+              return (
+                <div key={it.title} style={{ flex: `0 0 ${w}px`, height: "100%", position: "relative", overflow: "hidden", transition: "none", borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none" }}>
+                  <Panel item={it} thin={thin} palette={PALETTE} vertical={vertical} />
+                </div>
+              );
+          })}
+        </div>
+      </section>
+      {vertical && (
+        <section
+          className="px-6 py-12 space-y-8"
+          style={{ background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`, color: PALETTE.grayLight }}
+        >
+          <div>
+            <h3 className="text-3xl font-bold mb-4">{t('services.mobileAutomationTitle', 'Automatizaciones')}</h3>
+            <ul className="list-disc pl-5 space-y-2 text-purple-200">
+              <li>
+                <Link to={t('routes.automation.appointments', '/services/genera-citas')} className="underline">
+                  {t('header.automationItems.appointments')}
+                </Link>
+              </li>
+              <li>
+                <Link to={t('routes.automation.inventory', '/services/inventario')} className="underline">
+                  {t('header.automationItems.inventory')}
+                </Link>
+              </li>
+              <li>
+                <Link to={t('routes.automation.quotes', '/services/cotizaciones')} className="underline">
+                  {t('header.automationItems.quotes')}
+                </Link>
+              </li>
+              <li>
+                <Link to={t('routes.automation.postSale', '/services/postventa')} className="underline">
+                  {t('header.automationItems.postSale')}
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <ContactForm title={t('services.contactPrompt', '¿Buscas algo más? Contáctanos.')} />
+        </section>
+      )}
+    </>
   );
 }
 

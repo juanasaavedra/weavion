@@ -49,7 +49,9 @@
     "title": "¿Qué ganas con nosotros?",
     "subtitle": "Soluciones Digitales para tu empresa",
     "description": "Ofrecemos servicios principales que cubren todas las necesidades digitales de tu empresa. Haz clic en las tarjetas para ver más detalles.",
-    "sliderInstruction": "Mueve hacia los lados para explorar cada panel"
+    "sliderInstruction": "Mueve hacia los lados para explorar cada panel",
+    "mobileAutomationTitle": "Automatizaciones",
+    "contactPrompt": "¿Buscas algo más? Contáctanos."
   },
   "about": {
     "title": "Sobre Nosotros",

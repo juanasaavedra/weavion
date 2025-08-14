@@ -102,6 +102,7 @@ export default function Header() {
                 openMenu={openMenu}
                 setOpenMenu={setOpenMenu}
                 dividerIndex={servicesItems.length}
+                dividerLabel={t('services.mobileAutomationTitle', 'Automatizaciones')}
               />
             </div>
           </div>
@@ -113,7 +114,7 @@ export default function Header() {
   );
 }
 
-function DropdownMenu({ id, title, items, openMenu, setOpenMenu, dividerIndex }) {
+function DropdownMenu({ id, title, items, openMenu, setOpenMenu, dividerIndex, dividerLabel }) {
   const menuRef = useRef(null);
   const closeTimer = useRef();
 
@@ -159,6 +160,7 @@ function DropdownMenu({ id, title, items, openMenu, setOpenMenu, dividerIndex })
             items={items}
             onSelect={() => setOpenMenu(null)}
             dividerIndex={dividerIndex}
+            dividerLabel={dividerLabel}
           />
         </div>
       )}
