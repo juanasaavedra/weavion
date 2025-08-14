@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 const PALETTE = {
   purpleDark: "#39166F",
@@ -15,25 +16,25 @@ export default function ServiciosPinnedSlider() {
         title: t('servicesSlider.items.web.title', 'Diseño & Desarrollo Web'),
         desc: t('servicesSlider.items.web.desc', 'Sitios ultra-rápidos y accesibles. Microinteracciones, SEO y performance 90+ en Lighthouse.'),
         bg: `radial-gradient(60% 80% at 20% 20%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%), linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`,
-        href: `#${t('routes.services.web', '/services/web')}`,
+        href: t('routes.services.web', '/services/web'),
       },
       {
         title: t('servicesSlider.items.servicetitan.title', 'Integración a ServiceTitan'),
         desc: t('servicesSlider.items.servicetitan.desc', 'De lead a ingreso sin fricción: captura limpia, asignación automática y control total de la operación.'),
         bg: `radial-gradient(60% 80% at 80% 30%, rgba(255,255,255,.15), rgba(0,0,0,0) 60%), linear-gradient(120deg, #352a6e, ${PALETTE.purpleDark})`,
-        href: `#${t('routes.services.crm', '/services/crm-servicetitan')}`,
+        href: t('routes.services.crm', '/services/crm-servicetitan'),
       },
       {
         title: t('servicesSlider.items.analytics.title', 'Analíticas de Negocio'),
         desc: t('servicesSlider.items.analytics.desc', 'Paneles en tiempo real: CAC, ROAS y revenue por canal para decidir con datos.'),
         bg: `radial-gradient(60% 80% at 20% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #3a3272, ${PALETTE.purpleBright})` ,
-        href: `#${t('routes.services.analytics', '/services/analiticas-negocio')}`,
+        href: t('routes.services.analytics', '/services/analiticas-negocio'),
       },
       {
         title: t('servicesSlider.items.automation.title', 'Automatizaciones'),
         desc: t('servicesSlider.items.automation.desc', 'Flujos que trabajan por ti: recordatorios, inventario y más.'),
         bg: `radial-gradient(60% 80% at 80% 70%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%), linear-gradient(120deg, #261241, #3b1b6a)`,
-        href: `#${t('routes.automation.appointments', '/services/genera-citas')}`,
+        href: t('routes.automation.appointments', '/services/genera-citas'),
       },
     ];
 
@@ -159,10 +160,10 @@ export default function ServiciosPinnedSlider() {
         <div style={{ maxWidth: 920, opacity: thin ? 0.0 : 1.0, transition: "opacity .15s linear", color: palette.grayLight, textAlign: "left", background: "rgba(255,255,255,0.07)", backdropFilter: "blur(8px)", padding: vertical ? "2rem" : "3rem", borderRadius: 20 }}>
           <h2 style={{ margin: 0, fontWeight: 800, fontSize: "clamp(36px, 7vw, 84px)", letterSpacing: "-0.02em", background:'#F3EDFF', WebkitBackgroundClip: "text", color: "transparent", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.title}</h2>
           <p style={{ marginTop: "1.1rem", fontSize: "clamp(16px, 2.1vw, 22px)", lineHeight: 1.45, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
-          <a href={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: '#fff', textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
+          <Link to={item.href} style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: "2rem", border: `2px solid ${palette.purpleBright}`, color: '#fff', textDecoration: "none", padding: ".9rem 1.2rem", borderRadius: 999 }}>
             <span style={{ width: 10, height: 10, borderRadius: "50%", background: palette.purpleBright, display: "inline-block" }} />
             {t('servicesSlider.learnMore', 'Conocer más')}
-          </a>
+          </Link>
         </div>
         {thin && !vertical && (
           <div
