@@ -114,7 +114,7 @@ export default function Header() {
   );
 }
 
-function DropdownMenu({ id, title, items, openMenu, setOpenMenu, dividerIndex, dividerLabel }) {
+function DropdownMenu({ id, title, items, defaultPath, openMenu, setOpenMenu, dividerIndex, dividerLabel }) {
   const menuRef = useRef(null);
   const closeTimer = useRef();
 
@@ -146,14 +146,21 @@ function DropdownMenu({ id, title, items, openMenu, setOpenMenu, dividerIndex, d
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
-        <button
-          type="button"
-          onClick={() => setOpenMenu(open ? null : id)}
+        <Link
+          to={defaultPath}
+          onClick={(e) => {
+            if (!open) {
+              e.preventDefault();
+              setOpenMenu(id);
+            } else {
+              setOpenMenu(null);
+            }
+          }}
           className="flex w-full items-center justify-center gap-2 px-6 py-3 font-argent text-white text-sm md:text-base"
         >
           <span>{title}</span>
           <ChevronDown className="w-3 h-3" />
-        </button>
+        </Link>
       {open && (
         <div className="absolute left-1/2 -translate-x-1/2 mt-2">
           <TechMenu
