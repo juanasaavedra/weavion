@@ -7,7 +7,7 @@ import en from './locales/en.json';
 const storedLang =
   typeof window !== 'undefined' && localStorage.getItem('language')
     ? localStorage.getItem('language')
-    : 'es';
+    : 'en';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -15,7 +15,7 @@ i18n.use(initReactI18next).init({
     en: { translation: en },
   },
   lng: storedLang,
-  fallbackLng: 'es',
+  fallbackLng: 'en',
   interpolation: {
     escapeValue: false,
   },
