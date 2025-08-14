@@ -8,22 +8,37 @@ module.exports = {
   ],
   theme: {
     extend: {
-      animation: {
-        'star-movement-bottom': 'star-movement-bottom 6s linear infinite alternate',
-        'star-movement-top': 'star-movement-top 6s linear infinite alternate',
-      },
-      keyframes: {
-        'star-movement-bottom': {
-          '0%': { transform: 'translate(0%, 0%)', opacity: '0.7' },
-          '100%': { transform: 'translate(-100%, 0%)', opacity: '0' },
+        animation: {
+          'star-movement-bottom': 'star-movement-bottom 6s linear infinite alternate',
+          'star-movement-top': 'star-movement-top 6s linear infinite alternate',
+          'gradient-slow': 'gradient 8s ease infinite',
         },
-        'star-movement-top': {
-          '0%': { transform: 'translate(0%, 0%)', opacity: '0.7' },
-          '100%': { transform: 'translate(100%, 0%)', opacity: '0' },
+        keyframes: {
+          'star-movement-bottom': {
+            '0%': { transform: 'translate(0%, 0%)', opacity: '0.7' },
+            '100%': { transform: 'translate(-100%, 0%)', opacity: '0' },
+          },
+          'star-movement-top': {
+            '0%': { transform: 'translate(0%, 0%)', opacity: '0.7' },
+            '100%': { transform: 'translate(100%, 0%)', opacity: '0' },
+          },
+          gradient: {
+            '0%': {
+              'background-size': '200% 200%',
+              'background-position': '0% 50%'
+            },
+            '50%': {
+              'background-size': '200% 200%',
+              'background-position': '100% 50%'
+            },
+            '100%': {
+              'background-size': '200% 200%',
+              'background-position': '0% 50%'
+            }
+          },
         },
-      },
-      fontFamily: {
-        sans: ['arial-nova', ...defaultTheme.fontFamily.sans],
+        fontFamily: {
+          sans: ['arial-nova', ...defaultTheme.fontFamily.sans],
         argent: ['argent-pixel-cf', ...defaultTheme.fontFamily.sans],
         ars: ['Ars Nova', ...defaultTheme.fontFamily.sans],
       },
