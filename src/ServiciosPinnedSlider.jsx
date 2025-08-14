@@ -149,13 +149,11 @@ export default function ServiciosPinnedSlider() {
           })}
         </div>
       </section>
-      {vertical && (
-        <section
-          className="px-6 py-12 space-y-8"
-          style={{ background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`, color: PALETTE.grayLight }}
-        >
-          <div>
-            <h3 className="text-3xl font-bold mb-4">{t('services.mobileAutomationTitle', 'Automatizaciones')}</h3>
+        {vertical && (
+          <section
+            className="px-6 py-12 space-y-8"
+            style={{ background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`, color: PALETTE.grayLight }}
+          >
             <ul className="list-disc pl-5 space-y-2 text-purple-200">
               <li>
                 <Link to={t('routes.automation.appointments', '/services/genera-citas')} className="underline">
@@ -178,10 +176,9 @@ export default function ServiciosPinnedSlider() {
                 </Link>
               </li>
             </ul>
-          </div>
-          <ContactForm title={t('services.contactPrompt', '¿Buscas algo más? Contáctanos.')} />
-        </section>
-      )}
+            <ContactForm title={t('services.contactPrompt', '¿Buscas algo más? Contáctanos.')} />
+          </section>
+        )}
     </>
   );
 }
