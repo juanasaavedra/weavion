@@ -239,18 +239,18 @@ function Landing() {
 
         <div className="relative z-10 grid w-full grid-cols-1 md:grid-cols-2 items-center gap-8">
           {/* IZQUIERDA: titulares */}
-          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left relative z-[9999] top-10 md:top-0">
+          <div className="md:pr-10 w-full md:w-[60vw] max-w-4xl text-left relative z-[9999] top-10 md:top-0">
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-lores text-5xl md:text-8xl text-[#D6D6D6] mb-10 md:mb-16 md:ml-[200px] leading-tight"
+            className="font-lores text-5xl md:text-7xl text-[#D6D6D6] mb-10 md:mb-16 md:ml-[200px] leading-tight"
           >
-            Aumenta tu <span className="text-purple-400">presencia digital</span>, sin trabajar de más
+            <Trans i18nKey="hero.headline" components={{ 0: <span className="text-purple-400" /> }} />
           </motion.h1>
           <Link
             to="/services"
-            className="transition group absolute left-0 top-[90%] md:static md:mt-20 md:ml-[200px] flex h-12 w-44 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+            className="transition group absolute left-0 top-[110%] z-50 md:static md:mt-20 md:ml-[200px] flex h-12 w-44 md:h-16 md:w-60 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
           >
             <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900 font-argent">
               {t("hero.cta", "Descúbrelo")}
@@ -280,10 +280,10 @@ export default function App() {
 
         {/* Services intro */}
         <section className="py-24 px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white">Nuestros servicios</h2>
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white">{t("nav.services")}</h2>
           <p className="mt-4 text-lg text-gray-300 flex items-center justify-center gap-2">
             <ArrowLeft className="w-5 h-5" />
-            Mueve hacia los lados para explorar cada panel
+            {t("services.sliderInstruction")}
             <ArrowRight className="w-5 h-5" />
           </p>
         </section>
