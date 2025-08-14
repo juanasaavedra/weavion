@@ -66,6 +66,7 @@ export default function Header() {
               id="services"
               title={t('header.services', 'Servicios')}
               items={servicesItems}
+              defaultPath="/services"
               openMenu={openMenu}
               setOpenMenu={setOpenMenu}
             />
@@ -73,6 +74,7 @@ export default function Header() {
               id="automation"
               title={t('header.automation', 'Automatiza')}
               items={automationItems}
+              defaultPath={automationItems[0]?.path}
               openMenu={openMenu}
               setOpenMenu={setOpenMenu}
             />
@@ -85,7 +87,7 @@ export default function Header() {
   );
 }
 
-function DropdownMenu({ id, title, items, openMenu, setOpenMenu }) {
+function DropdownMenu({ id, title, items, defaultPath, openMenu, setOpenMenu }) {
   const menuRef = useRef(null);
   const closeTimer = useRef();
 
@@ -117,13 +119,14 @@ function DropdownMenu({ id, title, items, openMenu, setOpenMenu }) {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
-      <button
-        onClick={() => setOpenMenu(open ? null : id)}
-        className="flex w-full items-center justify-center gap-2 px-6 py-3 font-argent text-white text-sm md:text-base"
-      >
-        <span>{title}</span>
-        <ChevronDown className="w-3 h-3" />
-      </button>
+        <Link
+          to={defaultPath}
+          onClick={() => setOpenMenu(open ? null : id)}
+          className="flex w-full items-center justify-center gap-2 px-6 py-3 font-argent text-white text-sm md:text-base"
+        >
+          <span>{title}</span>
+          <ChevronDown className="w-3 h-3" />
+        </Link>
       {open && (
         <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-64 rounded-xl bg-black/40 backdrop-blur-lg border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.3)] overflow-hidden">
           {items.map(({ label, path }, idx) => (
