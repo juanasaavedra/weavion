@@ -99,14 +99,6 @@ function DropdownMenu({ title, items }) {
               {label}
             </Link>
           ))}
-
-          <Link
-            to="/contact"
-            onClick={() => setOpen(false)}
-            className="flex-1 text-center py-3 rounded-xl bg-purple-600 text-white hover:bg-purple-500 transition"
-          >
-            Contacto
-          </Link>
         </div>
       )}
     </div>
