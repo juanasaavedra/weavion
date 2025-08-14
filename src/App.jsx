@@ -246,11 +246,11 @@ function Landing() {
             transition={{ duration: 0.8 }}
             className="font-lores text-5xl md:text-7xl text-[#D6D6D6] mb-10 md:mb-16 md:ml-[200px] leading-tight"
           >
-            <Trans i18nKey="hero.headline" components={{ 0: <span className="text-purple-400" /> }} />
+            <Trans i18nKey="hero.headline" components={{ 0: <span className="text-purple-300" /> }} />
           </motion.h1>
           <Link
             to="/services"
-            className="transition group absolute left-0 top-[110%] z-50 md:static md:mt-20 md:ml-[200px] flex h-12 w-44 md:h-16 md:w-60 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+            className="transition group absolute left-0 top-[110%] z-50 md:static md:mt-20 md:ml-[200px] flex h-14 w-48 md:h-20 md:w-64 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
           >
             <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900 font-argent">
               {t("hero.cta", "Descúbrelo")}
