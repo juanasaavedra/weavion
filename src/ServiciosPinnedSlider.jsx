@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import ContactForm from './ContactForm';
 
 const PALETTE = {
   purpleDark: "#39166F",
@@ -156,36 +155,6 @@ export default function ServiciosPinnedSlider() {
           })}
         </div>
       </section>
-        {vertical && (
-          <section
-            className="px-6 py-12 space-y-8"
-            style={{ background: `linear-gradient(120deg, ${PALETTE.blackPurple}, ${PALETTE.purpleDark})`, color: PALETTE.grayLight }}
-          >
-            <ul className="list-disc pl-5 space-y-2 text-purple-200">
-              <li>
-                <Link to={t('routes.automation.appointments', '/services/genera-citas')} className="underline">
-                  {t('header.automationItems.appointments')}
-                </Link>
-              </li>
-              <li>
-                <Link to={t('routes.automation.inventory', '/services/inventario')} className="underline">
-                  {t('header.automationItems.inventory')}
-                </Link>
-              </li>
-              <li>
-                <Link to={t('routes.automation.quotes', '/services/cotizaciones')} className="underline">
-                  {t('header.automationItems.quotes')}
-                </Link>
-              </li>
-              <li>
-                <Link to={t('routes.automation.postSale', '/services/postventa')} className="underline">
-                  {t('header.automationItems.postSale')}
-                </Link>
-              </li>
-            </ul>
-            <ContactForm title={t('services.contactPrompt', '¿Buscas algo más? Contáctanos.')} />
-          </section>
-        )}
     </>
   );
 }
