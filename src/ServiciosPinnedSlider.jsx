@@ -41,11 +41,10 @@ export default function ServiciosPinnedSlider() {
 
     const [dims, setDims] = useState({ vw: 0, vh: 0 });
     const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
-    const scrollX = useRef(0);
+    const [index, setIndex] = useState(0); // índice del panel activo
     const sectionRef = useRef(null);
 
   // Ajustes de sensación
-  const SLOW_FACTOR = 1.8; // >1 = más lenta cada transición
   const THIN_MIN_BASE = 68;     // ancho min de tiras comprimidas en desktop
   const THIN_MAX_BASE = 104;    // ancho max de tiras comprimidas en desktop
   const THIN_MIN_MOBILE = 24;   // ancho min en dispositivos móviles
@@ -66,12 +65,7 @@ export default function ServiciosPinnedSlider() {
     const handleWheel = (e) => {
       if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
       e.preventDefault();
-      const perPanel = dims.vw * SLOW_FACTOR;
-      const totalWidth = dims.vw + (items.length - 1) * perPanel;
-      const maxScroll = totalWidth - dims.vw;
-      scrollX.current = clamp(scrollX.current + e.deltaX, 0, maxScroll);
-      const raw = scrollX.current / Math.max(1, maxScroll);
-      setProgress(raw);
+      setIndex((i) => clamp(i + Math.sign(e.deltaX), 0, items.length - 1));
     };
     const onTouchStart = (e) => {
       if (e.touches.length !== 1) return;
@@ -84,14 +78,11 @@ export default function ServiciosPinnedSlider() {
       const dy = startY - e.touches[0].clientY;
       if (Math.abs(dx) <= Math.abs(dy)) return;
       e.preventDefault();
-      const perPanel = dims.vw * SLOW_FACTOR;
-      const totalWidth = dims.vw + (items.length - 1) * perPanel;
-      const maxScroll = totalWidth - dims.vw;
-      scrollX.current = clamp(scrollX.current + dx, 0, maxScroll);
-      const raw = scrollX.current / Math.max(1, maxScroll);
-      setProgress(raw);
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
+      if (Math.abs(dx) > 50) {
+        setIndex((i) => clamp(i + Math.sign(dx), 0, items.length - 1));
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }
     };
     el.addEventListener("wheel", handleWheel, { passive: false });
     el.addEventListener("touchstart", onTouchStart, { passive: false });
@@ -101,7 +92,13 @@ export default function ServiciosPinnedSlider() {
       el.removeEventListener("touchstart", onTouchStart);
       el.removeEventListener("touchmove", onTouchMove);
     };
-  }, [dims]);
+  }, [items.length]);
+
+  // Actualizar progreso cuando cambia el índice
+  useEffect(() => {
+    const steps = items.length - 1;
+    setProgress(steps > 0 ? index / steps : 0);
+  }, [index, items.length]);
 
   // Derivar estado: cuál panel está activo y cuánto llevamos de su transición
   const steps = items.length - 1;
@@ -142,7 +139,17 @@ export default function ServiciosPinnedSlider() {
               const w = Math.round(widths[j] || 0);
               const thin = w <= THIN + 1;
               return (
-                <div key={it.title} style={{ flex: `0 0 ${w}px`, height: "100%", position: "relative", overflow: "hidden", transition: "none", borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none" }}>
+                <div
+                  key={it.title}
+                  style={{
+                    flex: `0 0 ${w}px`,
+                    height: "100%",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "width 0.3s ease",
+                    borderRight: j < renderIndex ? `1px solid rgba(172,172,172,.15)` : "none",
+                  }}
+                >
                   <Panel item={it} thin={thin} palette={PALETTE} vertical={vertical} />
                 </div>
               );
