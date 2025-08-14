@@ -49,7 +49,9 @@
     "title": "What do you gain with us?",
     "subtitle": "Digital Solutions for your business",
     "description": "We offer core services that cover all your business digital needs. Click on the cards to see more details.",
-    "sliderInstruction": "Move sideways to explore each panel"
+    "sliderInstruction": "Move sideways to explore each panel",
+    "mobileAutomationTitle": "Automations",
+    "contactPrompt": "Looking for something else? Contact us."
   },
   "about": {
     "title": "About Us",

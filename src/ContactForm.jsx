@@ -9,7 +9,7 @@ const getServiceOptions = (t) => [
   { label: t('contact.services.other'), value: 'other' },
 ];
 
-export default function ContactForm() {
+export default function ContactForm({ title }) {
   const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
@@ -58,7 +58,7 @@ export default function ContactForm() {
       className="space-y-6 container-rounded bg-white/[0.06] backdrop-blur-md p-8 md:p-10 ring-1 ring-white/10 shadow-[inset_0_0_0_1px_rgba(182,146,255,.22),0_10px_28px_rgba(108,72,237,.18)]"
     >
       <h2 className="text-3xl font-bold text-white mb-6">
-        {t('contact.formTitle')}
+        {title || t('contact.formTitle')}
       </h2>
       <div>
         <span className="block mb-2 text-white">
