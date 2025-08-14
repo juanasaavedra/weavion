@@ -16,17 +16,17 @@ export default function Header() {
       {
         id: 'web',
         label: t('header.servicesItems.webDev'),
-        path: t('routes.services.web'),
+        path: t('routes.services.web', '/services/web'),
       },
       {
         id: 'crm',
         label: t('header.servicesItems.crm'),
-        path: t('routes.services.crm'),
+        path: t('routes.services.crm', '/services/crm-servicetitan'),
       },
       {
         id: 'analytics',
         label: t('header.servicesItems.analytics'),
-        path: t('routes.services.analytics'),
+        path: t('routes.services.analytics', '/services/analiticas-negocio'),
       },
     ],
     [i18n.language, t]
@@ -37,22 +37,22 @@ export default function Header() {
       {
         id: 'appointments',
         label: t('header.automationItems.appointments'),
-        path: t('routes.automation.appointments'),
+        path: t('routes.automation.appointments', '/services/genera-citas'),
       },
       {
         id: 'inventory',
         label: t('header.automationItems.inventory'),
-        path: t('routes.automation.inventory'),
+        path: t('routes.automation.inventory', '/services/inventario'),
       },
       {
         id: 'quotes',
         label: t('header.automationItems.quotes'),
-        path: t('routes.automation.quotes'),
+        path: t('routes.automation.quotes', '/services/cotizaciones'),
       },
       {
         id: 'postSale',
         label: t('header.automationItems.postSale'),
-        path: t('routes.automation.postSale'),
+        path: t('routes.automation.postSale', '/services/postventa'),
       },
     ],
     [i18n.language, t]
