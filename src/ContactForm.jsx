@@ -13,7 +13,7 @@ export default function ContactForm() {
   const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
-    service: '',
+    services: [],
     company: '',
     name: '',
     email: '',
@@ -25,6 +25,16 @@ export default function ContactForm() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((f) => ({ ...f, [name]: value }));
+  };
+
+  const handleServiceChange = (e) => {
+    const { value, checked } = e.target;
+    setForm((f) => {
+      const services = checked
+        ? [...f.services, value]
+        : f.services.filter((s) => s !== value);
+      return { ...f, services };
+    });
   };
 
   const handleSubmit = (e) => {
@@ -51,26 +61,24 @@ export default function ContactForm() {
         {t('contact.formTitle')}
       </h2>
       <div>
-        <label className="block mb-2 text-white" htmlFor="service">
+        <span className="block mb-2 text-white">
           {t('contact.serviceLabel')}
-        </label>
-        <select
-          id="service"
-          name="service"
-          value={form.service}
-          onChange={handleChange}
-          className="w-full p-3 rounded-full bg-black/40 text-white border border-white/20 focus:border-purple-500 focus:outline-none"
-          required
-        >
-          <option value="" disabled>
-            --
-          </option>
-          {serviceOptions.map((opt) => (
-            <option key={opt.value} value={opt.value}>
+        </span>
+        <div className="flex flex-col gap-2 text-white">
+          {serviceOptions.map((opt, idx) => (
+            <label key={opt.value} className="inline-flex items-center">
+              <input
+                type="checkbox"
+                value={opt.value}
+                checked={form.services.includes(opt.value)}
+                onChange={handleServiceChange}
+                className="mr-2 accent-purple-500"
+                required={idx === 0 && form.services.length === 0}
+              />
               {opt.label}
-            </option>
+            </label>
           ))}
-        </select>
+        </div>
       </div>
       <div>
         <label className="block mb-2 text-white" htmlFor="company">

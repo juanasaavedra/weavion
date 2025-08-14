@@ -106,7 +106,7 @@
     "email": "Email",
     "phone": "Phone (optional)",
     "company": "Company name",
-    "serviceLabel": "Which service are you looking for?",
+    "serviceLabel": "Which services are you looking for?",
     "message": "Tell us about your project",
     "submitButton": "Send Message",
     "formTitle": "Start your project now",
