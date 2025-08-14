@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export default function ContactSection() {
   const { t } = useTranslation();
+  const [pos, setPos] = useState({ x: 50, y: 50 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setPos({ x, y });
+  };
+
   return (
     <section
+      onMouseMove={handleMouseMove}
+      style={{
+        background: `radial-gradient(circle at ${pos.x}% ${pos.y}%, #8b5cf6, #4c1d95)`
+      }}
       className="relative flex items-center justify-center py-20 px-4 md:px-8 pb-32 overflow-hidden"
       id="contactSection"
     >
@@ -24,7 +37,7 @@ export default function ContactSection() {
             </p>
             <Link
               to="/contact"
-              className="mt-6 mb-8 inline-block px-8 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-[length:200%_200%] animate-gradient-slow hover:shadow-purple-500/50 shadow-lg transition-all"
+              className="mt-6 mb-8 inline-block px-8 py-4 rounded-full font-semibold text-white bg-black hover:bg-gray-900 shadow-lg transition-all"
             >
               {t('contact.cta.button') || 'Contáctanos'}
             </Link>
