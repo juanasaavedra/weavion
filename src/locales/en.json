@@ -299,6 +299,22 @@
           "Automatic reports to your email every week."
         ]
       }
+    },
+    "appointments": {
+      "hero": {
+        "title": "Schedule more, with less friction.",
+        "subtitle": "Synced calendar, confirmations via WhatsApp/SMS, smart reminders and rescheduling in one tap.",
+        "cta": "Try smart scheduling"
+      },
+      "features": [
+        { "title": "Fewer no-shows", "desc": "Reminders + double confirmation via WA/SMS/email." },
+        { "title": "Dynamic slots", "desc": "Real availability per technician, area and SLA." },
+        { "title": "Lead-to-appointment funnel", "desc": "From qualified lead → scheduled in one flow." }
+      ],
+      "flow": {
+        "title": "Flow: lead → confirmed appointment",
+        "steps": ["Form", "Validation", "Schedule", "Confirmation"]
+      }
     }
   }
 }
