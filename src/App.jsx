@@ -2,7 +2,7 @@
 // src/App.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -250,7 +250,7 @@ function Landing() {
           </motion.h1>
           <Link
             to="/services"
-            className="transition group absolute left-0 top-[85%] md:static md:mt-10 md:ml-[200px] flex h-12 w-44 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+            className="transition group absolute left-0 top-[90%] md:static md:mt-20 md:ml-[200px] flex h-12 w-44 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-700 p-[1.5px] text-white duration-300 hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
           >
             <div className="flex h-full w-full items-center justify-center rounded-full bg-[#010207] transition duration-300 ease-in-out group-hover:bg-gradient-to-br group-hover:from-gray-700 group-hover:to-gray-900 font-argent">
               {t("hero.cta", "Descúbrelo")}

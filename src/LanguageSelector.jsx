@@ -27,7 +27,7 @@ export default function LanguageSelector() {
   return (
     <button
       onClick={toggleLanguage}
-      className="cursor-pointer h-10 w-20 text-center text-white text-lg font-bold bg-gradient-to-r from-purple-800 via-purple-400 to-purple-800 p-[2px] rounded-full hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-600/30"
+      className="cursor-pointer h-10 w-20 text-center text-white text-lg font-bold bg-gradient-to-r from-purple-900 via-purple-600 to-purple-900 p-[2px] rounded-full hover:bg-gradient-to-l hover:shadow-2xl hover:shadow-purple-700/30"
     >
       {i18n.language.toUpperCase()}
     </button>
