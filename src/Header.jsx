@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
 import logo from './assets/logo.png';
+import TechMenu from './TechMenu';
 
 export default function Header() {
   const { t, i18n } = useTranslation();
@@ -13,14 +14,17 @@ export default function Header() {
   const servicesItems = useMemo(
     () => [
       {
+        id: 'web',
         label: t('header.servicesItems.webDev'),
         path: t('routes.services.web'),
       },
       {
+        id: 'crm',
         label: t('header.servicesItems.crm'),
         path: t('routes.services.crm'),
       },
       {
+        id: 'analytics',
         label: t('header.servicesItems.analytics'),
         path: t('routes.services.analytics'),
       },
@@ -31,18 +35,22 @@ export default function Header() {
   const automationItems = useMemo(
     () => [
       {
+        id: 'appointments',
         label: t('header.automationItems.appointments'),
         path: t('routes.automation.appointments'),
       },
       {
+        id: 'inventory',
         label: t('header.automationItems.inventory'),
         path: t('routes.automation.inventory'),
       },
       {
+        id: 'quotes',
         label: t('header.automationItems.quotes'),
         path: t('routes.automation.quotes'),
       },
       {
+        id: 'postSale',
         label: t('header.automationItems.postSale'),
         path: t('routes.automation.postSale'),
       },
@@ -125,21 +133,8 @@ function DropdownMenu({ id, title, items, openMenu, setOpenMenu }) {
         <ChevronDown className="w-3 h-3" />
       </button>
       {open && (
-        <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-64 rounded-xl bg-black/40 backdrop-blur-lg border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.3)] overflow-hidden">
-          {items.map(({ label, path }, idx) => (
-            <Link
-              key={idx}
-              to={path}
-              onClick={() => setOpenMenu(null)}
-              className="group relative block w-full px-5 py-3 text-left text-white/80 transition-all duration-300 hover:text-white border-t border-white/10 first:border-t-0"
-            >
-              <span className="absolute left-0 top-0 h-full w-0 bg-purple-400 transition-all duration-300 group-hover:w-1"></span>
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-700/30 to-purple-400/30 bg-[length:200%_100%] bg-left transition-all duration-500 group-hover:bg-right opacity-0 group-hover:opacity-100"></span>
-              <span className="relative z-10 block transition-transform duration-300 group-hover:translate-x-1">
-                {label}
-              </span>
-            </Link>
-          ))}
+        <div className="absolute left-1/2 -translate-x-1/2 mt-2">
+          <TechMenu items={items} onSelect={() => setOpenMenu(null)} className="w-[360px]" />
         </div>
       )}
     </div>
