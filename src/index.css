@@ -302,7 +302,7 @@ spline-viewer canvas#spline {
   margin-right: 0.5rem;
   border-radius: 6px;
   background-color: var(--color-gunmetal);
-  border: 2px solid var(--color-accent);
+  border: 1.5px solid #7C3AED;
   box-sizing: border-box;
   transition: all 0.2s ease;
 }
@@ -312,8 +312,8 @@ spline-viewer canvas#spline {
 }
 
 .custom-checkbox input:checked + .checkmark {
-  background-color: var(--color-accent);
-  border-color: var(--color-highlight);
+  background-color: #7C3AED;
+  border-color: #7C3AED;
 }
 
 .custom-checkbox .checkmark::after {
