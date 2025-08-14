@@ -60,6 +60,8 @@ export default function ServiciosPinnedSlider() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+    let startX = 0;
+    let startY = 0;
     const handleWheel = (e) => {
       if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
       e.preventDefault();
@@ -70,8 +72,34 @@ export default function ServiciosPinnedSlider() {
       const raw = scrollX.current / Math.max(1, maxScroll);
       setProgress(raw);
     };
+    const onTouchStart = (e) => {
+      if (e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    };
+    const onTouchMove = (e) => {
+      if (e.touches.length !== 1) return;
+      const dx = startX - e.touches[0].clientX;
+      const dy = startY - e.touches[0].clientY;
+      if (Math.abs(dx) <= Math.abs(dy)) return;
+      e.preventDefault();
+      const perPanel = dims.vw * SLOW_FACTOR;
+      const totalWidth = dims.vw + (items.length - 1) * perPanel;
+      const maxScroll = totalWidth - dims.vw;
+      scrollX.current = clamp(scrollX.current + dx, 0, maxScroll);
+      const raw = scrollX.current / Math.max(1, maxScroll);
+      setProgress(raw);
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    };
     el.addEventListener("wheel", handleWheel, { passive: false });
-    return () => el.removeEventListener("wheel", handleWheel);
+    el.addEventListener("touchstart", onTouchStart, { passive: false });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => {
+      el.removeEventListener("wheel", handleWheel);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+    };
   }, [dims]);
 
   // Derivar estado: cuál panel está activo y cuánto llevamos de su transición
