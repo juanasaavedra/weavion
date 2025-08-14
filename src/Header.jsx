@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
@@ -6,41 +6,49 @@ import LanguageSelector from './LanguageSelector';
 import logo from './assets/logo.png';
 
 export default function Header() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const servicesItems = [
-    {
-      label: t('header.servicesItems.webDev', 'Diseño y Desarrollo web'),
-      path: t('routes.services.web', '/services/web'),
-    },
-    {
-      label: t('header.servicesItems.crm', 'Integración a CRM o Service Titan'),
-      path: t('routes.services.crm', '/services/crm-servicetitan'),
-    },
-    {
-      label: t('header.servicesItems.analytics', 'Analíticas de negocio'),
-      path: t('routes.services.analytics', '/services/analiticas-negocio'),
-    },
-  ];
+  const [openMenu, setOpenMenu] = useState(null);
 
-  const automationItems = [
-    {
-      label: t('header.automationItems.appointments', 'Genera citas'),
-      path: t('routes.automation.appointments', '/services/genera-citas'),
-    },
-    {
-      label: t('header.automationItems.inventory', 'Charla con tu inventario y modifícalo'),
-      path: t('routes.automation.inventory', '/services/inventario'),
-    },
-    {
-      label: t('header.automationItems.quotes', 'Entrega cotizaciones inmediatas'),
-      path: t('routes.automation.quotes', '/services/cotizaciones'),
-    },
-    {
-      label: t('header.automationItems.postSale', 'Postventa inteligente'),
-      path: t('routes.automation.postSale', '/services/postventa'),
-    },
-  ];
+  const servicesItems = useMemo(
+    () => [
+      {
+        label: t('header.servicesItems.webDev'),
+        path: t('routes.services.web'),
+      },
+      {
+        label: t('header.servicesItems.crm'),
+        path: t('routes.services.crm'),
+      },
+      {
+        label: t('header.servicesItems.analytics'),
+        path: t('routes.services.analytics'),
+      },
+    ],
+    [i18n.language, t]
+  );
+
+  const automationItems = useMemo(
+    () => [
+      {
+        label: t('header.automationItems.appointments'),
+        path: t('routes.automation.appointments'),
+      },
+      {
+        label: t('header.automationItems.inventory'),
+        path: t('routes.automation.inventory'),
+      },
+      {
+        label: t('header.automationItems.quotes'),
+        path: t('routes.automation.quotes'),
+      },
+      {
+        label: t('header.automationItems.postSale'),
+        path: t('routes.automation.postSale'),
+      },
+    ],
+    [i18n.language, t]
+  );
 
   return (
     <div className="fixed top-4 inset-x-0 z-50 flex items-center px-4 md:px-8 drop-shadow-[0_8px_20px_rgba(0,0,0,0.8)]">
@@ -54,8 +62,20 @@ export default function Header() {
       {/* Menús intermedios */}
         <div className="flex-1 flex items-center justify-center">
           <div className="glass-high rounded-2xl flex flex-row">
-            <DropdownMenu title={t('header.services', 'Servicios')} items={servicesItems} />
-            <DropdownMenu title={t('header.automation', 'Automatiza')} items={automationItems} />
+            <DropdownMenu
+              id="services"
+              title={t('header.services', 'Servicios')}
+              items={servicesItems}
+              openMenu={openMenu}
+              setOpenMenu={setOpenMenu}
+            />
+            <DropdownMenu
+              id="automation"
+              title={t('header.automation', 'Automatiza')}
+              items={automationItems}
+              openMenu={openMenu}
+              setOpenMenu={setOpenMenu}
+            />
           </div>
         </div>
 
@@ -65,28 +85,29 @@ export default function Header() {
   );
 }
 
-function DropdownMenu({ title, items }) {
-  const [open, setOpen] = useState(false);
+function DropdownMenu({ id, title, items, openMenu, setOpenMenu }) {
   const menuRef = useRef(null);
   const closeTimer = useRef();
+
+  const open = openMenu === id;
 
   useEffect(() => {
     const handleClick = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false);
+        setOpenMenu(null);
       }
     };
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
-  }, []);
+  }, [setOpenMenu]);
 
   const handleEnter = () => {
     clearTimeout(closeTimer.current);
-    setOpen(true);
+    setOpenMenu(id);
   };
 
   const handleLeave = () => {
-    closeTimer.current = setTimeout(() => setOpen(false), 900);
+    closeTimer.current = setTimeout(() => setOpenMenu((current) => (current === id ? null : current)), 900);
   };
 
   return (
@@ -97,7 +118,7 @@ function DropdownMenu({ title, items }) {
       onMouseLeave={handleLeave}
     >
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => setOpenMenu(open ? null : id)}
         className="flex w-full items-center justify-center gap-2 px-6 py-3 font-argent text-white text-sm md:text-base"
       >
         <span>{title}</span>
@@ -109,7 +130,7 @@ function DropdownMenu({ title, items }) {
             <Link
               key={idx}
               to={path}
-              onClick={() => setOpen(false)}
+              onClick={() => setOpenMenu(null)}
               className="group relative block w-full px-5 py-3 text-left text-white/80 transition-all duration-300 hover:text-white border-t border-white/10 first:border-t-0"
             >
               <span className="absolute left-0 top-0 h-full w-0 bg-purple-400 transition-all duration-300 group-hover:w-1"></span>
