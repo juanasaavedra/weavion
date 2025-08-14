@@ -43,6 +43,7 @@ export default function ServiciosPinnedSlider() {
     const [progress, setProgress] = useState(0); // 0..1 a lo largo de la sección
     const [index, setIndex] = useState(0); // índice del panel activo
     const sectionRef = useRef(null);
+    const wheelDeltaRef = useRef(0);
 
   // Ajustes de sensación
   const THIN_MIN_BASE = 68;     // ancho min de tiras comprimidas en desktop
@@ -65,7 +66,11 @@ export default function ServiciosPinnedSlider() {
     const handleWheel = (e) => {
       if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
       e.preventDefault();
-      setIndex((i) => clamp(i + Math.sign(e.deltaX), 0, items.length - 1));
+      wheelDeltaRef.current += e.deltaX;
+      if (Math.abs(wheelDeltaRef.current) > 50) {
+        setIndex((i) => clamp(i + Math.sign(wheelDeltaRef.current), 0, items.length - 1));
+        wheelDeltaRef.current = 0;
+      }
     };
     const onTouchStart = (e) => {
       if (e.touches.length !== 1) return;
