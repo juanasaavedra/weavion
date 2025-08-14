@@ -239,14 +239,14 @@ function Landing() {
 
         <div className="relative z-10 grid w-full grid-cols-1 md:grid-cols-2 items-center gap-8">
           {/* IZQUIERDA: titulares */}
-          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left relative z-[9999] top-20 md:top-0">
+          <div className="md:pr-10 w-full md:w-[50vw] max-w-3xl text-left relative z-[9999] top-10 md:top-0">
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-lores text-4xl md:text-7xl text-[#D6D6D6] mb-10 md:mb-16 md:ml-[200px] leading-tight"
+            className="font-lores text-5xl md:text-8xl text-[#D6D6D6] mb-10 md:mb-16 md:ml-[200px] leading-tight"
           >
-            Aumenta tu <span className="text-4xl md:text-5xl">presencia digital</span>, sin trabajar de más
+            Aumenta tu <span className="text-purple-400">presencia digital</span>, sin trabajar de más
           </motion.h1>
           <Link
             to="/services"
