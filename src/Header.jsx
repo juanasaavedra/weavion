@@ -137,7 +137,7 @@ function DropdownMenu({ id, title, items, defaultPath, openMenu, setOpenMenu }) 
         </Link>
       {open && (
         <div className="absolute left-1/2 -translate-x-1/2 mt-2">
-          <TechMenu items={items} onSelect={() => setOpenMenu(null)} className="w-[360px]" />
+          <TechMenu items={items} onSelect={() => setOpenMenu(null)} />
         </div>
       )}
     </div>
