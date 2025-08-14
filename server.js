@@ -8,6 +8,22 @@ const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 
+// Serve static assets from the project root and the public folder
+const rootDir = __dirname;
+const publicDir = path.join(rootDir, 'public');
+
+app.use(
+  express.static(rootDir, {
+    setHeaders(res, filePath) {
+      if (filePath.endsWith('.jsx')) {
+        // Ensure JSX files are served with a JavaScript MIME type
+        res.setHeader('Content-Type', 'application/javascript');
+      }
+    },
+  })
+);
+app.use(express.static(publicDir));
+
 const DB_FILE = path.join(__dirname, 'messages.json');
 function readDB() {
   try {
@@ -26,6 +42,11 @@ app.post('/api/messages', (req, res) => {
   db.push(newMsg);
   writeDB(db);
   res.json({ ok: true });
+});
+
+// Send index.html for any other request to support client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(rootDir, 'index.html'));
 });
 
 app.listen(PORT, () => {
