@@ -101,6 +101,7 @@ export default function Header() {
                 defaultPath={servicesItems[0]?.path}
                 openMenu={openMenu}
                 setOpenMenu={setOpenMenu}
+                dividerIndex={servicesItems.length}
               />
             </div>
           </div>
@@ -112,7 +113,7 @@ export default function Header() {
   );
 }
 
-function DropdownMenu({ id, title, items, openMenu, setOpenMenu }) {
+function DropdownMenu({ id, title, items, openMenu, setOpenMenu, dividerIndex }) {
   const menuRef = useRef(null);
   const closeTimer = useRef();
 
@@ -154,7 +155,11 @@ function DropdownMenu({ id, title, items, openMenu, setOpenMenu }) {
         </button>
       {open && (
         <div className="absolute left-1/2 -translate-x-1/2 mt-2">
-          <TechMenu items={items} onSelect={() => setOpenMenu(null)} />
+          <TechMenu
+            items={items}
+            onSelect={() => setOpenMenu(null)}
+            dividerIndex={dividerIndex}
+          />
         </div>
       )}
     </div>
