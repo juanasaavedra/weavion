@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter, Routes, Route } from 'react-router-dom';
+import ScrollToTop from './ScrollToTop';
 import Landing from './App';
 import ServiciosPinnedSlider from './ServiciosPinnedSlider';
 import ContactPage from './ContactPage';
@@ -18,6 +19,7 @@ import Header from './Header';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HashRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path=""           element={<Landing />} />
