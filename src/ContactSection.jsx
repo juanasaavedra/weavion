@@ -24,7 +24,7 @@ export default function ContactSection() {
             </p>
             <Link
               to="/contact"
-              className="mt-6 mb-8 inline-block px-8 py-4 rounded-full font-semibold text-white bg-black hover:shadow-purple-500/50 shadow-lg transition-all"
+              className="mt-6 mb-8 inline-block px-8 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-[length:200%_200%] animate-gradient-slow hover:shadow-purple-500/50 shadow-lg transition-all"
             >
               {t('contact.cta.button') || 'Contáctanos'}
             </Link>
