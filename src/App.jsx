@@ -244,9 +244,9 @@ function Landing() {
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-argent text-4xl md:text-7xl text-[#D6D6D6] mb-10 md:mb-16 md:ml-[200px] leading-tight"
+            className="font-lores text-4xl md:text-7xl text-[#D6D6D6] mb-10 md:mb-16 md:ml-[200px] leading-tight"
           >
-            Aumenta tu <span className="font-ars text-4xl md:text-5xl font-light">presencia digital</span>, sin trabajar de más
+            Aumenta tu <span className="text-4xl md:text-5xl">presencia digital</span>, sin trabajar de más
           </motion.h1>
           <Link
             to="/services"
