@@ -298,6 +298,22 @@
           "Reportes automáticos a tu correo cada semana."
         ]
       }
+    },
+    "appointments": {
+      "hero": {
+        "title": "Agenda más, con menos fricción.",
+        "subtitle": "Calendario sincronizado, confirmaciones por WhatsApp/SMS, recordatorios inteligentes y reprogramación con un tap.",
+        "cta": "Probar agenda inteligente"
+      },
+      "features": [
+        { "title": "Reducción de no-shows", "desc": "Recordatorios + confirmación doble vía WA/SMS/email." },
+        { "title": "Slots dinámicos", "desc": "Disponibilidad real por técnico, zona y SLA." },
+        { "title": "Embudo a cita", "desc": "Desde lead calificado → agendado en un flujo." }
+      ],
+      "flow": {
+        "title": "Flujo: lead → cita confirmada",
+        "steps": ["Formulario", "Validación", "Agenda", "Confirmación"]
+      }
     }
   }
 }

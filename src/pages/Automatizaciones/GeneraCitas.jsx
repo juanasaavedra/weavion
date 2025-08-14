@@ -1,9 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { GradientBg, CTAButton, PALETTE } from "./common";
 import ProductInterestSection from "../../components/ProductInterestSection";
 
 export default function GeneraCitas() {
+  const { t } = useTranslation();
+  const features = t("pages.appointments.features", { returnObjects: true });
+  const flowSteps = t("pages.appointments.flow.steps", { returnObjects: true });
   return (
     <GradientBg>
       <section className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
@@ -21,26 +25,18 @@ export default function GeneraCitas() {
               color: "transparent",
             }}
           >
-            Agenda más, con menos fricción.
+            {t("pages.appointments.hero.title")}
           </motion.h1>
           <p className="max-w-3xl" style={{ color: PALETTE.grayLight }}>
-            Calendario sincronizado, confirmaciones por WhatsApp/SMS, recordatorios
-            inteligentes y reprogramación con un tap.
+            {t("pages.appointments.hero.subtitle")}
           </p>
           <div className="mt-6">
-            <CTAButton>Probar agenda inteligente</CTAButton>
+            <CTAButton>{t("pages.appointments.hero.cta")}</CTAButton>
           </div>
         </header>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            {
-              t: "Reducción de no-shows",
-              d: "Recordatorios + confirmación doble vía WA/SMS/email.",
-            },
-            { t: "Slots dinámicos", d: "Disponibilidad real por técnico, zona y SLA." },
-            { t: "Embudo a cita", d: "Desde lead calificado → agendado en un flujo." },
-          ].map((c, i) => (
+          {features.map((c, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 10 }}
@@ -53,8 +49,8 @@ export default function GeneraCitas() {
                 color: PALETTE.grayLight,
               }}
             >
-              <div className="text-xl font-semibold text-white">{c.t}</div>
-              <div className="mt-1 text-sm">{c.d}</div>
+              <div className="text-xl font-semibold text-white">{c.title}</div>
+              <div className="mt-1 text-sm">{c.desc}</div>
             </motion.div>
           ))}
         </div>
@@ -64,7 +60,7 @@ export default function GeneraCitas() {
           style={{ borderColor: "rgba(115,40,232,.35)" }}
         >
           <h3 className="mb-3 text-sm" style={{ color: PALETTE.grayLight }}>
-            Flujo: lead → cita confirmada
+            {t("pages.appointments.flow.title")}
           </h3>
           <svg width="100%" height="160" viewBox="0 0 1200 160" className="opacity-90">
             {Array.from({ length: 4 }).map((_, i) => (
@@ -98,10 +94,9 @@ export default function GeneraCitas() {
             className="grid grid-cols-4 gap-4 text-center text-xs"
             style={{ color: PALETTE.grayLight }}
           >
-            <div>Formulario</div>
-            <div>Validación</div>
-            <div>Agenda</div>
-            <div>Confirmación</div>
+            {flowSteps.map((s, i) => (
+              <div key={i}>{s}</div>
+            ))}
           </div>
         </div>
       </section>
