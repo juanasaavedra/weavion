@@ -790,3 +790,9 @@ spline-viewer canvas#spline {
   .termhint-bubble { transition: none; }
   .termhint-link { transition: none; }
 }
+
+@media (min-width: 768px) and (min-aspect-ratio: 1/1) and (max-aspect-ratio: 1/1) {
+  .square-ml-reduce {
+    margin-left: 100px !important;
+  }
+}
