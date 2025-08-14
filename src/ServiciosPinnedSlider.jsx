@@ -176,12 +176,12 @@ export default function ServiciosPinnedSlider() {
               alignItems: "center",
               justifyContent: "center",
               textAlign: "center",
-              fontSize: "clamp(20px, 8vh, 48px)",
+              fontSize: "clamp(16px, 6vh, 40px)",
               letterSpacing: "0.1em",
               color: "#fff",
               opacity: 0.75,
               padding: "1rem 0",
-              fontFamily: "'argent-pixel-cf', sans-serif",
+              fontFamily: "var(--font-display)",
               overflow: "hidden",
             }}
             aria-hidden
