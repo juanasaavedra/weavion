@@ -1,27 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export default function ContactSection() {
   const { t } = useTranslation();
-  const [pos, setPos] = useState({ x: 50, y: 50 });
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setPos({ x, y });
-  };
 
   return (
     <section
-      onMouseMove={handleMouseMove}
-      style={{
-        background: `radial-gradient(circle at ${pos.x}% ${pos.y}%, #8b5cf6, #4c1d95)`
-      }}
       className="relative flex items-center justify-center py-20 px-4 md:px-8 pb-32 overflow-hidden"
       id="contactSection"
     >
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-900/60 via-purple-700/40 to-purple-900/60 bg-[length:200%_200%] animate-gradient-slow" />
       {/* Glass card with animated gradient border */}
       <div className="relative z-10 w-full max-w-5xl text-center group">
         <div className="p-[1px] rounded-2xl bg-gradient-to-r from-purple-500 via-purple-700 to-purple-500 animate-gradient-slow">
@@ -47,3 +36,4 @@ export default function ContactSection() {
     </section>
   );
 }
+
