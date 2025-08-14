@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
@@ -6,43 +6,49 @@ import LanguageSelector from './LanguageSelector';
 import logo from './assets/logo.png';
 
 export default function Header() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [openMenu, setOpenMenu] = useState(null);
 
-  const servicesItems = [
-    {
-      label: t('header.servicesItems.webDev', 'Diseño y Desarrollo web'),
-      path: t('routes.services.web', '/services/web'),
-    },
-    {
-      label: t('header.servicesItems.crm', 'Integración a CRM o Service Titan'),
-      path: t('routes.services.crm', '/services/crm-servicetitan'),
-    },
-    {
-      label: t('header.servicesItems.analytics', 'Analíticas de negocio'),
-      path: t('routes.services.analytics', '/services/analiticas-negocio'),
-    },
-  ];
+  const servicesItems = useMemo(
+    () => [
+      {
+        label: t('header.servicesItems.webDev'),
+        path: t('routes.services.web'),
+      },
+      {
+        label: t('header.servicesItems.crm'),
+        path: t('routes.services.crm'),
+      },
+      {
+        label: t('header.servicesItems.analytics'),
+        path: t('routes.services.analytics'),
+      },
+    ],
+    [i18n.language, t]
+  );
 
-  const automationItems = [
-    {
-      label: t('header.automationItems.appointments', 'Genera citas'),
-      path: t('routes.automation.appointments', '/services/genera-citas'),
-    },
-    {
-      label: t('header.automationItems.inventory', 'Charla con tu inventario y modifícalo'),
-      path: t('routes.automation.inventory', '/services/inventario'),
-    },
-    {
-      label: t('header.automationItems.quotes', 'Entrega cotizaciones inmediatas'),
-      path: t('routes.automation.quotes', '/services/cotizaciones'),
-    },
-    {
-      label: t('header.automationItems.postSale', 'Postventa inteligente'),
-      path: t('routes.automation.postSale', '/services/postventa'),
-    },
-  ];
+  const automationItems = useMemo(
+    () => [
+      {
+        label: t('header.automationItems.appointments'),
+        path: t('routes.automation.appointments'),
+      },
+      {
+        label: t('header.automationItems.inventory'),
+        path: t('routes.automation.inventory'),
+      },
+      {
+        label: t('header.automationItems.quotes'),
+        path: t('routes.automation.quotes'),
+      },
+      {
+        label: t('header.automationItems.postSale'),
+        path: t('routes.automation.postSale'),
+      },
+    ],
+    [i18n.language, t]
+  );
 
   return (
     <div className="fixed top-4 inset-x-0 z-50 flex items-center px-4 md:px-8 drop-shadow-[0_8px_20px_rgba(0,0,0,0.8)]">
