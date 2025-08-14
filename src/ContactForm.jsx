@@ -64,7 +64,7 @@ export default function ContactForm() {
         <span className="block mb-2 text-white">
           {t('contact.serviceLabel')}
         </span>
-        <div className="flex flex-col gap-2 text-white">
+        <div className="flex flex-col gap-1 text-white">
           {serviceOptions.map((opt, idx) => (
             <label key={opt.value} className="custom-checkbox text-white">
               <input
