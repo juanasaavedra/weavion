@@ -66,15 +66,15 @@ export default function ContactForm() {
         </span>
         <div className="flex flex-col gap-2 text-white">
           {serviceOptions.map((opt, idx) => (
-            <label key={opt.value} className="inline-flex items-center">
+            <label key={opt.value} className="custom-checkbox text-white">
               <input
                 type="checkbox"
                 value={opt.value}
                 checked={form.services.includes(opt.value)}
                 onChange={handleServiceChange}
-                className="mr-2 accent-purple-500"
                 required={idx === 0 && form.services.length === 0}
               />
+              <span className="checkmark"></span>
               {opt.label}
             </label>
           ))}
