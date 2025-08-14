@@ -48,7 +48,8 @@
   "services": {
     "title": "¿Qué ganas con nosotros?",
     "subtitle": "Soluciones Digitales para tu empresa",
-    "description": "Ofrecemos servicios principales que cubren todas las necesidades digitales de tu empresa. Haz clic en las tarjetas para ver más detalles."
+    "description": "Ofrecemos servicios principales que cubren todas las necesidades digitales de tu empresa. Haz clic en las tarjetas para ver más detalles.",
+    "sliderInstruction": "Mueve hacia los lados para explorar cada panel"
   },
   "about": {
     "title": "Sobre Nosotros",

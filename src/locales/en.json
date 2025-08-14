@@ -48,7 +48,8 @@
   "services": {
     "title": "What do you gain with us?",
     "subtitle": "Digital Solutions for your business",
-    "description": "We offer core services that cover all your business digital needs. Click on the cards to see more details."
+    "description": "We offer core services that cover all your business digital needs. Click on the cards to see more details.",
+    "sliderInstruction": "Move sideways to explore each panel"
   },
   "about": {
     "title": "About Us",
