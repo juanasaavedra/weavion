@@ -6,15 +6,16 @@ export default function NavTechMenus() {
   const [openMobile, setOpenMobile] = useState(false);
 
   const services = [
-    { icon: <Cpu size={16} className="text-fuchsia-400" />, title: "Web Design & Development", desc: "Sites rápidos, accesibles y escalables", to: "/services/web" },
-    { icon: <Network size={16} className="text-fuchsia-400" />, title: "CRM / ServiceTitan", desc: "Integración, pipelines y automatización", to: "/services/crm" },
-    { icon: <BarChart3 size={16} className="text-fuchsia-400" />, title: "Business analytics", desc: "Dashboards, métricas y BI", to: "/services/analytics" }
+    { icon: <Cpu size={16} className="text-fuchsia-400" />, title: "Web Design & Development", desc: "Sites rápidos, accesibles y escalables", to: "/web-design" },
+    { icon: <Network size={16} className="text-fuchsia-400" />, title: "CRM / ServiceTitan", desc: "Integración, pipelines y automatización", to: "/crm-servicetitan" },
+    { icon: <BarChart3 size={16} className="text-fuchsia-400" />, title: "Business analytics", desc: "Dashboards, métricas y BI", to: "/analiticas-negocio" }
   ];
 
   const automations = [
-    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Lead intake → Sheets/DB", desc: "Formularios conectados a tu data", to: "/automate/intake" },
-    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Emails inteligentes", desc: "Respuestas según reglas y contexto", to: "/automate/emails" },
-    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Bots/agents n8n + Python", desc: "Flujos y agentes para operaciones", to: "/automate/agents" }
+    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Generar citas", desc: "Agenda automática y recordatorios", to: "/automatizaciones/generar-citas" },
+    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Cotizaciones inmediatas", desc: "Precios y propuestas al instante", to: "/automatizaciones/cotizaciones-inmediatas" },
+    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Inventario inteligente", desc: "Consulta y actualización del stock", to: "/automatizaciones/inventario-inteligente" },
+    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Postventa inteligente", desc: "Seguimiento y NPS automatizado", to: "/automatizaciones/postventa-inteligente" }
   ];
 
   return (
@@ -70,11 +71,20 @@ function Dropdown({ items, label, onClose }) {
       <div className="px-2 py-1 text-[11px] uppercase tracking-widest text-fuchsia-300/80">{label}</div>
       <div className="mt-1 space-y-1">
         {items.map((item, i) => (
-          <Link key={i} to={item.to} className="group block rounded-xl p-[10px] transition relative overflow-hidden">
+          <Link
+            key={i}
+            to={item.to}
+            onClick={onClose}
+            className="group block rounded-xl p-[10px] transition relative overflow-hidden"
+          >
             <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/10 group-hover:ring-fuchsia-400/30" />
-            {i !== 0 && <div className="absolute -top-[1px] left-2 right-2 h-px bg-gradient-to-r from-transparent via-fuchsia-400/20 to-transparent" />}
+            {i !== 0 && (
+              <div className="absolute -top-[1px] left-2 right-2 h-px bg-gradient-to-r from-transparent via-fuchsia-400/20 to-transparent" />
+            )}
             <div className="flex items-start gap-3">
-              <div className="mt-1 flex h-7 w-7 items-center justify-center rounded-lg bg-white/5 ring-1 ring-white/10">{item.icon}</div>
+              <div className="mt-1 flex h-7 w-7 items-center justify-center rounded-lg bg-white/5 ring-1 ring-white/10">
+                {item.icon}
+              </div>
               <div>
                 <div className="text-[13px] text-white font-medium leading-snug">{item.title}</div>
                 <div className="text-xs text-white/60 mt-0.5">{item.desc}</div>
@@ -90,24 +100,32 @@ function Dropdown({ items, label, onClose }) {
 function MobileCombinedMenu({ onClose, services, automations }) {
   return (
     <div className="md:hidden fixed inset-0 z-50">
-      <button className="absolute inset-0 bg-black/60 backdrop-blur" onClick={onClose} aria-label="Close" />
+      <button
+        className="absolute inset-0 bg-black/60 backdrop-blur"
+        onClick={onClose}
+        aria-label="Close"
+      />
       <div className="absolute inset-x-3 top-16 bottom-6 rounded-2xl border border-white/10 bg-black/80 backdrop-blur overflow-y-auto shadow-2xl">
-        <MobileGroup title="Services" items={services} />
+        <MobileGroup title="Services" items={services} onClose={onClose} />
         <Separator />
-        <MobileGroup title="Automate" items={automations} />
+        <MobileGroup title="Automate" items={automations} onClose={onClose} />
       </div>
     </div>
   );
 }
 
-function MobileGroup({ title, items }) {
+function MobileGroup({ title, items, onClose }) {
   return (
     <div className="p-3">
       <div className="px-1 pb-2 text-[11px] uppercase tracking-widest text-fuchsia-300/80">{title}</div>
       <ul className="space-y-2">
         {items.map((i, idx) => (
           <li key={idx}>
-            <Link to={i.to} className="flex items-start gap-3 rounded-xl p-3 ring-1 ring-white/10 hover:ring-fuchsia-400/30 transition bg-white/[0.02]">
+            <Link
+              to={i.to}
+              onClick={onClose}
+              className="flex items-start gap-3 rounded-xl p-3 ring-1 ring-white/10 hover:ring-fuchsia-400/30 transition bg-white/[0.02]"
+            >
               <div className="mt-0.5 flex h-7 w-7 items-center justify-center rounded-lg bg-white/5 ring-1 ring-white/10">{i.icon}</div>
               <div>
                 <div className="text-[13px] text-white font-medium leading-snug">{i.title}</div>
