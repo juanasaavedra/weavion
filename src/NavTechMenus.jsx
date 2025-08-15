@@ -4,6 +4,7 @@ import { ChevronDown, Cpu, Network, BarChart3, Workflow } from "lucide-react";
 
 export default function NavTechMenus() {
   const [openMobile, setOpenMobile] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
 
   const services = [
     { icon: <Cpu size={16} className="text-fuchsia-400" />, title: "Web Design & Development", desc: "Sites rápidos, accesibles y escalables", to: "/web-design" },
@@ -38,36 +39,46 @@ export default function NavTechMenus() {
       )}
 
       {/* --- DESKTOP --- */}
-      <div className="hidden md:flex items-center gap-2">
-        <DropdownTrigger label="Services" items={services} />
-        <DropdownTrigger label="Automate" items={automations} />
+      <div className="hidden md:flex w-full justify-center items-center gap-2">
+        <DropdownTrigger
+          label="Services"
+          items={services}
+          isOpen={openMenu === 'services'}
+          onOpen={() => setOpenMenu('services')}
+          onClose={() => setOpenMenu(null)}
+        />
+        <DropdownTrigger
+          label="Automate"
+          items={automations}
+          isOpen={openMenu === 'automate'}
+          onOpen={() => setOpenMenu('automate')}
+          onClose={() => setOpenMenu(null)}
+        />
       </div>
     </div>
   );
 }
 
-function DropdownTrigger({ label, items }) {
-  const [open, setOpen] = useState(false);
+function DropdownTrigger({ label, items, isOpen, onOpen, onClose }) {
   return (
-    <div className="relative">
+    <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
       <button
-        onClick={() => setOpen(v => !v)}
+        onClick={() => (isOpen ? onClose() : onOpen())}
         className="group flex items-center gap-2 px-3 py-2 rounded-xl text-white/90 hover:text-white transition bg-white/0 hover:bg-white/5 ring-1 ring-transparent hover:ring-white/10"
+        aria-haspopup="menu"
+        aria-expanded={isOpen}
       >
         <span className="text-sm">{label}</span>
         <ChevronDown size={16} className="transition" />
       </button>
-      {open && <Dropdown items={items} label={label} onClose={() => setOpen(false)} />}
+      {isOpen && <Dropdown items={items} label={label} onClose={onClose} />}
     </div>
   );
 }
 
 function Dropdown({ items, label, onClose }) {
   return (
-    <div
-      onMouseLeave={onClose}
-      className="absolute left-0 mt-2 w-[320px] rounded-2xl border border-white/10 bg-gradient-to-b from-black/90 to-black/70 backdrop-blur p-2 shadow-2xl"
-    >
+    <div className="absolute left-0 mt-2 w-[320px] rounded-2xl border border-white/10 bg-gradient-to-b from-black/90 to-black/70 backdrop-blur p-2 shadow-2xl">
       <div className="px-2 py-1 text-[11px] uppercase tracking-widest text-fuchsia-300/80">{label}</div>
       <div className="mt-1 space-y-1">
         {items.map((item, i) => (
