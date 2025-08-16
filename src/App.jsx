@@ -11,6 +11,7 @@ import StatsSection from "./StatsSection";
 import ProcessTimeline from "./ProcessTimeline";
 import ContactSection from "./ContactSection";
 import ServiciosPinnedSlider from "./ServiciosPinnedSlider.jsx";
+import Footer from "./Footer";
 
 /* -------------------------------------------------------
    Hook: carga el web component de Spline sin tocar index.html
@@ -327,6 +328,8 @@ export default function App() {
 
         {/* Spacer */}
         <div className="h-12 md:h-24" />
+
+        <Footer />
       </div>
     </>
   );

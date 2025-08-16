@@ -12,6 +12,7 @@ import GeneraCitas from './pages/GeneraCitas';
 import InventarioInteractivo from './pages/InventarioInteractivo';
 import CotizacionesInmediatas from './pages/CotizacionesInmediatas';
 import PostventaInteligente from './pages/PostventaInteligente';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import './index.css';
 import './i18n';
 import Header from './Header';
@@ -37,6 +38,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="services/instant-quotes" element={<CotizacionesInmediatas />} />
           <Route path="services/postventa" element={<PostventaInteligente />} />
           <Route path="services/smart-post-sale" element={<PostventaInteligente />} />
+          <Route path="privacy" element={<PrivacyPolicy />} />
         <Route path="*"          element={<Landing />} />  {/* fallback a landing */}
       </Routes>
     </HashRouter>
