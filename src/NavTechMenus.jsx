@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { ChevronDown, Cpu, Network, BarChart3, Workflow } from "lucide-react";
 
 export default function NavTechMenus() {
+  const { t } = useTranslation();
   const [openMobile, setOpenMobile] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
 
   const services = [
-    { icon: <Cpu size={16} className="text-fuchsia-400" />, title: "Web Design & Development", desc: "Sites rápidos, accesibles y escalables", to: "/web-design" },
-    { icon: <Network size={16} className="text-fuchsia-400" />, title: "CRM / ServiceTitan", desc: "Integración, pipelines y automatización", to: "/crm-servicetitan" },
-    { icon: <BarChart3 size={16} className="text-fuchsia-400" />, title: "Business analytics", desc: "Dashboards, métricas y BI", to: "/analiticas-negocio" }
+    { icon: <Cpu size={16} className="text-fuchsia-400" />, title: "Web Design & Development", desc: "Sites rápidos, accesibles y escalables", to: t('routes.services.web', '/services/web') },
+    { icon: <Network size={16} className="text-fuchsia-400" />, title: "CRM / ServiceTitan", desc: "Integración, pipelines y automatización", to: t('routes.services.crm', '/services/crm-servicetitan') },
+    { icon: <BarChart3 size={16} className="text-fuchsia-400" />, title: "Business analytics", desc: "Dashboards, métricas y BI", to: t('routes.services.analytics', '/services/analiticas-negocio') }
   ];
 
   const automations = [
-    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Generar citas", desc: "Agenda automática y recordatorios", to: "/automatizaciones/generar-citas" },
-    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Cotizaciones inmediatas", desc: "Precios y propuestas al instante", to: "/automatizaciones/cotizaciones-inmediatas" },
-    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Inventario inteligente", desc: "Consulta y actualización del stock", to: "/automatizaciones/inventario-inteligente" },
-    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Postventa inteligente", desc: "Seguimiento y NPS automatizado", to: "/automatizaciones/postventa-inteligente" }
+    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Generar citas", desc: "Agenda automática y recordatorios", to: t('routes.automation.appointments', '/services/genera-citas') },
+    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Cotizaciones inmediatas", desc: "Precios y propuestas al instante", to: t('routes.automation.quotes', '/services/cotizaciones') },
+    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Inventario inteligente", desc: "Consulta y actualización del stock", to: t('routes.automation.inventory', '/services/inventario') },
+    { icon: <Workflow size={16} className="text-fuchsia-400" />, title: "Postventa inteligente", desc: "Seguimiento y NPS automatizado", to: t('routes.automation.postSale', '/services/postventa') }
   ];
 
   return (
