@@ -8,9 +8,10 @@ import ContactPage from './ContactPage';
 import WebDesign from './pages/WebDesign';
 import CRMServiceTitan from './pages/CRMServiceTitan';
 import AnaliticasNegocio from './pages/AnaliticasNegocio';
-import GeneraCitas from './pages/GeneraCitas';
-import InventarioInteractivo from './pages/InventarioInteractivo';
-import CotizacionesInmediatas from './pages/CotizacionesInmediatas';
+// Pages for Automate dropdown
+import GeneraCitas from './pages/Automatizaciones/GeneraCitas';
+import InventarioChat from './pages/Automatizaciones/InventarioChat';
+import CotizacionesPostventa from './pages/Automatizaciones/CotizacionesPostventa';
 import PostventaInteligente from './pages/PostventaInteligente';
 import './index.css';
 import './i18n';
@@ -31,10 +32,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="contact"    element={<ContactPage />} />
           <Route path="services/genera-citas" element={<GeneraCitas />} />
           <Route path="services/generate-appointments" element={<GeneraCitas />} />
-          <Route path="services/inventario" element={<InventarioInteractivo />} />
-          <Route path="services/inventory" element={<InventarioInteractivo />} />
-          <Route path="services/cotizaciones" element={<CotizacionesInmediatas />} />
-          <Route path="services/instant-quotes" element={<CotizacionesInmediatas />} />
+          <Route path="services/inventario" element={<InventarioChat />} />
+          <Route path="services/inventory" element={<InventarioChat />} />
+          <Route path="services/cotizaciones" element={<CotizacionesPostventa />} />
+          <Route path="services/instant-quotes" element={<CotizacionesPostventa />} />
           <Route path="services/postventa" element={<PostventaInteligente />} />
           <Route path="services/smart-post-sale" element={<PostventaInteligente />} />
         <Route path="*"          element={<Landing />} />  {/* fallback a landing */}
